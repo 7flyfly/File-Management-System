@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--引入公共头-->
+<div class="header" th:replace="public:: #public-header"></div>
+<!--sidebar-->
+<div class="sidebar" th:replace="mywork:: #sidebar(activeUri='emps')"></div>
+<div>
+    <span>待审核界面</span>
+</div>
+</body>
+</html>
