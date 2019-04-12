@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="header" th:replace="public:: #public-header"></div>
-<div class="sidebar" th:replace="controlCenter:: #sidebar(activeUri='AdvancedSearch')"></div>
-<div>高级搜索功能</div>
+<div class="sidebar" th:replace="IntegratedQuery/controlCenter:: #sidebar(activeUri='AdvancedSearch')"></div>
+<div id="advancedSearch_div">高级搜索功能</div>
 </body>
 </html>

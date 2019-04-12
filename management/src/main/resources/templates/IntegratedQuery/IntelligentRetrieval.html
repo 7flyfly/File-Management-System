@@ -4,10 +4,70 @@
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>智能检索</title>
+
 </head>
 <body>
 <div class="header" th:replace="public:: #public-header"></div>
-<div class="sidebar" th:replace="controlCenter:: #sidebar(activeUri='IntelligentRetrieval')"></div>
-<div>智能检索功能</div>
+<div class="sidebar" th:replace="IntegratedQuery/controlCenter::#sidebar(activeUri='IntelligentRetrieval')"></div>
+<div id="intelligentRetrieval_div">
+    <div class="container">
+        <div class="row" style=" padding-top: 50px">
+            <h1 class="text-center ">瑞拷得智能检索系统</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
+                        全文检索
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="imageRetrieval" value="imageRetrieval">
+                        图像检索
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="audioRetrieval" value="audioRetrieval">
+                        音频检索
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="videoRetrieval" value="videoRetrieval">
+                        视频检索
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-7" style="padding-top: 30px">
+                <form action="/IntegratedQuery/GetKeyWord">
+                    <div class="input-group input-group-lg text-center">
+                        <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">上传</button>
+                            <button class="btn btn-primary" type="submit">搜索</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" style="margin:80px 40px 50px 50px;border:1px solid #b9c2dc">
+            <div style="margin-left:10px;margin-right:10px">
+                <div class="row" style="margin:0px 0px 5px 5px;">
+                    <h3 style="margin-left: 50px">综合统计</h3>
+                </div>
+                <div class="row" style="margin:0px 0px 5px 5px;">
+                    <h4>文书档案:102件</h4>
+                    <h4>科技档案:102件</h4>
+                    <h4>招标档案:52件</h4>
+                    <h4>基建档案:43件</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
