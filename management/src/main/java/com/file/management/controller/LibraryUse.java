@@ -15,17 +15,17 @@ public class LibraryUse {
         return "LibraryUse/controlCenter";
     }
 
-    @RequestMapping("/check")
+    @RequestMapping("/LibraryUse/Check")
     public String Check(){
-        return "LibraryUse/check";
+        return "LibraryUse/Check";
     }
-    @RequestMapping("/examine")
+    @RequestMapping("/LibraryUse/Examine")
     public String Examine(){
-        return "LibraryUse/examine";
+        return "LibraryUse/Examine";
     }
 
-    @RequestMapping("/query")
+    @RequestMapping("/LibraryUse/Query")
     public String Query(){
-        return "LibraryUse/query";
+        return "LibraryUse/Query";
     }
 }

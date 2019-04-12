@@ -1,14 +1,15 @@
-<!--利用查询界面-->
+<!--利用审批页面-->
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
-    <title>利用查询</title>
+    <title>利用审批</title>
 </head>
 <body>
+
 <div class="header" th:replace="public:: #public-header"></div>
 <!--sidebar-->
-<div class="sidebar" th:replace="LibrarycontrolCenter:: #sidebar(activeUri='query')"></div>
-<div>利用查询功能</div>
+<div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar"></div>
+<div>利用审批功能</div>
 </body>
 </html>
