@@ -1,0 +1,32 @@
+<!--报表统计公共部分-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--sidebar-->
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" id="sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active"
+                   th:class="${activeUri=='center'?'nav-link active':'nav-link'}"
+                   href="#" th:href="@{/FormStatistics/TabulateStatistics}">
+                    汇总统计 <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <!--th:class="${activeUri=='main'?'nav-link active':'nav-link'}"-->
+            <!--th:class="${activeUri=='emps'?'nav-link active':'nav-link'}"-->
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/FormStatistics/Breakdown}"
+                   th:class="${activeUri=='emps'?'nav-link active':'nav-link'}">
+                    分项统计
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

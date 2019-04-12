@@ -1,0 +1,13 @@
+<!--表表统计/汇总统计-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>汇总统计</title>
+</head>
+<body>
+<div class="header" th:replace="public:: #public-header"></div>
+<div class="sidebar" th:replace="FormStatistics/StatisticsPublic:: #sidebar(activeUri='TabulateStatistics')"></div>
+<div>汇总统计界面</div>
+</body>
+</html>
