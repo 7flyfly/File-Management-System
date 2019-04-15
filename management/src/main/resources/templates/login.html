@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>登录</title>
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/js/bootstrap.min.js" />
     <link rel="stylesheet" type="text/css" href="../static/css/login.css">
 </head>
 <body>
@@ -14,7 +12,7 @@
             <div class="form-horizontal col-md-offset-3" id="login_form">
                 <h3 class="form-title">登录 - 档案综合管理系统</h3>
                 <div class="col-md-9">
-                    <p style="..." th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                    <p class="msg" style="..." th:text="${msg}" th:if="${not #strings.isEmpty(msg)}" ></p>
                     <div class="form-group">
                         <i class="fa fa-user fa-lg"></i>
                         <input class="form-control required" type="text"  required="required" placeholder="账号" id="username" name="username" th:value="${username}" autofocus="autofocus" maxlength="20"/>

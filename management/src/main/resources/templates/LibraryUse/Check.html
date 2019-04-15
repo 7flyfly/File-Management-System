@@ -4,13 +4,79 @@
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>利用登记</title>
+
 </head>
 <body>
 <div class="header" th:replace="public :: #public-header"></div>
-<!--sidebar-->
-<div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar"></div>
-<div>
-    <span>利用登记功能</span>
-</div>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/check.css">
+    <!--sidebar-->
+    <div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar"></div>
+    <div class="center">
+        <ol class="breadcrumb">
+            <li>
+                <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+                    <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
+                    借阅利用
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">利用登记</a>
+            </li>
+        </ol>
+        <div id="main-center">
+            <div id="mc-query" class="container-fluid">
+                <div class="row">
+                    <div class="text-center zero-padding">
+                        <span class="col-md-2 zero-padding-lr">
+                            <select class="form-control input-sm query-type">
+                                <option value="">所有类型</option>
+                                <option value="0">馆内登记</option>
+                                <option value="1">网上登记</option>
+                                <option value="2">微信登记</option>
+                            </select>
+                        </span>
+                        <span class="col-md-2 zero-padding-lr">
+                            <select class="form-control input-sm query-status">
+                                <option value=" ">所有状态</option>
+                                <option value="0">待提交</option>
+                                <option value="1">审核中</option>
+                                <option value="2">已通过</option>
+                                <option value="-2">未通过</option>
+                                <option value="9">无需审核</option>
+                            </select>
+                        </span>
+                        <span class="col-md-2 zero-padding-lr">
+                            <select class="form-control input-sm query-reason">
+                                <option value="">所有利用目的</option>
+                                <option value="401">出国查档</option>
+                                <option value="402">调职查档</option>
+                            </select>
+                        </span>
+                        <span class="col-md-2 zero-padding-lr">
+                            <select class="form-control input-sm query-way">
+                                <option value="">所有利用方式</option>
+                                <option value="403">查阅</option>
+                                <option value="404">借阅</option>
+                                <option value="601">复制</option>
+                            </select>
+                        </span>
+                        <span class="col-md-1 zero-padding-lr">
+                            <input type="text" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="登记起时间" class="date readOnly form-control input-sm query-createdtime-start validate[custom[date]]">
+                        </span>
+                        <span class="col-md-1 zero-padding-lr">
+                            <input type="text" name="query-createdtime-end" data-force-parse="true" readonly="true" placeholder="登记止时间" class="date readOnly form-control input-sm query-createdtime-end validate[custom[date]]">
+                        </span>
+                        <span class="col-md-2 zero-padding-lr">
+                            <input class="form-control input-sm query-keywords" placeholder="单号或利用人账号、姓名">
+                        </span>
+                        <span id="mc-xs-visible" class="hidden-sm hidden-md hidden-lg zero-padding">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
