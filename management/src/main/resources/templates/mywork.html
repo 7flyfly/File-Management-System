@@ -10,11 +10,74 @@
 <!--引入公共头-->
 <div class="header" th:replace="public:: #public-header"></div>
 <!--sidebar-->
-<nav class="col-md-2 d-none d-md-block bg-light sidebar" id="sidebar">
-<div class="sidebar-sticky">
-    <div id="tree"></div>
-</div>
-</nav>
 
+<div>
+    <table width="100%">
+        <tr>
+            <td class="tb1">
+                    <div class="sidebar-sticky">
+                        <div id="tree"></div>
+                    </div>
+            </td>
+            <td class="tb1">
+                <div class="container" >
+                    <div>
+                        <table width="100%">
+                            <tr>
+                                <td class="tb1">
+                                    <div class="span4">
+                                        <h2>收集</h2>
+                                        <p> 代收档案：3</p>
+                                        <p> 待整理档案：0</p>
+                                        <p> 异常档案：0<a th:href="@{/#}" name="register">前往处理</a></p>
+                                        <p>
+                                            <a class="btn btn-success btn-large" href="#">刷新</a></p>
+                                    </div>
+                                </td>
+                                <td class="tb1">
+                                    <div class="span4">
+                                        <h2>贮藏</h2>
+                                        <p> 环境监控：<a th:href="@{/#}" name="register">查看详情</a></p>
+                                        <p> 视频监控：<a th:href="@{/#}" name="register">查看视频</a></p>
+                                        <p> 人员进出：<a th:href="@{/#}" name="register">查看详情</a></p>
+                                        <p>
+                                            <a class="btn btn-success btn-large" href="#">刷新</a></p>
+                                    </div>
+                                </td>
+                                <td class="tb1">
+                                    <div class="span4">
+                                        <h2>管理</h2>
+                                        <p> 即将到期档案：<a th:href="@{/#}" name="register">前往处理</a></p>
+                                        <p> 已到期档案：  <a th:href="@{/#}" name="register">前往处理</a></p>
+                                        <p> 档案盘点：    <a th:href="@{/#}" name="register">查看详情</a></p>
+                                        <p>
+                                            <a class="btn btn-success btn-large" href="#">刷新</a></p>
+                                    </div>
+                                </td>
+                                <td class="tb1">
+                                    <div class="span4">
+                                        <h2>利用</h2>
+                                        <p> 借阅申请：0<a th:href="@{/#}" name="register">查看详情</a></p>
+                                        <p> 在借档案：10<a th:href="@{/#}" name="register">查看视频</a></p>
+                                        <p> 专题编研：1<a th:href="@{/#}" name="register">查看详情</a></p>
+                                        <p>
+                                            <a class="btn btn-success btn-large" href="#">刷新</a></p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <div class="span4">
+                                    <h2><span class="badge badge-info">info</span>您的待处理工作</h2>
+                                    <p> 档案HHU1001未保存成功，请重新添加<a th:href="@{/#}" name="register">点击前往</a></p>
+                                    <p> 档案HHU1002信息未补全，请继续补全<a th:href="@{/#}" name="register">点击前往</a></p>
+                                </div>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
