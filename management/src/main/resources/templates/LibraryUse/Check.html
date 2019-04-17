@@ -4,7 +4,15 @@
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>利用登记</title>
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" type="text/javascript"></script> </head>
 
+    <script>
+        $(document).ready(function() {
+            $('#example').dataTable();
+        } );
+    </script>
 </head>
 <body>
 <div class="header" th:replace="public :: #public-header"></div>
@@ -77,6 +85,36 @@
             </div>
         </div>
     </div>
+<div>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Age</th>
+        <th>Start date</th>
+        <th>Salary</th>
+    </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Age</th>
+        <th>Start date</th>
+        <th>Salary</th>
+    </tr>
+    </tfoot>
+
+    <tbody>
+
+    </tbody>
+</table>
+</div>
+
 
 </body>
 </html>
