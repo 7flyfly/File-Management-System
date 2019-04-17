@@ -1,6 +1,8 @@
-package com.file.management.controller;
+package com.file.management.controller.IntegratedQuery;
 
 
+import com.file.management.utils.SolrUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
