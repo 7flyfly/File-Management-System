@@ -1,6 +1,10 @@
 package com.file.management.controller.IntegratedQuery;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.file.management.service.solr.SolrService;
 import com.file.management.utils.SolrUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -33,16 +38,6 @@ public class IntegratedQuery {
     public String advancedSearch(){
         return "IntegratedQuery/AdvancedSearch";
     }
-
-    @RequestMapping("/GetKeyWord")
-    @ResponseBody
-    public String getKeyWord(String keyword){
-        System.out.println("keyword:"+keyword);
-//        String keyword1 = request.getParameter("keyword");
-//        System.out.println("keyword:"+keyword1);
-        return keyword;
-    }
-
 
 
 }

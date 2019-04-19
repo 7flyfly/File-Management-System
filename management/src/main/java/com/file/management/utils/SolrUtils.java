@@ -12,16 +12,19 @@ public class SolrUtils {
     private static CloudSolrClient cloudSolrClient;//Zookeeper服务器连接
     private static String zkHostURL;//zookeeper连接地址
     private static String cloudCollection;//云端数据集
-    private static String coreName = "test_core";//core名称
+//    private static String coreName = "file_core";//core名称
+    private static String coreCore = "test_core";//core名称
 
     //创建solr客户端
     public SolrClient createSolrClient(){
-        solrClient = new HttpSolrClient.Builder(this.SolrURL).build();
+        String url = this.SolrURL + coreCore;
+        solrClient = new HttpSolrClient.Builder(url).build();
         return solrClient;
     }
 
     //创建solr客户端
     public void SolrConnection(){
+        String url = this.SolrURL + coreCore;
         solrClient = new HttpSolrClient.Builder(this.SolrURL).build();
     }
 
@@ -39,10 +42,10 @@ public class SolrUtils {
     }
 
     public String getCoreName() {
-        return coreName;
+        return coreCore;
     }
 
     public void setCoreName(String coreName) {
-        this.coreName = coreName;
+        this.coreCore = coreName;
     }
 }

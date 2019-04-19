@@ -15,34 +15,34 @@
             <h1 class="text-center ">瑞拷得智能检索系统</h1>
         </div>
         <div class="row">
-            <div class="col-md-3 text-center">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
-                        全文检索
-                    </label>
+            <form action="/IntegratedQuery/IntelligentRetrieval/GetQueryRequest">
+                <div class="col-md-3 text-center">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
+                            全文检索
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="imageRetrieval" value="imageRetrieval">
+                            图像检索
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="audioRetrieval" value="audioRetrieval">
+                            音频检索
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="videoRetrieval" value="videoRetrieval">
+                            视频检索
+                        </label>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="imageRetrieval" value="imageRetrieval">
-                        图像检索
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="audioRetrieval" value="audioRetrieval">
-                        音频检索
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="videoRetrieval" value="videoRetrieval">
-                        视频检索
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-7" style="padding-top: 30px">
-                <form action="/IntegratedQuery/GetKeyWord">
+                <div class="col-md-7" style="padding-top: 30px">
                     <div class="input-group input-group-lg text-center">
                         <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
                         <span class="input-group-btn">
@@ -50,8 +50,8 @@
                             <button class="btn btn-primary" type="submit">搜索</button>
                         </span>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
         <div class="row" style="margin:80px 40px 50px 50px;border:1px solid #b9c2dc">
             <div style="margin-left:10px;margin-right:10px">
