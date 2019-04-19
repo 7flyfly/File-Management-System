@@ -4,23 +4,38 @@
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>利用登记</title>
+    <!--
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" type="text/javascript"></script> </head>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" type="text/javascript"></script>
+    -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dataTables/css/jquery.dataTables.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dataTables/css/dataTables.jqueryui.css}">
+    <script th:src="@{/js/dataTables/dataTables.jqueryui.js}" type="text/javascript"></script>
+</head>
+    <style type="text/css">
+        .table >tbody >tr >td{
+            text-align: center;
+        }
+        .table>thead >tr> th{
+            text-align: center;
+        }
+    </style>
+   <script>
+       $(document).ready(function () {
+           $('#table').DataTable({
 
-    <script>
-        $(document).ready(function() {
-            $('#example').dataTable();
-        } );
-    </script>
+           });
+       })
+   </script>
+
 </head>
 <body>
-<div class="header" th:replace="public :: #public-header"></div>
-
+<div id="container" >
+    <div class="header" th:replace="public :: #public-header"></div>
     <link rel="stylesheet" type="text/css" href="/static/css/check.css">
-    <!--sidebar-->
-    <div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar"></div>
-    <div class="center">
+    <div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar" style="width: 20%;height: 90%; background-color: #cccccc"></div>
+    <div class="center" style="width: 78%;height: 90%;float: left ">
         <ol class="breadcrumb">
             <li>
                 <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
@@ -32,7 +47,7 @@
                 <a href="#">利用登记</a>
             </li>
         </ol>
-        <div id="main-center">
+        <div id="center">
             <div id="mc-query" class="container-fluid">
                 <div class="row">
                     <div class="text-center zero-padding">
@@ -78,13 +93,341 @@
                         <span class="col-md-2 zero-padding-lr">
                             <input class="form-control input-sm query-keywords" placeholder="单号或利用人账号、姓名">
                         </span>
-                        <span id="mc-xs-visible" class="hidden-sm hidden-md hidden-lg zero-padding">
-                        </span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="text-center">
+                        <div class="btn-group btn-group-sm btn-group-xs" role="group">
+                            <button class="btn btn-default " type="button">
+                                <i class="glyphicon glyphicon-search" onclick="search()">搜索</i>
+                            </button>
+                            <button class="btn btn-info" type="button">
+                                <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal" onclick="add()">新建登记单</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--模态框-->
+                <form method="post" name="register" class="form-horizontal" role="form" id="form-data"  style="margin: 20px;" >
+                    <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: #007bff">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                    <h4 class="modal-title" id="addModalLabel"> 新建登记单 </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" class="form-horizontal">
+                                        <!--userid为隐藏的input，便于update时的传值-->
+                                        <input type="text" id="type" name="type" hidden>
+                                        <div class="form-group">
+                                            <label for="type" class="col-sm-3 control-label">类型</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" disabled="true" name="type-text">
+                                                    <option value="0" selected="true">馆内登记</option>
+                                                    <option value="1">网上登记</option>
+                                                    <option value="2">微信登记</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="borrower" class="col-sm-3 control-label">利用人</label>
+                                            <div class="col-sm-9">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <input type="radio" name="borrower-type-rb" value="0">
+                                                        选择用户
+                                                        <div class="input-group input-group-sm">
+                                                            <input class="form-control " type="text" readonly="true" placeholder="请选择" disabled="">
+                                                            <span class="input-group-btn">
+                                                                <i class="glyphicon glyphicon-remove">清除</i>
+                                                                <button class="btn btn-default" type="submit"></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <input type="radio" name="borrower-type-rb" value="1" checked="true">
+                                                        输入利用者信息
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> 单位</span>
+                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerUnit" placeholder="单位">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> 姓名</span>
+                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerName" placeholder="姓名">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> 联系方式</span>
+                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerPhone" placeholder="联系方式">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> 证件类型</span>
+                                                            <select class="form-control" name="borrowerIdtype">
+                                                                <option value="">请选择</option>
+                                                                <option value="1">身份证</option>
+                                                                <option value="2">学生证</option>
+                                                                <option value="3">教师证</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> 证件号码</span>
+                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerIdno" placeholder="证件号码">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="borrowerDate" class="col-sm-3 control-label">利用日期</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="borrowerDate"  placeholder="请选择">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="reason" class="col-sm-3 control-label">利用目的</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" name="reason">
+                                                    <option value="">请选择</option>
+                                                    <option value="401">出国查档</option>
+                                                    <option value="402">调职查档</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="way">利用方式</label>
+                                            <div class="input-group ">
+                                                <div class="checkbox-panel form-control">
+                                                    <input class="origin" type="hidden" name="way" value="">
+                                                    <span class="checkboxes-item">
+                                                        <input value="403" name="_cb_DVW" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="查阅">
+                                                        <span class="checkboxes-item-text">查阅</span>
+                                                    </span>
+                                                    <span class="checkboxes-item">
+                                                        <input value="404" name="_cb_DVW" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="借阅">
+                                                        <span class="checkboxes-item-text">借阅</span>
+                                                    </span>
+                                                    <span class="checkboxes-item">
+                                                        <input value="601" name="_cb_DVW" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="复制">
+                                                        <span class="checkboxes-item-text">复制</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-content">
+                                            <label class="col-sm-3 control-label" for="content">内容</label>
+                                            <div class="input-group">
+                                                <div role="group" class="btn-group btn-group-sm btn-group-xs-12 right">
+                                                    <button type="button" class="btn btn-default btn-selToAdd btn-xs-block">
+                                                        <i class="glyphicon glyphicon-plus">选择档案库并添加</i>
+                                                    </button>
+                                                    <div class="dialog-panel dialog-tree-panel hide">
+                                                        <input type="hidden" class="origin" name="query-template" value="sxda_a">
+                                                        <div class="input-group input-group-sm"><input type="text" readonly="true" placeholder="请选择" class="form-control origin-text readOnly">
+                                                            <span class="input-group-btn"><button type="button" class="btn btn-default">
+                                                                <i class="icon-remove">清除</i>
+                                                            </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dialog-panel dialog-custom-panel hide">
+                                                        <input type="hidden" class="origin" name="content" value="[]">
+                                                        <div class="input-group input-group-sm">
+                                                            <input type="text" readonly="true" placeholder="请选择" class="form-control origin-text readOnly">
+                                                            <span class="input-group-btn"><button type="button" class="btn btn-default">
+                                                                <i class="icon-remove">清除</i>
+                                                            </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-bordered nowrap" width="100%" cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>档案库</th>
+                                                        <th>档案条目</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="borrowday">出借天数</label>
+                                            <div class="input-group">
+                                                <input type="text" autocomplete="off" class="form-control validate[custom[integer],min[0]]" name="borrowday" placeholder="出借天数">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="input" class="btn btn-primary" onclick="vali();">提交</button>
+                                    <span id="tip">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
+
+            <div id="main">
+                <table id="table" class="display table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
+                    <thread>
+                        <tr>
+                            <th>序号</th>
+                            <th>单号</th>
+                            <th>类型</th>
+                            <th>登记人</th>
+                            <th>登记日期</th>
+                            <th>单位</th>
+                            <th>姓名</th>
+                            <th>日期</th>
+                            <th>联系电话</th>
+                            <th>证件类型</th>
+                            <th>证件号码</th>
+                            <th>目的</th>
+                            <th>方式</th>
+                            <th>内容</th>
+                            <th>状态</th>
+                            <th>出借经办人</th>
+                            <th>出借提交日期</th>
+                            <th>出借日期</th>
+                            <th>借阅天数</th>
+                            <th>归还经办人</th>
+                            <th>归还日期</th>
+                            <th>操作</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                      <tr th:each="content:${contentList}">
+                          <td th:text="${content.id}">0</td>
+                          <td th:text="${content.oddNumbers}">0</td>
+                          <td th:text="${content.registrant}">0</td>
+                          <td th:text="${content.recordDate}">0</td>
+                          <td th:text="${content.unit}">0</td>
+                          <td th:text="${content.name}">0</td>
+                          <td th:text="${content.date}">0</td>
+                          <td th:text="${content.telphone}">0</td>
+                          <td th:text="${content.certificateType}">0</td>
+                          <td th:text="${content.certificateNumber}">0</td>
+                          <td th:text="${content.purpose}">0</td>
+                          <td th:text="${content.way}">0</td>
+                          <td th:text="${content.contant}">0</td>
+                          <td th:text="${content.state}">0</td>
+                          <td th:text="${content.stloanAgentate}">0</td>
+                          <td th:text="${content.loanUbmissionDate}">0</td>
+                          <td th:text="${content.loanDate}">0</td>
+                          <td th:text="${content.day}">0</td>
+                          <td th:text="${content.Return}">0</td>
+                          <td th:text="${content.returnData}">0</td>
+                          <td th:text="${content.operation}">0</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <script type="text/javascript">
+                function search() {
+                      $.ajax({
+                          type: 'GET',
+                          url: '/registration',
+                          dataType: 'json',
+                      })
+                }
+            </script>
+
+            <!--
+            <script type="text/javascript">
+                //点击搜索按钮进行数据渲染
+                function search(){
+                    $("#table").dataTable().fnDraw();
+                }
+
+                $(document).ready(function() {
+                    $('#table').DataTable( {
+                        ordering:false,  //关闭排序
+                        searching:false,
+                        scrollY: 200,
+                        scrollX: true,
+                        autoWidth:true,
+                        paging: false,
+                        lengthMenu:[5,10,25,50,100],
+                        colums: [{
+                            data: "id"
+                        },{
+                            data: "odd_numbers"
+                        },{
+                            data:"type"
+                        },{
+                            data:"registrant"
+                        },{
+                            data:"record_date"
+                        },{
+                            data:"unit"
+                        },{
+                            data:"name"
+                        },{
+                            data:"date"
+                        },{
+                            data:"telphone"
+                        },{
+                            data:"certificate_type "
+                        },{
+                            data:"certificate_number "
+                        },{
+                            data:"purpose "
+                        },{
+                            data:"way "
+                        },{
+                            data:"contant "
+                        },{
+                            data:"state "
+                        },{
+                            data:"loan_agent "
+                        },{
+                            data:"loan_ubmission_date "
+                        },{
+                            data:"loan_date "
+                        },{
+                            data:"return"
+                        },{
+                            data:"return_data"
+                        },{
+                            data:"operation"
+                        }],
+                    // 语言
+                    language: {
+                        "sProcessing": "处理中...",
+                        "sLengthMenu": "显示 _MENU_ 项结果",
+                        "sZeroRecords": "没有匹配结果",
+                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                        "sInfoPostFix": "",
+                        "sSearch": "搜索:",
+                        "sUrl": "",
+                        "sEmptyTable": "表中数据为空",
+                        "sLoadingRecords": "载入中...",
+                        "sInfoThousands": ",",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "上页",
+                            "sNext": "下页",
+                            "sLast": "末页"
+                        },
+                    }
+                    } );
+                } );
+            </script>
+            -->
         </div>
     </div>
-
+</div>
 </body>
 </html>

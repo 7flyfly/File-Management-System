@@ -1,7 +1,7 @@
 package com.file.management.service;
 
 import com.file.management.dao.UserResposity;
-import com.file.management.dao.addUserRepository;
+import com.file.management.dao.AddUserRepository;
 import com.file.management.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserResposity userResposity;
     @Autowired
-    private addUserRepository addUserRepository;
+    private AddUserRepository addUserRepository;
 
     @Override
     public User findUser(String username, String password) {

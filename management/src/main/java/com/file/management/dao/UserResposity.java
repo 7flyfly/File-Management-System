@@ -7,5 +7,4 @@ public interface UserResposity extends JpaRepository<User,String> {
        //查询用户
       User findByUserNameAndPassWord(String username,String password);
 
-      
 }

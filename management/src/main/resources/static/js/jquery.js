@@ -2,7 +2,7 @@
  * jQuery JavaScript Library v2.0.3
  * http://jquery.com/
  *
- * Includes Sizzle.js
+ * Includes Sizzle.dataTables
  * http://sizzlejs.com/
  *
  * Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors
@@ -403,7 +403,7 @@ jQuery.extend({
 		}
 	},
 
-	// See test/unit/core.js for details concerning isFunction.
+	// See test/unit/core.dataTables for details concerning isFunction.
 	// Since version 1.3, DOM methods and functions like alert
 	// aren't supported. They return false on IE (#2968).
 	isFunction: function( obj ) {
@@ -3270,7 +3270,7 @@ jQuery.support = (function( support ) {
 			support.boxSizing = div.offsetWidth === 4;
 		});
 
-		// Use window.getComputedStyle because jsdom on node.js will break without it.
+		// Use window.getComputedStyle because jsdom on node.dataTables will break without it.
 		if ( window.getComputedStyle ) {
 			support.pixelPosition = ( window.getComputedStyle( div, null ) || {} ).top !== "1%";
 			support.boxSizingReliable = ( window.getComputedStyle( div, null ) || { width: "4px" } ).width === "4px";
@@ -6105,7 +6105,7 @@ function isHidden( elem, el ) {
 }
 
 // NOTE: we've included the "window" in window.getComputedStyle
-// because jsdom on node.js will break without it.
+// because jsdom on node.dataTables will break without it.
 function getStyles( elem ) {
 	return window.getComputedStyle( elem, null );
 }
@@ -6770,7 +6770,7 @@ var
 	_load = jQuery.fn.load,
 
 	/* Prefilters
-	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
+	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.dataTables for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
 	 *    - AFTER param serialization (s.data is a string if s.processData is true)
