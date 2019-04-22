@@ -1,6 +1,6 @@
-package com.file.management.dao;
+package com.file.management.dao.metadata;
 
-import com.file.management.pojo.Template;
+import com.file.management.pojo.metadata.Template;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;

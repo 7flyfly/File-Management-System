@@ -1,11 +1,14 @@
 package com.file.management.pojo;
 
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
 @Entity
 @Table(name = "tb_users")
 public class User {
@@ -15,19 +18,4 @@ public class User {
     @Column(name ="PASSWORD")
     private String passWord;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
 }

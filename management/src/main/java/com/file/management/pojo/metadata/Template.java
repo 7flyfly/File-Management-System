@@ -1,4 +1,4 @@
-package com.file.management.pojo;
+package com.file.management.pojo.metadata;
 
 import javax.persistence.*;
 import java.io.Serializable;

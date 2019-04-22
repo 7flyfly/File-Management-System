@@ -1,10 +1,10 @@
 package com.file.management;
 
-import com.file.management.pojo.Field;
-import com.file.management.pojo.Template;
-import com.file.management.service.FieldService;
-import com.file.management.service.TablesService;
-import com.file.management.service.TemplateService;
+import com.file.management.pojo.metadata.Field;
+import com.file.management.pojo.metadata.Template;
+import com.file.management.service.metadata.FieldService;
+import com.file.management.service.metadata.TablesService;
+import com.file.management.service.metadata.TemplateService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +17,15 @@ import java.util.*;
 @SpringBootTest
 public class ManagementApplicationTests {
     @Autowired
-    FieldService fieldService;
+    private FieldService fieldService;
     @Autowired
-    TablesService tablesService;
+    private TablesService tablesService;
     @Autowired
-    TemplateService templateService;
+    private TemplateService templateService;
 
     @Test
     public void contextLoads() {
-        /*Field field1 = new Field();
+        Field field1 = new Field();
         field1.setFieldType("int");
         field1.setFieldLength(11);
         field1.setFieldPrimaryKey(true);
@@ -81,7 +81,7 @@ public class ManagementApplicationTests {
         tablesService.generateTablesByTemplateId(1,"tb_test4");
         tablesService.generateTablesByTemplateId(1,"tb_test5");
         // 不用模板的tb_test3使用的是field3 field4
-        tablesService.generateTablesByUser(set2,"tb_test3");*/
+        tablesService.generateTablesByUser(set2,"tb_test3");
 
         HashMap<String,String> map = new HashMap<>();
         map.put("No","10");

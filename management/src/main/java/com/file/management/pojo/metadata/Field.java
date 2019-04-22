@@ -1,4 +1,4 @@
-package com.file.management.pojo;
+package com.file.management.pojo.metadata;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,10 +37,13 @@ public class Field implements Serializable {
     @Column(name ="FIELD_PRIMARY_KEY",nullable = false)
     private boolean fieldPrimaryKey;
 
-    // 字段是否为索引，且该字段在保存时必需有值
+    // 字段是否为索引，即该字段是否可以被检索，且该字段在保存时必需有值
     @Column(name ="FIELD_INDEX",nullable = false)
     private Boolean fieldIndex;
 
+    // 字段是否可被分词
+    @Column(name ="FIELD_IK",columnDefinition="bit default 0")
+    private Boolean fieldIk;
 
     public int getFieldId() {
         return fieldId;
@@ -104,6 +107,14 @@ public class Field implements Serializable {
 
     public void setFieldIndex(Boolean fieldIndex) {
         this.fieldIndex = fieldIndex;
+    }
+
+    public Boolean getFieldIk() {
+        return fieldIk;
+    }
+
+    public void setFieldIk(Boolean fieldIk) {
+        this.fieldIk = fieldIk;
     }
 
     @Override

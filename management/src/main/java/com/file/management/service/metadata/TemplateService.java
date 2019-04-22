@@ -1,7 +1,7 @@
-package com.file.management.service;
+package com.file.management.service.metadata;
 
-import com.file.management.dao.TemplateRepository;
-import com.file.management.pojo.Template;
+import com.file.management.dao.metadata.TemplateRepository;
+import com.file.management.pojo.metadata.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class TemplateService {
 
     /**
      * 添加一个模板
-     * @param template
+     * @param template 需要添加的模板
      */
     @Transactional
     public void saveOne(Template template) {
@@ -46,7 +46,7 @@ public class TemplateService {
 
     /**
      * 批量添加模板
-     * @param templates
+     * @param templates 需要批量添加的模板列表
      */
     @Transactional
     public void saveAll(List<Template> templates){
@@ -58,8 +58,8 @@ public class TemplateService {
 
     /**
      * 根据模板id查询模板
-     * @param templateId
-     * @return
+     * @param templateId 模板id
+     * @return 查询的模板结果
      */
     public Template getTemplateByTemplateId(int templateId){
         return templateRepository.findByTemplateId(templateId);
@@ -67,17 +67,13 @@ public class TemplateService {
 
     /**
      * 根据模板uuid查询模板
-     * @param templateUuid
-     * @return
+     * @param templateUuid 模板uuid
+     * @return 查询的模板结果
      */
     public Template getTemplateByTemplateUuid(String templateUuid){
         return templateRepository.findByTemplateUuid(templateUuid);
     }
-
-    /**
-     * 根据表格id删除表格
-     * @param templateId
-     */
+    
     /*public void deleteTemplateByTemplateId(int templateId) {
         templateRepository.deleteTemplateByTemplateId(templateId);
     }*/

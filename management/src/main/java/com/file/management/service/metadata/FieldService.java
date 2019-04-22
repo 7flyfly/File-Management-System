@@ -1,7 +1,7 @@
-package com.file.management.service;
+package com.file.management.service.metadata;
 
-import com.file.management.dao.FieldRepository;
-import com.file.management.pojo.Field;
+import com.file.management.dao.metadata.FieldRepository;
+import com.file.management.pojo.metadata.Field;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class FieldService {
 
     /**
      * 添加一个字段
-     * @param field
+     * @param field 需要添加的字段
      */
     @Transactional
     public void saveOne(Field field) {
@@ -44,7 +44,7 @@ public class FieldService {
 
     /**
      * 批量添加字段
-     * @param fields
+     * @param fields 需要批量添加的字段列表
      */
     @Transactional
     public void saveAll(List<Field> fields){
@@ -56,8 +56,8 @@ public class FieldService {
 
     /**
      * 根据字段uuid查询字段
-     * @param filedUuid
-     * @return
+     * @param filedUuid 字段的uuid
+     * @return 查询的字段结果
      */
     public Field getFieldByFieldUUid(String filedUuid){
         return fieldRepository.findByFieldUuid(filedUuid);
@@ -65,8 +65,8 @@ public class FieldService {
 
     /**
      * 根据字段名称做精确查询
-     * @param fieldName
-     * @return
+     * @param fieldName 字段名称
+     * @return 查询的字段结果
      */
     public Field getFieldByFieldName(String fieldName){
         return fieldRepository.findByFieldName(fieldName);
@@ -74,17 +74,13 @@ public class FieldService {
 
     /**
      * 根据字段名称做模糊查询
-     * @param fieldName
-     * @return
+     * @param fieldName 字段模糊名称
+     * @return 查询的字段结果
      */
     public List<Field> getFieldByFieldNameLike(String fieldName){
         return fieldRepository.findByFieldNameLike(fieldName);
     }
-
-    /**
-     * 根据字段id删除字段
-     * @param fieldId
-     */
+    
     /*public void deleteFieldByFieldId(int fieldId){
         fieldRepository.deleteFieldByFieldId(fieldId);
     }*/

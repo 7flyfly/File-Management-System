@@ -1,6 +1,6 @@
-package com.file.management.dao;
+package com.file.management.dao.metadata;
 
-import com.file.management.pojo.Field;
+import com.file.management.pojo.metadata.Field;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
