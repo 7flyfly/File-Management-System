@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fe44000f-35d7-47ef-ab7f-c3084f2dbecf" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_50.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_8.xml" afterDir="false" />
@@ -17,6 +16,7 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_8.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_magese_ik_analyzer_7_5_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_xstream_xstream_1_4_10.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_2_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" afterDir="false" />
@@ -76,6 +76,7 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_noggit_noggit_0_8.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_14.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_26.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_26.xml" afterDir="false" />
@@ -122,15 +123,13 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_11_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xmlpull_xmlpull_1_1_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xpp3_xpp3_min_1_1_4c.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/management/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntegratedQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/management/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -145,10 +144,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="273">
+              <caret line="180" column="40" lean-forward="true" selection-start-line="180" selection-start-column="40" selection-end-line="180" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -156,32 +155,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="22" />
+            <state relative-caret-position="463">
+              <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="109" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#844#845#0" expanded="true" />
-                <element signature="e#921#922#0" expanded="true" />
-                <element signature="e#977#978#0" expanded="true" />
-                <element signature="e#1010#1011#0" expanded="true" />
-                <element signature="e#1044#1045#0" expanded="true" />
-                <element signature="e#1074#1075#0" expanded="true" />
-                <element signature="e#1123#1124#0" expanded="true" />
-                <element signature="e#1164#1165#0" expanded="true" />
-                <element signature="e#1199#1200#0" expanded="true" />
-                <element signature="e#1230#1231#0" expanded="true" />
-                <element signature="e#1278#1279#0" expanded="true" />
-                <element signature="e#1318#1319#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/UserResposity.java">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="1782">
+              <caret line="125" column="27" lean-forward="true" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+              <folding>
+                <element signature="e#2235#2251#0" expanded="true" />
+                <element signature="e#2945#2961#0" expanded="true" />
+                <element signature="e#4748#4764#0" expanded="true" />
+                <element signature="e#6259#6275#0" expanded="true" />
+                <element signature="e#1625#1641#0" expanded="true" />
+                <element signature="e#2511#2527#0" expanded="true" />
+                <element signature="e#2878#2894#0" expanded="true" />
+                <element signature="e#3768#3784#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" column="68" lean-forward="true" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -189,42 +195,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3531">
-              <caret line="107" column="37" lean-forward="true" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
+            <state>
+              <caret line="84" column="47" selection-start-line="84" selection-start-column="47" selection-end-line="84" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+            <state relative-caret-position="193">
+              <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="69" selection-start-column="52" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="339">
+              <caret line="165" selection-start-line="165" selection-end-line="167" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2595#2650#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntegratedQuery.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="26" column="42" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="42" />
-              <folding>
-                <element signature="e#758#759#0" expanded="true" />
-                <element signature="e#819#820#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -241,6 +244,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>collection</find>
+      <find>dataimporter.tb_2.last_index_time</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -249,17 +253,28 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/management/pom.xml" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/solr/SolrController.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Solr.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntegratedQuery.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java" />
+        <option value="$PROJECT_DIR$/management/pom.xml" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" />
       </list>
     </option>
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1151" />
+    <option name="width" value="960" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -271,47 +286,52 @@
         <subPane>
           <expand>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
+              <item name="management" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -320,8 +340,8 @@
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -331,8 +351,8 @@
               <item name="IntegratedQuery" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -341,8 +361,8 @@
               <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -351,8 +371,8 @@
               <item name="pojo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -361,8 +381,19 @@
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
+              <item name="management" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="management" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="solr" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -371,48 +402,19 @@
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
+              <item name="File-Management-System-0422" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System-0422" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="LibraryUse" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System-0417" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System-0417" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="SystemManagement" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -486,28 +488,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1151" height="1040" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18423465" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24360341" />
       <window_info id="Designer" order="1" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Structure" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="DB Execution Console" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.32936078" />
+      <window_info id="Structure" order="4" weight="0.18123667" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.32855567" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.32855567" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.29988974" />
+      <window_info anchor="bottom" id="Debug" order="4" visible="true" weight="0.16468039" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="DB Execution Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -521,13 +523,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((DefaultElement)((DefaultDocument)document).rootElement).content" custom="org.dom4j.tree.DefaultDocument,org.dom4j.tree.DefaultElement" />
+      </configuration>
+    </watches-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/public.html" />
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/LibrarycontrolCenter.html" />
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/AuthorityManagement.html">
@@ -562,13 +568,7 @@
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Examine.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/LibraryUse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/LibraryUse.java" />
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Check.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-494" />
@@ -588,16 +588,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Solr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Solr.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/Closeable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -605,74 +596,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java" />
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/UserResposity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3531">
-          <caret line="107" column="37" lean-forward="true" selection-start-line="107" selection-start-column="37" selection-end-line="107" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#844#845#0" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-            <element signature="e#1010#1011#0" expanded="true" />
-            <element signature="e#1044#1045#0" expanded="true" />
-            <element signature="e#1074#1075#0" expanded="true" />
-            <element signature="e#1123#1124#0" expanded="true" />
-            <element signature="e#1164#1165#0" expanded="true" />
-            <element signature="e#1199#1200#0" expanded="true" />
-            <element signature="e#1230#1231#0" expanded="true" />
-            <element signature="e#1278#1279#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="297">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntegratedQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="26" column="42" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="42" />
+        <state relative-caret-position="429">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/SolrDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/dom4j/dom4j/2.1.1/dom4j-2.1.1.jar!/org/dom4j/io/XMLWriter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/dom4j/dom4j/2.1.1/dom4j-2.1.1.jar!/org/dom4j/Node.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1773">
+          <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
           <folding>
-            <element signature="e#758#759#0" expanded="true" />
-            <element signature="e#819#820#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java">
+    <entry file="file://$PROJECT_DIR$/management/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="35" column="55" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+        <state>
+          <caret line="84" column="47" selection-start-line="84" selection-start-column="47" selection-end-line="84" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="109" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="68" lean-forward="true" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="69" selection-start-column="52" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="165" selection-start-line="165" selection-end-line="167" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2595#2650#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="180" column="40" lean-forward="true" selection-start-line="180" selection-start-column="40" selection-end-line="180" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="125" column="27" lean-forward="true" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+          <folding>
+            <element signature="e#2235#2251#0" expanded="true" />
+            <element signature="e#2945#2961#0" expanded="true" />
+            <element signature="e#4748#4764#0" expanded="true" />
+            <element signature="e#6259#6275#0" expanded="true" />
+            <element signature="e#1625#1641#0" expanded="true" />
+            <element signature="e#2511#2527#0" expanded="true" />
+            <element signature="e#2878#2894#0" expanded="true" />
+            <element signature="e#3768#3784#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
         </state>
       </provider>
     </entry>

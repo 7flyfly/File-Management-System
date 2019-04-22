@@ -63,6 +63,7 @@ public class IntelligentRetrievalController {
     @RequestMapping(value = "/fullImportTabel/{tableName}")
     @ResponseBody
     /**
+     * 测试用，可删除
      * 导入表，将表中的数据建立索引
      * @param tableName 表名
      * eg: http://localhost:8080/IntegratedQuery/IntelligentRetrieval/fullImportTabel/tb_3
@@ -100,6 +101,7 @@ public class IntelligentRetrievalController {
     @RequestMapping(value = "/deltaImportTabel/{tableName}")
     @ResponseBody
     /**
+     * 测试 可删除
      * 增量导入表，将表中的数据建立索引，根据DocumentNumber修改索引，根据软删除标识删除索引
      * 更改软删除标识可以实现回滚
      * @param tableName 表名
@@ -121,7 +123,6 @@ public class IntelligentRetrievalController {
                     map.put("result",tableName+"增量导入失败!");
                     return map.toString();
                 }
-
             }else{
                 map.put("result","失败! 表名不能为空");
                 return map.toString();
@@ -146,7 +147,7 @@ public class IntelligentRetrievalController {
             SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfig();
             List<SolrDataSource> solrDataSourcesList = solrDataConfig.getSolrDataSourceList();
             solrDataSourcesList = solrDataConfigService.addDataSource(solrDataSourcesList,"db_test","com.mysql.jdbc.Driver",
-                    "jdbc:mysql://localhost:3306/db_test","root","2010109hy");
+                    "jdbc:mysql://localhost:3306/db_test","root","123456");
             solrDataConfig.setSolrDataSourceList(solrDataSourcesList);  //覆盖原有solrDataSourcesList
             boolean bool = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
             map.put("result",bool);

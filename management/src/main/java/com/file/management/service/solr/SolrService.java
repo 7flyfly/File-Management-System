@@ -1,6 +1,7 @@
 package com.file.management.service.solr;
 
 import com.alibaba.fastjson.JSON;
+import com.file.management.pojo.*;
 import com.file.management.utils.SolrUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -8,14 +9,21 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class SolrService {
+    @Autowired
+    SolrDataConfigService solrDataConfigService;
+
     //根据id查询索引
     /**
      * 将表中数据导入solr
@@ -41,6 +49,154 @@ public class SolrService {
             return document.toString();
         }
     }
+
+    /**
+     * 新增需要将数据变为索引的数据库信息
+     * @param dataSourceName 数据库名 "db_test"
+     * @param driveName 驱动名 "com.mysql.jdbc.Driver"
+     * @param dataSourceUrl 数据库地址 "jdbc:mysql://localhost:3306/db_test"
+     * @param userName 用户名 "root"
+     * @param password 密码 "123456"
+     * @return
+     */
+    public HashMap<Boolean,String> addDataSources2SolrDataConfig(String dataSourceName,String driveName,String dataSourceUrl,
+                                                                 String userName,String password){
+        try {
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfig();
+            List<SolrDataSource> solrDataSourcesList = solrDataConfig.getSolrDataSourceList();
+            solrDataSourcesList = solrDataConfigService.addDataSource(solrDataSourcesList,dataSourceName,driveName,
+                    dataSourceUrl,userName,password);
+            solrDataConfig.setSolrDataSourceList(solrDataSourcesList);  //覆盖原有solrDataSourcesList
+            boolean bool = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
+            hashMap.put(true,"新增数据源成功");
+            return hashMap;
+        }catch(Exception e){
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            hashMap.put(false,e.getMessage());
+            return hashMap;
+        }
+    }
+
+    /**
+     * 新增需要将数据变为索引的数据库表的信息
+     * @param dataSourceName 所在数据库名(默认配置文件中的数据库名，先指定db_fileManagement todo 读取数据库配置文件)
+     * @param tableName 数据库表名
+     * @param primaryKey 数据库表中主键名称(有且只有一个主键，suggest：档号的英文名)
+     * @param documentNumber 指定的uniqueKey，档号的字段名称；(suggest：档号的英文名
+     * @param solrStringList string型，字段在综合查询中不可被检索；
+     * @param solrStringCopyTextList string型，字段在综合查询中可以被检索；
+     * @param solrStringArrList string型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；
+     * @param solrStringArrCopyTextList string型，允许该字段有多个值(即组成数组)，字段在综合查询中可以被检索；
+     * @param solrIKList 可被分词类型，字段在综合查询中不可被检索；(不建议，用solrStringList)
+     * @param solrIKCopyTextList 可被分词类型，字段在综合查询中可以被检索；
+     * @param solrIKArrList 可被分词类型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；(不建议，用solrStringArrList)
+     * @param solrIKArrCopyTextList 可被分词类型，允许该字段有多个值(即组成数组)，字段在综合查询中可以被检索；
+     * @param solrDateList date型，字段在综合查询中不可被检索；
+     * @param solrDateCopyTextList date型，字段在综合查询中可以被检索；
+     * @param solrDateArrList date型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；
+     * @param solrDateArrCopyTextList date型，字段在综合查询中不可被检索；
+     */
+    public HashMap<Boolean,String> addTableEntity2SolrDataConfig(String dataSourceName, String tableName, String primaryKey,
+             String documentNumber,List<String> solrStringList, List<String> solrStringCopyTextList,
+             List<String> solrStringArrList, List<String> solrStringArrCopyTextList, List<String> solrIKList,
+             List<String> solrIKCopyTextList, List<String> solrIKArrList, List<String> solrIKArrCopyTextList,
+             List<String> solrDateList, List<String> solrDateCopyTextList, List<String> solrDateArrList,
+             List<String> solrDateArrCopyTextList){
+        try {
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfig();
+            //一个solrEntityDocumentList中只有一个元素
+            List<SolrEntityDocument>  solrEntityDocumentList = solrDataConfig.getSolrEntityDocumentList();
+            //solrEntityDocument中存放solrTableEntityList
+            List<SolrTableEntity> solrTableEntityList = solrEntityDocumentList.get(0).getSolrTableEntityList();
+            //构建表
+            List<SolrTableEntityColumn> solrTableEntityColumnList = solrDataConfigService.createSolrTableEntityColumnList(
+                    documentNumber,solrStringList,solrStringCopyTextList, solrStringArrList, solrStringArrCopyTextList,
+                    solrIKList,solrIKCopyTextList,solrIKArrList, solrIKArrCopyTextList,solrDateList,
+                    solrDateCopyTextList,solrDateArrList,solrDateArrCopyTextList);
+            //增加表
+            solrTableEntityList = solrDataConfigService.addSolrTableEntity(solrTableEntityList,tableName,primaryKey,
+                    dataSourceName,solrTableEntityColumnList);
+            solrEntityDocumentList.get(0).setSolrTableEntityList(solrTableEntityList);
+            solrDataConfig.setSolrEntityDocumentList(solrEntityDocumentList);
+            boolean bool = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
+            String boolMessage = bool ? "添加成功" : "添加失败";
+            hashMap.put(bool,tableName+boolMessage);
+            return hashMap;
+        }catch(Exception e){
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            hashMap.put(false,e.getMessage());
+            return hashMap;
+        }
+    }
+
+    /**
+     * 导入表，将表中的数据建立索引
+     * @param tableName 表名，非空
+     */
+    public HashMap<Boolean,String> fullImportTable2Solr(String tableName){
+        try{
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            if(tableName!=null&&!tableName.equals("")){
+                System.out.println("tableName:"+tableName);
+                SolrUtils solrUtils = new SolrUtils();
+                SolrClient solrClient = solrUtils.createSolrClient();
+                boolean bool = this.fullImportTableIntoSolr(solrClient,tableName);
+                solrClient.close();
+                if(bool){
+                    hashMap.put(true,"成功导入表："+tableName);
+                    return hashMap;
+                }else{
+                    hashMap.put(false,tableName+"导入失败!");
+                    return hashMap;
+                }
+
+            }else{
+                hashMap.put(false,"失败! 表名不能为空");
+                return hashMap;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            hashMap.put(false,e.getMessage());
+            return hashMap;
+        }
+    }
+
+    /**
+     * 增量导入表，将表中的数据建立索引，根据DocumentNumber修改索引，根据软删除标识删除索引
+     * 更改软删除标识可以实现回滚
+     * @param tableName 表名
+     */
+    public HashMap<Boolean,String> deltaImportTable2Solr(String tableName){
+        try{
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            if(tableName!=null&&!tableName.equals("")){
+                System.out.println("tableName:"+tableName);
+                SolrUtils solrUtils = new SolrUtils();
+                SolrClient solrClient = solrUtils.createSolrClient();
+                boolean bool = this.deltaImportTableIntoSolr(solrClient,tableName);
+                solrClient.close();
+                if(bool){
+                    hashMap.put(true,"成功增量导入表："+tableName);
+                    return hashMap;
+                }else{
+                    hashMap.put(false,tableName+"增量导入失败!");
+                    return hashMap;
+                }
+            }else{
+                hashMap.put(false,"失败! 表名不能为空");
+                return hashMap;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            hashMap.put(false,e.getMessage());
+            return hashMap;
+        }
+    }
+
 
     /**
      * 将表中数据导入solr，建立索引

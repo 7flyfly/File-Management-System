@@ -9,13 +9,14 @@ import com.file.management.utils.SolrUtils;
 import com.file.management.utils.XsteamUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.springframework.stereotype.Service;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,22 +71,27 @@ public class SolrDataConfigService {
      * @return
      */
     public boolean rewriteSolrDataConfig(String solrDataConfigPath,String xmlStr){
-        FileWriter out = null;
+        FileWriter fileWritter = null;
         try {
-            out = new FileWriter(solrDataConfigPath);
+            File xmlFile = new File(solrDataConfigPath);
+            fileWritter = new FileWriter(xmlFile);
             Document document = XsteamUtil.string2XMLDocument(xmlStr);
-            OutputFormat format = OutputFormat.createPrettyPrint();  //转换成字符串
-            format.setEncoding("UTF-8");
-            XMLWriter writer = new XMLWriter( out, format );
-            writer.write(document);
+//            Element root = document.getRootElement();
+//            Element data = root.element("document");//获取子节点
+//            Element entity = data.element("entity");//获取子节点
+//            System.out.println(entity.attributes());
+            //使用dom4j的XMLWriter,&gt;无法转换为>，所以先转换为String
+            String documentStr = XsteamUtil.xmlDocument2String(document);
+            String documentStrReplace = documentStr.replaceAll("&gt;",">");
+            fileWritter.write(documentStrReplace);
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("保存SolrDataConfig失败！");
         }finally{
-            if (out!=null) {
+            if (fileWritter!=null) {
                 try {
-                    out.close();
+                    fileWritter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                     System.out.println("保存SolrDataConfig失败！");
@@ -230,6 +236,7 @@ public class SolrDataConfigService {
 
     /**
      * 将数据库表字段按不同的需求转换为solr中dynamicField的格式
+     * @param documentNumber 指定的uniqueKey，档号的字段名称；
      * @param solrStringList string型，字段在综合查询中不可被检索；
      * @param solrStringCopyTextList string型，字段在综合查询中可以被检索；
      * @param solrStringArrList string型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；
