@@ -9,10 +9,12 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.swing.text.Document;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +53,27 @@ public class SolrService {
     }
 
     /**
+     * 对solr进行检索
+     * @param solrClient solr客户端
+     * @param keyword 关键词
+     * @return
+     */
+    public SolrDocumentList querySolrbyKeyword(SolrClient solrClient, String keyword){
+        SolrDocumentList docs = null;
+        try {
+            SolrQuery query = new SolrQuery();
+            query.setQuery("text:*");
+            //开始检索
+            QueryResponse queryResponse = solrClient.query(query);
+            docs = queryResponse.getResults();
+            solrClient.commit();
+            return docs;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return docs;
+        }
+    }
+    /**
      * 新增需要将数据变为索引的数据库信息
      * @param dataSourceName 数据库名 "db_test"
      * @param driveName 驱动名 "com.mysql.jdbc.Driver"
@@ -82,20 +105,20 @@ public class SolrService {
      * 新增需要将数据变为索引的数据库表的信息
      * @param dataSourceName 所在数据库名(默认配置文件中的数据库名，先指定db_fileManagement todo 读取数据库配置文件)
      * @param tableName 数据库表名
-     * @param primaryKey 数据库表中主键名称(有且只有一个主键，suggest：档号的英文名)
-     * @param documentNumber 指定的uniqueKey，档号的字段名称；(suggest：档号的英文名
-     * @param solrStringList string型，字段在综合查询中不可被检索；
-     * @param solrStringCopyTextList string型，字段在综合查询中可以被检索；
-     * @param solrStringArrList string型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；
-     * @param solrStringArrCopyTextList string型，允许该字段有多个值(即组成数组)，字段在综合查询中可以被检索；
-     * @param solrIKList 可被分词类型，字段在综合查询中不可被检索；(不建议，用solrStringList)
-     * @param solrIKCopyTextList 可被分词类型，字段在综合查询中可以被检索；
-     * @param solrIKArrList 可被分词类型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；(不建议，用solrStringArrList)
-     * @param solrIKArrCopyTextList 可被分词类型，允许该字段有多个值(即组成数组)，字段在综合查询中可以被检索；
-     * @param solrDateList date型，字段在综合查询中不可被检索；
-     * @param solrDateCopyTextList date型，字段在综合查询中可以被检索；
-     * @param solrDateArrList date型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；
-     * @param solrDateArrCopyTextList date型，字段在综合查询中不可被检索；
+     * @param primaryKey 数据库表中主键名称(有且只有一个主键，suggest：档号字段的英文名)
+     * @param documentNumber 指定的uniqueKey，档号的字段名称；(suggest：档号字段的英文名)
+     * @param solrStringList string型，字段在综合查询中不可被检索；可以为null [1]
+     * @param solrStringCopyTextList string型，字段在综合查询中可以被检索；可以为null [2]
+     * @param solrStringArrList string型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；可以为null
+     * @param solrStringArrCopyTextList string型，允许该字段有多个值(即组成数组)，字段在综合查询中可以被检索；可以为null
+     * @param solrIKList 可被分词类型，字段在综合查询中不可被检索；(不建议，用solrStringList)；可以为null
+     * @param solrIKCopyTextList 可被分词类型，字段在综合查询中可以被检索；可以为null [3]
+     * @param solrIKArrList 可被分词类型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；(不建议，用solrStringArrList)；可以为null
+     * @param solrIKArrCopyTextList 可被分词类型，允许该字段有多个值(即组成数组)，字段在综合查询中可以被检索；可以为null
+     * @param solrDateList date型，字段在综合查询中不可被检索；可以为null
+     * @param solrDateCopyTextList date型，字段在综合查询中可以被检索；可以为null
+     * @param solrDateArrList date型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；可以为null
+     * @param solrDateArrCopyTextList date型，字段在综合查询中不可被检索；可以为null
      */
     public HashMap<Boolean,String> addTableEntity2SolrDataConfig(String dataSourceName, String tableName, String primaryKey,
              String documentNumber,List<String> solrStringList, List<String> solrStringCopyTextList,
