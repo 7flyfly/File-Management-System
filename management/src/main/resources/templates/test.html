@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>查询登录和单点日志</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/dataTables/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap-treeview.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <script th:src="@{/js/dataTables/jquery.dataTables.min.js}"></script>
+    <style type="text/css">
+    .table > tbody > tr > td {
+        text-align: center;
+    }
+
+    /* dataTables表头居中 */
+    .table > thead:first-child > tr:first-child > th {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <p>
+            <span>员工账号：</span>
+            <input type="text" id="account" placeholder="输入员工账号"/>
+            <span>日志类型:&nbsp;&nbsp;</span>
+            <select id="logtype">
+                <option value="">请选择</option>
+                <option value="1">单点日志</option>
+                <option value="2">登录日志</option>
+            </select>
+        </p>
+        <p>
+            <span>时间点：&nbsp;&nbsp;</span>
+            <input type="date" id="logdate"/>
+        </p>
+        <p>
+            <span>开始时间：</span>
+            <input type="datetime-local" id="starttime"/>&nbsp;&nbsp;
+            <span>截止时间：&nbsp;&nbsp;
+                <input type="datetime-local" id="endtime"/>
+            </span>
+        </p>
+        <button type="button" class="btn btn-default btn-primary" onclick="search()">搜索</button>
+    </div>
+</div>
+<hr/>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <table id="table" class="table table-border table-hover table-bg table-sort cell-border" width="100%">
+            <thead>
+                <tr>
+                    <th>员工信息</th>
+                    <th>访问时间</th>
+                    <th>响应时间</th>
+                    <th>日志类型</th>
+                    <th>APP_ID</th>
+                    <th>菜单ID</th>
+                    <th>菜单名称</th>
+                    <th>手机操作系统信息</th>
+                    <th>手机串号信息唯一标识</th>
+                    <th>异常信息</th>
+                </tr>
+            </thead>
+            <thead></thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    // 点击搜索按钮进行数据的渲染
+    function search() {
+        $("#table").dataTable().fnDraw();
+    }
+    $(document).ready(function () {
+        $("#table").DataTable({ //对表格控件进行初始化
+            ordering: false,  // 关闭排序
+            searching: false,  // 关闭插件自带的搜索，我们会自定义搜索
+            serverSide: true,  //服务器模式
+            Processing: true,  //是否显示“处理中...”
+            scrollX: true,  //水平方向的滚动条
+            autoWidth : true,  // 自动宽度
+            lengthMenu: [5, 10, 25, 50, 100],  // 分页器的页数
+            ajax: {
+                //指定数据源
+                url: "../sysLogInfoController/listloginfo",
+                type: "POST",
+                // 这里向后端传递查询参数
+                data: function (d) {
+                    d.account = $("#account").val().trim();
+                    d.logtype = $("#logtype").val().trim();
+                    d.logdate = $("#logdate").val().trim();
+                    d.starttime = $("#starttime").val().trim();
+                    d.endtime = $("#endtime").val().trim();
+                }
+            },
+            // 与<table>标签中的<th>标签内的字段对应
+            columns: [{
+                data: "party_account"
+            }, {
+                data: "access_date"
+            }, {
+                data: "response_date"
+            }, {
+                data: "log_type"
+            }, {
+                data: "app_id"
+            }, {
+                data: "menu_id"
+            }, {
+                data: "menu_name"
+            }, {
+                data: "phone_info"
+            }, {
+                data: "phone_unique"
+            }, {
+                data: "error_msg"
+            }],
+            // 语言
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
