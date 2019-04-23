@@ -224,6 +224,7 @@ public class IntelligentRetrievalController {
             List<SolrEntityDocument>  solrEntityDocumentList = solrDataConfig.getSolrEntityDocumentList();
             //solrEntityDocument中存放solrTableEntityList
             List<SolrTableEntity> solrTableEntityList = solrEntityDocumentList.get(0).getSolrTableEntityList();
+            if(solrTableEntityList==null) solrTableEntityList = new ArrayList<SolrTableEntity>();
             //确定数据库表中各字段在solr中对应的性质
             String documentNumber = "FILE_NUMBER";
             List<String> solrStringList = new ArrayList<String>();
