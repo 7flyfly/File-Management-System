@@ -73,7 +73,7 @@ public class TemplateService {
     public Template getTemplateByTemplateUuid(String templateUuid){
         return templateRepository.findByTemplateUuid(templateUuid);
     }
-    
+
     /*public void deleteTemplateByTemplateId(int templateId) {
         templateRepository.deleteTemplateByTemplateId(templateId);
     }*/

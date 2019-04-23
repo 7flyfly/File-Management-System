@@ -28,6 +28,12 @@ public class Tables implements Serializable{
     @JoinColumn(name = "TEMPLATE_ID")
     private Template template;
 
+    // 表的主键
+    @OneToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @JoinColumn(name = "FIELD_ID",nullable = false)
+    private Field primaryKey;
+
+
     // 表对应的字段
     @ManyToMany(cascade = CascadeType.MERGE,fetch=FetchType.EAGER)
     @JoinTable(
@@ -70,11 +76,27 @@ public class Tables implements Serializable{
     }
 
     public Set<Field> getFields() {
-        return fields;
+        if(this.getTemplate() == null) {
+            return fields;
+        }else{
+            return this.getTemplate().getFields();
+        }
     }
 
     public void setFields(Set<Field> fields) {
         this.fields = fields;
+    }
+
+    public Field getPrimaryKey() {
+        if(this.getTemplate() == null) {
+            return primaryKey;
+        }else{
+            return this.getTemplate().getPrimaryKey();
+        }
+    }
+
+    public void setPrimaryKey(Field primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
     @Override

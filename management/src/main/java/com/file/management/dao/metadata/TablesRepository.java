@@ -15,6 +15,9 @@ public interface TablesRepository extends JpaRepository<Tables,Integer> {
     // 根据表uuid查询表
     Tables findByTableUuid(String tableUuid);
 
+    // 根据表名查询表
+    Tables findByTableName(String tableName);
+
     // 根据表id删除表
     @Modifying
     @Query(value = "delete from tb_table where table_id=?1 ", nativeQuery = true)

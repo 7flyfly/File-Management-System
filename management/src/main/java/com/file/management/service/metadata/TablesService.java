@@ -59,30 +59,6 @@ public class TablesService {
         // 将该表放入数据库中
         table.setTableUuid("Table" + "_" + table.getTableName() + "_" + createdate);
         tablesRepository.saveAndFlush(table);
-
-        // 在综合查询中不可被检索的字段list
-        ArrayList<String> solrStringList = new ArrayList<>();
-
-        // 综合查询中可以被检索的字段list
-        ArrayList<String> solrStringCopyTextList = new ArrayList<>();
-
-        // 在综合查询中可以被检索并可以被分词的字段list
-        ArrayList<String> solrIKCopyTextList = new ArrayList<>();
-
-        for (Field f : table.getFields()) {
-            if (!f.getFieldIndex()) {
-                solrStringList.add(f.getFieldEnglishName());
-            } else {
-                if (!f.getFieldIk()) {
-                    solrStringCopyTextList.add(f.getFieldEnglishName());
-                } else {
-                    solrIKCopyTextList.add(f.getFieldEnglishName());
-                }
-            }
-        }
-
-        // 将表放入solr中
-        solrService.addTableEntity2SolrDataConfig("db_fileManagement", table.getTableName(), "DOCUMENT_NO", "DOCUMENT_NO", solrStringList, solrStringCopyTextList, null, null, null, solrIKCopyTextList, null, null, null, null, null, null);
     }
 
     /**
@@ -130,6 +106,8 @@ public class TablesService {
         return true;
     }
 
+    public Tables getTablesByTableName(String tableName){return tablesRepository.findByTableName(tableName);}
+
     /**
      * 根据表格uuid删除表格
      *
@@ -150,11 +128,12 @@ public class TablesService {
     /**
      * 生成表函数
      *
+     * @param primaryKey 该表的主键
      * @param fields     表字段
      * @param tableName  表名
      * @param isTemplate 是否使用模板生成
      */
-    public void generateTables(Set<Field> fields, String tableName, boolean isTemplate) {
+    public void generateTables(Field primaryKey,Set<Field> fields, String tableName, boolean isTemplate) {
 
         //根据一些字段生成一张名为tableName的表
         String sqlCreateTable = "";
@@ -162,13 +141,15 @@ public class TablesService {
 
         // 添加所需字段
         for (Field f : fields) {
-            sqlCreateTable += f.getFieldEnglishName() + " " + f.getFieldType() + "(" + f.getFieldLength() + ")" + ",\n";
-
-            // 设置表的主键
-            if (f.isFieldPrimaryKey()) {
-                sqlCreateTable += "PRIMARY KEY (" + f.getFieldEnglishName() + ")\n";
+            if (f.getFieldLength() == 0) {
+                sqlCreateTable += f.getFieldEnglishName() + " " + f.getFieldType() + ",\n";
+            } else {
+                sqlCreateTable += f.getFieldEnglishName() + " " + f.getFieldType() + "(" + f.getFieldLength() + ")" + ",\n";
             }
         }
+
+        // 设置表的主键
+        sqlCreateTable += "PRIMARY KEY (" + primaryKey.getFieldEnglishName() + "),\n";
 
         // 添加最后修改时间并设置默认值
         sqlCreateTable += "LAST_MODIFIED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
@@ -185,6 +166,8 @@ public class TablesService {
         // 将新生成的表放入tb_tables中
         Tables tables = new Tables();
         tables.setTableName(tableName);
+        tables.setPrimaryKey(primaryKey);
+
         // 如果不是模板，即用户自定义字段生成的模板建立table-field关联
         if (!isTemplate) {
             tables.setFields(fields);
@@ -195,11 +178,16 @@ public class TablesService {
     /**
      * 使用用户自定义字段生成表
      *
+     * @param primaryKey 该表的主键
      * @param fields    表字段
      * @param tableName 表名
      */
-    public void generateTablesByUser(Set<Field> fields, String tableName) {
-        generateTables(fields, tableName, false);
+    public void generateTablesByUser(Field primaryKey,Set<Field> fields, String tableName) {
+        // 根据用户定义字段生成表
+        generateTables(primaryKey,fields, tableName, false);
+
+        // 将表插入solr中
+        addTableToSolr(getTablesByTableName(tableName));
     }
 
     /**
@@ -210,7 +198,7 @@ public class TablesService {
      */
     public void generateTablesByTemplateId(int templateId, String tableName) {
         Template template = templateService.getTemplateByTemplateId(templateId);
-        generateTables(template.getFields(), tableName, true);
+        generateTables(template.getPrimaryKey(),template.getFields(), tableName, true);
 
         // 修改tb_table的模板id的sql语句
         String sqlUpdateTable = "";
@@ -218,7 +206,9 @@ public class TablesService {
 
         // 执行修改表的模板id的sql语句
         jdbcTemplate.execute(sqlUpdateTable);
-        templateService.saveOne(template);
+
+        // 将表加入solr中
+        addTableToSolr(getTablesByTableName(tableName));
 
         /*String sqlUpdateTemplateField = "";
         for(Field f:templateService.getTemplateByTemplateId(templateId).getFields()){
@@ -276,7 +266,7 @@ public class TablesService {
      * @param value     主键value
      * @return 返回删除是否成功信息
      */
-    public String DeleteDate(String tableUuid, String key, String value) {
+    public String deleteDate(String tableUuid, String key, String value) {
         // 获取table名称
         Tables tables = getTablesByTableUuid(tableUuid);
         String tableName = tables.getTableName();
@@ -306,11 +296,43 @@ public class TablesService {
      * @param values    主键值
      * @return 返回删除是否成功信息
      */
-    public String DeleteDates(String tableUuid, String key, String[] values) {
+    public String deleteDates(String tableUuid, String key, String[] values) {
         StringBuffer sb = new StringBuffer();
         for (String value : values) {
-            sb.append(DeleteDate(tableUuid, key, value));
+            sb.append(deleteDate(tableUuid, key, value));
         }
         return sb.toString();
+    }
+
+    /**
+     *
+     * 将表放入solr中
+     * @param table 要放入solr的表
+     */
+    public void addTableToSolr(Tables table) {
+        // 在综合查询中不可被检索的字段list
+        System.out.println("---------");
+        ArrayList<String> solrStringList = new ArrayList<>();
+
+        // 综合查询中可以被检索的字段list
+        ArrayList<String> solrStringCopyTextList = new ArrayList<>();
+
+        // 在综合查询中可以被检索并可以被分词的字段list
+        ArrayList<String> solrIKCopyTextList = new ArrayList<>();
+
+        for (Field f : table.getFields()) {
+            if (!f.getFieldIndex()) {
+                solrStringList.add(f.getFieldEnglishName());
+            } else {
+                if (!f.getFieldIk()) {
+                    solrStringCopyTextList.add(f.getFieldEnglishName());
+                } else {
+                    solrIKCopyTextList.add(f.getFieldEnglishName());
+                }
+            }
+        }
+
+        // 将表放入solr中
+        solrService.addTableEntity2SolrDataConfig("db_fileManagement", table.getTableName(), "Document_No", "Document_No", solrStringList, solrStringCopyTextList, null, null, null, solrIKCopyTextList, null, null, null, null, null, null);
     }
 }

@@ -30,6 +30,12 @@ public class Template implements Serializable {
                 inverseJoinColumns = {@JoinColumn(name="FIELD_ID")}
     )
     private Set<Field> fields;
+
+    // 模板的主键
+    @OneToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @JoinColumn(name = "FIELD_ID",nullable = false)
+    private Field primaryKey;
+
     /*@OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "TEMPLATE_ID")*/
 
@@ -63,6 +69,14 @@ public class Template implements Serializable {
 
     public void setFields(Set<Field> fields) {
         this.fields = fields;
+    }
+
+    public Field getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(Field primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
     @Override

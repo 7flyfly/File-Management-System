@@ -145,7 +145,6 @@ public class SolrService {
             solrDataConfig.setSolrEntityDocumentList(solrEntityDocumentList);
             boolean bool = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
             String boolMessage = bool ? "添加成功" : "添加失败";
-            hashMap.put(bool,tableName+boolMessage);
             return hashMap;
         }catch(Exception e){
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();

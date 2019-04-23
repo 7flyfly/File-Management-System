@@ -8,12 +8,14 @@ import java.io.Serializable;
 public class Field implements Serializable {
 
     // 字段id，为字段类的主键，策略是自增
+    // 字段id自动生成，用户不需要自行输入
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="FIELD_ID")
     private int fieldId;
 
     // 字段uuid，用户不可以修改
+    // 字段uuid自动生成，用户不需要自行输入
     @Column(name ="FIELD_UUID",updatable = false)
     private String fieldUuid;
 
@@ -30,20 +32,20 @@ public class Field implements Serializable {
     private String fieldType;
 
     // 字段长度，且该字段在保存时必需有值
-    @Column(name ="FIELD_LENGTH",nullable = false)
+    @Column(name ="FIELD_LENGTH",columnDefinition="int default 0")
     private int fieldLength;
 
-    // 字段是否为主键，且该字段在保存时必需有值
-    @Column(name ="FIELD_PRIMARY_KEY",nullable = false)
-    private boolean fieldPrimaryKey;
+    /*// 字段是否为主键，且该字段的默认值为false
+    @Column(name ="FIELD_PRIMARY_KEY",columnDefinition="bit default 0")
+    private boolean fieldPrimaryKey;*/
 
     // 字段是否为索引，即该字段是否可以被检索，且该字段在保存时必需有值
     @Column(name ="FIELD_INDEX",nullable = false)
     private Boolean fieldIndex;
 
-    // 字段是否可被分词
+    // 字段是否可被分词，且该字段的默认值为false
     @Column(name ="FIELD_IK",columnDefinition="bit default 0")
-    private Boolean fieldIk;
+    private boolean fieldIk;
 
     public int getFieldId() {
         return fieldId;
@@ -93,13 +95,13 @@ public class Field implements Serializable {
         this.fieldLength = fieldLength;
     }
 
-    public boolean isFieldPrimaryKey() {
+    /*public boolean isFieldPrimaryKey() {
         return fieldPrimaryKey;
     }
 
     public void setFieldPrimaryKey(boolean fieldPrimaryKey) {
         this.fieldPrimaryKey = fieldPrimaryKey;
-    }
+    }*/
 
     public Boolean getFieldIndex() {
         return fieldIndex;
@@ -126,8 +128,8 @@ public class Field implements Serializable {
                 ", fieldEnglishName='" + fieldEnglishName + '\'' +
                 ", fieldType='" + fieldType + '\'' +
                 ", fieldLength=" + fieldLength +
-                ", fieldPrimaryKey=" + fieldPrimaryKey +
                 ", fieldIndex=" + fieldIndex +
+                ", fieldIk=" + fieldIk +
                 '}';
     }
 }
