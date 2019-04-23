@@ -25,7 +25,7 @@ public class ManagementApplicationTests {
 
     @Test
     public void contextLoads() {
-        Field field1 = new Field();
+        /*Field field1 = new Field();
         field1.setFieldName("序号");
         field1.setFieldEnglishName("No");
         field1.setFieldType("int");
@@ -149,17 +149,20 @@ public class ManagementApplicationTests {
         // 用模板tb_test2的使用的是field1 field2
         tablesService.generateTablesByUser(field2,set,"tb_test3");
         tablesService.generateTablesByTemplateId(1,"tb_test1");
-        tablesService.generateTablesByTemplateId(1,"tb_test2");
-
-        // 不用模板的tb_test3使用的是field3 field4
-        // tablesService.generateTablesByUser(set2,"tb_test3");
+        tablesService.generateTablesByTemplateId(1,"tb_test2");*/
 
         /*HashMap<String,String> map = new HashMap<>();
         map.put("No","10");
         map.put("DocumentNo","dasdsaas");
         map.put("Title","河海大学");
-        tablesService.InsertData("Table_tb_test1_2019-04-22 22:28:34",map);*/
+        tablesService.InsertData("Table_tb_test1_2019-04-23 10:34:26",map);*/
 
-        // tablesService.deleteDate("Table_tb_test1_2019-04-22 22:28:34","DocumentNo","dasdsaas");
+        /*HashMap<String,String> map = new HashMap<>();
+        map.put("No","20");
+        map.put("DocumentNo","1111");
+        map.put("Title","河海大学test");
+        tablesService.InsertData("Table_tb_test1_2019-04-23 10:34:26",map);*/
+
+        /*tablesService.deleteDate("Table_tb_test1_2019-04-23 10:34:26","DocumentNo","1111");*/
     }
 }
