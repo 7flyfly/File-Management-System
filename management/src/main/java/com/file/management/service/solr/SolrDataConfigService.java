@@ -1,6 +1,5 @@
 package com.file.management.service.solr;
 
-import com.alibaba.fastjson.JSONObject;
 import com.file.management.pojo.SolrDataConfig;
 import com.file.management.pojo.SolrDataSource;
 import com.file.management.pojo.SolrTableEntity;

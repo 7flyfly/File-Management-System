@@ -2,12 +2,14 @@ package com.file.management.controller.IntegratedQuery;
 
 import com.file.management.pojo.*;
 import com.file.management.service.solr.SolrDataConfigService;
+import com.file.management.service.solr.SolrQueryService;
 import com.file.management.service.solr.SolrService;
 import com.file.management.utils.SolrUtils;
 import com.file.management.utils.XsteamUtil;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.dom4j.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,13 @@ import java.util.*;
 @RequestMapping("/IntegratedQuery/IntelligentRetrieval")
 public class IntelligentRetrievalController {
     @Autowired
-    SolrService solrService;
+    private SolrService solrService;
     @Autowired
-    SolrDataConfigService solrDataConfigService;
+    private SolrDataConfigService solrDataConfigService;
+    @Autowired
+    private SolrQueryService solrQueryService;
 
-    @RequestMapping(value = "/getQueryRequest")
+    @RequestMapping(value = "/GetQueryRequest")
     @ResponseBody
     /**
      * 根据关键词查询结果 todo
@@ -38,15 +42,17 @@ public class IntelligentRetrievalController {
         try {
             String keyword = request.getParameter("keyword");
             String optionsRadios = request.getParameter("optionsRadios");
+            String TableId = null;
             Map<String,Object> map = new HashMap<>();
+            if(TableId==null) TableId = "";
             if("fullTextSearch".equals(optionsRadios)&&keyword!=null){
                 System.out.println("keyword:"+keyword);
                 SolrUtils solrUtils = new SolrUtils();
                 solrClient = solrUtils.createSolrClient();
-                String result = solrService.getDoucmentByDocumentNumber(solrClient,keyword);
+                SolrDocumentList docs = solrQueryService.queryKeywordbySolr(solrClient,keyword,TableId);
                 solrClient.close();
                 map.put("keyword",keyword);
-                map.put("result",result);
+                map.put("result",docs.toString());
                 return map.toString();
             }else{
                 map.put("result","失败！关键字不能为空");
@@ -66,7 +72,7 @@ public class IntelligentRetrievalController {
         }
     }
 
-    @GetMapping("/insert")
+    @GetMapping("/Insert")
     @ResponseBody
     public String solrInsert(){
         SolrUtils solrUtils = new SolrUtils();
@@ -91,7 +97,7 @@ public class IntelligentRetrievalController {
         return "success";
     }
 
-    @RequestMapping(value="/delete/{id}")
+    @RequestMapping(value="/Delete/{id}")
     @ResponseBody
     public String deleteDocumentById(@PathVariable String id){
         try {
@@ -109,7 +115,7 @@ public class IntelligentRetrievalController {
         }
     }
 
-    @RequestMapping(value = "/test/fullImportTabel/{tableName}")
+    @RequestMapping(value = "/Test/FullImportTabel/{tableName}")
     @ResponseBody
     /**
      * 测试用，可删除
@@ -124,7 +130,7 @@ public class IntelligentRetrievalController {
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
                 SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = solrService.fullImportTableIntoSolr(solrClient,tableName);
+                boolean bool = solrService.fullImportTable(solrClient,tableName);
                 solrClient.close();
                 if(bool){
                     map.put("result","成功导入表："+tableName);
@@ -147,7 +153,7 @@ public class IntelligentRetrievalController {
         }
     }
 
-    @RequestMapping(value = "/test/deltaImportTabel/{tableName}")
+    @RequestMapping(value = "/Test/DeltaImportTabel/{tableName}")
     @ResponseBody
     /**
      * 测试 可删除
@@ -163,7 +169,7 @@ public class IntelligentRetrievalController {
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
                 SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = solrService.deltaImportTableIntoSolr(solrClient,tableName);
+                boolean bool = solrService.deltaImportTable(solrClient,tableName);
                 solrClient.close();
                 if(bool){
                     map.put("result","成功增量导入表："+tableName);
@@ -185,7 +191,7 @@ public class IntelligentRetrievalController {
         }
     }
 
-    @RequestMapping(value="/test/addDataSources2SolrDataConfig")
+    @RequestMapping(value="/Test/AddDataSources2SolrDataConfig")
     @ResponseBody
     /**
      * 测试用，可删除
@@ -210,7 +216,7 @@ public class IntelligentRetrievalController {
         }
     }
 
-    @RequestMapping(value="/test/addTableEntity2SolrDataConfig")
+    @RequestMapping(value="/Test/AddTableEntity2SolrDataConfig")
     @ResponseBody
     /**
      * 测试用，可删除

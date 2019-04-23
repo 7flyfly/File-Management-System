@@ -107,12 +107,6 @@
             <artifactId>zookeeper</artifactId>
             <version>3.4.13</version>
         </dependency>
-        <!-- json -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.50</version>
-        </dependency>
         <!-- 导入XStream -->
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
@@ -124,6 +118,17 @@
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- json -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.50</version>
         </dependency>
     </dependencies>
 

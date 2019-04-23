@@ -1,6 +1,5 @@
 package com.file.management.service.solr;
 
-import com.alibaba.fastjson.JSON;
 import com.file.management.pojo.*;
 import com.file.management.utils.SolrUtils;
 import org.apache.solr.client.solrj.SolrClient;
@@ -24,55 +23,8 @@ import java.util.Map;
 @Service
 public class SolrService {
     @Autowired
-    SolrDataConfigService solrDataConfigService;
+    private SolrDataConfigService solrDataConfigService;
 
-    //根据id查询索引
-    /**
-     * 将表中数据导入solr
-     * @param solrClient：solr客户端
-     * @param DocumentNumber: 档号
-     */
-    public String getDoucmentByDocumentNumber(SolrClient solrClient, String DocumentNumber){
-        SolrDocument document = null;
-        try {
-            document = solrClient.getById(DocumentNumber);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Map<String,Object> map = new HashMap<>();
-            map.put("code","2");
-            map.put("message",e.getMessage());
-            return map.toString();
-        }
-        //处理输出
-        if(document==null){
-            return "未查询到相关结果";
-        }else{
-            System.out.println(document);
-            return document.toString();
-        }
-    }
-
-    /**
-     * 对solr进行检索
-     * @param solrClient solr客户端
-     * @param keyword 关键词
-     * @return
-     */
-    public SolrDocumentList querySolrbyKeyword(SolrClient solrClient, String keyword){
-        SolrDocumentList docs = null;
-        try {
-            SolrQuery query = new SolrQuery();
-            query.setQuery("text:*");
-            //开始检索
-            QueryResponse queryResponse = solrClient.query(query);
-            docs = queryResponse.getResults();
-            solrClient.commit();
-            return docs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return docs;
-        }
-    }
     /**
      * 新增需要将数据变为索引的数据库信息
      * @param dataSourceName 数据库名 "db_test"
@@ -84,6 +36,7 @@ public class SolrService {
      */
     public HashMap<Boolean,String> addDataSources2SolrDataConfig(String dataSourceName,String driveName,String dataSourceUrl,
                                                                  String userName,String password){
+        SolrClient solrClient = null;
         try {
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
             SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfig();
@@ -91,10 +44,22 @@ public class SolrService {
             solrDataSourcesList = solrDataConfigService.addDataSource(solrDataSourcesList,dataSourceName,driveName,
                     dataSourceUrl,userName,password);
             solrDataConfig.setSolrDataSourceList(solrDataSourcesList);  //覆盖原有solrDataSourcesList
-            boolean bool = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
-            hashMap.put(true,"新增数据源成功");
+            boolean bool1 = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
+            SolrUtils solrUtils = new SolrUtils();
+            solrClient = solrUtils.createSolrClient();
+            boolean bool2 = this.reloadConfig(solrClient);
+            String boolMessage = bool1&&bool2 ? "新增数据源成功" : "新增数据源失败";
+            hashMap.put(true,boolMessage);
+            solrClient.close();
             return hashMap;
         }catch(Exception e){
+            if(solrClient!=null){
+                try {
+                    solrClient.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
             hashMap.put(false,e.getMessage());
             return hashMap;
@@ -126,6 +91,7 @@ public class SolrService {
              List<String> solrIKCopyTextList, List<String> solrIKArrList, List<String> solrIKArrCopyTextList,
              List<String> solrDateList, List<String> solrDateCopyTextList, List<String> solrDateArrList,
              List<String> solrDateArrCopyTextList){
+        SolrClient solrClient = null;
         try {
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
             SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfig();
@@ -144,10 +110,22 @@ public class SolrService {
                     dataSourceName,solrTableEntityColumnList);
             solrEntityDocumentList.get(0).setSolrTableEntityList(solrTableEntityList);
             solrDataConfig.setSolrEntityDocumentList(solrEntityDocumentList);
-            boolean bool = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
-            String boolMessage = bool ? "添加成功" : "添加失败";
+            boolean bool1 = solrDataConfigService.saveSolrDataConfig(solrDataConfig);
+            SolrUtils solrUtils = new SolrUtils();
+            solrClient = solrUtils.createSolrClient();
+            boolean bool2 = this.reloadConfig(solrClient);
+            String boolMessage = bool1&&bool2 ? "添加成功" : "添加失败";
+            hashMap.put(true,boolMessage);
+            solrClient.close();
             return hashMap;
         }catch(Exception e){
+            if(solrClient!=null){
+                try {
+                    solrClient.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
             hashMap.put(false,e.getMessage());
             return hashMap;
@@ -165,7 +143,7 @@ public class SolrService {
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
                 SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = this.fullImportTableIntoSolr(solrClient,tableName);
+                boolean bool = this.fullImportTable(solrClient,tableName);
                 solrClient.close();
                 if(bool){
                     hashMap.put(true,"成功导入表："+tableName);
@@ -199,7 +177,7 @@ public class SolrService {
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
                 SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = this.deltaImportTableIntoSolr(solrClient,tableName);
+                boolean bool = this.fullImportTable(solrClient,tableName);
                 solrClient.close();
                 if(bool){
                     hashMap.put(true,"成功增量导入表："+tableName);
@@ -220,13 +198,14 @@ public class SolrService {
         }
     }
 
+// ----------------以下是对solr的基本操作------------------------------
 
     /**
      * 将表中数据导入solr，建立索引
      * @param solrClient：solr客户端
      * @param tableName: 表名
      */
-    public boolean fullImportTableIntoSolr(SolrClient solrClient, String tableName){
+    public boolean fullImportTable(SolrClient solrClient, String tableName){
         if(solrClient!=null&&tableName!=null&&!tableName.equals("")){
             try {
                 SolrQuery solrQuery = new SolrQuery();
@@ -258,7 +237,7 @@ public class SolrService {
      * @param solrClient：solr客户端
      * @param tableName: 表名
      */
-    public boolean deltaImportTableIntoSolr(SolrClient solrClient, String tableName){
+    public boolean deltaImportTable(SolrClient solrClient, String tableName){
         if(solrClient!=null&&tableName!=null&&!tableName.equals("")){
             try {
                 SolrQuery solrQuery = new SolrQuery();
