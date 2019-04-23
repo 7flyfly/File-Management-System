@@ -133,6 +133,7 @@ public class SolrService {
             List<SolrEntityDocument>  solrEntityDocumentList = solrDataConfig.getSolrEntityDocumentList();
             //solrEntityDocument中存放solrTableEntityList
             List<SolrTableEntity> solrTableEntityList = solrEntityDocumentList.get(0).getSolrTableEntityList();
+            if(solrTableEntityList==null) solrTableEntityList = new ArrayList<SolrTableEntity>();
             //构建表
             List<SolrTableEntityColumn> solrTableEntityColumnList = solrDataConfigService.createSolrTableEntityColumnList(
                     documentNumber,solrStringList,solrStringCopyTextList, solrStringArrList, solrStringArrCopyTextList,
