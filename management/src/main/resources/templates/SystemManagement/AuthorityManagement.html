@@ -6,8 +6,14 @@
     <title>权限管理</title>
 </head>
 <body>
-<div class="header" th:replace="public:: #public-header"></div>
-<div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar"></div>
-<div>权限管理</div>
+<div id="container">
+    <div class="header" th:replace="public:: #public-header"></div>
+    <div id="body">
+        <div class="header" th:replace="public:: #public-header"></div>
+        <div id="center">
+            <div>权限管理</div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

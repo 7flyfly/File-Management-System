@@ -108,7 +108,7 @@
                     </div>
                 </div>
                 <!--模态框-->
-                <form method="post" name="register" class="form-horizontal" role="form" id="form-data"  style="margin: 20px;" >
+                <form method="post" name="register" class="form-horizontal" role="form" id="form-data"  style="margin: 20px; width: 60%" >
                     <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -123,7 +123,7 @@
                                         <div class="form-group">
                                             <label for="type" class="col-sm-3 control-label">类型</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" disabled="true" name="type-text">
+                                                <select class="form-control" id="getType" name="type-text">
                                                     <option value="0" selected="true">馆内登记</option>
                                                     <option value="1">网上登记</option>
                                                     <option value="2">微信登记</option>
@@ -138,10 +138,10 @@
                                                         <input type="radio" name="borrower-type-rb" value="0">
                                                         选择用户
                                                         <div class="input-group input-group-sm">
-                                                            <input class="form-control " type="text" readonly="true" placeholder="请选择" disabled="">
+                                                            <input id="register" class="form-control " type="text" placeholder="请选择" >
                                                             <span class="input-group-btn">
                                                                 <i class="glyphicon glyphicon-remove">清除</i>
-                                                                <button class="btn btn-default" type="submit"></button>
+                                                                <button class="btn btn-default" type="button"></button>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -227,7 +227,7 @@
                                                         <input type="hidden" class="origin" name="query-template" value="sxda_a">
                                                         <div class="input-group input-group-sm"><input type="text" readonly="true" placeholder="请选择" class="form-control origin-text readOnly">
                                                             <span class="input-group-btn"><button type="button" class="btn btn-default">
-                                                                <i class="icon-remove">清除</i>
+                                                                <i class="glyphicon glyphicon-remove">清除</i>
                                                             </button>
                                                             </span>
                                                         </div>
@@ -237,7 +237,7 @@
                                                         <div class="input-group input-group-sm">
                                                             <input type="text" readonly="true" placeholder="请选择" class="form-control origin-text readOnly">
                                                             <span class="input-group-btn"><button type="button" class="btn btn-default">
-                                                                <i class="icon-remove">清除</i>
+                                                                <i class="glyphicon glyphicon-remove">清除</i>
                                                             </button>
                                                             </span>
                                                         </div>
@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="input" class="btn btn-primary" onclick="vali();">提交</button>
+                                    <button type="input" class="btn btn-primary que_add">提交</button>
                                     <span id="tip">
                                     </span>
                                 </div>
@@ -331,103 +331,9 @@
                     </tbody>
                 </table>
             </div>
-
-            <script type="text/javascript">
-                function search() {
-                      $.ajax({
-                          type: 'GET',
-                          url: '/registration',
-                          dataType: 'json',
-                      })
-                }
-            </script>
-
-            <!--
-            <script type="text/javascript">
-                //点击搜索按钮进行数据渲染
-                function search(){
-                    $("#table").dataTable().fnDraw();
-                }
-
-                $(document).ready(function() {
-                    $('#table').DataTable( {
-                        ordering:false,  //关闭排序
-                        searching:false,
-                        scrollY: 200,
-                        scrollX: true,
-                        autoWidth:true,
-                        paging: false,
-                        lengthMenu:[5,10,25,50,100],
-                        colums: [{
-                            data: "id"
-                        },{
-                            data: "odd_numbers"
-                        },{
-                            data:"type"
-                        },{
-                            data:"registrant"
-                        },{
-                            data:"record_date"
-                        },{
-                            data:"unit"
-                        },{
-                            data:"name"
-                        },{
-                            data:"date"
-                        },{
-                            data:"telphone"
-                        },{
-                            data:"certificate_type "
-                        },{
-                            data:"certificate_number "
-                        },{
-                            data:"purpose "
-                        },{
-                            data:"way "
-                        },{
-                            data:"contant "
-                        },{
-                            data:"state "
-                        },{
-                            data:"loan_agent "
-                        },{
-                            data:"loan_ubmission_date "
-                        },{
-                            data:"loan_date "
-                        },{
-                            data:"return"
-                        },{
-                            data:"return_data"
-                        },{
-                            data:"operation"
-                        }],
-                    // 语言
-                    language: {
-                        "sProcessing": "处理中...",
-                        "sLengthMenu": "显示 _MENU_ 项结果",
-                        "sZeroRecords": "没有匹配结果",
-                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                        "sInfoPostFix": "",
-                        "sSearch": "搜索:",
-                        "sUrl": "",
-                        "sEmptyTable": "表中数据为空",
-                        "sLoadingRecords": "载入中...",
-                        "sInfoThousands": ",",
-                        "oPaginate": {
-                            "sFirst": "首页",
-                            "sPrevious": "上页",
-                            "sNext": "下页",
-                            "sLast": "末页"
-                        },
-                    }
-                    } );
-                } );
-            </script>
-            -->
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/js/LibraryUse/Check.js}"></script>
 </div>
 </body>
 </html>

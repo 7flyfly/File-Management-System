@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="header" th:replace="public:: #public-header"></div>
+<!--sidebar-->
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" id="sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                    专题管理
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/SpecialTopic/Special}">
+                   专题
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+</body>
+</html>

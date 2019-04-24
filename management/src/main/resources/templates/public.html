@@ -2,18 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head id="public_head">
     <meta charset="UTF-8">
-    <title>Title</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" th:href="@{/css/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/dataTables/css/jquery.dataTables.css}">
     <link th:href="@{/css/bootstrap-treeview.css}" rel="stylesheet" />
     <link type="text/css" href="../static/css/mywork.css" th:href="@{../static/css/mywork.css}">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap-treeview.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
-    <script th:src="@{/js/dataTables/jquery.dataTables.min.js}"></script>
+
+    <!--<script th:src="@{/js/dataTables/jquery.dataTables.min.js}"></script>-->
 
 
     <!-- Required Javascript -->
@@ -162,7 +164,7 @@
                         <li class="nav-item"><a class="nav-link active" th:class="${activeUri=='mywork'?'nav-link active':'nav-link'}" th:href="@{/mywork}" href="#">我的工作</a> </li>
                         <li class="nav-item"><a class="nav-link" th:class="${activeUri=='borrow'?'nav-link active':'nav-link'}" th:href="@{/LibraryUse/Check}"  href="#">借阅利用</a> </li>
                         <li><a class="nav-link"th:class="${activeUri=='borrow'?'nav-link active':'nav-link'}" href="#"th:href="@{/IntegratedQuery/QueryHomePage}">综合查询</a> </li>
-                        <li><a href="#" >专题编研</a> </li>
+                        <li><a href="#" th:href="@{/SpecialTopic/Special}">专题编研</a> </li>
                         <li><a href="#"th:href="@{/FormStatistics/TabulateStatistics}">报表统计</a> </li>
                         <li><a href="#"th:href="@{/SystemManagement/Metadata}" >系统管理</a> </li>
                     </ul>
