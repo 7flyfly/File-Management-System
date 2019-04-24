@@ -1,6 +1,5 @@
 package com.file.management.controller.Library;
 
-
 import com.alibaba.fastjson.JSONObject;
 import com.file.management.pojo.RegistationExamine;
 import com.file.management.service.LibraryUse.ExamineService;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
+/*
+ 利用审批
+ */
 @Controller
 public class ExamineController {
     @Autowired
