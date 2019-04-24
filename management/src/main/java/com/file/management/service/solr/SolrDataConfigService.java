@@ -1,6 +1,5 @@
 package com.file.management.service.solr;
 
-import com.alibaba.fastjson.JSONObject;
 import com.file.management.pojo.SolrDataConfig;
 import com.file.management.pojo.SolrDataSource;
 import com.file.management.pojo.SolrTableEntity;
@@ -249,7 +248,7 @@ public class SolrDataConfigService {
      * @param solrDateCopyTextList date型，字段在综合查询中可以被检索；
      * @param solrDateArrList date型，允许该字段有多个值(即组成数组)，字段在综合查询中不可被检索；
      * @param solrDateArrCopyTextList date型，字段在综合查询中不可被检索；
-     * @return 构造好的SolrTableEntityColumnList，可直接用于构造TableEntity
+     * @return 构造好的SolrTableEntityColumnList，可直接用 于构造TableEntity
      */
     public List<SolrTableEntityColumn> createSolrTableEntityColumnList(String documentNumber,List<String> solrStringList,
            List<String> solrStringCopyTextList, List<String> solrStringArrList, List<String> solrStringArrCopyTextList,

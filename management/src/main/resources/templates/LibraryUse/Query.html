@@ -1,14 +1,82 @@
-<!--利用查询界面-->
+<!--利用查询页面-->
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>利用查询</title>
+
 </head>
 <body>
-<div class="header" th:replace="public:: #public-header"></div>
-<!--sidebar-->
-<div class="sidebar" th:replace="LibrarycontrolCenter:: #sidebar"></div>
-<div>利用查询功能</div>
+<div id="container">
+    <div class="header" th:replace="public:: #public-header"></div>
+    <div id="body">
+        <!--sidebar-->
+        <div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar"style="width: 20%;height: 90%; background-color: #cccccc"></div>
+        <div class="center" style="width: 78%;height: 90%;float: left ">
+            <ol class="breadcrumb">
+                <li>
+                    <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+                        <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
+                        借阅利用
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">利用查询</a>
+                </li>
+            </ol>
+            <div class="main-center">
+                <div id="mc-query" class="container-fluid">
+                    <div class="row">
+                        <div class="text-center zero-padding">
+                            <span class="col-md-2 zero-padding-lr"></span>
+                            <span class="col-md-2 zero-padding-lr">
+                                <select class="form-control input-sm query-type">
+                                    <option value="">所有类型</option>
+                                    <option value="1">馆内登记</option>
+                                    <option value="2">网上登记</option>
+                                    <option value="3">微信登记</option>
+                                </select>
+                            </span>
+                            <span class="col-md-2 zero-padding-lr">
+                                <select class="form-control input-sm query-checkstatus">
+                                    <option value="true">待审核</option>
+                                    <option value="false">已审核</option>
+                                </select>
+                            </span>
+                            <span class="col-md-2 zero-padding-lr">
+                                <input class="form-control input-sm query-check-keywords" placeholder="审批单号">
+                            </span>
+                            <span class="col-md-2 zero-padding-lr">
+                                <input class="form-control input-sm query-using-keywords" placeholder="利用单号或利用人账号、姓名">
+                            </span>
+                            <span class="col-md-1 zero-padding-lr">
+                                <button class="btn btn-primary btn-sm btn-xs" type="button">
+                                    <i class="glyphicon glyphicon-search">搜索</i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="mc-main" class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <div class="row">
+                        <table id="table" ></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/LibraryUse/QueryTable.js}"></script>
+
+</div>
+
 </body>
 </html>

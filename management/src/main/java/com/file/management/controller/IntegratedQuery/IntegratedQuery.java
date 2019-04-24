@@ -1,8 +1,6 @@
 package com.file.management.controller.IntegratedQuery;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.file.management.service.solr.SolrService;
 import com.file.management.utils.SolrUtils;

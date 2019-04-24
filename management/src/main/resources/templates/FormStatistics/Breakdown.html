@@ -6,8 +6,182 @@
     <title>分项统计</title>
 </head>
 <body>
-<div class="header" th:replace="public:: #public-header"></div>
-<div class="sidebar" th:replace="FormStatistics/StatisticsPublic:: #sidebar(activeUri='TabulateStatistics')"></div>
-<div>分项统计界面</div>
+<div id="container">
+    <div class="header" th:replace="public:: #public-header"></div>
+    <div id="body">
+        <div class="sidebar" th:replace="FormStatistics/StatisticsPublic:: #sidebar"style="width: 20%;height: 90%; background-color: #cccccc"></div>
+        <div id="center" style="width: 82%;height: 90%;float: left">
+            <ol class="breadcrumb">
+                <li>
+                    <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+                        <span aria-hidden="true" class="glyphicon glyphicon-align-left" ></span>
+                        报表统计
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#">分项统计</a>
+                </li>
+            </ol>
+            <div class="row">
+                <span class="col-md-1 zero-padding-lr"></span>
+                <span class="col-md-2 zero-padding-lr">
+                    <select class="form-control input-sm " name="query-dictionarykind">
+                        <option value="qzh" selected="true">全宗号</option>
+                        <option value="flh">分类号</option>
+                        <option value="gddw">归档单位</option>
+                        <option value="mj">密级</option>
+                        <option value="bgqx">保管期限</option>
+                        <option value="ztlx">载体类型</option>
+                        <option value="yz">语种</option>
+                        <option value="ly">来源</option>
+                    </select>
+                </span>
+                <span class="col-md-2 zero-padding-lr">
+                    <select class="form-control input-sm query-dictionarykind" name="query-dictionarykind">
+                        <option value="qzh" selected="true">全宗号</option>
+                        <option value="flh">分类号</option>
+                        <option value="gddw">归档单位</option>
+                        <option value="mj">密级</option>
+                        <option value="bgqx">保管期限</option>
+                        <option value="ztlx">载体类型</option>
+                        <option value="yz">语种</option>
+                        <option value="ly">来源</option>
+                    </select>
+                </span>
+                <span class="col-md-6 zero-padding-lr">
+                    <div class="row">
+                        <div class="text-center">
+                            <span class="col-md-3 zero-padding-lr">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-default btn-sel-date dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false" aria-haspopup="true">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-left">
+                                            <li>
+                                                <a class="sel-year0" for="query-createdtime-%" href="javascript:void(0)">今年</a>
+                                            </li>
+                                            <li>
+                                                <a class="sel-year1" for="query-createdtime-%" href="javascript:void(0)">去年</a>
+                                            </li>
+                                            <li>
+                                                <a class="sel-month0" for="query-createdtime-%" href="javascript:void(0)">当月</a>
+                                            </li>
+                                            <li>
+                                                <a class="sel-month1" for="query-createdtime-%" href="javascript:void(0)">上月</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <input type="text" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="登记起时间" class="date readOnly form-control input-sm query-createdtime-start query-compared-of validate[custom[date]]">
+                                </div>
+                            </span>
+                            <span class="col-md-3 zero-padding">
+                                <input type="text" name="query-createdtime-end" data-force-parse="true" readonly="true" placeholder="登记止时间" class="date readOnly form-control input-sm query-createdtime-end query-compared-of validate[custom[date]]">
+                            </span>
+                            <span class="col-md-4 zero-padding-lr">
+                                <div class="dialog-panel dialog-tree-panel query-creator query-compared-of">
+                                    <input type="hidden" class="origin" name="query-creator">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" readonly="true" placeholder="选择录入人" class="form-control origin-text readOnly">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-remove">清除</i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </span>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <span class="col-md-5 zero-padding-lr"></span>
+                    <span class="col-md-2 zero-padding-lr">
+                        <div role="group" class="btn-group btn-group-sm btn-group-xs-12">
+                            <button data-text="添加对比" data-cancel-text="取消对比" class="btn btn-info btn-compare btn-xs-block" type="button">
+                                <i class="glyphicon glyphicon-transfer">添加对比</i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-search btn-xs-block">
+                                <i class="glyphicon glyphicon-search">统计</i>
+                            </button>
+                        </div>
+                    </span>
+                    <span class="col-md-5 zero-padding-lr"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div id="Table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="dataTables_scroll">
+                                <div class="dataTables_scrollHead" style="overflow: hidden; position:relative; border: 0px none;width: 100%">
+                                    <div class="dataTables_scrollHeadInner" style="box-sizing: content-box;width: 1200px;padding-right: 0px">
+                                        <table class="table table-striped table-bordered nowrap hover no-footer" role="grid" style="margin-left: 0px;width: 1200px;" width="100%" cellpadding="0">
+                                            <thead>
+                                             <tr role="row">
+                                                 <th rowspan="2" class="th-ord td-ord sorting_disabled" colspan="1" style="width: 35.2px;" aria-label="序号">序号</th>
+                                                 <th rowspan="2" class="th-library td-library sorting_disabled" colspan="1" style="width: 175.2px;" aria-label="库">库</th>
+                                                 <th rowspan="2" class="th-1 th-num td-num sorting_disabled" colspan="1" style="width: 120.2px;" aria-label="记录数1">
+                                                     <span class="mask-12"></span>
+                                                     <span class="caption-12" title="记录数">记录数</span>
+                                                     <span class="badge badge-info badge-info-compared hide">1</span>
+                                                 </th>
+                                                 <th colspan="1" rowspan="1">数据词典</th>
+                                             </tr>
+                                             <th class="th-1 th-num td-num sorting_disabled" data-data="dictcount101" rowspan="1" colspan="1" style="width: 863px;" aria-label="东南大学1">
+                                                 <span class="mask-12"></span>
+                                                 <span class="caption-12" title="东南大学">东南大学</span>
+                                                 <span class="badge badge-info badge-info-compared hide">1</span>
+                                             </th>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>声像档案</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>案卷目录</td>
+                                                <td>3</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>卷内目录</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="dataTables_info" id="DataTables_Table_9_info" role="status" aria-live="polite">
+                        显示第 1 至 3 项结果，共 3 项
+                        <span class="select-info">
+                            <span class="select-item">已选择 0 行</span>
+                            <span class="select-item"></span>
+                            <span class="select-item"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

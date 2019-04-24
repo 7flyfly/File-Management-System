@@ -35,11 +35,11 @@ public class SystemManagement {
     }
 
     /*
-     菜单管理
+     部门管理
     */
-    @RequestMapping("/SystemManagement/MenuManagement")
-    public String MenuManagement(){
-        return "SystemManagement/MenuManagement";
+    @RequestMapping("/SystemManagement/DepartmentManage")
+    public String departmentManagement(){
+        return "SystemManagement/DepartmentManage";
     }
 
     /*

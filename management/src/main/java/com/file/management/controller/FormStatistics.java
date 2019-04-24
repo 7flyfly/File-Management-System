@@ -22,6 +22,6 @@ public class FormStatistics {
      */
     @RequestMapping("/FormStatistics/Breakdown")
     public String Breakdown(){
-        return "FormStatistics/Breakdown";
+        return "/FormStatistics/Breakdown";
     }
 }

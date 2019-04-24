@@ -1,0 +1,83 @@
+<!--专题编研-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>专题编研</title>
+</head>
+<body>
+  <div id="container">
+      <div class="header" th:replace="public:: #public-header"></div>
+      <div class="body">
+          <div class="sidebar" th:replace="SpecialTopic/Sidebar:: #sidebar" style="width: 20%;height: 90%; background-color: #cccccc"></div>
+          <div class="center" style="width: 78%;height: 90%;float: left ">
+              <ol class="breadcrumb">
+                  <li>
+                      <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+                          <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
+                          专题编研
+                      </a>
+                  </li>
+                  <li class="active">
+                      <a href="#">专题</a>
+                  </li>
+              </ol>
+              <div class="main-center">
+                  <div id="mc-query" class="container-fluid">
+                      <div class="row">
+                          <div class="text-center zero-padding">
+                              <span class="col-md-3 zero-padding-lr"></span>
+                              <span class="col-md-2 zero-padding-lr">
+                                  <select class="form-control input-sm query-status">
+                                      <option value="">所有状态</option>
+                                      <option value="false">未发布</option>
+                                      <option value="true">已发布</option>
+                                  </select>
+                              </span>
+                              <span class="col-md-1 zero-padding-lr">
+                                  <input type="text" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="创建起时间" class="date readOnly form-control input-sm query-createdtime-start validate[custom[date]]">
+                              </span>
+                              <span class="col-md-1 zero-padding-lr"><input type="text" name="query-createdtime-end" data-force-parse="true" readonly="true" placeholder="创建止时间" class="date readOnly form-control input-sm query-createdtime-end validate[custom[date]]">
+                              </span>
+                              <span class="col-md-2 zero-padding-lr"><input class="form-control input-sm query-keywords" placeholder="名称"></span>
+                              <span class="col-md-3 zero-padding-lr"></span>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="text-center">
+                              <div role="group" class="btn-group btn-group-sm btn-group-xs-12">
+                                  <button type="button" class="btn btn-default btn-search btn-xs-block">
+                                      <i class="glyphicon glyphicon-search">搜索</i>
+                                  </button>
+                                  <button type="button" class="btn btn-info btn-add btn-xs-block">
+                                      <i class="glyphicon glyphicon-plus">新建专题</i>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div id="mc-main" class="container-fluid">
+                      <div class="row">
+                          <div id="DataTables_Table" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                              <div class="row">
+                                  <div class="col-sm-6"></div>
+                                  <div class="col-sm-6"></div>
+                              </div>
+                              <div class="row">
+                                  <table id="table"></table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+      <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+      <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+      <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+      <script type="text/javascript" th:src="@{/js/SpecialTopic/TopicTable.js}"></script>
+  </div>
+
+</body>
+</html>
