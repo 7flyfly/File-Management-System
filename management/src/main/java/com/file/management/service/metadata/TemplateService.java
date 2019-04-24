@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TemplateService {
     //获取当前的日期
     private Date date = new Date();
     //设置要获取到什么样的时间
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     //获取String类型的时间
     private String createdate = sdf.format(date);
 
@@ -72,6 +73,10 @@ public class TemplateService {
      */
     public Template getTemplateByTemplateUuid(String templateUuid){
         return templateRepository.findByTemplateUuid(templateUuid);
+    }
+
+    public ArrayList<Template> getAllTemplates(){
+        return templateRepository.findAllTemplates();
     }
 
     /*public void deleteTemplateByTemplateId(int templateId) {

@@ -1,7 +1,12 @@
 package com.file.management.controller;
 
 
+import com.file.management.pojo.metadata.Template;
+import com.file.management.service.metadata.TemplateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /*
@@ -9,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class SystemManagement {
+
+    @Autowired
+    TemplateService templateService;
 
     /*
       权限管理
@@ -54,8 +62,28 @@ public class SystemManagement {
     元数据模板
    */
     @RequestMapping("/SystemManagement/MetadataTemplate")
-    public String MetadataTemplate(){
+    public String MetadataTemplate(Model model){
+        model.addAttribute("templates",templateService.getAllTemplates());
         return "SystemManagement/MetadataTemplate";
+    }
+
+    /*
+     元数据模板查看模板详情
+    */
+    @RequestMapping("/SystemManagement/MetadataTemplate/{TemplateUuid}")
+    public String MetadataTemplateDetails(@PathVariable("TemplateUuid") String TemplateUuid,Model model){
+        Template template = templateService.getTemplateByTemplateUuid(TemplateUuid);
+        model.addAttribute("template",template);
+        return "/SystemManagement/TemplateDetails";
+    }
+
+    /*
+    元数据管理
+   */
+    @RequestMapping("/SystemManagement/MetadataManagement")
+    public String MetadataManagement(Model model){
+
+        return "SystemManagement/MetadataManagement";
     }
 
     /*

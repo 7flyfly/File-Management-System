@@ -1,0 +1,52 @@
+<!--模板详情-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>TemplateDetails</title>
+</head>
+<body>
+<div class="header" th:replace="public:: #public-header"></div>
+<div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar"></div>
+<ol class="breadcrumb">
+    <li>
+        <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+            <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
+            元数据库管理
+        </a>
+    </li>
+    <li class="active">
+        <a href="#">模板详情</a>
+    </li>
+</ol>
+<div class="col-sm-10 zero-padding-lr">
+    <table id="books" class="table table-striped table-bordered row-border hover order-column" cellspacing="0"  style="margin-top:20px;">
+        <thead>
+        <tr>
+            <th>字段id</th>
+            <th>字段uuid</th>
+            <th>字段中文名</th>
+            <th>字段英文名</th>
+            <th>字段类型</th>
+            <th>字段最大长度</th>
+            <th>字段是否可以被索引</th>
+            <th>字段是否可以被分词</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="field:${template.fields}">
+            <td th:text="${field.fieldId}"></td>
+            <td th:text="${field.fieldUuid}"></td>
+            <td th:text="${field.fieldName}"></td>
+            <td th:text="${field.fieldEnglishName}"></td>
+            <td th:text="${field.fieldType}"></td>
+            <td th:text="${field.fieldLength}"></td>
+            <td th:text="${field.fieldIndex}"></td>
+            <td th:text="${field.fieldIk}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

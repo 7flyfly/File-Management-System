@@ -36,8 +36,10 @@ public class Template implements Serializable {
     @JoinColumn(name = "FIELD_ID",nullable = false)
     private Field primaryKey;
 
-    /*@OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "TEMPLATE_ID")*/
+    // 模板描述
+    @Column(name = "templateDescription")
+    private String templateDescription;
+
 
     public int getTemplateId() {
         return templateId;
@@ -79,6 +81,14 @@ public class Template implements Serializable {
         this.primaryKey = primaryKey;
     }
 
+    public String getTemplateDescription() {
+        return templateDescription;
+    }
+
+    public void setTemplateDescription(String templateDescription) {
+        this.templateDescription = templateDescription;
+    }
+
     @Override
     public String toString() {
         return "Template{" +
@@ -86,6 +96,8 @@ public class Template implements Serializable {
                 ", templateName='" + templateName + '\'' +
                 ", templateUuid='" + templateUuid + '\'' +
                 ", fields=" + fields +
+                ", primaryKey=" + primaryKey +
+                ", templateDescription='" + templateDescription + '\'' +
                 '}';
     }
 }

@@ -25,7 +25,7 @@ public class ManagementApplicationTests {
 
     @Test
     public void contextLoads() {
-        /*Field field1 = new Field();
+        Field field1 = new Field();
         field1.setFieldName("序号");
         field1.setFieldEnglishName("No");
         field1.setFieldType("int");
@@ -139,23 +139,45 @@ public class ManagementApplicationTests {
         set.add(field4);
         set.add(field5);
 
-        Template t = new Template();
-        t.setFields(set);
-        t.setTemplateName("demo");
-        t.setPrimaryKey(field2);
-        templateService.saveOne(t);
+        Template t1 = new Template();
+        t1.setFields(set);
+        t1.setTemplateName("demo1");
+        t1.setPrimaryKey(field2);
+        t1.setTemplateDescription("第一个模板demo");
+        templateService.saveOne(t1);
+
+        Template t2 = new Template();
+        t2.setFields(set);
+        t2.setTemplateName("demo2");
+        t2.setPrimaryKey(field2);
+        t2.setTemplateDescription("第二个模板demo");
+        templateService.saveOne(t2);
+
+        Template t3 = new Template();
+        t3.setFields(set);
+        t3.setTemplateName("demo3");
+        t3.setPrimaryKey(field2);
+        t3.setTemplateDescription("第三个模板demo");
+        templateService.saveOne(t3);
+
+        Template t4 = new Template();
+        t4.setFields(set);
+        t4.setTemplateName("demo4");
+        t4.setPrimaryKey(field2);
+        t4.setTemplateDescription("第四个模板demo");
+        templateService.saveOne(t4);
 
 
         // 用模板tb_test2的使用的是field1 field2
         tablesService.generateTablesByUser(field2,set,"tb_test3");
         tablesService.generateTablesByTemplateId(1,"tb_test1");
-        tablesService.generateTablesByTemplateId(1,"tb_test2");*/
+        tablesService.generateTablesByTemplateId(1,"tb_test2");
 
         /*HashMap<String,String> map = new HashMap<>();
         map.put("No","10");
         map.put("DocumentNo","dasdsaas");
         map.put("Title","河海大学");
-        tablesService.InsertData("Table_tb_test1_2019-04-23 10:34:26",map);*/
+        tablesService.InsertData("Table_tb_test1_2019-04-24 10:13:26",map);*/
 
         /*HashMap<String,String> map = new HashMap<>();
         map.put("No","20");
