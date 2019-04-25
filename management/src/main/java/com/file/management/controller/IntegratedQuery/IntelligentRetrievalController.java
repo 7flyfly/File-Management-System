@@ -1,5 +1,7 @@
 package com.file.management.controller.IntegratedQuery;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.file.management.pojo.*;
 import com.file.management.service.solr.SolrDataConfigService;
 import com.file.management.service.solr.SolrQueryService;
@@ -16,7 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,32 +34,40 @@ public class IntelligentRetrievalController {
     @Autowired
     private SolrQueryService solrQueryService;
 
-    @RequestMapping(value = "/GetQueryRequest")
+    static String keyword = "";
+    static String queryType = "";
+    static String tableId = "";
+    @RequestMapping(value = "/KeySerach")
     @ResponseBody
     /**
-     * 根据关键词查询结果 todo
+     * 根据关键词查询结果
      * 目前 根据DocumentNumber检索
      */
-    public String getQueryRequest(HttpServletRequest request){
+    public String keySerach(HttpSession session, String dataJson){
         SolrClient solrClient = null;
+        JSONObject result_jsonObject = new JSONObject();
         try {
-            String keyword = request.getParameter("keyword");
-            String optionsRadios = request.getParameter("optionsRadios");
-            String TableId = null;
-            Map<String,Object> map = new HashMap<>();
-            if(TableId==null) TableId = "";
-            if("fullTextSearch".equals(optionsRadios)&&keyword!=null){
-                System.out.println("keyword:"+keyword);
+            JSONObject jsonObject = (JSONObject)JSONObject.parse(dataJson);
+            System.out.println(jsonObject);
+            String keyword =  jsonObject.getString("keyword");
+            IntelligentRetrievalController.keyword = keyword;
+            String queryType =  jsonObject.getString("queryType");
+            IntelligentRetrievalController.queryType = queryType;
+            String tableId =  jsonObject.getString("tableId");
+            IntelligentRetrievalController.tableId = tableId;
+            if(tableId==null) tableId = "";
+            if("fullTextSearch".equals(queryType)&&keyword!=null){
                 SolrUtils solrUtils = new SolrUtils();
                 solrClient = solrUtils.createSolrClient();
-                SolrDocumentList docs = solrQueryService.queryKeywordbySolr(solrClient,keyword,TableId);
+                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId);
                 solrClient.close();
-                map.put("keyword",keyword);
-                map.put("result",docs.toString());
-                return map.toString();
+                result_jsonObject.put("message",docsJsonObject);
+                result_jsonObject.put("result","success");
+                return result_jsonObject.toString();
             }else{
-                map.put("result","失败！关键字不能为空");
-                return map.toString();
+                result_jsonObject.put("result","error");
+                result_jsonObject.put("message","失败！关键字不能为空");
+                return result_jsonObject.toString();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,10 +76,47 @@ public class IntelligentRetrievalController {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            Map<String,Object> map = new HashMap<>();
-            map.put("code","1");
-            map.put("message",e.getMessage());
-            return map.toString();
+            result_jsonObject.put("result","error");
+            result_jsonObject.put("message",e.getMessage());
+            return result_jsonObject.toString();
+        }
+    }
+
+    @RequestMapping(value = "/KeySerach2")
+    @ResponseBody
+    public String KeySerach2(HttpServletResponse response){
+        SolrClient solrClient = null;
+        JSONObject result_jsonObject = new JSONObject();
+        try {
+            if(tableId==null) tableId = "";
+            System.out.println(keyword);
+            if("fullTextSearch".equals(queryType)&&keyword!=null){
+                SolrUtils solrUtils = new SolrUtils();
+                solrClient = solrUtils.createSolrClient();
+                System.out.println(keyword);
+                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId);
+                solrClient.close();
+//                result_jsonObject.put("message",docsJsonObject);
+//                result_jsonObject.put("result","success");
+                result_jsonObject.put("rows",docsJsonObject.getString("documentList"));
+                result_jsonObject.put("total",docsJsonObject.getString("numFound"));
+                System.out.println(result_jsonObject);
+                return result_jsonObject.toString();
+            }else{
+                result_jsonObject.put("result","error");
+                result_jsonObject.put("message","失败！关键字不能为空1");
+                return result_jsonObject.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            try {
+                solrClient.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            result_jsonObject.put("result","error");
+            result_jsonObject.put("message",e.getMessage());
+            return result_jsonObject.toString();
         }
     }
 

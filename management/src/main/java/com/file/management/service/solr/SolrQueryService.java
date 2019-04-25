@@ -2,6 +2,7 @@ package com.file.management.service.solr;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.file.management.utils.SolrUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
@@ -45,21 +46,28 @@ public class SolrQueryService {
      * @param keyword 关键词
      * @return
      */
-    public SolrDocumentList queryKeywordbySolr(SolrClient solrClient, String keyword, String TableId){
+    public JSONObject queryKeywordbySolr(SolrClient solrClient, String keyword, String TableId){
         JSONObject jsonObject = new JSONObject();
+        JSONObject result_jsonObject = new JSONObject();
         jsonObject.put("Keyword",keyword);
         jsonObject.put("TableId",TableId);
         SolrDocumentList docs = null;
+        JSONArray docsJsonArray = new JSONArray();
         try {
             SolrQuery solrQuery = this.buildSolrQuery(jsonObject);
             //开始检索
             QueryResponse queryResponse = solrClient.query(solrQuery);
             docs = queryResponse.getResults();
-            this.ConvertResult(docs);
-            return docs;
+            Long numFound = docs.getNumFound();
+            docsJsonArray= (JSONArray)JSONArray.toJSON(docs);
+            result_jsonObject.put("keyword",keyword);
+            result_jsonObject.put("numFound",numFound);
+            result_jsonObject.put("documentList",docsJsonArray);
+            System.out.println(docsJsonArray);
+            return result_jsonObject;
         } catch (Exception e) {
             e.printStackTrace();
-            return docs;
+            return result_jsonObject;
         }
     }
 
@@ -114,14 +122,7 @@ public class SolrQueryService {
         if(querystring!=null)
             solrQuery.set("q", querystring);
         System.out.println("solrQuery = " + solrQuery);
-        System.out.println("jsonObject = [" + jsonObject + "]");
         return  solrQuery;
     }
 
-    public void ConvertResult(SolrDocumentList docs){
-        Long numFound = docs.getNumFound();
-        JSONArray jsonArray= (JSONArray)JSONArray.toJSON(docs);
-        System.out.println(jsonArray.get(0));
-        System.out.println(jsonArray);
-    }
 }

@@ -2,56 +2,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="public:: #public_head">
-    <meta charset="UTF-8">
-    <title>智能检索</title>
-
 </head>
 <body>
 <div class="header" th:replace="public:: #public-header"></div>
 <div class="sidebar" th:replace="IntegratedQuery/controlCenter::#sidebar(activeUri='IntelligentRetrieval')"></div>
 <div id="intelligentRetrieval_div">
-    <div class="container">
+    <div class="container" id="intelligentRetrieval_container">
         <div class="row" style=" padding-top: 50px">
             <h1 class="text-center ">瑞拷得智能检索系统</h1>
         </div>
         <div class="row">
-            <form action="/IntegratedQuery/IntelligentRetrieval/GetQueryRequest">
-                <div class="col-md-3 text-center">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
-                            全文检索
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="imageRetrieval" value="imageRetrieval">
-                            图像检索
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="audioRetrieval" value="audioRetrieval">
-                            音频检索
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="videoRetrieval" value="videoRetrieval">
-                            视频检索
-                        </label>
-                    </div>
+            <div class="col-md-3 text-center">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="queryTypeOptionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
+                        全文检索
+                    </label>
                 </div>
-                <div class="col-md-7" style="padding-top: 30px">
-                    <div class="input-group input-group-lg text-center">
-                        <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">上传</button>
-                            <button class="btn btn-primary" type="submit">搜索</button>
-                        </span>
-                    </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="queryTypeOptionsRadios" id="imageRetrieval" value="imageRetrieval">
+                        图像检索
+                    </label>
                 </div>
-            </form>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="queryTypeOptionsRadios" id="audioRetrieval" value="audioRetrieval">
+                        音频检索
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="queryTypeOptionsRadios" id="videoRetrieval" value="videoRetrieval">
+                        视频检索
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-7" style="padding-top: 30px">
+                <div class="input-group input-group-lg text-center">
+                    <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button">上传</button>
+                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.keySerach()" >搜索</button>
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="row" style="margin:80px 40px 50px 50px;border:1px solid #b9c2dc">
             <div style="margin-left:10px;margin-right:10px">
@@ -67,7 +62,11 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/js/IntegratedQuery/IntelligentRetrieval.js}"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 </div>
 </body>
-
 </html>
