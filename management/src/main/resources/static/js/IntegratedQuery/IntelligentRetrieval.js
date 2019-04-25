@@ -24,7 +24,8 @@ IntelligentRetrieval={
 //                console.log("errorMessage:"+JSON.stringify(msg))
 //            }
 //        });
-        $("#intelligentRetrieval_bootstrapTable").empty();
+        $("#intelligentRetrieval_container").empty();
+        $("#intelligentRetrieval_bootstrapTable").css({"table-layout":"fixed"});
         $('#intelligentRetrieval_bootstrapTable').bootstrapTable({
                 url:'/IntegratedQuery/IntelligentRetrieval/KeySerach',  //请求后台url
                 method:'get',
@@ -80,9 +81,15 @@ IntelligentRetrieval={
                         },  {
                             title : '题名',
                             field : 'title_ik_c',
-                            align : 'center',
-                            valign : 'center',
-                            width : '30%'
+                            cellStyle:{
+                                css:{
+                                    "overflow": "hidden",
+                                    "text-overflow": "ellipsis",
+                                    "white-space": "nowrap"
+                                }
+                            },
+                            width : '30%',
+                            formatter:paramsMatter
                         },  {
                             title : '责任者',
                             field : 'personliable_s_c',
@@ -97,11 +104,18 @@ IntelligentRetrieval={
                             valign : 'center',
                             width : '10%',
                             formatter : function (value, row, index) {
-                                return[ '<button id="table_amend" class="btn btn-success table_btn amend" type="button">详情</button>',
+                                return[ '<button id="table_amend" class="btn btn-success table_btn amend" type="button">详情</button>&nbsp;&nbsp;',
                                         '<button id="table_amend" class="btn btn-success table_btn amend" type="button">全文</button>',
                                 ].join("")
                             }
                         },]
             });
     }
+};
+
+function paramsMatter(value, row, index) {
+    //替换空格，因为字符串拼接的时候如果遇到空格，会自动将后面的部分截掉，所有这里用html的转义符
+    //&nbsp;代替
+    value = value.replace(/\s+/g,'&nbsp;');
+    return "<span title="+value+">"+value+"</span>";
 }
