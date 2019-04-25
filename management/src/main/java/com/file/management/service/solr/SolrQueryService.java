@@ -46,11 +46,14 @@ public class SolrQueryService {
      * @param keyword 关键词
      * @return
      */
-    public JSONObject queryKeywordbySolr(SolrClient solrClient, String keyword, String TableId){
+    public JSONObject queryKeywordbySolr(SolrClient solrClient, String keyword, String tableId, String pageSize,
+                                         String offset){
         JSONObject jsonObject = new JSONObject();
         JSONObject result_jsonObject = new JSONObject();
         jsonObject.put("Keyword",keyword);
-        jsonObject.put("TableId",TableId);
+        jsonObject.put("TableId",tableId);
+        jsonObject.put("PageSize",pageSize);
+        jsonObject.put("Offset",offset);
         SolrDocumentList docs = null;
         JSONArray docsJsonArray = new JSONArray();
         try {
@@ -104,11 +107,12 @@ public class SolrQueryService {
         //当输入为空时的特殊处理
         querystring = this.buildQueryStr(keyword,tableId);
         //分页
-        int page = jsonObject.containsKey("PageNo")? Integer.parseInt(jsonObject.getString("PageNo"))-1:0;
-        int size = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize"))-1:0;
-        int start = page * size;
-        if(start!=0){solrQuery.set("start", start);}
-        if(size!=0){solrQuery.set("rows", size);}
+        int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
+        int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
+        if(offset!=-1 && PageSize!=-1 ){
+            solrQuery.set("start", offset);
+            solrQuery.set("rows", PageSize);
+        }
         solrQuery.set("wt", "json");
         //高亮
 //        if (!keyword.equals("")){

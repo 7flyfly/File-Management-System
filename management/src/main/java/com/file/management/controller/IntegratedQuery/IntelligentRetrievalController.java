@@ -34,32 +34,28 @@ public class IntelligentRetrievalController {
     @Autowired
     private SolrQueryService solrQueryService;
 
-    static String keyword = "";
-    static String queryType = "";
-    static String tableId = "";
-    @RequestMapping(value = "/KeySerach")
+
+    @RequestMapping(value = "/KeySerach2")
     @ResponseBody
     /**
      * 根据关键词查询结果
      * 目前 根据DocumentNumber检索
      */
-    public String keySerach(HttpSession session, String dataJson){
+    public String keySerach2(HttpSession session, String dataJson){
         SolrClient solrClient = null;
         JSONObject result_jsonObject = new JSONObject();
         try {
             JSONObject jsonObject = (JSONObject)JSONObject.parse(dataJson);
             System.out.println(jsonObject);
             String keyword =  jsonObject.getString("keyword");
-            IntelligentRetrievalController.keyword = keyword;
             String queryType =  jsonObject.getString("queryType");
-            IntelligentRetrievalController.queryType = queryType;
             String tableId =  jsonObject.getString("tableId");
-            IntelligentRetrievalController.tableId = tableId;
             if(tableId==null) tableId = "";
             if("fullTextSearch".equals(queryType)&&keyword!=null){
                 SolrUtils solrUtils = new SolrUtils();
                 solrClient = solrUtils.createSolrClient();
-                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId);
+                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,"1",
+                        "1");
                 solrClient.close();
                 result_jsonObject.put("message",docsJsonObject);
                 result_jsonObject.put("result","success");
@@ -82,23 +78,23 @@ public class IntelligentRetrievalController {
         }
     }
 
-    @RequestMapping(value = "/KeySerach2")
+    @RequestMapping(value = "/KeySerach")
     @ResponseBody
-    public String KeySerach2(HttpServletResponse response){
+    /**
+     * 根据关键词查询结果,并返回给bootStrapTable
+     */
+    public String KeySerach(String keyword, String queryType, String tableId, String pageSize, String offset){
         SolrClient solrClient = null;
         JSONObject result_jsonObject = new JSONObject();
         try {
             if(tableId==null) tableId = "";
-            System.out.println(keyword);
             if("fullTextSearch".equals(queryType)&&keyword!=null){
                 SolrUtils solrUtils = new SolrUtils();
                 solrClient = solrUtils.createSolrClient();
                 System.out.println(keyword);
-                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId);
+                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,pageSize,offset);
                 solrClient.close();
-//                result_jsonObject.put("message",docsJsonObject);
-//                result_jsonObject.put("result","success");
-                result_jsonObject.put("rows",docsJsonObject.getString("documentList"));
+                result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
                 result_jsonObject.put("total",docsJsonObject.getString("numFound"));
                 System.out.println(result_jsonObject);
                 return result_jsonObject.toString();
