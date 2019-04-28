@@ -94,6 +94,13 @@ public class TablesService {
     }
 
     /**
+     *
+     * @param tableId
+     * @return
+     */
+    public String getTableNameByTableId(int tableId){ return getTablesByTableId(tableId).getTableName();}
+
+    /**
      * 根据表格id删除表格
      *
      * @param tableId 表的id
@@ -106,6 +113,11 @@ public class TablesService {
         return true;
     }
 
+    /**
+     *
+     * @param tableName
+     * @return
+     */
     public Tables getTablesByTableName(String tableName){return tablesRepository.findByTableName(tableName);}
 
     /**

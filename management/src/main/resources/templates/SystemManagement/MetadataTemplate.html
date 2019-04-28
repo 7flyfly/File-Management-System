@@ -40,7 +40,7 @@
     <div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar"></div>
     <ol class="breadcrumb">
         <li>
-            <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+            <a data-target="#i-menu-sidebar" data-toggle="sidebar" th:href="@{/SystemManagement/Metadata}">
                 <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
                 元数据库管理
             </a>
@@ -49,9 +49,11 @@
             <a href="#">元数据管理</a>
         </li>
     </ol>
-    <button id="btn_add" type="button" class="btn bg-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="modal" data-target="#addModal"></span>新增模板
-    </button>
+    <div style="margin-bottom:20px;">
+        <button id="btn_add" type="button" class="btn bg-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="modal" data-target="#addModal"></span>新增模板
+        </button>
+    </div>
 
     <!--模态框-->
     <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
@@ -59,21 +61,187 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">增加</h4>
+                    <h4 class="modal-title">模板信息</h4>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <input type="text" placeholder="模板名称" id="addtemplatename" class="form-control" />
+                            <input type="text" placeholder="模板名称" id="templateName" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="模板描述" id="addtemplatedescription" class="form-control" />
+                            <input type="text" placeholder="模板描述" id="templateDescription" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <tr>
+                                <td class="tableleft">主键字段信息</td>
+                                <td>
+                                    <input type="text" placeholder="字段名称" id="fieldName" class="form-control" />
+                                    <input type="text" placeholder="字段英文名" id="fieldEnglishName" class="form-control" />
+                                    <!--<input type="text" placeholder="字段类型" id="fieldType" class="form-control" />-->
+                                    <select class="form-control" id="fieldType">
+                                        <option value="">字段类型</option>
+                                        <option value="varchar">varchar</option>
+                                        <option value="int">int</option>
+                                        <option value="data">data</option>
+                                    </select>
+                                    <input type="text" placeholder="字段最大长度" id="fieldLength" class="form-control" />
+                                    <!--<input type="text" placeholder="字段是否建索引" id="fieldIndex" class="form-control" />-->
+                                    <select class="form-control" id="fieldIndex">
+                                        <option value="">字段是否建索引</option>
+                                        <option value="true">true</option>
+                                        <option value="false">false</option>
+                                    </select>
+                                    <!--<input type="text" placeholder="字段是否可分词" id="fieldIk" class="form-control" />-->
+
+                                    <select class="form-control" id="fieldIk">
+                                        <option value="">字段是否分词</option>
+                                        <option value="true">true</option>
+                                        <option value="false">false</option>
+                                    </select>
+
+                                        <button type="button" class="btn bg-primary"  id="addTable" onclick="add_tr(this)" style="margin-top:10px;">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加字段
+                                    </button>
+                                    <!--<button type="button" class="btn btn-success"  id="deleteTable" onclick="del_tr(this)" style="margin-top:10px;">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除该字段
+                                    </button>-->
+                                </td>
+                            </tr>
+                                <script>
+                                    window.a = 0;
+                                    window.arr = [];
+
+                                    function del_tr(obj) {
+                                        $(obj).parent().remove();
+                                        a--;
+                                    }
+
+                                   function add_tr(obj){
+                                        var tr = "<div class=\"form-group\"><tr>";
+                                        tr += "<td class=\"tableleft\">其他字段信息</td>";
+                                        tr += "<td><input type=\"text\" placeholder=\"字段名称\" id=\"fieldName" + a + "\" class=\"form-control\" />";
+                                        tr += "<input type=\"text\" placeholder=\"字段英文名\" id=\"fieldEnglishName" + a + "\" class=\"form-control\" />";
+
+                                        /*tr += "<input type=\"text\" placeholder=\"字段类型\" id=\"fieldType" + a + "\" class=\"form-control\" />";*/
+                                        tr += "<select class=\"form-control\" id=\"fieldType" + a + "\"><option value=\"\">字段类型</option><option value=\"varchar\">varchar</option><option value=\"int\">int</option><option value=\"data\">data</option></select>";
+
+                                        tr += "<input type=\"text\" placeholder=\"字段最大长度\" id=\"fieldLength" + a + "\" class=\"form-control\" />";
+
+                                        /*tr += "<input type=\"text\" placeholder=\"字段是否建索引\" id=\"fieldIndex" + a + "\" class=\"form-control\" />"*/
+                                        tr += "<select class=\"form-control\" id=\"fieldIndex" + a + "\"><option value=\"\">字段是否建索引</option><option value=\"true\">true</option><option value=\"false\">false</option></select>";
+
+                                        /*tr += "<input type=\"text\" placeholder=\"字段是否可分词\" id=\"fieldIk" + a + "\" class=\"form-control\" />"*/
+                                        tr += "<select class=\"form-control\" id=\"fieldIk" + a + "\"><option value=\"\">字段是否分词</option><option value=\"true\">true</option><option value=\"false\">false</option></select>";
+
+                                        tr += "<button type=\"button\" class=\"btn bg-primary\"  id=\"addTable\" onclick=\"add_tr(this)\" style=\"margin-top:10px;\">";
+                                        tr += "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>添加字段";
+                                        tr += "</button><button type=\"button\" class=\"btn btn-success\"  id=\"deleteTable\" onclick=\"del_tr(this)\" style=\"margin-top:10px;\">";
+                                        tr += "<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>删除该字段</button>";
+                                        $(obj).parent().append(tr);
+                                        arr.push(a);
+                                        a++;
+                                    }
+
+                                    //提交更改
+                                    function update(obj) {
+                                        //获取模态框数据
+                                        var templateName = $('#templateName').val();
+                                        var templateDescription = $('#templateDescription').val();
+                                        var fieldName = $('#fieldName').val();
+                                        var fieldEnglishName = $('#fieldEnglishName').val();
+
+                                        // 获取选择框值
+                                        var selectType = document.getElementById("fieldType");
+                                        var indexType = selectType.selectedIndex;
+                                        var fieldType= selectType.options[indexType].text;
+
+                                        var fieldLength = $('#fieldLength').val();
+
+
+                                        // 获取选择框值
+                                        var selectIk = document.getElementById("fieldIk");
+                                        var indexIk = selectIk.selectedIndex;
+                                        var fieldIk= selectIk.options[indexIk].text;
+
+                                        // 获取选择框值
+                                        var selectIndex = document.getElementById("fieldIndex");
+                                        var indexIndex = selectIndex.selectedIndex;
+                                        var fieldIndex = selectIndex.options[indexIndex].text;
+
+                                        var fieldNames = [];
+                                        var fieldEnglishNames = [];
+                                        var fieldTypes = [];
+                                        var fieldLengths = [];
+                                        var fieldIndexs = [];
+                                        var fieldIks = [];
+
+                                        for(var i=0;i<a;i++){
+                                            eval("fieldNames.push($('#fieldName" + i.toString() + "').val());");
+                                            eval("fieldEnglishNames.push($('#fieldEnglishName" + i.toString() + "').val());");
+                                            /*eval("fieldTypes.push($('#fieldType" + i.toString() + "').val());");*/
+                                            eval("var selectType" + i.toString() + " = document.getElementById(\"fieldType" + i.toString() +"\");");
+                                            eval("var indexType" + i.toString() + " = selectType" + i.toString() + ".selectedIndex;");
+                                            eval("var fieldType" + i.toString() + " = selectType" + i.toString() + ".options[indexType" + i.toString() + "].text");
+                                            eval("fieldTypes.push(fieldType" + i.toString() + ");");
+
+                                            eval("fieldLengths.push($('#fieldLength" + i.toString() + "').val());");
+
+                                            eval("var selectIndex" + i.toString() + " = document.getElementById(\"fieldIndex" + i.toString() +"\");");
+                                            eval("var indexIndex" + i.toString() + " = selectIndex" + i.toString() + ".selectedIndex;");
+                                            eval("var fieldIndex" + i.toString() + " = selectIndex" + i.toString() + ".options[indexIndex" + i.toString() + "].text");
+                                            eval("fieldIndexs.push(fieldIndex" + i.toString() + ");");
+
+                                            eval("var selectIk" + i.toString() + " = document.getElementById(\"fieldIk" + i.toString() +"\");");
+                                            eval("var indexIk" + i.toString() + " = selectIndex" + i.toString() + ".selectedIndex;");
+                                            eval("var fieldIk" + i.toString() + " = selectIndex" + i.toString() + ".options[indexIk" + i.toString() + "].text;");
+                                            eval("fieldIks.push(fieldIk" + i.toString() + ");");
+                                            /*eval("fieldIndexs.push($('#fieldIndex" + i.toString() + "').val());");
+                                            eval("fieldIks.push($('#fieldIk" + i.toString() + "').val());");*/
+                                        }
+
+                                        var stringA = a.toString();
+
+                                        var jsonObj ={
+                                            'templateName': templateName,
+                                            'templateDescription': templateDescription,
+                                            "fieldName": fieldName,
+                                            "fieldEnglishName": fieldEnglishName,
+                                            "fieldType": fieldType,
+                                            "fieldLength": fieldLength,
+                                            "fieldIndex": fieldIndex,
+                                            "fieldIk": fieldIk,
+                                            "fieldNames": fieldNames,
+                                            "fieldEnglishNames": fieldEnglishNames,
+                                            "fieldTypes": fieldTypes,
+                                            "fieldLengths": fieldLengths,
+                                            "fieldIndexs": fieldIndexs,
+                                            "fieldIks": fieldIks,
+                                            "stringA": stringA
+                                        };
+                                        console.log(jsonObj);
+
+                                        $.ajax({
+                                            type: "post",
+                                            url: '/SystemManagement/postTemplateData',
+                                            data: JSON.stringify(jsonObj),
+                                            dataType: "json",
+                                            contentType: "application/json",
+                                            success:function(data) {
+                                                alert(data);
+                                                location.reload();
+                                            }
+                                        });
+                                        $('#modal').modal('hide');
+                                    }
+                                </script>
+
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary que_add">确定</button>
+                    <button type="button" class="btn btn-primary que_add" onclick="update(this)" data-dismiss="modal">确定</button>
                 </div>
             </div>
         </div>
@@ -81,7 +249,7 @@
 
 
     <div class="col-sm-10 zero-padding-lr" >
-        <table class="table table-striped table-bordered row-border hover order-column" cellspacing="0"  style="margin-top:50px;">
+        <table id="table_id" class="table table-striped table-bordered row-border hover order-column" cellspacing="0">
             <thead>
                 <tr>
                     <th>模板id</th>
@@ -107,6 +275,33 @@
                 </tr>
             </tbody>
         </table>
+        <script>
+            $(document).ready(function () {
+                $('#table_id').DataTable({
+                    // 国际化
+                    "language": {
+                        "sProcessing": "处理中...",
+                        "sLengthMenu": "显示 _MENU_ 项结果",
+                        "sZeroRecords": "没有匹配结果",
+                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                        "sInfoPostFix": "",
+                        "sSearch": "搜索:",
+                        "sUrl": "",
+                        "sEmptyTable": "表中数据为空",
+                        "sLoadingRecords": "载入中...",
+                        "sInfoThousands": ",",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "上页",
+                            "sNext": "下页",
+                            "sLast": "末页"
+                        }
+                    }
+                });
+            });
+        </script>
     </div>
 </body>
 </html>

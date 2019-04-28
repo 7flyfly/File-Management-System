@@ -11,7 +11,7 @@
     <div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar"></div>
     <ol class="breadcrumb">
         <li>
-            <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+            <a data-target="#i-menu-sidebar" data-toggle="sidebar" th:href="@{/SystemManagement/Metadata}">
                 <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
                 元数据库管理
             </a>
