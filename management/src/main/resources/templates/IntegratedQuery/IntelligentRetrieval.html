@@ -7,60 +7,66 @@
 <div class="header" th:replace="public:: #public-header"></div>
 <div class="sidebar" th:replace="IntegratedQuery/controlCenter::#sidebar(activeUri='IntelligentRetrieval')"></div>
 <div id="intelligentRetrieval_div" class="col-md-8" >
-    <table id="intelligentRetrieval_bootstrapTable"> </table>
-    <div class="container" id="intelligentRetrieval_container">
-        <div class="row" style=" padding-top: 50px">
-            <h1 class="text-center ">瑞拷得智能检索系统</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-3 text-center">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="queryTypeOptionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
-                        全文检索
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="queryTypeOptionsRadios" id="imageRetrieval" value="imageRetrieval">
-                        图像检索
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="queryTypeOptionsRadios" id="audioRetrieval" value="audioRetrieval">
-                        音频检索
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="queryTypeOptionsRadios" id="videoRetrieval" value="videoRetrieval">
-                        视频检索
-                    </label>
-                </div>
+    <div class="row" id="intelligentRetrieval_container_row" style="margin-left:25px;margin-right:25px;">
+        <div class="container" id="intelligentRetrieval_container">
+            <div class="row" style=" padding-top: 50px" id="intelligentRetrieval_container_head">
+                <h1 class="text-center ">瑞拷得智能检索系统</h1>
             </div>
-            <div class="col-md-7" style="padding-top: 30px">
-                <div class="input-group input-group-lg text-center">
-                    <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
-                    <span class="input-group-btn">
+            <div class="row" id="intelligentRetrieval_container_body">
+                <div class="col-md-3 text-center">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="queryTypeOptionsRadios" id="fullTextSearch" value="fullTextSearch" checked>
+                            全文检索
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="queryTypeOptionsRadios" id="imageRetrieval" value="imageRetrieval">
+                            图像检索
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="queryTypeOptionsRadios" id="audioRetrieval" value="audioRetrieval">
+                            音频检索
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="queryTypeOptionsRadios" id="videoRetrieval" value="videoRetrieval">
+                            视频检索
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-7" style="padding-top: 30px">
+                    <div class="input-group input-group-lg text-center">
+                        <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
+                        <span class="input-group-btn">
                         <button class="btn btn-primary" type="button">上传</button>
                         <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.keySerach()" >搜索</button>
                     </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin:80px 40px 50px 50px;border:1px solid #b9c2dc" id="intelligentRetrieval_container_tail">
+                <div style="margin-left:10px;margin-right:10px">
+                    <div class="row" style="margin:0px 0px 5px 5px;">
+                        <h3 style="margin-left: 50px">综合统计</h3>
+                    </div>
+                    <div class="row" style="margin:0px 0px 5px 5px;">
+                        <h4>文书档案:102件</h4>
+                        <h4>科技档案:102件</h4>
+                        <h4>招标档案:52件</h4>
+                        <h4>基建档案:43件</h4>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin:80px 40px 50px 50px;border:1px solid #b9c2dc">
-            <div style="margin-left:10px;margin-right:10px">
-                <div class="row" style="margin:0px 0px 5px 5px;">
-                    <h3 style="margin-left: 50px">综合统计</h3>
-                </div>
-                <div class="row" style="margin:0px 0px 5px 5px;">
-                    <h4>文书档案:102件</h4>
-                    <h4>科技档案:102件</h4>
-                    <h4>招标档案:52件</h4>
-                    <h4>基建档案:43件</h4>
-                </div>
-            </div>
+    </div>
+    <div class="row">
+        <div style="margin-left:10px;margin-right:10px;">
+            <table id="intelligentRetrieval_bootstrapTable"> </table>
         </div>
     </div>
     <script type="text/javascript" th:src="@{/js/IntegratedQuery/IntelligentRetrieval.js}"></script>
@@ -68,6 +74,34 @@
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!--模态框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">详细信息</h4>
+                </div>
+                <div class="modal-body table-responsive">
+                    <table class="table table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>属性</th>
+                            <th>属性值</th>
+                        </tr>
+                        </thead>
+                        <tbody id="detailList">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <!--                <button type="button" class="btn btn-default" >取消</button>-->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
+

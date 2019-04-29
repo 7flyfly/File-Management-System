@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -106,6 +107,16 @@ public class TablesService {
         return true;
     }
 
+    /**
+     * 根据TableId获得tableName
+     * @param tableId 表的id
+     */
+    public String getTableNameByTableId(int tableId){ return getTablesByTableId(tableId).getTableName();}
+
+    /**
+     * 根据tableName获得table
+     * @param tableName 表名
+     */
     public Tables getTablesByTableName(String tableName){return tablesRepository.findByTableName(tableName);}
 
     /**
@@ -224,7 +235,6 @@ public class TablesService {
 
     /**
      * 表中添加一条数据
-     *
      * @param tableUuid 表uuid
      * @param map:      key为属性名称，value为属性值。
      */

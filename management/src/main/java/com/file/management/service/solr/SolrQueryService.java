@@ -1,19 +1,32 @@
 package com.file.management.service.solr;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.file.management.utils.SolrUtils;
+import com.file.management.dao.DynamicSQL;
+import com.file.management.dao.metadata.TablesRepository;
+import com.file.management.service.metadata.TablesService;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class SolrQueryService {
+    @Autowired
+    private TablesService tablesService;
+    @Autowired
+    private TablesRepository tablesRepository;
+    @Autowired
+    private DynamicSQL dynamicSQL;
 
     /**
      * 根据id查询索引
@@ -66,12 +79,38 @@ public class SolrQueryService {
             result_jsonObject.put("keyword",keyword);
             result_jsonObject.put("numFound",numFound);
             result_jsonObject.put("documentList",docsJsonArray);
-            System.out.println(docsJsonArray);
             return result_jsonObject;
         } catch (Exception e) {
             e.printStackTrace();
             return result_jsonObject;
         }
+    }
+
+
+    public JSONObject queryDocumentFromDatabase(String table_id, String document_number){
+        System.out.println(table_id +"\n"+ document_number);
+        JSONObject result_js = new JSONObject();
+        String tableName = tablesService.getTableNameByTableId(Integer.parseInt(table_id));
+        if(tableName!=null&&!tableName.isEmpty()){
+            List resultList = dynamicSQL.selectResultListByTableNameAndAttr(tableName,"DocumentNo",
+                    document_number);
+            if(resultList.size()==1){
+                Object row = resultList.get(0);
+                Object[] attValue = (Object[]) row;
+                List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+                for(int i = 0; i<AttrNameList.size(); i++){
+                    if(attValue[i]==null) continue;
+                    String attName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
+                    result_js.put(attName,attValue[i]);
+                }
+            }else{
+                result_js.put("error","该档号有多个结果");
+            }
+        }else{
+            result_js.put("error","节点对应的表为空");
+        }
+        System.out.println(result_js);
+        return result_js;
     }
 
     /**
@@ -124,7 +163,8 @@ public class SolrQueryService {
 //            solrQuery.setHighlightFragsize(0);
 //        }
         if(querystring!=null)
-            solrQuery.set("q", querystring);
+            solrQuery.set("q", keyword);
+//        solrQuery.set("q.op", "AND");  //默认操作符
         System.out.println("solrQuery = " + solrQuery);
         return  solrQuery;
     }

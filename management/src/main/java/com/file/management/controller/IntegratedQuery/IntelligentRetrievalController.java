@@ -34,50 +34,6 @@ public class IntelligentRetrievalController {
     @Autowired
     private SolrQueryService solrQueryService;
 
-
-    @RequestMapping(value = "/KeySerach2")
-    @ResponseBody
-    /**
-     * 根据关键词查询结果
-     * 目前 根据DocumentNumber检索
-     */
-    public String keySerach2(HttpSession session, String dataJson){
-        SolrClient solrClient = null;
-        JSONObject result_jsonObject = new JSONObject();
-        try {
-            JSONObject jsonObject = (JSONObject)JSONObject.parse(dataJson);
-            System.out.println(jsonObject);
-            String keyword =  jsonObject.getString("keyword");
-            String queryType =  jsonObject.getString("queryType");
-            String tableId =  jsonObject.getString("tableId");
-            if(tableId==null) tableId = "";
-            if("fullTextSearch".equals(queryType)&&keyword!=null){
-                SolrUtils solrUtils = new SolrUtils();
-                solrClient = solrUtils.createSolrClient();
-                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,"1",
-                        "1");
-                solrClient.close();
-                result_jsonObject.put("message",docsJsonObject);
-                result_jsonObject.put("result","success");
-                return result_jsonObject.toString();
-            }else{
-                result_jsonObject.put("result","error");
-                result_jsonObject.put("message","失败！关键字不能为空");
-                return result_jsonObject.toString();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            try {
-                solrClient.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            result_jsonObject.put("result","error");
-            result_jsonObject.put("message",e.getMessage());
-            return result_jsonObject.toString();
-        }
-    }
-
     @RequestMapping(value = "/KeySerach")
     @ResponseBody
     /**
@@ -110,6 +66,36 @@ public class IntelligentRetrievalController {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            result_jsonObject.put("result","error");
+            result_jsonObject.put("message",e.getMessage());
+            return result_jsonObject.toString();
+        }
+    }
+
+
+    @RequestMapping(value = "/getDetail")
+    @ResponseBody
+    /**
+     * 根据关键词查询结果
+     * 目前 根据DocumentNumber检索
+     */
+    public String getDetail(String dataJson){
+        JSONObject result_jsonObject = new JSONObject();
+        try {
+            JSONObject jsonObject = (JSONObject)JSONObject.parse(dataJson);
+            System.out.println("getDetail/table_id+document_number:" + jsonObject);
+            String table_id =  jsonObject.getString("table_id");
+            String document_number =  jsonObject.getString("document_number");
+            if(table_id!=null&&document_number!=null){
+                result_jsonObject = solrQueryService.queryDocumentFromDatabase(table_id,document_number);
+                return result_jsonObject.toString();
+            }else{
+                result_jsonObject.put("result","error");
+                result_jsonObject.put("message","失败！关键字不能为空");
+                return result_jsonObject.toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             result_jsonObject.put("result","error");
             result_jsonObject.put("message",e.getMessage());
             return result_jsonObject.toString();

@@ -24,7 +24,10 @@ IntelligentRetrieval={
 //                console.log("errorMessage:"+JSON.stringify(msg))
 //            }
 //        });
-        $("#intelligentRetrieval_container").empty();
+        $("#intelligentRetrieval_container_head").remove();
+        $("#intelligentRetrieval_container_tail").remove();
+        $("#intelligentRetrieval_container_row").css({"border-bottom":"2px solid #337ab7"});
+        $("#intelligentRetrieval_bootstrapTable").bootstrapTable('destroy');
         $("#intelligentRetrieval_bootstrapTable").css({"table-layout":"fixed"});
         $('#intelligentRetrieval_bootstrapTable').bootstrapTable({
                 url:'/IntegratedQuery/IntelligentRetrieval/KeySerach',  //请求后台url
@@ -67,7 +70,7 @@ IntelligentRetrieval={
                             }
                         },{
                             title : '档案号',
-                            field : 'DOCUMENT_NUMBER',
+                            field : 'document_number',
                             align : 'center',
                             valign : 'center',
                             width : '10%',
@@ -103,9 +106,10 @@ IntelligentRetrieval={
                             align : 'center',
                             valign : 'center',
                             width : '10%',
+                            events : operateEvents,
                             formatter : function (value, row, index) {
-                                return[ '<button id="table_amend" class="btn btn-success table_btn amend" type="button">详情</button>&nbsp;&nbsp;',
-                                        '<button id="table_amend" class="btn btn-success table_btn amend" type="button">全文</button>',
+                                return[ '<button id="table_btn_detail" class="btn btn-info table_btn amend btn-sm" data-toggle="modal" data-target="#detailModal" >详情</button>&nbsp;&nbsp;&nbsp;&nbsp;',
+                                        '<button id="table_btn_fullText" class="btn btn-info table_btn amend btn-sm" type="button">全文</button>',
                                 ].join("")
                             }
                         },]
@@ -118,4 +122,43 @@ function paramsMatter(value, row, index) {
     //&nbsp;代替
     value = value.replace(/\s+/g,'&nbsp;');
     return "<span title="+value+">"+value+"</span>";
+}
+
+window.operateEvents = {
+    "click #table_btn_detail":function(e, row, index){
+            if(typeof(index)!="undefined"){
+                var data = {
+                            "table_id":index.table_id_s,
+                            "document_number": index.document_number,
+                            };
+                            console.log(data);
+                            $.ajax({
+                                url: '/IntegratedQuery/IntelligentRetrieval/getDetail',
+                                data:{"dataJson":JSON.stringify(data)},
+                                dataType:"JSON",
+                                type:"GET",
+                                success:function(msg){
+                                    IntelligentRetrieval.result = msg;
+                                    $('#detailModal').modal("show");
+                                    $("#detailList").empty();
+                                        var str = ""
+                                        for(var p in msg){
+                                          console.log(p + " " + msg[p]);
+                                          str = str + '<tr><td>'+ p +':</td><td>'+ msg[p] +'</td></tr>'
+                                        }
+                                    $("#detailList").append(str);
+                                },
+                                error:function(msg){
+                                    console.log("errorMessage:"+JSON.stringify(msg));
+                                }
+                            });
+            }else{
+                console.log("index is undefined!")
+            }
+    },
+
+    "click #table_btn_fullText":function(e, index){
+            console.log("table_btn_detail")
+            console.log(index);
+    }
 }
