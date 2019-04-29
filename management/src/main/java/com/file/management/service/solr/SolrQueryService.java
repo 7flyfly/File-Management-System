@@ -98,10 +98,13 @@ public class SolrQueryService {
                 Object row = resultList.get(0);
                 Object[] attValue = (Object[]) row;
                 List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+                JSONObject jsonObject = tablesService.getAttrECNameByTableName(tableName);
                 for(int i = 0; i<AttrNameList.size(); i++){
-                    if(attValue[i]==null) continue;
-                    String attName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
-                    result_js.put(attName,attValue[i]);
+                    String attEName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
+                    if(attValue[i]!=null&&jsonObject.containsKey(attEName)){
+                        String attCName = jsonObject.getString(attEName);
+                        result_js.put(attCName,attValue[i]);
+                    }
                 }
             }else{
                 result_js.put("error","该档号有多个结果");

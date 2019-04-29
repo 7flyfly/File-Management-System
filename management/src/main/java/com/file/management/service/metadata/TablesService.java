@@ -1,5 +1,6 @@
 package com.file.management.service.metadata;
 
+import com.alibaba.fastjson.JSONObject;
 import com.file.management.dao.metadata.TablesRepository;
 import com.file.management.pojo.metadata.Field;
 import com.file.management.pojo.metadata.Tables;
@@ -350,5 +351,15 @@ public class TablesService {
 
         // 将表放入solr中
         solrService.addTableEntity2SolrDataConfig("db_fileManagement", table.getTableName(), table.getPrimaryKey().getFieldEnglishName(), "DocumentNo", solrStringList, solrStringCopyTextList, null, null, null, solrIKCopyTextList, null, null, null, null, null, null);
+    }
+
+    public JSONObject getAttrECNameByTableName(String tableName){
+        JSONObject jsonObject = new JSONObject();
+        Tables tables = this.getTablesByTableName(tableName);
+        Set<Field> EAttrNameset = tables.getFields();
+        for (Field field : EAttrNameset) {
+            jsonObject.put(field.getFieldEnglishName(),field.getFieldName());
+        }
+        return jsonObject;
     }
 }

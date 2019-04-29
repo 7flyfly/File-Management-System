@@ -144,7 +144,7 @@ window.operateEvents = {
                                         var str = ""
                                         for(var p in msg){
                                           console.log(p + " " + msg[p]);
-                                          str = str + '<tr><td>'+ p +':</td><td>'+ msg[p] +'</td></tr>'
+                                          str = str + '<tr><td width="100px">'+ p +':</td><td>'+ msg[p] +'</td></tr>'
                                         }
                                     $("#detailList").append(str);
                                 },

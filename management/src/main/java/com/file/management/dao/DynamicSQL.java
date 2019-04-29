@@ -39,9 +39,18 @@ public class DynamicSQL {
         return  resultList;
     }
 
+    /**
+     * 获取数据库表中的列的列名
+     * @param tableName
+     * @return
+     */
     public List selectAttrNameByTableName(String tableName){
         String sql = "select COLUMN_NAME from information_schema.`COLUMNS` where table_name = \"" + tableName + "\"";
         List resultList = entityManager.createNativeQuery(sql).getResultList();
         return  resultList;
     }
+
+//    public String getAttrCNameByTableId(String TableId, String colEName){
+//
+//    }
 }
