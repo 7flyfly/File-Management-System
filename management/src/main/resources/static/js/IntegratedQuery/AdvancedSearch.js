@@ -1,50 +1,40 @@
-var IntelligentRetrieval={
+var AdvancedSearch={
+    allKeyWord: "",
     keyWord: "",
-    tableId: "",
-    queryType: "",
-    imgSearchCheck:function(){
-        alert("敬请期待!");
-    },
-    keySearchCheck:function(){
-            IntelligentRetrieval.keyWord=$("#keyword").val();
-            IntelligentRetrieval.queryType=$("input[name='queryTypeOptionsRadios']:checked").val();
-            if(IntelligentRetrieval.keyWord!=null&&IntelligentRetrieval.keyWord!=""){
-                if("fullTextSearch"==IntelligentRetrieval.queryType){
-                    IntelligentRetrieval.keySearch();
-                }else{
-                    alert("敬请期待!");
-                }
-            }else{
+    anyKeyWord: "",
+    noKeyWord: "",
+    nodeName: "",
+    keyWordPosition: "",
+    SearchCheck:function(){
+            AdvancedSearch.allKeyWord=$("#contain_allKeyWord").val();
+            AdvancedSearch.keyWord=$("#contain_keyWord").val();
+            AdvancedSearch.anyKeyWord=$("#contian_anyKeyWord").val();
+            AdvancedSearch.noKeyWord=$("#contian_noKeyWord").val();
+            AdvancedSearch.nodeName=$("#nodeName").val();
+            AdvancedSearch.keyWordPosition=$("input[name='keyWordPositionOptionsRadios']:checked").val();
+            if(AdvancedSearch.allKeyWord==null&&AdvancedSearch.allKeyWord==""&&
+            AdvancedSearch.keyWord==null&&AdvancedSearch.keyWord==""&&
+            AdvancedSearch.anyKeyWord==null&&AdvancedSearch.anyKeyWord==""&&
+            AdvancedSearch.noKeyWord==null&&AdvancedSearch.noKeyWord==""){
                 alert("关键字不能为空!");
+            }else{
+                console.log(AdvancedSearch.allKeyWord);
+                console.log(AdvancedSearch.keyWord);
+                console.log(AdvancedSearch.anyKeyWord);
+                console.log(AdvancedSearch.noKeyWord);
+                console.log(AdvancedSearch.nodeName);
+                console.log(AdvancedSearch.keyWordPosition);
+                AdvancedSearch.conditionalSearch()
             }
     },
-    keySearch: function () {
-//        var data = {
-//        "keyword":IntelligentRetrieval.keyWord,
-//        "queryType": IntelligentRetrieval.queryType,
-//        "tableId": IntelligentRetrieval.tableId
-//        };
-//        console.log(data);
-//        $.ajax({
-//            url: '/IntegratedQuery/IntelligentRetrieval/KeySerach',
-//            data:{"dataJson":JSON.stringify(data)},
-//            dataType:"JSON",
-//            async : false,
-//            type:"GET",
-//            success:function(msg){
-//                IntelligentRetrieval.result = msg
-//            },
-//            error:function(msg){
-//                console.log("errorMessage:"+JSON.stringify(msg))
-//            }
-//        });
-        $("#intelligentRetrieval_container_head").remove();
-        $("#intelligentRetrieval_container_tail").remove();
-        $("#intelligentRetrieval_container_row").css({"border-bottom":"2px solid #337ab7"});
-        $("#intelligentRetrieval_bootstrapTable").bootstrapTable('destroy');
-        $("#intelligentRetrieval_bootstrapTable").css({"table-layout":"fixed"});
-        $('#intelligentRetrieval_bootstrapTable').bootstrapTable({
-                url:'/IntegratedQuery/IntelligentRetrieval/KeySearch',  //请求后台url
+    conditionalSearch: function () {
+        $("#advancedSearch_body").remove();
+        $("#advancedSearch_tail").remove();
+        $("#advancedSearch_div").css({"border-bottom":"2px solid #337ab7"});
+        $("#advancedSearch_bootstrapTable").bootstrapTable('destroy');
+        $("#advancedSearch_bootstrapTable").css({"table-layout":"fixed"});
+        $('#advancedSearch_bootstrapTable').bootstrapTable({
+                url:'/IntegratedQuery/AdvancedSearch/conditionalSearch',  //请求后台url
                 method:'get',
                 showRefresh:false, //是否显示刷新按钮
                 cardView: false,   //是否显示详细视图
@@ -64,9 +54,12 @@ var IntelligentRetrieval={
                 contentType: "application/json;charset=utf-8",
                 queryParams: function (params) {
                     return{
-                        keyword:IntelligentRetrieval.keyWord,
-                        queryType: IntelligentRetrieval.queryType,
-                        tableId: IntelligentRetrieval.tableId,
+                        allKeyWord: AdvancedSearch.allKeyWord,
+                        keyWord: AdvancedSearch.keyWord,
+                        anyKeyWord: AdvancedSearch.anyKeyWord,
+                        noKeyWord: AdvancedSearch.noKeyWord,
+                        keyWordPosition: AdvancedSearch.keyWordPosition,
+                        nodeName: AdvancedSearch.nodeName,
                         pageSize : params.limit, // 每页显示数量
                         offset : params.offset, // 起始索引
                     }
@@ -78,8 +71,8 @@ var IntelligentRetrieval={
                             valign : 'center',
                             width : '10%',
                             formatter : function (value, row, index) {
-                                var pageSize = $('#intelligentRetrieval_bootstrapTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
-                                var pageNumber = $('#intelligentRetrieval_bootstrapTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+                                var pageSize = $('#advancedSearch_bootstrapTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+                                var pageNumber = $('#advancedSearch_bootstrapTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
                                 return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
                             }
                         },{

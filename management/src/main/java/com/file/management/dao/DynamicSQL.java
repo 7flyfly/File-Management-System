@@ -34,7 +34,28 @@ public class DynamicSQL {
      */
     public List selectResultListByTableNameAndAttr(String tableName, String attr, String attrVal){
         String sql = "select * from " + tableName + " where " + attr + "= \"" + attrVal + "\"";
-        Object object = entityManager.createNativeQuery(sql).getSingleResult();
+        List resultList = entityManager.createNativeQuery(sql).getResultList();
+        return  resultList;
+    }
+
+    /**
+     * 根据表名拼接原生sql进行查询
+     * @param tableName 表名
+     * @return 返回抽象list
+     */
+    public List selectResultListByTableNameAndAttrNotNull(String tableName, String attr){
+        String sql = "select * from " + tableName + " where " + attr + "!= \"\" " ;
+        List resultList = entityManager.createNativeQuery(sql).getResultList();
+        return  resultList;
+    }
+
+    /**
+     * 根据solr的最新更新时间选择表中最近更新的记录
+     * @param tableName 表名
+     * @return 返回抽象list
+     */
+    public List selectLastModifiedByTableName(String tableName, String lastModified){
+        String sql = "select * from " + tableName + " where LAST_MODIFIED >  \"" + lastModified +" \"";
         List resultList = entityManager.createNativeQuery(sql).getResultList();
         return  resultList;
     }

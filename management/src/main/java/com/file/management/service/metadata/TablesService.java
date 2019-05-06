@@ -255,7 +255,7 @@ public class TablesService {
         // 拼接字符串完成插入数据的sql语句
         String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
         jdbcTemplate.execute(sqlInsert);
-        solrService.deltaImportTable2Solr(tableName);
+        solrService.deltaImportTable2Solr(tableName,null,null,null,null);
     }
 
     /**
@@ -288,7 +288,7 @@ public class TablesService {
         jdbcTemplate.execute(sqlUpdate);
 
         // 调用solrService的方法，看是否可以删除数据
-        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName);
+        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null);
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {
@@ -353,6 +353,11 @@ public class TablesService {
         solrService.addTableEntity2SolrDataConfig("db_fileManagement", table.getTableName(), table.getPrimaryKey().getFieldEnglishName(), "DocumentNo", solrStringList, solrStringCopyTextList, null, null, null, solrIKCopyTextList, null, null, null, null, null, null);
     }
 
+    /**
+     * 获得表中属性的中英文名称
+     * @param tableName 表名
+     * @return
+     */
     public JSONObject getAttrECNameByTableName(String tableName){
         JSONObject jsonObject = new JSONObject();
         Tables tables = this.getTablesByTableName(tableName);

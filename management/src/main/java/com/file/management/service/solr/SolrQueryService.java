@@ -87,12 +87,13 @@ public class SolrQueryService {
     }
 
 
-    public JSONObject queryDocumentFromDatabase(String table_id, String document_number){
+    public JSONObject queryDocumentFromDatabase(String table_id, String document_number ,String documentNumberDatabaseName,
+                                                String annexDatabaseName, String arrSplit){
         System.out.println(table_id +"\n"+ document_number);
         JSONObject result_js = new JSONObject();
         String tableName = tablesService.getTableNameByTableId(Integer.parseInt(table_id));
         if(tableName!=null&&!tableName.isEmpty()){
-            List resultList = dynamicSQL.selectResultListByTableNameAndAttr(tableName,"DocumentNo",
+            List resultList = dynamicSQL.selectResultListByTableNameAndAttr(tableName,documentNumberDatabaseName,
                     document_number);
             if(resultList.size()==1){
                 Object row = resultList.get(0);
@@ -101,9 +102,17 @@ public class SolrQueryService {
                 JSONObject jsonObject = tablesService.getAttrECNameByTableName(tableName);
                 for(int i = 0; i<AttrNameList.size(); i++){
                     String attEName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
-                    if(attValue[i]!=null&&jsonObject.containsKey(attEName)){
+                    if(AttrNameList.get(i).toString().equals(annexDatabaseName)){
+                        String fileNameStr = "";
                         String attCName = jsonObject.getString(attEName);
-                        result_js.put(attCName,attValue[i]);
+                        String[] fileNames = attValue[i].toString().split(";");
+                        for(String fileName : fileNames){
+                            fileNameStr = fileNameStr + fileName.substring(fileName.lastIndexOf("\\") + 1 )+ "; ";
+                        }
+                        result_js.put(attCName,fileNameStr);
+                    }else if(attValue[i]!=null&&jsonObject.containsKey(attEName)){
+                            String attCName = jsonObject.getString(attEName);
+                            result_js.put(attCName,attValue[i]);
                     }
                 }
             }else{

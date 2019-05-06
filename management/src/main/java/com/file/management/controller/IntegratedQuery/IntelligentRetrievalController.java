@@ -34,7 +34,7 @@ public class IntelligentRetrievalController {
     @Autowired
     private SolrQueryService solrQueryService;
 
-    @RequestMapping(value = "/KeySerach")
+    @RequestMapping(value = "/KeySearch")
     @ResponseBody
     /**
      * 根据关键词查询结果,并返回给bootStrapTable
@@ -44,21 +44,15 @@ public class IntelligentRetrievalController {
         JSONObject result_jsonObject = new JSONObject();
         try {
             if(tableId==null) tableId = "";
-            if("fullTextSearch".equals(queryType)&&keyword!=null){
-                SolrUtils solrUtils = new SolrUtils();
-                solrClient = solrUtils.createSolrClient();
-                System.out.println(keyword);
-                JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,pageSize,offset);
-                solrClient.close();
-                result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
-                result_jsonObject.put("total",docsJsonObject.getString("numFound"));
-                System.out.println(result_jsonObject);
-                return result_jsonObject.toString();
-            }else{
-                result_jsonObject.put("result","error");
-                result_jsonObject.put("message","失败！关键字不能为空1");
-                return result_jsonObject.toString();
-            }
+            SolrUtils solrUtils = new SolrUtils();
+            solrClient = solrUtils.createSolrClient();
+            System.out.println(keyword);
+            JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,pageSize,offset);
+            solrClient.close();
+            result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
+            result_jsonObject.put("total",docsJsonObject.getString("numFound"));
+            System.out.println(result_jsonObject);
+            return result_jsonObject.toString();
         } catch (IOException e) {
             e.printStackTrace();
             try {
@@ -87,7 +81,8 @@ public class IntelligentRetrievalController {
             String table_id =  jsonObject.getString("table_id");
             String document_number =  jsonObject.getString("document_number");
             if(table_id!=null&&document_number!=null){
-                result_jsonObject = solrQueryService.queryDocumentFromDatabase(table_id,document_number);
+                result_jsonObject = solrQueryService.queryDocumentFromDatabase(table_id,document_number,
+                        "DocumentNo","Annex",";");
                 return result_jsonObject.toString();
             }else{
                 result_jsonObject.put("result","error");
@@ -295,5 +290,44 @@ public class IntelligentRetrievalController {
             map.put("message",e.getMessage());
             return map.toString();
         }
+    }
+
+    @RequestMapping(value="/test")
+    @ResponseBody
+    /**
+     * 测试用，可删除
+     */
+    public String fullImportTable2Solr(){
+        Map<String,Object> map = new HashMap<>();
+        HashMap<Boolean,String> hashMap = solrService.fullImportTable2Solr("tb_test3",
+                null,null,null,null);
+        map.put("result",hashMap);
+        return map.toString();
+    }
+
+    @RequestMapping(value="/deltaTest")
+    @ResponseBody
+    /**
+     * 测试用，可删除
+     */
+    public String deltaImportTable2Solr(){
+        Map<String,Object> map = new HashMap<>();
+        HashMap<Boolean,String> hashMap = solrService.deltaImportTable2Solr("tb_test3",
+                null,null,null,null);
+        map.put("result",hashMap);
+        return map.toString();
+    }
+
+    @RequestMapping(value="/oneTest")
+    @ResponseBody
+    /**
+     * 测试用，可删除
+     */
+    public String oneImportTable2Solr(){
+        Map<String,Object> map = new HashMap<>();
+        HashMap<Boolean,String> hashMap = solrService.refreshOneDocument2Solr("tb_test3","2018-1WS0908.3-171",
+                null,null,null,null);
+        map.put("result",hashMap);
+        return map.toString();
     }
 }
