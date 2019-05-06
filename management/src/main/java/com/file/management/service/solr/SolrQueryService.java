@@ -70,7 +70,7 @@ public class SolrQueryService {
         SolrDocumentList docs = null;
         JSONArray docsJsonArray = new JSONArray();
         try {
-            SolrQuery solrQuery = this.buildSolrQuery(jsonObject);
+            SolrQuery solrQuery = this.buildSolrQuery4queryKeyword(jsonObject);
             //开始检索
             QueryResponse queryResponse = solrClient.query(solrQuery);
             docs = queryResponse.getResults();
@@ -86,7 +86,58 @@ public class SolrQueryService {
         }
     }
 
+    /**
+     * 高级搜索
+     * @param solrClient
+     * @param allKeyWord 包含以下全部关键字
+     * @param keyword 包含以下的完整关键词
+     * @param anyKeyWord 包含以下任意一个关键词
+     * @param noKeyWord 不包括以下关键词
+     * @param keyWordPosition 查询关键词位于
+     * @param tableId 表ID
+     * @param pageSize
+     * @param offset
+     * @return
+     */
+    public JSONObject ConditionQuerybySolr(SolrClient solrClient, String allKeyWord, String keyword, String anyKeyWord,
+                                           String noKeyWord, String keyWordPosition, String tableId ,String pageSize, String offset){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject result_jsonObject = new JSONObject();
+        jsonObject.put("allKeyWord",allKeyWord);
+        jsonObject.put("keyword",keyword);
+        jsonObject.put("anyKeyWord",anyKeyWord);
+        jsonObject.put("noKeyWord",noKeyWord);
+        jsonObject.put("keyWordPosition",keyWordPosition);
+        jsonObject.put("TableId",tableId);
+        jsonObject.put("PageSize",pageSize);
+        jsonObject.put("Offset",offset);
+        SolrDocumentList docs = null;
+        JSONArray docsJsonArray = new JSONArray();
+        try {
+            SolrQuery solrQuery = this.buildSolrQuery4ConditionQuery(jsonObject);
+            //开始检索
+            QueryResponse queryResponse = solrClient.query(solrQuery);
+            docs = queryResponse.getResults();
+            Long numFound = docs.getNumFound();
+            docsJsonArray= (JSONArray)JSONArray.toJSON(docs);
+            result_jsonObject.put("numFound",numFound);
+            result_jsonObject.put("documentList",docsJsonArray);
+            return result_jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result_jsonObject;
+        }
+    }
 
+    /**
+     * 根据document_number和Table_id从数据库中查询档案
+     * @param table_id 表id
+     * @param document_number 档案号
+     * @param documentNumberDatabaseName 档案号在数据库中的字段名称
+     * @param annexDatabaseName 附件在数据库中的字段名称
+     * @param arrSplit 附件的分割符
+     * @return
+     */
     public JSONObject queryDocumentFromDatabase(String table_id, String document_number ,String documentNumberDatabaseName,
                                                 String annexDatabaseName, String arrSplit){
         System.out.println(table_id +"\n"+ document_number);
@@ -105,7 +156,7 @@ public class SolrQueryService {
                     if(AttrNameList.get(i).toString().equals(annexDatabaseName)){
                         String fileNameStr = "";
                         String attCName = jsonObject.getString(attEName);
-                        String[] fileNames = attValue[i].toString().split(";");
+                        String[] fileNames = attValue[i].toString().split(arrSplit);
                         for(String fileName : fileNames){
                             fileNameStr = fileNameStr + fileName.substring(fileName.lastIndexOf("\\") + 1 )+ "; ";
                         }
@@ -150,7 +201,12 @@ public class SolrQueryService {
         return querystring;
     }
 
-    public SolrQuery buildSolrQuery(JSONObject jsonObject) {
+    /**
+     * 构造solr的查询语句
+     * @param jsonObject Keyword，TableId
+     * @return
+     */
+    public SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject) {
         String keyword = jsonObject.getString("Keyword");
         String tableId = jsonObject.getString("TableId");
         String querystring = null;
@@ -174,11 +230,99 @@ public class SolrQueryService {
 //            solrQuery.setHighlightSimplePost("</font>");
 //            solrQuery.setHighlightFragsize(0);
 //        }
-        if(querystring!=null)
+        if(querystring==null)
             solrQuery.set("q", keyword);
+        else
+            solrQuery.set("q", querystring);
 //        solrQuery.set("q.op", "AND");  //默认操作符
         System.out.println("solrQuery = " + solrQuery);
         return  solrQuery;
     }
 
+    /**
+     * 构造solr的查询语句
+     * @param jsonObject allKeyWord，keyword，anyKeyWord，noKeyWord，keyWordPosition，TableId，Offset，PageSize
+     * @return
+     */
+    public SolrQuery buildSolrQuery4ConditionQuery(JSONObject jsonObject) {
+        String allKeyWord = jsonObject.getString("allKeyWord");
+        String keyword = jsonObject.getString("keyword");
+        String anyKeyWord = jsonObject.getString("anyKeyWord");
+        String noKeyWord = jsonObject.getString("noKeyWord");
+        String keyWordPosition = jsonObject.getString("keyWordPosition");
+        String table_id = jsonObject.getString("TableId");
+        String querystring = null;
+        SolrQuery solrQuery = new SolrQuery();
+        //当输入为空时的特殊处理
+        StringBuffer buff = new StringBuffer();
+        String param = "";
+        if(keyWordPosition!=null&&!keyWordPosition.isEmpty()){
+            if(keyWordPosition.equals("fullTextPosition")){ param = "text"; }
+            if(keyWordPosition.equals("descriptionPosition")){ param = "file_content_iks";}//todo 增加copyfield
+            if(keyWordPosition.equals("AnnexRetrieval")){ param = "file_content_iks";}
+        }
+        if(allKeyWord!=null&&!allKeyWord.isEmpty()){
+            String[] keys = allKeyWord.split("\\+");
+            String keyStr = "";
+            for(int i = 0 ;i<keys.length-1; i++){
+                keyStr = keyStr + keys[i] + " AND " ;
+            }
+            keyStr = keyStr + keys[keys.length-1];
+            buff.append("("+param +":"+ keyStr +")");
+        }
+        if(keyword!=null&&!keyword.isEmpty()){
+            solrQuery.set("defType","edismax");
+            solrQuery.set("mm","100%");
+            String[] keys = keyword.split("\\+");
+            String keyStr = "";
+            for(int i = 0 ;i<keys.length-1; i++){
+                keyStr = keyStr + keys[i] + " AND " ;
+            }
+            keyStr = keyStr + keys[keys.length-1] ;
+            buff.append("("+param +":"+ keyStr +")");
+        }
+        if(anyKeyWord!=null&&!anyKeyWord.isEmpty()){
+            buff.append("("+param +":" + anyKeyWord +")");
+        }
+        if(noKeyWord!=null&&!noKeyWord.isEmpty()){
+            String[] keys = noKeyWord.split("\\+");
+            String keyStr = "";
+            for(int i = 0 ;i<keys.length-1; i++){
+                keyStr = keyStr + " NOT " + keys[i] ;
+            }
+            keyStr = keyStr +  " NOT " + keys[keys.length-1];
+            buff.append(keyStr);
+        }
+        if(table_id!=null&&!table_id.isEmpty()){
+            String[] keys = table_id.split("\\+");
+            String keyStr = "";
+            for(int i = 0 ;i<keys.length-1; i++){
+                keyStr = keyStr + keys[i] + " AND " ;
+            }
+            keyStr = keyStr + keys[keys.length-1];
+            buff.append("("+"table_id_s:"+ keyStr +")");
+        }
+        querystring = buff.toString();
+        //分页
+        int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
+        int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
+        if(offset!=-1 && PageSize!=-1 ){
+            solrQuery.set("start", offset);
+            solrQuery.set("rows", PageSize);
+        }
+        solrQuery.set("wt", "json");
+        //高亮
+//        if (!keyword.equals("")){
+//            solrQuery.setHighlight(true);
+//            solrQuery.set("hl.fl","keyword,idtitle,id");
+//            solrQuery.setHighlightSnippets(1);
+//            solrQuery.setHighlightSimplePre("<font color=\"red\">");
+//            solrQuery.setHighlightSimplePost("</font>");
+//            solrQuery.setHighlightFragsize(0);
+//        }
+        solrQuery.set("q", querystring);
+        solrQuery.set("q.op", "AND");  //默认操作符
+        System.out.println("solrQuery = " + solrQuery);
+        return  solrQuery;
+    }
 }

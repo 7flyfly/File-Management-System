@@ -33,7 +33,8 @@ public class AdvancedSearchController {
             SolrUtils solrUtils = new SolrUtils();
             solrClient = solrUtils.createSolrClient();
             System.out.println(keyWord);
-            JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyWord,nodeName,pageSize,offset);
+            JSONObject docsJsonObject = solrQueryService.ConditionQuerybySolr(solrClient,allKeyWord,keyWord,anyKeyWord,
+                    noKeyWord,keyWordPosition,nodeName,pageSize,offset);
             solrClient.close();
             result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
             result_jsonObject.put("total",docsJsonObject.getString("numFound"));
