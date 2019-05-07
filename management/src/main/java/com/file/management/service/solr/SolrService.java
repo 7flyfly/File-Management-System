@@ -159,7 +159,7 @@ public class SolrService {
         if(documentNumberDatabaseName==null) documentNumberDatabaseName = "DocumentNo";
         if(annexDatabaseName==null) annexDatabaseName = "Annex";
         if(arrSplit==null) arrSplit = ";";
-        if(fileContentSolrName==null) fileContentSolrName = "file_content_iks";
+        if(fileContentSolrName==null) fileContentSolrName = "annex_content";
         if(tableName!=null&&!tableName.equals("")){
             List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
             if(!(AttrNameList.contains(annexDatabaseName)&&AttrNameList.contains(documentNumberDatabaseName))){
@@ -242,7 +242,7 @@ public class SolrService {
             if(documentNumberDatabaseName==null) documentNumberDatabaseName = "DocumentNo";
             if(annexDatabaseName==null) annexDatabaseName = "Annex";
             if(arrSplit==null) arrSplit = ";";
-            if(fileContentSolrName==null) fileContentSolrName = "file_content_iks";
+            if(fileContentSolrName==null) fileContentSolrName = "annex_content";
             if(tableName!=null&&!tableName.equals("")){
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
@@ -285,7 +285,7 @@ public class SolrService {
             if(documentNumberDatabaseName==null) documentNumberDatabaseName = "DocumentNo";
             if(annexDatabaseName==null) annexDatabaseName = "Annex";
             if(arrSplit==null) arrSplit = ";";
-            if(fileContentSolrName==null) fileContentSolrName = "file_content_iks";
+            if(fileContentSolrName==null) fileContentSolrName = "annex_content";
             if(tableName!=null&&!tableName.equals("")){
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();

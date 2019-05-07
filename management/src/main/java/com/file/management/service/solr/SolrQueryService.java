@@ -60,7 +60,7 @@ public class SolrQueryService {
      * @return
      */
     public JSONObject queryKeywordbySolr(SolrClient solrClient, String keyword, String tableId, String pageSize,
-                                         String offset){
+                                         String offset,String fileContentSolrName){
         JSONObject jsonObject = new JSONObject();
         JSONObject result_jsonObject = new JSONObject();
         jsonObject.put("Keyword",keyword);
@@ -70,7 +70,7 @@ public class SolrQueryService {
         SolrDocumentList docs = null;
         JSONArray docsJsonArray = new JSONArray();
         try {
-            SolrQuery solrQuery = this.buildSolrQuery4queryKeyword(jsonObject);
+            SolrQuery solrQuery = this.buildSolrQuery4queryKeyword(jsonObject,fileContentSolrName);
             //开始检索
             QueryResponse queryResponse = solrClient.query(solrQuery);
             docs = queryResponse.getResults();
@@ -100,7 +100,8 @@ public class SolrQueryService {
      * @return
      */
     public JSONObject ConditionQuerybySolr(SolrClient solrClient, String allKeyWord, String documentNumber, String anyKeyWord,
-                                           String noKeyWord, String keyWordPosition, String nodeName ,String pageSize, String offset){
+                                           String noKeyWord, String keyWordPosition, String nodeName ,String pageSize,
+                                           String offset, String fileContentSolrName){
         JSONObject jsonObject = new JSONObject();
         JSONObject result_jsonObject = new JSONObject();
         jsonObject.put("allKeyWord",allKeyWord);
@@ -115,7 +116,7 @@ public class SolrQueryService {
         SolrDocumentList docs = null;
         JSONArray docsJsonArray = new JSONArray();
         try {
-            SolrQuery solrQuery = this.buildSolrQuery4ConditionQuery(jsonObject);
+            SolrQuery solrQuery = this.buildSolrQuery4ConditionQuery(jsonObject,fileContentSolrName);
             if(solrQuery==null){
                 //开始检索
                 result_jsonObject.put("numFound","0");
@@ -164,11 +165,13 @@ public class SolrQueryService {
                     if(AttrNameList.get(i).toString().equals(annexDatabaseName)){
                         String fileNameStr = "";
                         String attCName = jsonObject.getString(attEName);
-                        String[] fileNames = attValue[i].toString().split(arrSplit);
-                        for(String fileName : fileNames){
-                            fileNameStr = fileNameStr + fileName.substring(fileName.lastIndexOf("\\") + 1 )+ "; ";
+                        if(attCName.contains(arrSplit)){
+                            String[] fileNames = attValue[i].toString().split(arrSplit);
+                            for(String fileName : fileNames){
+                                fileNameStr = fileNameStr + fileName.substring(fileName.lastIndexOf("\\") + 1 )+ "; ";
+                            }
+                            result_js.put(attCName,fileNameStr);
                         }
-                        result_js.put(attCName,fileNameStr);
                     }else if(attValue[i]!=null&&jsonObject.containsKey(attEName)){
                             String attCName = jsonObject.getString(attEName);
                             result_js.put(attCName,attValue[i]);
@@ -190,16 +193,16 @@ public class SolrQueryService {
      * @param table_id 数据所在表的id
      * @return 拼接好的查询字符串
      */
-    public String buildQueryStr(String keyword, String table_id){
+    public String buildQueryStr(String keyword, String table_id,String fileContentSolrName){
         String querystring = null;
         if(keyword.isEmpty()){
-            querystring = "text:*";
+            querystring = "all_text:* ";
             if(!table_id.isEmpty()){
                 querystring = "table_id_s"+":"+table_id;
             }
         }else{
             StringBuffer buff = new StringBuffer();
-            buff.append("("+"text:"+keyword+" "+"OR"+" "+"document_number:"+keyword+")");
+            buff.append("("+"all_text:"+keyword+" "+"OR"+" "+"document_number:"+keyword+")");
             if(!table_id.isEmpty()){
                 buff.append(" AND ");
                 buff.append("table_id_s"+":"+table_id);
@@ -214,13 +217,13 @@ public class SolrQueryService {
      * @param jsonObject Keyword，TableId
      * @return
      */
-    public SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject) {
+    public SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject,String fileContentSolrName) {
         String keyword = jsonObject.getString("Keyword");
         String tableId = jsonObject.getString("TableId");
         String querystring = null;
         SolrQuery solrQuery = new SolrQuery();
         //当输入为空时的特殊处理
-        querystring = this.buildQueryStr(keyword,tableId);
+        querystring = this.buildQueryStr(keyword,tableId,fileContentSolrName);
         //分页
         int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
         int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
@@ -250,9 +253,10 @@ public class SolrQueryService {
     /**
      * 构造solr的查询语句
      * @param jsonObject allKeyWord，keyword，anyKeyWord，noKeyWord，keyWordPosition，TableId，Offset，PageSize
+     * @param fileContentSolrName 附件在solr中的字段名称
      * @return
      */
-    public SolrQuery buildSolrQuery4ConditionQuery(JSONObject jsonObject) {
+    public SolrQuery buildSolrQuery4ConditionQuery(JSONObject jsonObject,String fileContentSolrName) {
         String allKeyWord = jsonObject.getString("allKeyWord");
         String documentNumber = jsonObject.getString("documentNumber");
         String anyKeyWord = jsonObject.getString("anyKeyWord");
@@ -263,36 +267,38 @@ public class SolrQueryService {
         SolrQuery solrQuery = new SolrQuery();
         //当输入为空时的特殊处理
         ArrayList<StringBuffer> buffList = new ArrayList<>();
-        ArrayList<String> paramList = new ArrayList<>();
+        String param = "all_text";
+        //判断搜索范围
         if(keyWordPosition!=null&&!keyWordPosition.isEmpty()){
-            if(keyWordPosition.equals("fullTextPosition")){ paramList.add("text"); }
-            if(keyWordPosition.equals("descriptionPosition")){ paramList.add("text"); paramList.add("file_content_iks");}
-            if(keyWordPosition.equals("AnnexRetrieval")){ paramList.add("file_content_iks");}
+            if(keyWordPosition.equals("fullTextPosition")){ param = "all_text";}
+            if(keyWordPosition.equals("descriptionPosition")){ param = "text"; }
+            if(keyWordPosition.equals("AnnexRetrieval")){ param = fileContentSolrName;}
         }
-        for(String param:paramList){
-            if(allKeyWord!=null&&!allKeyWord.isEmpty()){
-                StringBuffer buff = new StringBuffer();
-                String[] keys = allKeyWord.split("\\+");
-                String keyStr = "";
-                for(int i = 0 ;i<keys.length-1; i++){
-                    keyStr = keyStr + keys[i] + " AND " ;
-                }
-                keyStr = keyStr + keys[keys.length-1];
-                buff.append("("+param +":"+ keyStr +")");
-                buffList.add(buff);
+        //判断搜索关键词
+        if(allKeyWord!=null&&!allKeyWord.isEmpty()){
+            StringBuffer buff = new StringBuffer();
+            String[] keys = allKeyWord.split("\\+");
+            String keyStr = "";
+            for(int i = 0 ;i<keys.length-1; i++){
+                keyStr = keyStr + keys[i] + " AND " ;
             }
-            if(anyKeyWord!=null&&!anyKeyWord.isEmpty()){
-                StringBuffer buff = new StringBuffer();
-                String[] keys = anyKeyWord.split("\\+");
-                String keyStr = "";
-                for(int i = 0 ;i<keys.length-1; i++){
-                    keyStr = keyStr + keys[i] + " OR " ;
-                }
-                keyStr = keyStr + keys[keys.length-1];
-                buff.append("("+param +":"+ keyStr +")");
-                buffList.add(buff);
-            }
+            keyStr = keyStr + keys[keys.length-1];
+            buff.append("("+param +":"+ keyStr +")");
+            buffList.add(buff);
         }
+        if(anyKeyWord!=null&&!anyKeyWord.isEmpty()){
+            StringBuffer buff = new StringBuffer();
+            String[] keys = anyKeyWord.split("\\+");
+            String keyStr = "";
+            for(int i = 0 ;i<keys.length-1; i++){
+                keyStr = keyStr + keys[i] + " OR " ;
+            }
+            keyStr = keyStr + keys[keys.length-1];
+            buff.append("("+param +":"+ keyStr +")");
+            buffList.add(buff);
+        }
+
+        //判断搜索限制
         if(documentNumber!=null&&!documentNumber.isEmpty()){
             String[] keys = documentNumber.split("\\+");
             String keyStr = "";
@@ -302,17 +308,6 @@ public class SolrQueryService {
             keyStr = keyStr + keys[keys.length-1] ;
             StringBuffer buff = new StringBuffer();
             buff.append(" (document_number:"+ keyStr +")");
-            buffList.add(buff);
-        }
-        if(noKeyWord!=null&&!noKeyWord.isEmpty()){
-            String[] keys = noKeyWord.split("\\+");
-            String keyStr = "";
-            for(int i = 0 ;i<keys.length-1; i++){
-                keyStr = keyStr + " NOT " + keys[i] ;
-            }
-            keyStr = keyStr +  " NOT " + keys[keys.length-1];
-            StringBuffer buff = new StringBuffer();
-            buff.append(keyStr);
             buffList.add(buff);
         }
         if(table_id!=null&&!table_id.isEmpty()){
@@ -326,17 +321,29 @@ public class SolrQueryService {
             buff.append("("+"table_id_s:"+ keyStr +")");
             buffList.add(buff);
         }
-        if(buffList.size()==0){
-            return null;
-        }else{
+        if(buffList.size()!=0){
             StringBuffer buffall = new StringBuffer();
             for(int i = 0; i < buffList.size()-1 ; i++){
                 buffall.append(buffList.get(i));
                 buffall.append(" AND ");
             }
             buffall.append(buffList.get(buffList.size()-1));
-            querystring = buffall.toString();
+            StringBuffer buff = new StringBuffer();
+            if(noKeyWord!=null&&!noKeyWord.isEmpty()){
+                String[] keys = noKeyWord.split("\\+");
+                String keyStr = "";
+                for(int i = 0 ;i<=keys.length-1; i++){
+                    keyStr = keyStr + " NOT "+param+":" + keys[i] ;
+                }
+                buff.append(keyStr);
+            }
+            buffall.append(buff);
+            querystring = querystring + buffall.toString();
+        }else{
+            return null;
+
         }
+
         //分页
         int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
         int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
