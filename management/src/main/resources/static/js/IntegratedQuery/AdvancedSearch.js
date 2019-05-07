@@ -7,19 +7,20 @@ var AdvancedSearch={
     keyWordPosition: "",
     SearchCheck:function(){
             AdvancedSearch.allKeyWord=$("#contain_allKeyWord").val();
-            AdvancedSearch.keyWord=$("#contain_keyWord").val();
+            AdvancedSearch.documentNumber=$("#contian_documentNumber").val();
             AdvancedSearch.anyKeyWord=$("#contian_anyKeyWord").val();
             AdvancedSearch.noKeyWord=$("#contian_noKeyWord").val();
-            AdvancedSearch.nodeName=$("#nodeName").val();
+            AdvancedSearch.nodeName=$("#contian_nodeName").val();
             AdvancedSearch.keyWordPosition=$("input[name='keyWordPositionOptionsRadios']:checked").val();
             if(AdvancedSearch.allKeyWord==null&&AdvancedSearch.allKeyWord==""&&
-            AdvancedSearch.keyWord==null&&AdvancedSearch.keyWord==""&&
+            AdvancedSearch.documentNumber==null&&AdvancedSearch.documentNumber==""&&
+            AdvancedSearch.nodeName==null&&AdvancedSearch.nodeName==""&&
             AdvancedSearch.anyKeyWord==null&&AdvancedSearch.anyKeyWord==""&&
             AdvancedSearch.noKeyWord==null&&AdvancedSearch.noKeyWord==""){
                 alert("关键字不能为空!");
             }else{
                 console.log(AdvancedSearch.allKeyWord);
-                console.log(AdvancedSearch.keyWord);
+                console.log(AdvancedSearch.documentNumber);
                 console.log(AdvancedSearch.anyKeyWord);
                 console.log(AdvancedSearch.noKeyWord);
                 console.log(AdvancedSearch.nodeName);
@@ -28,8 +29,7 @@ var AdvancedSearch={
             }
     },
     conditionalSearch: function () {
-        $("#advancedSearch_body").remove();
-        $("#advancedSearch_tail").remove();
+        $("#advancedSearch_head").remove();
         $("#advancedSearch_div").css({"border-bottom":"2px solid #337ab7"});
         $("#advancedSearch_bootstrapTable").bootstrapTable('destroy');
         $("#advancedSearch_bootstrapTable").css({"table-layout":"fixed"});
@@ -55,7 +55,7 @@ var AdvancedSearch={
                 queryParams: function (params) {
                     return{
                         allKeyWord: AdvancedSearch.allKeyWord,
-                        keyWord: AdvancedSearch.keyWord,
+                        documentNumber: AdvancedSearch.documentNumber,
                         anyKeyWord: AdvancedSearch.anyKeyWord,
                         noKeyWord: AdvancedSearch.noKeyWord,
                         keyWordPosition: AdvancedSearch.keyWordPosition,

@@ -24,7 +24,7 @@ public class AdvancedSearchController {
     /**
      * 根据关键词查询结果,并返回给bootStrapTable
      */
-    public String KeySerach(String allKeyWord, String keyWord, String anyKeyWord, String noKeyWord,
+    public String KeySerach(String allKeyWord, String documentNumber, String anyKeyWord, String noKeyWord,
                             String keyWordPosition, String nodeName ,String pageSize, String offset){
         SolrClient solrClient = null;
         JSONObject result_jsonObject = new JSONObject();
@@ -32,8 +32,7 @@ public class AdvancedSearchController {
             if(nodeName==null) nodeName = "";
             SolrUtils solrUtils = new SolrUtils();
             solrClient = solrUtils.createSolrClient();
-            System.out.println(keyWord);
-            JSONObject docsJsonObject = solrQueryService.ConditionQuerybySolr(solrClient,allKeyWord,keyWord,anyKeyWord,
+            JSONObject docsJsonObject = solrQueryService.ConditionQuerybySolr(solrClient,allKeyWord,documentNumber,anyKeyWord,
                     noKeyWord,keyWordPosition,nodeName,pageSize,offset);
             solrClient.close();
             result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));

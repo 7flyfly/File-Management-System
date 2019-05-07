@@ -482,8 +482,12 @@ public class SolrService {
                     docs.add(solrInputDocument);
                 }
             }
-            solrClient.add(docs);
-            solrClient.commit();
+            if(docs.size()==0){
+                return false;
+            }else{
+                solrClient.add(docs);
+                solrClient.commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;

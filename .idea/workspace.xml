@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe44000f-35d7-47ef-ab7f-c3084f2dbecf" name="Default Changelist" comment="增加全文检索的页面">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_adobe_xmp_xmpcore_5_1_3.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_35.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_drewnoakes_metadata_extractor_2_10_1.xml" afterDir="false" />
@@ -24,6 +23,8 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_rometools_rome_utils_1_5_1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_java7_2_4_13.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_api_1_1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_l3s_boilerpipe_boilerpipe_1_1_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_ucar_cdm_4_5_5.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_ucar_grib_4_5_5.xml" afterDir="false" />
@@ -84,27 +85,18 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_quartz_scheduler_quartz_2_3_1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_tallison_jmatio_1_2.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_tukaani_xz_1_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_api_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ezmorph_ezmorph_1_0_6.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_json_lib_json_lib_2_4.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/management/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/DynamicSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/DynamicSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/management/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -121,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="71" column="4" lean-forward="true" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="100" />
+            <state relative-caret-position="745">
+              <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="100" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -138,14 +130,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="84" column="100" selection-start-line="84" selection-start-column="100" selection-end-line="84" selection-end-column="100" />
+            <state relative-caret-position="637">
+              <caret line="79" column="18" lean-forward="true" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -154,8 +147,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="156" column="61" lean-forward="true" selection-start-line="156" selection-start-column="61" selection-end-line="156" selection-end-column="61" />
+            <state relative-caret-position="3996">
+              <caret line="147" column="32" selection-start-line="147" selection-start-column="32" selection-end-line="147" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -163,8 +156,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1404">
-              <caret line="48" column="48" lean-forward="true" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+            <state relative-caret-position="252">
+              <caret line="31" column="43" lean-forward="true" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -172,8 +165,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1584">
-              <caret line="44" column="35" lean-forward="true" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
+            <state relative-caret-position="187">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,8 +177,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="49" column="53" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+            <state relative-caret-position="237">
+              <caret line="314" column="54" selection-start-line="314" selection-start-column="54" selection-end-line="314" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -193,11 +186,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="160" column="63" selection-start-line="160" selection-start-column="63" selection-end-line="160" selection-end-column="63" />
+            <state relative-caret-position="464">
+              <caret line="333" column="48" lean-forward="true" selection-start-line="333" selection-start-column="48" selection-end-line="333" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -208,8 +201,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="586" column="73" selection-start-line="586" selection-start-column="24" selection-end-line="586" selection-end-column="73" />
+            <state relative-caret-position="-3543">
+              <caret line="488" column="31" selection-start-line="488" selection-start-column="29" selection-end-line="488" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7816#7832#0" expanded="true" />
@@ -223,7 +216,7 @@
         <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="329">
-              <caret line="305" column="41" lean-forward="true" selection-start-line="305" selection-start-column="41" selection-end-line="305" selection-end-column="41" />
+              <caret line="305" column="41" selection-start-line="305" selection-start-column="41" selection-end-line="305" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -252,11 +245,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>modal</find>
-      <find>addModal</find>
-      <find>KeySerach</find>
-      <find>jq</find>
-      <find>contentType</find>
       <find>solrService</find>
       <find>Switch</find>
       <find>tablesService</find>
@@ -270,18 +258,23 @@
       <find>导入失败</find>
       <find>Lower</find>
       <find>toLowerCase</find>
-      <find>getFieldValue</find>
       <find>butto</find>
       <find>detailModal</find>
       <find>detailList</find>
       <find>params.limit</find>
       <find>pagination</find>
       <find>pageSize</find>
+      <find>DOCUMENT_NUMBER</find>
+      <find>水利系</find>
+      <find>getFieldValue</find>
+      <find>S0908.3-175</find>
       <find>getDetail</find>
+      <find>mm</find>
+      <find>intelligentRetrieval_container_row</find>
       <find>nodeName</find>
       <find>offset</find>
       <find>advancedSearch_bootstrapTable</find>
-      <find>intelligentRetrieval_container_row</find>
+      <find>document_number</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -315,15 +308,15 @@
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/DynamicSQL.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html" />
         <option value="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java" />
         <option value="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" />
       </list>
     </option>
   </component>
@@ -743,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1556520469485</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="增加高级检索页面 实现对附件的检索">
+      <created>1557135899416</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1557135899416</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -793,17 +793,17 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16255961" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.22496025" />
       <window_info id="Designer" order="1" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Structure" order="4" weight="0.20031796" />
+      <window_info id="Structure" order="4" visible="true" weight="0.20031796" />
       <window_info id="Learn" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3281372" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3289166" />
       <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49960256" weight="0.23382697" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.32034296" />
+      <window_info active="true" anchor="bottom" id="Debug" order="4" sideWeight="0.72138315" visible="true" weight="0.35463756" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3289166" />
@@ -811,7 +811,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3289166" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32969603" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50039744" side_tool="true" weight="0.29929852" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.27861685" side_tool="true" weight="0.35463756" />
       <window_info anchor="bottom" id="DB Execution Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -905,7 +905,8 @@
     <MESSAGE value="增加全文检索的页面" />
     <MESSAGE value="增加详情页" />
     <MESSAGE value="修改详情页的英文属性名为中文属性名" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改详情页的英文属性名为中文属性名" />
+    <MESSAGE value="增加高级检索页面 实现对附件的检索" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加高级检索页面 实现对附件的检索" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1276,70 +1277,24 @@
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
-          <caret line="305" column="41" lean-forward="true" selection-start-line="305" selection-start-column="41" selection-end-line="305" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="586" column="73" selection-start-line="586" selection-start-column="24" selection-end-line="586" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7816#7832#0" expanded="true" />
-            <element signature="e#8697#8716#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="160" column="63" selection-start-line="160" selection-start-column="63" selection-end-line="160" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="305" column="41" selection-start-line="305" selection-start-column="41" selection-end-line="305" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="49" column="53" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+        <state relative-caret-position="237">
+          <caret line="314" column="54" selection-start-line="314" selection-start-column="54" selection-end-line="314" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1584">
-          <caret line="44" column="35" lean-forward="true" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1404">
-          <caret line="48" column="48" lean-forward="true" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="156" column="61" lean-forward="true" selection-start-line="156" selection-start-column="61" selection-end-line="156" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="71" column="4" lean-forward="true" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="100" />
+        <state relative-caret-position="745">
+          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="100" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1354,13 +1309,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="31" column="43" lean-forward="true" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3996">
+          <caret line="147" column="32" selection-start-line="147" selection-start-column="32" selection-end-line="147" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="84" column="100" selection-start-line="84" selection-start-column="100" selection-end-line="84" selection-end-column="100" />
+        <state relative-caret-position="637">
+          <caret line="79" column="18" lean-forward="true" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3543">
+          <caret line="488" column="31" selection-start-line="488" selection-start-column="29" selection-end-line="488" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7816#7832#0" expanded="true" />
+            <element signature="e#8697#8716#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="333" column="48" lean-forward="true" selection-start-line="333" selection-start-column="48" selection-end-line="333" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
