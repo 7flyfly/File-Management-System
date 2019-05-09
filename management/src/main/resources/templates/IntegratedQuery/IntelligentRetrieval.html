@@ -43,8 +43,14 @@
                     <div class="input-group input-group-lg text-center">
                         <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
                         <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.imgSearchCheck()">上传</button>
-                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.keySearchCheck()" >搜索</button>
+                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.imgSearchCheck()">
+                            <span class="glyphicon glyphicon-picture"></span>
+                            图片
+                        </button>
+                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.keySearchCheck()">
+                            <span class="glyphicon glyphicon-search"></span>
+                            搜索
+                        </button>
                     </span>
                     </div>
                 </div>
@@ -74,6 +80,7 @@
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
     <!--模态框-->
     <div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
         <div class="modal-dialog" role="document">
@@ -96,11 +103,65 @@
                 </div>
                 <div class="modal-footer">
                     <!--                <button type="button" class="btn btn-default" >取消</button>-->
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id = "detailModal_confirm">确定</button>
                 </div>
             </div>
         </div>
     </div>
+    <!--模态框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="pictureViewModal" style="margin-top:150px;">
+        <div class="modal-dialog">
+            <div id="myCarousel" class="carousel slide" data-interval="false">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators" id="picture_carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner" id="picture_carousel_inner">
+
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+
+<!--        <div class="row">-->
+<!--    <div class="col-sm-6 col-md-3">-->
+<!--        <a href="#" class="thumbnail">-->
+<!--            <img src="http://192.168.0.104/documents/picture1.jpeg" width="300" height="300"-->
+<!--                 alt="通用的占位符缩略图">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div class="col-sm-6 col-md-3">-->
+<!--        <a href="#" class="thumbnail">-->
+<!--            <img src="http://192.168.0.104/documents/picture1.jpeg" width="300" height="300"-->
+<!--                 alt="通用的占位符缩略图">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div class="col-sm-6 col-md-3">-->
+<!--        <a href="#" class="thumbnail">-->
+<!--            <img src="../../imgs/pdf.jpg" width="300" height="300"-->
+<!--                 alt="通用的占位符缩略图">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div class="col-sm-6 col-md-3">-->
+<!--        <a href="#" class="thumbnail">-->
+<!--            <img src="http://192.168.0.104/documents/picture1.jpeg" width="300" height="300"-->
+<!--                 alt="通用的占位符缩略图">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+</div>
 </div>
 </body>
 </html>

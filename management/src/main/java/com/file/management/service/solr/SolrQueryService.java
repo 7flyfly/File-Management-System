@@ -27,7 +27,8 @@ public class SolrQueryService {
     private TablesRepository tablesRepository;
     @Autowired
     private DynamicSQL dynamicSQL;
-
+    @Autowired
+    private SolrService solrService;
     /**
      * 根据id查询索引
      * @param solrClient：solr客户端
@@ -139,7 +140,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 根据document_number和Table_id从数据库中查询档案
+     * 根据document_number和Table_id从数据库中查询档案,并未展示做准备
      * @param table_id 表id
      * @param document_number 档案号
      * @param documentNumberDatabaseName 档案号在数据库中的字段名称
@@ -164,14 +165,26 @@ public class SolrQueryService {
                     String attEName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
                     if(AttrNameList.get(i).toString().equals(annexDatabaseName)){
                         String fileNameStr = "";
+                        String fileAddressStr = "";
                         String attCName = jsonObject.getString(attEName);
-                        if(attCName.contains(arrSplit)){
-                            String[] fileNames = attValue[i].toString().split(arrSplit);
-                            for(String fileName : fileNames){
-                                fileNameStr = fileNameStr + fileName.substring(fileName.lastIndexOf("\\") + 1 )+ "; ";
+                        String[] fileNames = attValue[i].toString().split(arrSplit);
+                        int sum = 0; //附件数
+                        for(String filename : fileNames){
+                            if(!filename.contains("http")){
+                                continue;
                             }
-                            result_js.put(attCName,fileNameStr);
+                            sum ++;
+                            if(!solrService.getPictureTypeType(filename)){
+                                fileAddressStr = fileAddressStr + "../../imgs/" +
+                                        filename.substring(filename.lastIndexOf(".") + 1) +".jpg"+ "; "; //根据后缀获得富文本对应的图片
+                            }else{
+                                fileAddressStr = fileAddressStr + filename + "; ";
+                            }
+                            fileNameStr = fileNameStr + filename.substring(filename.lastIndexOf("\\") + 1 )+ "; ";
                         }
+                        result_js.put(attCName,"<button type=\"button\" class=\"btn btn-xm btn-default\" " +
+                                "onclick=\"IntelligentRetrieval.pictureView(\'"+document_number+"\',\'"+ fileAddressStr+"\',\'"+fileNameStr+"\')\"> " +
+                                "<span class=\"badge badge-warning\">"+sum+"</span> </button>");
                     }else if(attValue[i]!=null&&jsonObject.containsKey(attEName)){
                             String attCName = jsonObject.getString(attEName);
                             result_js.put(attCName,attValue[i]);

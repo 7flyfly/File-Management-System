@@ -5,6 +5,7 @@ import com.file.management.dao.DynamicSQL;
 import com.file.management.pojo.*;
 import com.file.management.service.metadata.TablesService;
 import com.file.management.utils.SolrUtils;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -18,8 +19,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.swing.text.Document;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.*;
 
 
@@ -399,23 +405,30 @@ public class SolrService {
             Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
             for(Object row : resultList){
                 Object[] attValue = (Object[]) row;
-                String fileName =(String)attValue[Annex_index];
+                String fileNameStr =(String)attValue[Annex_index];
                 String documentNumber =(String)attValue[documentNumber_index];
-                String[] fileNameArr = fileName.split(arrSplit);
+                String[] fileUrlArr = fileNameStr.split(arrSplit);
                 SolrDocument document = this.getDoucmentByDocumentNumber(solrClient,documentNumber);
                 SolrInputDocument solrInputDocument = new SolrInputDocument();
                 boolean flag = true;
-                for(String filePath : fileNameArr){
-                    File f = new File(filePath);     //获取附件
-                    if(!f .exists()) { flag = false; }  //文件不存在
-                    if(!this.getFileContentType(filePath)) { flag = false;}  //文件类型不是富文本类型
-                    if(!flag){
-                        System.out.println(filePath + "：文件导入失败！");
+                for(String fileUrl : fileUrlArr){
+                    if(!fileUrl.contains("http")||!this.getFileContentType(fileUrl)){
+                        System.out.println(fileUrl + "：文件导入失败！");
                         continue;
                     }
+                    String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+                    String urlHead = fileUrl.replace(fileName,"");
+                    URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误
+                    URLConnection con = url.openConnection();
+//                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//                    String fileContent = "";
+//                    String current;
+//                    while ((current = in.readLine()) != null) {
+//                        fileContent += current;
+//                    }
                     Tika tika = new Tika();
 //                    System.out.println("filetype:"+tika.detect(filePath));  //利用Tika的detect方法检测文件的实际类型
-                    String fileContent = tika.parseToString(f);  //利用Tika的parseToString()方法读取文件的文本内容
+                    String fileContent = tika.parseToString(con.getInputStream());  //利用Tika的parseToString()方法读取文件的文本内容
                     //重写solrInputDocument
                     for(String field : document.getFieldNames()){
                         if(!field.equals("_version_")&&!field.equals(fileContentSolrName))
@@ -584,7 +597,7 @@ public class SolrService {
     }
 
     /**
-     * 根据文件名获取文件的ContentType类型,是否可以被解析
+     * 根据文件名获取文件的ContentType类型,是否可以被解析 富文本
      */
     public boolean getFileContentType(String filename) {
         boolean bool = false;
@@ -612,6 +625,48 @@ public class SolrService {
                 bool = true;
                 break;
             case "pptx":
+                bool = true;
+                break;
+            default:
+                bool = false;
+        }
+        return bool;
+    }
+
+    /**
+     * 判断文件是否是图片类型
+     * @param filename 文件名称
+     * @return
+     */
+    public boolean getPictureTypeType(String filename) {
+        boolean bool = false;
+        String prefix = filename.substring(filename.lastIndexOf(".") + 1);
+        switch(prefix) {
+            case "bmp":
+                bool = true;
+                break;
+            case "jpeg":
+                bool = true;
+                break;
+            case "gif":
+                bool = true;
+                break;
+            case "psd":
+                bool = true;
+                break;
+            case "png":
+                bool = true;
+                break;
+            case "tiff":
+                bool = true;
+                break;
+            case "tga":
+                bool = true;
+                break;
+            case "eps":
+                bool = true;
+                break;
+            case "jpg":
                 bool = true;
                 break;
             default:
