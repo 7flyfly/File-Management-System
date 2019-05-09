@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 public interface TablesRepository extends JpaRepository<Tables,Integer> {
@@ -32,4 +33,5 @@ public interface TablesRepository extends JpaRepository<Tables,Integer> {
     @Modifying
     @Query(value = "update tb_table t set t.template_id=?1 where t.table_id=?2", nativeQuery = true)
     void updateTableByTemplateId(int templateId,int tableId);*/
+
 }

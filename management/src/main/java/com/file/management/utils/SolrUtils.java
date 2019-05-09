@@ -16,6 +16,7 @@ public class SolrUtils {
     private  String coreName = "test_core";//core名称
 //    private  String solrDataConfigPath = "D:\\solr\\solr-data-config.xml";
     private  String solrDataConfigPath = "D:\\solr\\solr\\server\\solr\\test_core\\conf\\solr-data-config.xml";
+    private  String solrDataimportPath = "D:\\solr\\solr\\server\\solr\\test_core\\conf\\dataimport.properties";
     //创建solr客户端
     public SolrClient createSolrClient(){
         String url = this.solrURL + coreName;
@@ -54,5 +55,13 @@ public class SolrUtils {
 
     public void setSolrDataConfigPath(String solrDataConfigPath){
         this.solrDataConfigPath = solrDataConfigPath;
+    }
+
+    public String getSolrDataimportPath() {
+        return solrDataimportPath;
+    }
+
+    public void setSolrDataimportPath(String solrDataimportPath) {
+        this.solrDataimportPath = solrDataimportPath;
     }
 }

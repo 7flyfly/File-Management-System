@@ -1,7 +1,11 @@
 package com.file.management.service.solr;
 
+import com.alibaba.fastjson.JSONObject;
+import com.file.management.dao.DynamicSQL;
 import com.file.management.pojo.*;
+import com.file.management.service.metadata.TablesService;
 import com.file.management.utils.SolrUtils;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -9,21 +13,34 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.swing.text.Document;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.*;
+
+
+import org.apache.tika.Tika;
+import org.apache.tika.detect.AutoDetectReader;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.language.LanguageIdentifier;
 
 @Service
 public class SolrService {
     @Autowired
     private SolrDataConfigService solrDataConfigService;
+
+    @Autowired
+    private DynamicSQL dynamicSQL;
 
     /**
      * 新增需要将数据变为索引的数据库信息
@@ -133,31 +150,128 @@ public class SolrService {
     }
 
     /**
+     * 针对表中的某一条档案进行更新
+     * @param tableName 表名
+     * @param document_number 档案号
+     * @param documentNumberDatabaseName  档案号在库表中对应的字段名
+     * @param annexDatabaseName 附件在库表中对应的字段名
+     * @param arrSplit 附件的分割符
+     * @param fileContentSolrName 附件在solr中的字段名称
+     * @return
+     */
+    public HashMap<Boolean,String> refreshOneDocument2Solr(String tableName, String document_number, String documentNumberDatabaseName,
+                                                           String annexDatabaseName, String arrSplit, String fileContentSolrName){
+        HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+        if(documentNumberDatabaseName==null) documentNumberDatabaseName = "DocumentNo";
+        if(annexDatabaseName==null) annexDatabaseName = "Annex";
+        if(arrSplit==null) arrSplit = ";";
+        if(fileContentSolrName==null) fileContentSolrName = "annex_content";
+        if(tableName!=null&&!tableName.equals("")){
+            List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+            if(!(AttrNameList.contains(annexDatabaseName)&&AttrNameList.contains(documentNumberDatabaseName))){
+                hashMap.put(false,"失败! 属性名不存在");
+                return hashMap;
+            }
+            List resultList = dynamicSQL.selectResultListByTableNameAndAttr(tableName,documentNumberDatabaseName,
+                    document_number);
+            int documentNumber_index = AttrNameList.indexOf(documentNumberDatabaseName);
+            int Annex_index = AttrNameList.indexOf(annexDatabaseName);
+            try {
+                SolrUtils solrUtils = new SolrUtils();
+                SolrClient solrClient = solrUtils.createSolrClient();
+                Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
+                for(Object row : resultList){
+                    Object[] attValue = (Object[]) row;
+                    String fileName =(String)attValue[Annex_index];
+                    String documentNumber =(String)attValue[documentNumber_index];
+                    SolrDocument document = this.getDoucmentByDocumentNumber(solrClient,documentNumber);
+                    SolrInputDocument solrInputDocument = new SolrInputDocument();
+                    //复制 solrInputDocument
+                    for(String field : document.getFieldNames()){
+                        if(!field.equals("_version_")){
+                            solrInputDocument.setField(field,document.getFieldValue(field));
+                        }
+                    }
+                    //重写 solrInputDocument
+                    if(solrInputDocument.containsKey(fileContentSolrName)){
+                        solrInputDocument.removeField(fileContentSolrName);
+
+                    }
+                    for(String field : document.getFieldNames()){
+                        for(int i = 0; i<AttrNameList.size(); i++){
+                            if(field.contains(((String)AttrNameList.get(i)).toLowerCase())){
+                                solrInputDocument.setField(field,attValue[i]);
+                            }
+                        }
+                    }
+                    boolean flag = true;
+                    if(fileName!=null){ //文件存在
+                        String[] fileNameArr = fileName.split(arrSplit);
+                        for(String filePath : fileNameArr){
+                            File f = new File(filePath);
+                            if(!f .exists()) { flag = false; }  //文件不存在
+                            if(!this.getFileContentType(filePath)) { flag = false;}  //文件类型不是富文本类型
+                            if(!flag){
+                                System.out.println(filePath + "：文件导入失败！");
+                                continue;
+                            }
+                            Tika tika = new Tika();
+//                    System.out.println("filetype:"+tika.detect(filePath));  //利用Tika的detect方法检测文件的实际类型
+                            String fileContent = tika.parseToString(f);  //利用Tika的parseToString()方法读取文件的文本内容
+                            solrInputDocument.addField(fileContentSolrName,fileContent);
+                        }
+                    }
+                    docs.add(solrInputDocument);
+                }
+                solrClient.add(docs);
+                solrClient.commit();
+                hashMap.put(true,"成功导入表："+tableName);
+                return hashMap;
+            } catch (Exception e) {
+                e.printStackTrace();
+                hashMap.put(false,tableName+"导入失败!");
+                return hashMap;
+            }
+        }else{
+            hashMap.put(false,"失败! 表名不能为空");
+            return hashMap;
+        }
+    }
+    /**
      * 导入表，将表中的数据建立索引
      * @param tableName 表名，非空
      */
-    public HashMap<Boolean,String> fullImportTable2Solr(String tableName){
+    public HashMap<Boolean,String> fullImportTable2Solr(String tableName, String documentNumberDatabaseName,
+                                                        String annexDatabaseName, String arrSplit, String fileContentSolrName){
         try{
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            if(documentNumberDatabaseName==null) documentNumberDatabaseName = "DocumentNo";
+            if(annexDatabaseName==null) annexDatabaseName = "Annex";
+            if(arrSplit==null) arrSplit = ";";
+            if(fileContentSolrName==null) fileContentSolrName = "annex_content";
             if(tableName!=null&&!tableName.equals("")){
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
-                SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = this.fullImportTable(solrClient,tableName);
-                solrClient.close();
-                if(bool){
+                SolrClient solrClient1 = solrUtils.createSolrClient();
+                boolean bool1 = this.fullImportTable(solrClient1,tableName);
+                Thread.sleep(1000);
+                SolrClient solrClient2 = solrUtils.createSolrClient();
+                boolean bool2 = this.fullimportFiles(solrClient2,tableName,documentNumberDatabaseName,annexDatabaseName,
+                        arrSplit,fileContentSolrName);
+                solrClient1.close();
+                solrClient2.close();
+                if(bool1&&bool2){
                     hashMap.put(true,"成功导入表："+tableName);
                     return hashMap;
                 }else{
                     hashMap.put(false,tableName+"导入失败!");
                     return hashMap;
                 }
-
             }else{
                 hashMap.put(false,"失败! 表名不能为空");
                 return hashMap;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
             hashMap.put(false,e.getMessage());
@@ -170,16 +284,26 @@ public class SolrService {
      * 更改软删除标识可以实现回滚
      * @param tableName 表名
      */
-    public HashMap<Boolean,String> deltaImportTable2Solr(String tableName){
+    public HashMap<Boolean,String> deltaImportTable2Solr(String tableName, String documentNumberDatabaseName,
+                                                         String annexDatabaseName, String arrSplit, String fileContentSolrName){
         try{
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            if(documentNumberDatabaseName==null) documentNumberDatabaseName = "DocumentNo";
+            if(annexDatabaseName==null) annexDatabaseName = "Annex";
+            if(arrSplit==null) arrSplit = ";";
+            if(fileContentSolrName==null) fileContentSolrName = "annex_content";
             if(tableName!=null&&!tableName.equals("")){
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
-                SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = this.deltaImportTable(solrClient,tableName);
-                solrClient.close();
-                if(bool){
+                SolrClient solrClient1 = solrUtils.createSolrClient();
+                boolean bool1 = this.deltaImportTable(solrClient1,tableName);
+                Thread.sleep(1000);
+                SolrClient solrClient2 = solrUtils.createSolrClient();
+                boolean bool2 = this.deltaimportFiles(solrClient2,tableName,documentNumberDatabaseName,annexDatabaseName,
+                        arrSplit,fileContentSolrName);
+                solrClient1.close();
+                solrClient2.close();
+                if(bool1&&bool2){
                     hashMap.put(true,"成功增量导入表："+tableName);
                     return hashMap;
                 }else{
@@ -190,7 +314,7 @@ public class SolrService {
                 hashMap.put(false,"失败! 表名不能为空");
                 return hashMap;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
             hashMap.put(false,e.getMessage());
@@ -262,6 +386,129 @@ public class SolrService {
     }
 
     /**
+     * 读取数据库中附件所在的地址，读取文件内容构建索引
+     * @param solrClient solr客户端
+     * @param tableName 表名
+     * @param documentNumberDatabaseName Documentnumber在数据库中字段的名称
+     * @param annexDatabaseName Annex在数据库中字段的名称
+     * @param arrSplit 附件的分割符
+     * @param fileContentSolrName 附件内容在solr中字段的名称
+     */
+    public boolean fullimportFiles(SolrClient solrClient, String tableName, String documentNumberDatabaseName,
+                                   String annexDatabaseName, String arrSplit, String fileContentSolrName){
+        List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+        if(!(AttrNameList.contains(annexDatabaseName)&&AttrNameList.contains(documentNumberDatabaseName))) return false;
+        List resultList = dynamicSQL.selectResultListByTableNameAndAttrNotNull(tableName,annexDatabaseName);
+        int documentNumber_index = AttrNameList.indexOf(documentNumberDatabaseName);
+        int Annex_index = AttrNameList.indexOf(annexDatabaseName);
+        try {
+            Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
+            for(Object row : resultList){
+                Object[] attValue = (Object[]) row;
+                String fileNameStr =(String)attValue[Annex_index];
+                String documentNumber =(String)attValue[documentNumber_index];
+                String[] fileUrlArr = fileNameStr.split(arrSplit);
+                SolrDocument document = this.getDoucmentByDocumentNumber(solrClient,documentNumber);
+                SolrInputDocument solrInputDocument = new SolrInputDocument();
+                boolean flag = true;
+                for(String fileUrl : fileUrlArr){
+                    if(!fileUrl.contains("http")||!this.getFileContentType(fileUrl)){
+                        System.out.println(fileUrl + "：文件导入失败！");
+                        continue;
+                    }
+                    String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
+                    String urlHead = fileUrl.replace(fileName,"");
+                    URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误
+                    URLConnection con = url.openConnection();
+//                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//                    String fileContent = "";
+//                    String current;
+//                    while ((current = in.readLine()) != null) {
+//                        fileContent += current;
+//                    }
+                    Tika tika = new Tika();
+//                    System.out.println("filetype:"+tika.detect(filePath));  //利用Tika的detect方法检测文件的实际类型
+                    String fileContent = tika.parseToString(con.getInputStream());  //利用Tika的parseToString()方法读取文件的文本内容
+                    //重写solrInputDocument
+                    for(String field : document.getFieldNames()){
+                        if(!field.equals("_version_")&&!field.equals(fileContentSolrName))
+                            solrInputDocument.setField(field,document.getFieldValue(field));
+                    }
+                    solrInputDocument.addField(fileContentSolrName,fileContent);
+                    docs.add(solrInputDocument);
+                }
+            }
+            solrClient.add(docs);
+            solrClient.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 读取数据库中附件所在的地址，增量读取文件内容构建索引（根据solr配置文件中的last_index_time选择更新）
+     * @param solrClient solr客户端
+     * @param tableName 表名
+     * @param documentNumberDatabaseName Documentnumber在数据库中字段的名称
+     * @param annexDatabaseName Annex在数据库中字段的名称
+     * @param arrSplit 附件的分割符
+     * @param fileContentSolrName 附件内容在solr中字段的名称
+     */
+    public boolean deltaimportFiles(SolrClient solrClient, String tableName, String documentNumberDatabaseName,
+                                   String annexDatabaseName, String arrSplit, String fileContentSolrName){
+        Properties properties = solrDataConfigService.getDataImportProperty();
+        String lastModified = properties.getProperty(tableName + ".last_index_time");
+        List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+        if(!(AttrNameList.contains(annexDatabaseName)&&AttrNameList.contains(documentNumberDatabaseName))) return false;
+        List resultList = dynamicSQL.selectLastModifiedByTableName(tableName,lastModified);
+        int documentNumber_index = AttrNameList.indexOf(documentNumberDatabaseName);
+        int Annex_index = AttrNameList.indexOf(annexDatabaseName);
+        try {
+            Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
+            for(Object row : resultList){
+                Object[] attValue = (Object[]) row;
+                String fileName =(String)attValue[Annex_index];
+                String documentNumber =(String)attValue[documentNumber_index];
+                String[] fileNameArr = fileName.split(arrSplit);
+                SolrDocument document = this.getDoucmentByDocumentNumber(solrClient,documentNumber);
+                SolrInputDocument solrInputDocument = new SolrInputDocument();
+                boolean flag = true;
+                for(String filePath : fileNameArr){
+                    File f = new File(filePath);    //获取附件
+                    if(!f .exists()) { flag = false; }  //文件不存在
+                    if(!this.getFileContentType(filePath)) { flag = false;}  //文件类型不是富文本类型
+                    if(!flag){
+                        System.out.println(filePath + "：文件导入失败！");
+                        continue;
+                    }
+                    Tika tika = new Tika();
+//                    System.out.println("filetype:"+tika.detect(filePath));  //利用Tika的detect方法检测文件的实际类型
+                    String fileContent = tika.parseToString(f);  //利用Tika的parseToString()方法读取文件的文本内容
+                    //重写solrInputDocument
+                    for(String field : document.getFieldNames()){
+                        if(!field.equals("_version_")&&!field.equals(fileContentSolrName))
+                            solrInputDocument.setField(field,document.getFieldValue(field));
+                    }
+                    solrInputDocument.addField(fileContentSolrName,fileContent);
+                    docs.add(solrInputDocument);
+                }
+            }
+            if(docs.size()==0){
+                return false;
+            }else{
+                solrClient.add(docs);
+                solrClient.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 重新载入配置文件
      * @param solrClient solr客户端
      */
@@ -328,5 +575,103 @@ public class SolrService {
             System.out.println("solrClient不能为空");
             return false;
         }
+    }
+
+    /**
+     * 根据id查询索引
+     * @param solrClient：solr客户端
+     * @param DocumentNumber: 档号
+     */
+    public SolrDocument getDoucmentByDocumentNumber(SolrClient solrClient, String DocumentNumber){
+        SolrDocument document = null;
+        try {
+            document = solrClient.getById(DocumentNumber);
+            return document;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String,Object> map = new HashMap<>();
+            map.put("code","2");
+            map.put("message",e.getMessage());
+            return document;
+        }
+    }
+
+    /**
+     * 根据文件名获取文件的ContentType类型,是否可以被解析 富文本
+     */
+    public boolean getFileContentType(String filename) {
+        boolean bool = false;
+        String prefix = filename.substring(filename.lastIndexOf(".") + 1);
+        switch(prefix) {
+            case "xlsx":
+                bool = true;
+                break;
+            case "pdf":
+                bool = true;
+                break;
+            case "doc":
+                bool = true;
+                break;
+            case "txt":
+                bool = true;
+                break;
+            case "xls":
+                bool = true;
+                break;
+            case "docx":
+                bool = true;
+                break;
+            case "ppt":
+                bool = true;
+                break;
+            case "pptx":
+                bool = true;
+                break;
+            default:
+                bool = false;
+        }
+        return bool;
+    }
+
+    /**
+     * 判断文件是否是图片类型
+     * @param filename 文件名称
+     * @return
+     */
+    public boolean getPictureTypeType(String filename) {
+        boolean bool = false;
+        String prefix = filename.substring(filename.lastIndexOf(".") + 1);
+        switch(prefix) {
+            case "bmp":
+                bool = true;
+                break;
+            case "jpeg":
+                bool = true;
+                break;
+            case "gif":
+                bool = true;
+                break;
+            case "psd":
+                bool = true;
+                break;
+            case "png":
+                bool = true;
+                break;
+            case "tiff":
+                bool = true;
+                break;
+            case "tga":
+                bool = true;
+                break;
+            case "eps":
+                bool = true;
+                break;
+            case "jpg":
+                bool = true;
+                break;
+            default:
+                bool = false;
+        }
+        return bool;
     }
 }

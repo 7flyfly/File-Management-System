@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 @Service
 public class SolrDataConfigService {
@@ -46,6 +47,17 @@ public class SolrDataConfigService {
         return bool;
     }
 
+    public Properties getDataImportProperty(){
+        Properties p = new Properties();
+        try {
+            SolrUtils solrUtils = new SolrUtils();
+            InputStream in = new BufferedInputStream(new FileInputStream(solrUtils.getSolrDataimportPath()));
+            p.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return p;
+    }
     /**
      * 获得solr数据库的配置文件
      * @param solrDataConfigPath solr数据库配置文件的绝对位置

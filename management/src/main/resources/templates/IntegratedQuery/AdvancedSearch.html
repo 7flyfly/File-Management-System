@@ -8,6 +8,111 @@
 <body>
 <div class="header" th:replace="public:: #public-header"></div>
 <div class="sidebar" th:replace="IntegratedQuery/controlCenter:: #sidebar(activeUri='AdvancedSearch')"></div>
-<div id="advancedSearch_div">高级搜索功能</div>
+<div class="col-md-10">
+    <div id="advancedSearch_div">
+        <div id="advancedSearch_head" class="row" style=" padding-top: 50px margin-bottom:25px" >
+            <h1 class="text-center ">瑞拷得高级检索</h1>
+        </div>
+        <div class="row" id="advancedSearch_body" style="padding-top: 50px">
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label" for="contain_allKeyWord">包含以下全部关键字:</label>
+                        <div class="col-sm-6">
+                            <input type="text" autocomplete="off" class="form-control" id="contain_allKeyWord" name="contain_allKeyWord"  data-prompt-position="bottomLeft">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label" for="contian_anyKeyWord">包含以下任意一个关键词:</label>
+                        <div class="col-sm-6">
+                            <input type="text" autocomplete="off" class="form-control" id="contian_anyKeyWord" name="contian_anyKeyWord" data-prompt-position="bottomLeft">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label" for="contian_noKeyWord">不包括以下关键词:</label>
+                        <div class="col-sm-6">
+                            <input type="text" autocomplete="off" class="form-control" id="contian_noKeyWord" name="contian_noKeyWord"  data-prompt-position="bottomLeft">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label" for="contian_documentNumber">档案号:</label>
+                        <div class="col-sm-6">
+                            <input type="text" autocomplete="off" class="form-control" id="contian_documentNumber" name="contian_documentNumber" data-prompt-position="bottomLeft">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label" for="contian_nodeName">节点名称:</label>
+                        <div class="col-sm-6">
+                            <input type="text" autocomplete="off" class="form-control" id="contian_nodeName" name="contian_nodeName"  data-prompt-position="bottomLeft">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">查询关键词位于:</label>
+                        <div class="row">
+                            <div class="col-sm-5 col-sm-offset-4">
+                                <label class="radio-inline">
+                                    <input type="radio" name="keyWordPositionOptionsRadios" id="fullTextPosition" value="fullTextPosition" checked>
+                                    <font size="3">全文</font>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="keyWordPositionOptionsRadios" id="descriptionPosition" value="descriptionPosition">
+                                    <font size="3">描述信息</font>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="keyWordPositionOptionsRadios" id="AnnexRetrieval" value="AnnexRetrieval">
+                                    <font size="3">附件</font>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="advancedSearch_tail" class="col-md-5 col-md-offset-3">
+                        <button class="btn btn-primary" type="button" onclick="AdvancedSearch.SearchCheck()">高级搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div style="margin-left:10px;margin-right:10px;">
+                <table id="advancedSearch_bootstrapTable"> </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/IntegratedQuery/AdvancedSearch.js}"></script>
+    <script type="text/javascript" th:src="@{/js/IntegratedQuery/IntelligentRetrieval.js}"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!--模态框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">详细信息</h4>
+                </div>
+                <div class="modal-body table-responsive">
+                    <table class="table table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th width="100px">属性</th>
+                            <th>属性值</th>
+                        </tr>
+                        </thead>
+                        <tbody id="detailList">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <!--                <button type="button" class="btn btn-default" >取消</button>-->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
