@@ -1,5 +1,6 @@
 package com.file.management;
 
+import com.file.management.dao.MenuRepository;
 import com.file.management.pojo.Menu;
 import com.file.management.pojo.metadata.Field;
 import com.file.management.pojo.metadata.Template;
@@ -31,114 +32,11 @@ public class ManagementApplicationTests {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private MenuRepository menuRepository;
+
     @Test
     public void contextLoads() {
-        /*Menu menu1 = new Menu();
-        menu1.setMenuName("我的工作");
-        menu1.setMenuUrl("/mywork");
-        menuService.addMenu(null,menu1);
-
-        Menu menu2 = new Menu();
-        menu2.setMenuName("借阅利用");
-        menu2.setMenuUrl("/LibraryUse/Check");
-        menuService.addMenu(null,menu2);
-
-        Menu menu3 = new Menu();
-        menu3.setMenuName("利用登记");
-        menu3.setMenuUrl("/LibraryUse/Check");
-        menuService.addMenu(menu2,menu3);
-
-        Menu menu4 = new Menu();
-        menu4.setMenuName("利用审批");
-        menu4.setMenuUrl("/LibraryUse/Examine");
-        menuService.addMenu(menu2,menu4);
-
-        Menu menu5 = new Menu();
-        menu5.setMenuName("利用查询");
-        menu5.setMenuUrl("/LibraryUse/Query");
-        menuService.addMenu(menu2,menu5);
-
-        Menu menu6 = new Menu();
-        menu6.setMenuName("综合查询");
-        menu6.setMenuUrl("/IntegratedQuery/QueryHomePage");
-        menuService.addMenu(null,menu6);
-
-        Menu menu7 = new Menu();
-        menu7.setMenuName("智能检索");
-        menu7.setMenuUrl("/IntegratedQuery/IntelligentRetrieval");
-        menuService.addMenu(menu6,menu7);
-
-        Menu menu8 = new Menu();
-        menu8.setMenuName("高级检索");
-        menu8.setMenuUrl("/IntegratedQuery/IntelligentRetrieval");
-        menuService.addMenu(menu6,menu8);
-
-        Menu menu9 = new Menu();
-        menu9.setMenuName("专题编研");
-        menu9.setMenuUrl("/SpecialTopic/Special");
-        menuService.addMenu(null,menu9);
-
-        Menu menu10 = new Menu();
-        menu10.setMenuName("专题管理");
-        menu10.setMenuUrl("/SpecialTopic/Special");
-        menuService.addMenu(menu9,menu10);
-
-        Menu menu11 = new Menu();
-        menu11.setMenuName("报表统计");
-        menu11.setMenuUrl("/FormStatistics/TabulateStatistics");
-        menuService.addMenu(null,menu11);
-
-        Menu menu12 = new Menu();
-        menu12.setMenuName("汇总统计");
-        menu12.setMenuUrl("/FormStatistics/TabulateStatistics");
-        menuService.addMenu(menu11,menu12);
-
-        Menu menu13 = new Menu();
-        menu13.setMenuName("分项统计");
-        menu13.setMenuUrl("/FormStatistics/Breakdown");
-        menuService.addMenu(menu11,menu13);
-
-        Menu menu14 = new Menu();
-        menu14.setMenuName("系统管理");
-        menu14.setMenuUrl("/SystemManagement/Metadata");
-        menuService.addMenu(null,menu14);
-
-        Menu menu15 = new Menu();
-        menu15.setMenuName("元数据库管理");
-        menu15.setMenuUrl("/SystemManagement/Metadata");
-        menuService.addMenu(menu14,menu15);
-
-        Menu menu16 = new Menu();
-        menu16.setMenuName("元数据模板管理");
-        menu16.setMenuUrl("SystemManagement/MetadataTemplate");
-        menu16.setMenuTable();
-        menuService.addMenu(menu15,menu16);
-
-
-        Menu menu17 = new Menu();
-        menu17.setMenuName("元数据管理");
-        menu17.setMenuUrl("/SystemManagement/MetadataManagement");
-        menuService.addMenu(menu15,menu17);
-
-        Menu menu18 = new Menu();
-        menu18.setMenuName("权限管理");
-        menu18.setMenuUrl("/SystemManagement/MetadataManagement");
-        menuService.addMenu(menu14,menu18);
-
-        Menu menu19 = new Menu();
-        menu19.setMenuName("部门管理");
-        menu19.setMenuUrl("/SystemManagement/DepartmentManage");
-        menuService.addMenu(menu18,menu19);
-
-        Menu menu20 = new Menu();
-        menu20.setMenuName("用户管理");
-        menu20.setMenuUrl("/SystemManagement/MetadataManagement");
-        menuService.addMenu(menu18,menu20);
-
-        Menu menu21 = new Menu();
-        menu21.setMenuName("角色管理");
-        menu21.setMenuUrl("还没有");
-        menuService.addMenu(menu18,menu21);*/
 
         Field field1 = new Field();
         field1.setFieldName("序号");
@@ -231,6 +129,27 @@ public class ManagementApplicationTests {
         field13.setFieldLength(100);
         field13.setFieldIndex(false);
 
+        Field field14 = new Field();
+        field14.setFieldName("最近修改时间");
+        field14.setFieldEnglishName("LAST_MODIFIED");
+        field14.setFieldType("TIMESTAMP");
+        field14.setFieldLength(100);
+        field14.setFieldIndex(false);
+
+        Field field15 = new Field();
+        field15.setFieldName("是否被删除");
+        field15.setFieldEnglishName("IS_DEL");
+        field15.setFieldType("int");
+        field15.setFieldLength(11);
+        field15.setFieldIndex(false);
+
+        Field field16 = new Field();
+        field16.setFieldName("表格号");
+        field16.setFieldEnglishName("TABLE_ID");
+        field16.setFieldType("int");
+        field16.setFieldLength(11);
+        field16.setFieldIndex(false);
+
         List<Field> list = new ArrayList<>();
         list.add(field1);
         list.add(field2);
@@ -245,9 +164,12 @@ public class ManagementApplicationTests {
         list.add(field11);
         list.add(field12);
         list.add(field13);
+        list.add(field14);
+        list.add(field15);
+        list.add(field16);
         fieldService.saveAll(list);
 
-        Set<Field> set = new HashSet<>();
+       /* Set<Field> set = new LinkedHashSet<>();
         set.add(field1);
         set.add(field2);
         set.add(field3);
@@ -326,7 +248,7 @@ public class ManagementApplicationTests {
 
         Template t11 = new Template();
         t11.setFields(set);
-        t11.setTemplateName("demo10");
+        t11.setTemplateName("demo11");
         t11.setPrimaryKey(field2);
         t11.setTemplateDescription("第十一个模板demo");
         templateService.saveOne(t11);
@@ -337,28 +259,57 @@ public class ManagementApplicationTests {
         tablesService.generateTablesByTemplateId(1,"tb_test1");
         tablesService.generateTablesByTemplateId(1,"tb_test2");
 
-        Menu menu1 = menuService.addMenu(null,"预立卷");
-        Menu menu2 = menuService.addMenu(menu1,"文书档案");
-        Menu menu3 = menuService.addMenu(menu2,"文书");
-        Menu menu4 = menuService.addMenu(menu3,"文件目录");
-        Menu menu5 = menuService.addMenu(menu2,"已故人事");
-        Menu menu6 = menuService.addMenu(menu5,"文件目录");
-        Menu menu7 = menuService.addMenu(menu2,"暂存文件");
-        Menu menu8 = menuService.addMenu(menu7,"文件目录");
-        Menu menu9 = menuService.addMenu(menu2,"河海资料");
-        Menu menu10 = menuService.addMenu(menu9,"文件目录");
-        Menu menu11 = menuService.addMenu(menu2,"文件资料汇编");
-        Menu menu12 = menuService.addMenu(menu11,"文件目录");
-        Menu menu13 = menuService.addMenu(menu2,"文书案卷");
-        Menu menu14 = menuService.addMenu(menu13,"案卷目录");
-        Menu menu15 = menuService.addMenu(menu13,"卷内目录");
-        Menu menu16 = menuService.addMenu(menu1,"教学档案");
-        Menu menu17 = menuService.addMenu(menu16,"学籍卡");
-        Menu menu18 = menuService.addMenu(menu17,"案卷目录");
-        Menu menu19 = menuService.addMenu(menu17,"卷内目录");
+        Menu menu1 = menuService.addMenu(null,"预立卷","","预立卷库");
+        Menu menu2 = menuService.addMenu(menu1,"文书档案","文书档案","预立卷库");
+        Menu menu3 = menuService.addMenu(menu2,"文书","","预立卷库");
+        Menu menu4 = menuService.addMenu(menu3,"文件目录","","预立卷库");
+        Menu menu5 = menuService.addMenu(menu2,"已故人事","","预立卷库");
+        Menu menu6 = menuService.addMenu(menu5,"文件目录","","预立卷库");
+        Menu menu7 = menuService.addMenu(menu2,"暂存文件","","预立卷库");
+        Menu menu8 = menuService.addMenu(menu7,"文件目录","","预立卷库");
+        Menu menu9 = menuService.addMenu(menu2,"河海资料","","预立卷库");
+        Menu menu10 = menuService.addMenu(menu9,"文件目录","","预立卷库");
+        Menu menu11 = menuService.addMenu(menu2,"文件资料汇编","","预立卷库");
+        Menu menu12 = menuService.addMenu(menu11,"文件目录","","预立卷库");
+        Menu menu13 = menuService.addMenu(menu2,"文书案卷","","预立卷库");
+        Menu menu14 = menuService.addMenu(menu13,"案卷目录","","预立卷库");
+        Menu menu15 = menuService.addMenu(menu13,"卷内目录","","预立卷库");
+        Menu menu16 = menuService.addMenu(menu1,"教学档案","教学档案","预立卷库");
+        Menu menu17 = menuService.addMenu(menu16,"学籍卡","","预立卷库");
+        Menu menu18 = menuService.addMenu(menu17,"案卷目录","","预立卷库");
+        Menu menu19 = menuService.addMenu(menu17,"卷内目录","","预立卷库");
 
-        menu4.setMenuTable(tablesService.getTablesByTableName("tb_test3"));
-        menu6.setMenuTable(tablesService.getTablesByTableName("tb_test1"));
+        Menu menu20 = menuService.addMenu(null,"整理库","","整理库");
+        Menu menu21 = menuService.addMenu(menu20,"文书档案","文书档案","整理库");
+        Menu menu22 = menuService.addMenu(menu21,"文书","","整理库");
+        Menu menu23 = menuService.addMenu(menu22,"文件目录","","整理库");
+        Menu menu24 = menuService.addMenu(menu21,"已故人事","","整理库");
+        Menu menu25 = menuService.addMenu(menu24,"文件目录","","整理库");
+        Menu menu26 = menuService.addMenu(menu21,"暂存文件","","整理库");
+        Menu menu27 = menuService.addMenu(menu26,"文件目录","","整理库");
+        Menu menu28 = menuService.addMenu(menu21,"河海资料","","整理库");
+        Menu menu29 = menuService.addMenu(menu28,"文件目录","","整理库");
+        Menu menu30 = menuService.addMenu(menu21,"文件资料汇编","","整理库");
+        Menu menu31 = menuService.addMenu(menu30,"文件目录","","整理库");
+        Menu menu32 = menuService.addMenu(menu21,"文书案卷","","整理库");
+        Menu menu33 = menuService.addMenu(menu32,"案卷目录","","整理库");
+        Menu menu34 = menuService.addMenu(menu32,"卷内目录","","整理库");
+        Menu menu35 = menuService.addMenu(menu20,"教学档案","教学档案","整理库");
+        Menu menu36 = menuService.addMenu(menu35,"学籍卡","","整理库");
+        Menu menu37 = menuService.addMenu(menu36,"案卷目录","","整理库");
+        Menu menu38 = menuService.addMenu(menu36,"卷内目录","","整理库");
+
+        menuService.updateMenuTableId(1,4);
+        menuService.updateMenuTableId(2,6);*/
+
+        System.out.println(tablesService.queryDataFromDatabase("1").toString());
+        // menuService.editMenuOrder(2,"M_m1mhn6pf");
+
+        /*List<Menu> menuList = menuService.getAllMenuByOrder();
+        System.out.println(menuList);*/
+        //System.out.println(menuService.getMenuRoot());
+
+        /*menuService.deleteMenuByMenuId(14);*/
 
         /*Menu menu10 = new Menu();
         menu10.setMenuName("科研档案");

@@ -5,34 +5,6 @@
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>元数据模板</title>
-    <style>
-        .content {
-          margin: 50px auto;
-          border: 1px solid #ccc;
-        }
-        .operation {
-          margin: 10px;
-        }
-        .operation>button {
-          margin: 10px;
-        }
-        #books_length {
-          float: left;
-          margin-left: 20px;
-        }
-        #books_filter {
-          float: right;
-          margin-right: 20px;
-        }
-        #books {
-          margin: 5px;
-        }
-        .center-block {
-          display: block;
-          width: 21%;
-          margin: auto;
-        }
-    </style>
 </head>
 
 <body>
@@ -99,7 +71,7 @@
                                         <option value="false">false</option>
                                     </select>
 
-                                        <button type="button" class="btn bg-primary"  id="addTable" onclick="add_tr(this)" style="margin-top:10px;">
+                                    <button type="button" class="btn bg-primary"  id="addTable" onclick="add_tr(this)" style="margin-top:10px;">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加字段
                                     </button>
                                     <!--<button type="button" class="btn btn-success"  id="deleteTable" onclick="del_tr(this)" style="margin-top:10px;">
@@ -235,7 +207,6 @@
                                     }
                                 </script>
 
-
                         </div>
                     </form>
                 </div>
@@ -266,9 +237,10 @@
                     <td th:text="${template.templateName}"></td>
                     <td th:text="${template.templateDescription}"></td>
                     <td>
-                        <button type="button" class="btn btn-default btn-search btn-xs-block">
+                        <button type="button" class="btn btn-default btn-search btn-xs-block" id="detail">
                             <a th:href="@{'/SystemManagement/MetadataTemplate/' + ${template.templateUuid}}">
-                                <i class="glyphicon glyphicon-search">查看详情</i>
+                                <i class="glyphicon glyphicon-search"></i>
+                                <label for="detail">查看详情</label>
                             </a>
                         </button>
                     </td>

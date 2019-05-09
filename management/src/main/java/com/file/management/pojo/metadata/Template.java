@@ -2,6 +2,7 @@ package com.file.management.pojo.metadata;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class Template implements Serializable {
                 joinColumns = {@JoinColumn(name="TEMPLATE_ID")},
                 inverseJoinColumns = {@JoinColumn(name="FIELD_ID")}
     )
-    private Set<Field> fields;
+    private Set<Field> fields = new LinkedHashSet<>();
 
     // 模板的主键
     @OneToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)

@@ -177,7 +177,7 @@ public class SolrService {
                 System.out.println("tableName:"+tableName);
                 SolrUtils solrUtils = new SolrUtils();
                 SolrClient solrClient = solrUtils.createSolrClient();
-                boolean bool = this.fullImportTable(solrClient,tableName);
+                boolean bool = this.deltaImportTable(solrClient,tableName);
                 solrClient.close();
                 if(bool){
                     hashMap.put(true,"成功增量导入表："+tableName);

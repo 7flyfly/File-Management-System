@@ -1,9 +1,13 @@
 package com.file.management.controller.metadata;
 
 
+import com.file.management.pojo.Menu;
 import com.file.management.pojo.metadata.Field;
+import com.file.management.pojo.metadata.Tables;
 import com.file.management.pojo.metadata.Template;
+import com.file.management.service.MenuService;
 import com.file.management.service.metadata.FieldService;
+import com.file.management.service.metadata.TablesService;
 import com.file.management.service.metadata.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/SystemManagement")
@@ -30,6 +29,12 @@ public class MetadataController {
 
     @Autowired
     FieldService fieldService;
+
+    @Autowired
+    MenuService menuService;
+
+    @Autowired
+    TablesService tablesService;
 
     /*
    元数据
@@ -59,7 +64,7 @@ public class MetadataController {
     }
 
     /*
-      元数据管理添加模板成功
+      元数据模板添加模板成功
      */
     @RequestMapping("/postTemplateData")
     public String returnTemplate(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
@@ -72,7 +77,7 @@ public class MetadataController {
         fieldPk.setFieldIk(Boolean.parseBoolean((String)map.get("fieldIk")));
         fieldService.saveOne(fieldPk);
 
-        Set<Field> fields = new HashSet<>();
+        LinkedHashSet<Field> fields = new LinkedHashSet<>();
         fields.add(fieldPk);
 
         ScriptEngineManager manager = new ScriptEngineManager();
@@ -105,6 +110,88 @@ public class MetadataController {
     */
     @RequestMapping("/MetadataManagement")
     public String MetadataManagement(Model model){
+        List<Template> templateList = templateService.getAllTemplates();
+        model.addAttribute("templateList",templateList);
+
+        List<Menu> menuList = menuService.getAllMenuByOrder();
+        for(Menu menu:menuList){
+            String string = "";
+            for(int i=menu.getMenuLevel();i>1;i--){
+                string += "│ ";
+            }
+            if(menu.getMenuLevel() >= 1){
+                string += "├ ";
+            }
+            menu.setMenuName(string + menu.getMenuName());
+        }
+        model.addAttribute("menuList",menuList);
         return "SystemManagement/MetadataManagement";
+    }
+    /*
+      元数据管理删除菜单
+     */
+    @RequestMapping("/deleteMenu")
+    public String MetadataManagementRemoveMenu(@RequestBody Map<String,Object> map){
+        String menuUuid = (String)map.get("uuid");
+        int res = menuService.deleteMenuByMenuUuid(menuUuid);
+        if(res == 0){
+            System.out.println("节点不存在。");
+        }else if(res == 1){
+            System.out.println("节点是根节点，无法删除。");
+        }else if(res == 2){
+            System.out.println("节点的子节点非空，无法删除。");
+        }else{
+            System.out.println("节点是叶子结点，可以删除。");
+        }
+        return "SystemManagement/MetadataManagement";
+    }
+
+    /*
+    元数据管理查看表单详情
+   */
+    @RequestMapping("/MetadataManagement/{menuId}")
+    public String MetadataTablesDetails(@PathVariable("menuId") int menuId, Model model){
+        Menu menu = menuService.getMenuByMenuId(menuId);
+        Tables tables = menu.getMenuTable();
+        List<Field> fieldList = new ArrayList<>(tables.getFields());
+        model.addAttribute("fieldList",fieldList);
+        return "SystemManagement/TableDetails";
+    }
+
+    /*
+      下拉菜单添加成功
+     */
+    @RequestMapping("/addMenu")
+    public void returnMenu(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+        String menuName = (String)map.get("menuName");
+        String menuDescription = (String)map.get("menuDescription");
+        String menuClassification = (String)map.get("menuClassification");
+        String menuParentUuid = (String)map.get("uuid");
+        Menu menuParent = menuService.getMenuByMenuUUid(menuParentUuid);
+        menuService.addMenu(menuParent,menuName,menuDescription,menuClassification);
+    }
+
+    @RequestMapping("/saveMenuEdit")
+    public void saveMenuEdit(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+        String menuDescription = (String)map.get("menuDescription");
+        String menuClassification = (String)map.get("menuClassification");
+        String menuUuid = (String)map.get("uuid");
+        String menuOrder = (String)map.get("menuOrder");
+        menuService.updateMenuDescription(menuDescription,menuUuid);
+        if(!menuClassification.equals("库类别")) {
+            menuService.updateMenuClassification(menuClassification, menuUuid);
+        }
+        menuService.editMenuOrder(Integer.parseInt(menuOrder),menuUuid);
+    }
+
+    @RequestMapping("/addTemplate")
+    public void addTemplate(@RequestBody Map<String,String> map,HttpServletResponse httpServletResponse){
+        String menuUuid = map.get("uuid");
+        String templateName = map.get("templateName");
+        String tableName = map.get("tableName");
+        Template template = templateService.getTemplateByTemplateName(templateName);
+        tablesService.generateTablesByTemplateId(template.getTemplateId(),tableName);
+        Tables tables = tablesService.getTablesByTableName(tableName);
+        menuService.updateMenuTableId(tables.getTableId(),menuService.getMenuByMenuUUid(menuUuid).getMenuId());
     }
 }

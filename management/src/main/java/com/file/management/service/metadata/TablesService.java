@@ -1,10 +1,13 @@
 package com.file.management.service.metadata;
 
+import com.alibaba.fastjson.JSONObject;
+import com.file.management.dao.DynamicSQL;
 import com.file.management.dao.metadata.TablesRepository;
 import com.file.management.pojo.metadata.Field;
 import com.file.management.pojo.metadata.Tables;
 import com.file.management.pojo.metadata.Template;
 import com.file.management.service.solr.SolrService;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,9 @@ import java.util.*;
 @Service
 public class TablesService {
     @Autowired
+    private FieldService fieldService;
+
+    @Autowired
     private TablesRepository tablesRepository;
 
     @Autowired
@@ -42,12 +48,15 @@ public class TablesService {
     @Autowired
     private SolrService solrService;
 
-    //获取当前的日期
+    @Autowired
+    private DynamicSQL dynamicSQL;
+
+    /*//获取当前的日期
     private Date date = new Date();
     //设置要获取到什么样的时间
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     //获取String类型的时间
-    private String createdate = sdf.format(date);
+    private String createdate = sdf.format(date);*/
 
     /**
      * 添加一张表
@@ -57,7 +66,7 @@ public class TablesService {
     @Transactional
     public void saveOne(Tables table) {
         // 将该表放入数据库中
-        table.setTableUuid("Table" + "_" + table.getTableName() + "_" + createdate);
+        table.setTableUuid("T" + "_" + RandomStringUtils.random(8, "abcdefghijklmnopqrstuvwxyz1234567890"));
         tablesRepository.saveAndFlush(table);
     }
 
@@ -246,8 +255,10 @@ public class TablesService {
         String keys = "";
         String values = "";
         for (String key : map.keySet()) {
-            keys += key + ",";
-            values += "\'" + map.get(key) + "\'" + ",";
+            if(map.get(key) != null && map.get(key) != "") {
+                keys += key + ",";
+                values += "\'" + map.get(key) + "\'" + ",";
+            }
         }
         // 删除最后一个逗号
         keys = keys.substring(0, keys.length() - 1);
@@ -275,17 +286,16 @@ public class TablesService {
      * 删除一条数据
      *
      * @param tableUuid tableuuid
-     * @param key       主键值
-     * @param value     主键value
+     * @param documentNo
      * @return 返回删除是否成功信息
      */
-    public String deleteDate(String tableUuid, String key, String value) {
+    public String deleteData(String tableUuid, String documentNo) {
         // 获取table名称
         Tables tables = getTablesByTableUuid(tableUuid);
         String tableName = tables.getTableName();
 
         // 更新数据表的软链接由默认的0变为1
-        String sqlUpdate = "UPDATE " + tableName + " SET IS_DEL = 1 WHERE " + key + "=" + "\'" + value + "\'";
+        String sqlUpdate = "UPDATE " + tableName + " SET IS_DEL = 1 WHERE DOCUMENTNO =" + "\'" + documentNo + "\'";
         jdbcTemplate.execute(sqlUpdate);
 
         // 调用solrService的方法，看是否可以删除数据
@@ -295,7 +305,7 @@ public class TablesService {
         for (boolean flag : hashMap.keySet()) {
             if (flag) {
                 // 如果可以删除，则直接删除表中的数据
-                String sqlDelete = "DELETE FROM " + tableName + " WHERE " + key + "=" + "\'" + value + "\'";
+                String sqlDelete = "DELETE FROM " + tableName + " WHERE DOCUMENTNO =" + "\'" + documentNo + "\'";
                 jdbcTemplate.execute(sqlDelete);
             }
             res += hashMap.get(flag) + "\n";
@@ -307,14 +317,13 @@ public class TablesService {
      * 批量删除数据
      *
      * @param tableUuid tableuuid
-     * @param key       主键值
-     * @param values    主键值
+     * @param documentNos
      * @return 返回删除是否成功信息
      */
-    public String deleteDates(String tableUuid, String key, String[] values) {
+    public String deleteDatas(String tableUuid,String[] documentNos) {
         StringBuffer sb = new StringBuffer();
-        for (String value : values) {
-            sb.append(deleteDate(tableUuid, key, value));
+        for (String documentNo : documentNos) {
+            sb.append(deleteData(tableUuid, documentNo));
         }
         return sb.toString();
     }
@@ -353,4 +362,79 @@ public class TablesService {
         // 将表放入solr中
         solrService.addTableEntity2SolrDataConfig("db_fileManagement", table.getTableName(), table.getPrimaryKey().getFieldEnglishName(), "DocumentNo", solrStringList, solrStringCopyTextList, null, null, null, solrIKCopyTextList, null, null, null, null, null, null);
     }
+
+    /**
+     * 获得表中属性的中英文名称
+     * @param tableName 表名
+     * @return
+     */
+    public JSONObject getAttrECNameByTableName(String tableName){
+        JSONObject jsonObject = new JSONObject();
+        Tables tables = this.getTablesByTableName(tableName);
+        Set<Field> EAttrNameset = tables.getFields();
+        for (Field field : EAttrNameset) {
+            jsonObject.put(field.getFieldEnglishName(),field.getFieldName());
+        }
+        return jsonObject;
+    }
+
+    /**
+     * 根据Table_id从数据库中查询所有数据
+     * @param table_id 表id
+     * @return
+     */
+   /* public JSONObject queryDataFromDatabase(String table_id){
+        JSONObject result_js = new JSONObject();
+        String tableName = getTableNameByTableId(Integer.parseInt(table_id));
+        List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+        List resultList = dynamicSQL.selectAllByTableName(tableName);
+        JSONObject jsonObject = getAttrECNameByTableName(tableName);
+        for(int j =0;j<resultList.size();j++) {
+            Object object = resultList.get(j);
+            Object[] attValue = (Object[]) object;
+            for (int i = 0; i < AttrNameList.size(); i++) {
+                String attEName = AttrNameList.get(i) == null ? "" : (String) AttrNameList.get(i);
+                String attCName = jsonObject.getString(attEName);
+                result_js.put(attCName, attValue[i]);
+            }
+        }
+        return result_js;
+    }*/
+
+    public List<String> queryTitleFromDatabase(String table_id){
+        String tableName = getTableNameByTableId(Integer.parseInt(table_id));
+        List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+        for(int i=0;i<AttrNameList.size();i++){
+            String attrNameStr = (String)AttrNameList.get(i);
+            Field field = fieldService.getFieldByFieldEnglishName(attrNameStr);
+            AttrNameList.set(i,field.getFieldName());
+        }
+        return AttrNameList;
+    }
+    public List<Map<String,String>> queryDataFromDatabase(String table_id){
+        List<Map<String,String>> listMap = new ArrayList<>();
+        String tableName = getTableNameByTableId(Integer.parseInt(table_id));
+        /*List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
+        for(int i=0;i<AttrNameList.size();i++){
+            String attrNameStr = (String)AttrNameList.get(i);
+            Field field = fieldService.getFieldByFieldEnglishName(attrNameStr);
+            AttrNameList.set(i,field.getFieldName());
+        }
+        System.out.print(AttrNameList);*/
+        //listList.add(AttrNameList);
+        List resultList = dynamicSQL.selectAllByTableName(tableName);
+        for (Object item : resultList) {
+            Object[] obj = (Object[]) item;
+            Map<String,String> map = new HashMap<>();
+            for(int i=0;i<obj.length;i++){
+                if (obj[i] != null) {
+                    map.put(String.valueOf(i),obj[i].toString());
+                }
+            }
+            listMap.add(map);
+        }
+        return listMap;
+    }
+
+
 }

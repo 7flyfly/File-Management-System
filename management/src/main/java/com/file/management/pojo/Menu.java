@@ -7,6 +7,7 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -33,9 +34,9 @@ public class Menu implements Serializable{
     @Column(name = "MENU_NAME",nullable = false)
     private String menuName;
 
-    /*// 菜单网址
-    @Column(name = "MENU_URL",nullable = false)
-    private String menuUrl;*/
+    // 菜单描述
+    @Column(name = "MENU_DESCRIPTION")
+    private String menuDescription;
 
     // 同一层级下菜单的顺序
     @Column(name = "MENU_ORDER")
@@ -47,8 +48,8 @@ public class Menu implements Serializable{
     private Menu menuParent;
 
     // 菜单的子节点菜单,默认懒加载
-    @OneToMany(targetEntity = Menu.class, cascade = { CascadeType.ALL }, mappedBy = "menuParent")
-    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(targetEntity = Menu.class, cascade = { CascadeType.ALL }, mappedBy = "menuParent",fetch=FetchType.EAGER)
+    /*@Fetch(FetchMode.SUBSELECT)*/
     @OrderBy("menuOrder")
     private List<Menu> menuChildren = new ArrayList<>();
 
@@ -56,6 +57,10 @@ public class Menu implements Serializable{
     @OneToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
     @JoinColumn(name = "TABLE_ID")
     private Tables menuTable;
+
+    // 库类别
+    @Column(name = "MENU_CLASSIFICATION",nullable = false)
+    private String menuClassification;
 
     public int getMenuId() {
         return menuId;
@@ -89,13 +94,13 @@ public class Menu implements Serializable{
         this.menuName = menuName;
     }
 
-//    public String getMenuUrl() {
-//        return menuUrl;
-//    }
-//
-//    public void setMenuUrl(String menuUrl) {
-//        this.menuUrl = menuUrl;
-//    }
+    public String getMenuDescription() {
+        return menuDescription;
+    }
+
+    public void setMenuDescription(String menuDescription) {
+        this.menuDescription = menuDescription;
+    }
 
     public int getMenuOrder() {
         return menuOrder;
@@ -129,18 +134,40 @@ public class Menu implements Serializable{
         this.menuTable = menuTable;
     }
 
+    public String getMenuClassification() {
+        return menuClassification;
+    }
+
+    public void setMenuClassification(String menuClassification) {
+        this.menuClassification = menuClassification;
+    }
+
     @Override
     public String toString() {
-        return "Menu{" +
-                "menuId=" + menuId +
-                ", menuUuid='" + menuUuid + '\'' +
-                ", menuLevel=" + menuLevel +
-                ", menuName='" + menuName + '\'' +
-//                ", menuUrl='" + menuUrl + '\'' +
-                ", menuOrder=" + menuOrder +
-                ", menuParent=" + menuParent +
-                ", menuChildren=" + menuChildren +
-                ", menuTable=" + menuTable +
-                '}';
+        String result = "{"
+                + "\"text\":\"" + menuName + "\"";
+
+        if(this.getMenuTable() != null) {
+            result += ",\"href\":\"" + String.valueOf(menuTable.getTableId()) + "\"";
+        }
+        if (this.menuChildren.size() != 0) {
+            if (result.contains("nodes")) {
+                result += ",";
+            } else {
+                result += ",\"nodes\":" + toString2(this.menuChildren);
+            }
+        }
+        return result + "}";
+    }
+
+    private String toString2(List<Menu> childrenList){
+        String result = "[";
+        for (Iterator it = childrenList.iterator(); it.hasNext();) {
+            result += ((Menu) it.next()).toString();
+            result += ",";
+        }
+        result = result.substring(0, result.length() - 1);
+        result += "]";
+        return result;
     }
 }
