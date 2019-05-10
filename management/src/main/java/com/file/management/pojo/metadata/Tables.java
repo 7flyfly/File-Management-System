@@ -2,6 +2,7 @@ package com.file.management.pojo.metadata;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -41,7 +42,7 @@ public class Tables implements Serializable{
             joinColumns = {@JoinColumn(name="TABLE_ID")},
             inverseJoinColumns = {@JoinColumn(name="FIELD_ID")}
     )
-    private Set<Field> fields;
+    private Set<Field> fields = new LinkedHashSet<>();
 
     public int getTableId() {
         return tableId;
@@ -101,12 +102,13 @@ public class Tables implements Serializable{
 
     @Override
     public String toString() {
-        return "Tables{" +
+        /*return "Tables{" +
                 "tableId=" + tableId +
                 ", tableName='" + tableName + '\'' +
                 ", tableUuid='" + tableUuid + '\'' +
                 ", template=" + template +
                 ", fields=" + fields +
-                '}';
+                '}';*/
+        return tableName;
     }
 }

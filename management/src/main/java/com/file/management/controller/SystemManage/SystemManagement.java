@@ -51,41 +51,6 @@ public class SystemManagement {
 //        return "SystemManagement/DepartmentManagement";
 //    }
 
-    /*
-    元数据
-   */
-    @RequestMapping("/SystemManagement/Metadata")
-    public String Metadata(){
-        return "SystemManagement/Metadata";
-    }
-
-    /*
-    元数据模板
-   */
-    @RequestMapping("/SystemManagement/MetadataTemplate")
-    public String MetadataTemplate(Model model){
-        model.addAttribute("templates",templateService.getAllTemplates());
-        return "SystemManagement/MetadataTemplate";
-    }
-
-    /*
-     元数据模板查看模板详情
-    */
-    @RequestMapping("/SystemManagement/MetadataTemplate/{TemplateUuid}")
-    public String MetadataTemplateDetails(@PathVariable("TemplateUuid") String TemplateUuid,Model model){
-        Template template = templateService.getTemplateByTemplateUuid(TemplateUuid);
-        model.addAttribute("template",template);
-        return "/SystemManagement/TemplateDetails";
-    }
-
-    /*
-    元数据管理
-   */
-    @RequestMapping("/SystemManagement/MetadataManagement")
-    public String MetadataManagement(Model model){
-
-        return "SystemManagement/MetadataManagement";
-    }
 
     /*
     流程管理

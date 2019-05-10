@@ -47,7 +47,8 @@ public class IntelligentRetrievalController {
             SolrUtils solrUtils = new SolrUtils();
             solrClient = solrUtils.createSolrClient();
             System.out.println(keyword);
-            JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,pageSize,offset);
+            JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,pageSize,
+                    offset,"annex_content");
             solrClient.close();
             result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
             result_jsonObject.put("total",docsJsonObject.getString("numFound"));

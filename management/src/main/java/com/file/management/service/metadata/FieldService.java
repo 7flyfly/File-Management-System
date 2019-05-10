@@ -2,12 +2,11 @@ package com.file.management.service.metadata;
 
 import com.file.management.dao.metadata.FieldRepository;
 import com.file.management.pojo.metadata.Field;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,12 +24,12 @@ public class FieldService {
     @Autowired
     private FieldRepository fieldRepository;
 
-    //获取当前的日期
+/*    //获取当前的日期
     private Date date = new Date();
     //设置要获取到什么样的时间
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     //获取String类型的时间
-    private String createdate = sdf.format(date);
+    private String createdate = sdf.format(date);*/
 
     /**
      * 添加一个字段
@@ -38,7 +37,7 @@ public class FieldService {
      */
     @Transactional
     public void saveOne(Field field) {
-        field.setFieldUuid("Field" + "_" + field.getFieldEnglishName() + "_" + createdate);
+        field.setFieldUuid("F" + "_" + RandomStringUtils.random(8, "abcdefghijklmnopqrstuvwxyz1234567890"));
         fieldRepository.saveAndFlush(field);
     }
 
@@ -49,7 +48,7 @@ public class FieldService {
     @Transactional
     public void saveAll(List<Field> fields){
         for(Field f: fields){
-            f.setFieldUuid("Field" + "_" + f.getFieldEnglishName() + "_" + createdate);
+            f.setFieldUuid("F" + "_" + RandomStringUtils.random(8, "abcdefghijklmnopqrstuvwxyz1234567890"));
         }
         fieldRepository.saveAll(fields);
     }
@@ -70,6 +69,10 @@ public class FieldService {
      */
     public Field getFieldByFieldName(String fieldName){
         return fieldRepository.findByFieldName(fieldName);
+    }
+
+    public Field getFieldByFieldEnglishName(String fieldEnglishName){
+        return fieldRepository.findByFieldEnglishName(fieldEnglishName);
     }
 
     /**

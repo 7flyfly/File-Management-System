@@ -2,6 +2,7 @@ package com.file.management.service.metadata;
 
 import com.file.management.dao.metadata.TemplateRepository;
 import com.file.management.pojo.metadata.Template;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -28,12 +29,12 @@ public class TemplateService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    //获取当前的日期
+    /*//获取当前的日期
     private Date date = new Date();
     //设置要获取到什么样的时间
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
     //获取String类型的时间
-    private String createdate = sdf.format(date);
+    private String createdate = sdf.format(date);*/
 
     /**
      * 添加一个模板
@@ -41,7 +42,7 @@ public class TemplateService {
      */
     @Transactional
     public void saveOne(Template template) {
-        template.setTemplateUuid("Template" + "_" + template.getTemplateName() + "_" + createdate);
+        template.setTemplateUuid("T" + "_" + RandomStringUtils.random(8, "abcdefghijklmnopqrstuvwxyz1234567890"));
         templateRepository.saveAndFlush(template);
     }
 
@@ -52,7 +53,7 @@ public class TemplateService {
     @Transactional
     public void saveAll(List<Template> templates){
         for(Template t: templates){
-            t.setTemplateUuid("Template" + "_" + t.getTemplateName() + "_" + createdate);
+            t.setTemplateUuid("T" + "_" + RandomStringUtils.random(8, "abcdefghijklmnopqrstuvwxyz1234567890"));
         }
         templateRepository.saveAll(templates);
     }
@@ -73,6 +74,10 @@ public class TemplateService {
      */
     public Template getTemplateByTemplateUuid(String templateUuid){
         return templateRepository.findByTemplateUuid(templateUuid);
+    }
+
+    public Template getTemplateByTemplateName(String templateName){
+        return templateRepository.findByTemplateName(templateName);
     }
 
     public ArrayList<Template> getAllTemplates(){

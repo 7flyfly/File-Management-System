@@ -33,7 +33,7 @@ public class AdvancedSearchController {
             SolrUtils solrUtils = new SolrUtils();
             solrClient = solrUtils.createSolrClient();
             JSONObject docsJsonObject = solrQueryService.ConditionQuerybySolr(solrClient,allKeyWord,documentNumber,anyKeyWord,
-                    noKeyWord,keyWordPosition,nodeName,pageSize,offset);
+                    noKeyWord,keyWordPosition,nodeName,pageSize,offset,"annex_content");
             solrClient.close();
             result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
             result_jsonObject.put("total",docsJsonObject.getString("numFound"));

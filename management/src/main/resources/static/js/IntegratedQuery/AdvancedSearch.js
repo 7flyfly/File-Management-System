@@ -150,7 +150,7 @@ window.operateEvents = {
                                     $("#detailList").empty();
                                         var str = ""
                                         for(var p in msg){
-                                          console.log(p + " " + msg[p]);
+//                                          console.log(p + " " + msg[p]);
                                           str = str + '<tr><td width="100px">'+ p +':</td><td>'+ msg[p] +'</td></tr>'
                                         }
                                     $("#detailList").append(str);

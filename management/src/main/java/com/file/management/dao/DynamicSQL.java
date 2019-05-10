@@ -71,6 +71,12 @@ public class DynamicSQL {
         return  resultList;
     }
 
+    public List selectAllByTableName(String tableName){
+        String sql = "select * from " + tableName;
+        List resultList = entityManager.createNativeQuery(sql).getResultList();
+        return resultList;
+    }
+
 //    public String getAttrCNameByTableId(String TableId, String colEName){
 //
 //    }

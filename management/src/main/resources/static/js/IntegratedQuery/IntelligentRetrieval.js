@@ -5,6 +5,32 @@ var IntelligentRetrieval={
     imgSearchCheck:function(){
         alert("敬请期待!");
     },
+    pictureView:function(document_number,fileAddressStr,fileNameStr){
+//        console.log(document_number);
+//        console.log(fileNameStr);
+//        console.log(fileAddressStr);
+        $("#detailModal_confirm").trigger("click");
+        $('#pictureViewModal').modal("show");
+        $('#picture_carousel_inner').empty();
+        $('#picture_carousel-indicators').empty();
+        var fileNameArr = fileNameStr.split(";");
+        var fileAddressArr = fileAddressStr.split(";");
+        $('#picture_carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="0" class="active"></li>')
+        $('#picture_carousel_inner').append('<div class="item active" align="center">'+
+                                '<a href="'+ fileNameArr[0] +'">'+
+                                ' <img src="'+ fileAddressArr[0] + '" style="height:400; width:400;"'+
+                                ' alt="通用的占位符缩略图" >'+
+                                '</a> </div>')
+        for ( var i = 1; i <fileNameArr.length-1; i++){  //末尾多一个分号
+                    $('#picture_carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="0" ></li>')
+                    $('#picture_carousel_inner').append('<div class="item" align="center">'+
+                                            '<a href="'+ fileNameArr[i] +'">'+
+                                            ' <img src="'+ fileAddressArr[i] +'"style="height:400; width:400;"'+
+                                            ' alt="通用的占位符缩略图" >'+
+                                            '</a> </div>')
+        }
+
+    },
     keySearchCheck:function(){
             IntelligentRetrieval.keyWord=$("#keyword").val();
             IntelligentRetrieval.queryType=$("input[name='queryTypeOptionsRadios']:checked").val();
@@ -157,7 +183,7 @@ window.operateEvents = {
                                     $("#detailList").empty();
                                         var str = ""
                                         for(var p in msg){
-                                          console.log(p + " " + msg[p]);
+//                                          console.log(p + " " + msg[p]);
                                           str = str + '<tr><td width="100px">'+ p +':</td><td>'+ msg[p] +'</td></tr>'
                                         }
                                     $("#detailList").append(str);
