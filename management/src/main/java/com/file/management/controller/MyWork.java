@@ -61,7 +61,7 @@ public class MyWork {
 
     @RequestMapping("/index")
     public String myworkIndex(){
-        return "myworkIndex";
+        return "mywork/myworkIndex";
     }
 
     /*

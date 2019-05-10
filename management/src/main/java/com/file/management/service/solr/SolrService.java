@@ -419,12 +419,13 @@ public class SolrService {
                 Object[] attValue = (Object[]) row;
                 String documentNumber =(String)attValue[documentNumber_index];
                 SolrDocument document = this.getDoucmentByDocumentNumber(solrClient,documentNumber);
+                if(document==null) continue;
                 SolrInputDocument solrInputDocument = new SolrInputDocument();
                 for(String field : document.getFieldNames()){
                     if(!field.equals("_version_")&&!field.equals(fileContentSolrName)&&!field.equals(imageContentSolrName))
                         solrInputDocument.setField(field,document.getFieldValue(field));
                 }
-                if(Annex_index!=-1){
+                if(Annex_index!=-1&&attValue[Annex_index]!=null){
                     String fileNameStr =(String)attValue[Annex_index];
                     String[] fileUrlArr = fileNameStr.split(arrSplit);
                     for(String fileUrl : fileUrlArr){
@@ -495,12 +496,21 @@ public class SolrService {
                 Object[] attValue = (Object[]) row;
                 String documentNumber =(String)attValue[documentNumber_index];
                 SolrDocument document = this.getDoucmentByDocumentNumber(solrClient,documentNumber);
+                if(document==null) continue;
                 SolrInputDocument solrInputDocument = new SolrInputDocument();
                 for(String field : document.getFieldNames()){
-                    if(!field.equals("_version_")&&!field.equals(fileContentSolrName)&&!field.equals(imageContentSolrName))
+                    if(!field.equals("_version_")&&!field.equals(fileContentSolrName)&&!field.equals(imageContentSolrName)){
                         solrInputDocument.setField(field,document.getFieldValue(field));
+                    }
                 }
-                if(Annex_index!=-1){
+                for(String field : document.getFieldNames()){
+                    for(int i = 0; i<AttrNameList.size(); i++){
+                        if(field.contains(((String)AttrNameList.get(i)).toLowerCase())){
+                            solrInputDocument.setField(field,attValue[i]);
+                        }
+                    }
+                }
+                if(Annex_index!=-1&&attValue[Annex_index]!=null){
                     String fileNameStr =(String)attValue[Annex_index];
                     String[] fileUrlArr = fileNameStr.split(arrSplit);
                     for(String fileUrl : fileUrlArr){

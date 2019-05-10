@@ -374,32 +374,22 @@ public class TablesService {
         // 删除最后一个逗号
         str = str.substring(0, str.length() - 2);
 
-        // 调用solrService的方法，看是否可以删除数据
+        // 执行修改语句
+        String sqlUpdate = "UPDATE " + tableName + " SET " + str + " WHERE DOCUMENTNO = '" + documentNo + "'";
+        jdbcTemplate.execute(sqlUpdate);
+
+        // 更改solr数据
         HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {
             if (flag) {
-                // 如果可以删除，则直接删除表中的数据
-                String sqlUpdate = "UPDATE " + tableName + " SET " + str + " WHERE DOCUMENTNO = '" + documentNo + "'";
-                jdbcTemplate.execute(sqlUpdate);
+
             }
             res += hashMap.get(flag) + "\n";
         }
         return res;
-
-        /*String sqlUpdate = "UPDATE " + tableName + " SET " + str + " WHERE DOCUMENTNO = '" + documentNo + "'";
-        jdbcTemplate.execute(sqlUpdate);
-        solrService.refreshOneDocument2Solr(tableName,documentNo,null,null,null,null);*/
     }
-
-
-
-       /* // 拼接字符串完成插入数据的sql语句
-        String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
-        jdbcTemplate.execute(sqlInsert);
-        solrService.deltaImportTable2Solr(tableName,null,null,null,null);*/
-
 
     /**
      * 获得表中属性的中英文名称
