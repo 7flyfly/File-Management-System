@@ -461,7 +461,7 @@ public class SolrService {
         Properties properties = solrDataConfigService.getDataImportProperty();
         String lastModified = properties.getProperty(tableName + ".last_index_time");
         List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
-        if(!(AttrNameList.contains(annexDatabaseName)&&AttrNameList.contains(documentNumberDatabaseName))) return false;
+        if(!(AttrNameList.contains(annexDatabaseName)&&AttrNameList.contains(documentNumberDatabaseName))) return true;
         List resultList = dynamicSQL.selectLastModifiedByTableName(tableName,lastModified);
         int documentNumber_index = AttrNameList.indexOf(documentNumberDatabaseName);
         int Annex_index = AttrNameList.indexOf(annexDatabaseName);

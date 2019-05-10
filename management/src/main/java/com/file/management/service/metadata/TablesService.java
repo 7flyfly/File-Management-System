@@ -267,7 +267,7 @@ public class TablesService {
         // 拼接字符串完成插入数据的sql语句
         String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
         jdbcTemplate.execute(sqlInsert);
-        solrService.deltaImportTable2Solr(tableName);
+        solrService.deltaImportTable2Solr(tableName,null,null,null,null);
     }
 
     /**
@@ -299,13 +299,13 @@ public class TablesService {
         jdbcTemplate.execute(sqlUpdate);
 
         // 调用solrService的方法，看是否可以删除数据
-        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName);
+        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null);
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {
             if (flag) {
                 // 如果可以删除，则直接删除表中的数据
-                String sqlDelete = "DELETE FROM " + tableName + " WHERE DOCUMENTNO =" + "\'" + documentNo + "\'";
+                String sqlDelete = "DELETE FROM " + tableName + " WHERE DOCUMENTNO = " + "\'" + documentNo + "\'";
                 jdbcTemplate.execute(sqlDelete);
             }
             res += hashMap.get(flag) + "\n";
@@ -363,6 +363,44 @@ public class TablesService {
         solrService.addTableEntity2SolrDataConfig("db_fileManagement", table.getTableName(), table.getPrimaryKey().getFieldEnglishName(), "DocumentNo", solrStringList, solrStringCopyTextList, null, null, null, solrIKCopyTextList, null, null, null, null, null, null);
     }
 
+    public String updateData(String tableUuid,String documentNo,HashMap<String,String> map){
+        Tables tables = getTablesByTableUuid(tableUuid);
+        String tableName = tables.getTableName();
+        String str = "";
+
+        for (String key : map.keySet()) {
+            str += key + " = '" + map.get(key) + "', ";
+        }
+        // 删除最后一个逗号
+        str = str.substring(0, str.length() - 2);
+
+        // 调用solrService的方法，看是否可以删除数据
+        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null);
+        String res = "";
+
+        for (boolean flag : hashMap.keySet()) {
+            if (flag) {
+                // 如果可以删除，则直接删除表中的数据
+                String sqlUpdate = "UPDATE " + tableName + " SET " + str + " WHERE DOCUMENTNO = '" + documentNo + "'";
+                jdbcTemplate.execute(sqlUpdate);
+            }
+            res += hashMap.get(flag) + "\n";
+        }
+        return res;
+
+        /*String sqlUpdate = "UPDATE " + tableName + " SET " + str + " WHERE DOCUMENTNO = '" + documentNo + "'";
+        jdbcTemplate.execute(sqlUpdate);
+        solrService.refreshOneDocument2Solr(tableName,documentNo,null,null,null,null);*/
+    }
+
+
+
+       /* // 拼接字符串完成插入数据的sql语句
+        String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
+        jdbcTemplate.execute(sqlInsert);
+        solrService.deltaImportTable2Solr(tableName,null,null,null,null);*/
+
+
     /**
      * 获得表中属性的中英文名称
      * @param tableName 表名
@@ -377,29 +415,6 @@ public class TablesService {
         }
         return jsonObject;
     }
-
-    /**
-     * 根据Table_id从数据库中查询所有数据
-     * @param table_id 表id
-     * @return
-     */
-   /* public JSONObject queryDataFromDatabase(String table_id){
-        JSONObject result_js = new JSONObject();
-        String tableName = getTableNameByTableId(Integer.parseInt(table_id));
-        List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
-        List resultList = dynamicSQL.selectAllByTableName(tableName);
-        JSONObject jsonObject = getAttrECNameByTableName(tableName);
-        for(int j =0;j<resultList.size();j++) {
-            Object object = resultList.get(j);
-            Object[] attValue = (Object[]) object;
-            for (int i = 0; i < AttrNameList.size(); i++) {
-                String attEName = AttrNameList.get(i) == null ? "" : (String) AttrNameList.get(i);
-                String attCName = jsonObject.getString(attEName);
-                result_js.put(attCName, attValue[i]);
-            }
-        }
-        return result_js;
-    }*/
 
     public List<String> queryTitleFromDatabase(String table_id){
         String tableName = getTableNameByTableId(Integer.parseInt(table_id));

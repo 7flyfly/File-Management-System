@@ -105,7 +105,25 @@ public class MyWork {
     @RequestMapping("/deleteData")
     public void deleteData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String tableId = (String)map.get("tableId");
-        String value = (String)map.get("documentNo");
-        tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),value);
+        String documentNo = (String)map.get("documentNo");
+        tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo);
+    }
+
+    /*
+      编辑数据
+     */
+    @RequestMapping("/editData")
+    public void editData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+        String tableId = (String)map.get("tableId");
+        String documentNo = (String)map.get("documentNo");
+        int length = (Integer)map.get("length");
+        ArrayList<String> value = (ArrayList<String>)map.get("value");
+        HashMap<String,String> hashMap = new HashMap<>();
+        for(int i=0;i<length;i++){
+            if(value.get(2*i+1) != "") {
+                hashMap.put(fieldService.getFieldByFieldName(value.get(2 * i)).getFieldEnglishName(), value.get(2 * i + 1));
+            }
+        }
+        tablesService.updateData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo,hashMap);
     }
 }

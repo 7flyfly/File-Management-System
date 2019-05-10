@@ -37,6 +37,28 @@
         </div>
     </div>
 
+    <!-- 编辑数据模态框 -->
+    <div class="modal fade" id="editData" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">编辑数据</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdit">
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary que_add" onclick="saveEdit(this)" data-dismiss="modal">确定</button>
+                    <input type = "hidden" id = "documentNo-edit">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table id="table_id" class="table table-striped table-bordered row-border hover order-column" cellspacing="0"  style="margin-top:20px;">
         <thead id ="head">
         </thead>
@@ -59,7 +81,8 @@
             body += "<tr>";
             for(j =0;j<tableTitle.length; j++){
                 if(tableData[i][j.toString()] !== undefined) {
-                    body += "<td>" + tableData[i][j.toString()] + "</td>";
+                    var temp = tableData[i][j.toString()];
+                    body += "<td title= temp style=\"max-width: 100px;overflow: hidden; text-overflow:ellipsis;white-space: nowrap\">" + tableData[i][j.toString()] + "</td>";
                 }else{
                     body += "<td></td>";
                 }
@@ -76,8 +99,19 @@
                 modalForm += "<div class=\"form-group\"><input type=\"text\" placeholder=\"" + tableTitle[i] + "\" id=\"formData" + i.toString() + "\" class=\"form-control\" /></div>";
             }
         }
-        console.log(modalForm);
+        //console.log(modalForm);
         $("#modalForm").html(modalForm);
+
+        formEdit = "";
+        for(i = 0; i <tableTitle.length; i++){
+            if (tableTitle[i] != "最近修改时间" && tableTitle[i] != "是否被删除") {
+                str = "edit" + i.toString();
+                formEdit += '<div class="form-group"><label class="col-sm-2 control-label" for="' + str + '">' + tableTitle[i] + '</label><div class="col-sm-10">';
+                formEdit += '<input type="text" autocomplete="off" class="form-control" id="' + str + '" name="' + str + '" placeholder="' + tableTitle[i] + '" data-prompt-position="bottomLeft"></div></div>';
+            }
+        }
+        console.log(formEdit);
+        $("#formEdit").html(formEdit);
     </script>
 
     <!-- 删除数据模态框 -->
@@ -91,7 +125,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">确定要删除菜单？</label>
+                            <label for="message-text" class="control-label">确定要删除该数据？</label>
                             <input id="documentNo" type="hidden">
                         </div>
                     </form>

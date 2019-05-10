@@ -37,7 +37,11 @@ public class ManagementApplicationTests {
 
     @Test
     public void contextLoads() {
-
+       /* HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("DocumentNo","123");
+        hashMap.put("PartNo","10");
+        hashMap.put("Title","xixi");
+        tablesService.updateData("T_v5fqrpkd","2018-1WS0908.3-171",hashMap);*/
         Field field1 = new Field();
         field1.setFieldName("序号");
         field1.setFieldEnglishName("No");
@@ -53,7 +57,7 @@ public class ManagementApplicationTests {
         field2.setFieldIndex(true);
 
         Field field3 = new Field();
-        field3.setFieldName("案卷号/件号");
+        field3.setFieldName("案卷号");
         field3.setFieldEnglishName("PartNo");
         field3.setFieldType("int");
         field3.setFieldLength(11);
@@ -63,7 +67,7 @@ public class ManagementApplicationTests {
         field4.setFieldName("题名");
         field4.setFieldEnglishName("Title");
         field4.setFieldType("varchar");
-        field4.setFieldLength(100);
+        field4.setFieldLength(255);
         field4.setFieldIndex(true);
         field4.setFieldIk(true);
 
@@ -106,7 +110,7 @@ public class ManagementApplicationTests {
         field10.setFieldName("附件");
         field10.setFieldEnglishName("Annex");
         field10.setFieldType("varchar");
-        field10.setFieldLength(50);
+        field10.setFieldLength(255);
         field10.setFieldIndex(false);
 
         Field field11 = new Field();
@@ -169,12 +173,20 @@ public class ManagementApplicationTests {
         list.add(field16);
         fieldService.saveAll(list);
 
-       /* Set<Field> set = new LinkedHashSet<>();
+        Set<Field> set = new LinkedHashSet<>();
         set.add(field1);
         set.add(field2);
         set.add(field3);
         set.add(field4);
         set.add(field5);
+
+        Set<Field> set2 = new LinkedHashSet<>();
+        set2.add(field1);
+        set2.add(field2);
+        set2.add(field3);
+        set2.add(field4);
+        set2.add(field5);
+        set2.add(field10);
 
         Template t1 = new Template();
         t1.setFields(set);
@@ -255,7 +267,7 @@ public class ManagementApplicationTests {
 
 
         // 用模板tb_test2的使用的是field1 field2
-        tablesService.generateTablesByUser(field2,set,"tb_test3");
+        tablesService.generateTablesByUser(field2,set2,"tb_test3");
         tablesService.generateTablesByTemplateId(1,"tb_test1");
         tablesService.generateTablesByTemplateId(1,"tb_test2");
 
@@ -300,7 +312,7 @@ public class ManagementApplicationTests {
         Menu menu38 = menuService.addMenu(menu36,"卷内目录","","整理库");
 
         menuService.updateMenuTableId(1,4);
-        menuService.updateMenuTableId(2,6);*/
+        menuService.updateMenuTableId(2,6);
 
         System.out.println(tablesService.queryDataFromDatabase("1").toString());
         // menuService.editMenuOrder(2,"M_m1mhn6pf");

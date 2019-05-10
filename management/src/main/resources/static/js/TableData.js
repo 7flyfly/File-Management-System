@@ -92,3 +92,53 @@ function removeInfo(obj) {
     });
     $('#delData').modal('hide');
 }
+
+// 编辑菜单
+$('#editData').on('show.bs.modal',function (event) {
+    var btnThis=$(event.relatedTarget);//触发事件的按钮
+    var modal=$(this);//当前模态框
+    var documentNoIndex = $("#documentNoIndex").val();
+    var documentNo = btnThis.closest('tr').find('td').eq(documentNoIndex).text();
+    modal.find("#documentNo-edit").val(documentNo);
+
+});
+
+function saveEdit(obj) {
+    var length = document.getElementById("tr1").childNodes.length;
+    var value = [];
+    var documentNo= $('#documentNo-edit').val();
+    for(i=0;i<length;i++){
+        var str = "edit" + i.toString();
+        if(document.getElementById(str)){
+            eval("value.push($('#" + str + "').attr('placeholder'))");
+            eval("value.push($('#" + str + "').val())");
+        }
+    }
+    var tableId = $("#tableId").val();
+    console.log(length);
+    console.log(documentNo);
+    console.log(value);
+    console.log(tableId);
+
+
+    jsonObj = {
+        documentNo: documentNo,
+        value: value,
+        tableId: tableId,
+        // 最近修改时间+是否删除+操作
+        length: length-3
+    }
+    eval(jsonObj);
+
+    $.ajax({
+        type: "post",
+        url: "/editData",
+        data: JSON.stringify(jsonObj),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(result) {
+            window.location.reload();
+        }
+    });
+    $('#editData').modal('hide');
+}
