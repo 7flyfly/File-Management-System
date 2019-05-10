@@ -267,7 +267,7 @@ public class TablesService {
         // 拼接字符串完成插入数据的sql语句
         String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
         jdbcTemplate.execute(sqlInsert);
-        solrService.deltaImportTable2Solr(tableName,null,null,null,null);
+        solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
     }
 
     /**
@@ -299,7 +299,7 @@ public class TablesService {
         jdbcTemplate.execute(sqlUpdate);
 
         // 调用solrService的方法，看是否可以删除数据
-        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null);
+        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {
@@ -375,7 +375,7 @@ public class TablesService {
         str = str.substring(0, str.length() - 2);
 
         // 调用solrService的方法，看是否可以删除数据
-        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null);
+        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {

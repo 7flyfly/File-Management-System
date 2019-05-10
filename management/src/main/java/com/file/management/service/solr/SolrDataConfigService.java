@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * 对Solr配置文件SolrDataConfig的配置
+ */
 @Service
 public class SolrDataConfigService {
 
@@ -63,7 +66,7 @@ public class SolrDataConfigService {
      * @param solrDataConfigPath solr数据库配置文件的绝对位置
      * @return
      */
-    public Document loadSolrDataConfig(String solrDataConfigPath){
+    private Document loadSolrDataConfig(String solrDataConfigPath){
         Document doc = null;
         SAXReader reader = new SAXReader();
         try{
@@ -81,7 +84,7 @@ public class SolrDataConfigService {
      * @param xmlStr solr数据库配置文件(xml)的String
      * @return
      */
-    public boolean rewriteSolrDataConfig(String solrDataConfigPath,String xmlStr){
+    private boolean rewriteSolrDataConfig(String solrDataConfigPath,String xmlStr){
         FileWriter fileWritter = null;
         try {
             File xmlFile = new File(solrDataConfigPath);

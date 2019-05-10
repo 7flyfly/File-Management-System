@@ -19,14 +19,14 @@ var IntelligentRetrieval={
         $('#picture_carousel_inner').append('<div class="item active" align="center">'+
                                 '<a href="'+ fileNameArr[0] +'">'+
                                 ' <img src="'+ fileAddressArr[0] + '" style="height:400; width:400;"'+
-                                ' alt="通用的占位符缩略图" >'+
+                                ' alt="请检查文件，文件或不存在" >'+
                                 '</a> </div>')
         for ( var i = 1; i <fileNameArr.length-1; i++){  //末尾多一个分号
                     $('#picture_carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="0" ></li>')
                     $('#picture_carousel_inner').append('<div class="item" align="center">'+
                                             '<a href="'+ fileNameArr[i] +'">'+
                                             ' <img src="'+ fileAddressArr[i] +'"style="height:400; width:400;"'+
-                                            ' alt="通用的占位符缩略图" >'+
+                                            ' alt="请检查文件，文件或不存在" >'+
                                             '</a> </div>')
         }
 
