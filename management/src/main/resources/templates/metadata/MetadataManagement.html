@@ -133,8 +133,8 @@
                 </button>
 
                 <!-- 编辑菜单模态框 -->
-                <div class="modal fade" id="editMenu" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="editMenu" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -176,11 +176,10 @@
                                     </div>
                                 </form>
                             </div>
-
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" class="btn btn-primary que_add" onclick="saveEdit(this)" data-dismiss="modal">确定</button>
-                                <input id="uuid-edit" type="hidden">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary que_add" onclick="saveEdit(this)" data-dismiss="modal">确定</button>
+                                    <input id="uuid-edit" type="hidden">
                             </div>
                         </div>
                     </div>
@@ -217,7 +216,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer" style="display: block;">
+                            <div class="modal-footer">
                                 <div class="bootstrap-dialog-footer">
                                     <div class="bootstrap-dialog-footer-buttons">
                                         <button class="btn btn-primary" onclick="saveAdd(this)">保存</button>
@@ -234,6 +233,7 @@
                         var menuTable = [[${menu.menuTable}]];
                         var num = [[${iterStat.index}]];
 
+                        console.log();
 
                         if(menuTable === null){
                             $("[id=detail]")[num-numNull].remove();

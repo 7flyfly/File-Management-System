@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 针对solr查询的一些操作
+ */
 @Service
 public class SolrQueryService {
     @Autowired
@@ -29,6 +32,7 @@ public class SolrQueryService {
     private DynamicSQL dynamicSQL;
     @Autowired
     private SolrService solrService;
+
     /**
      * 根据id查询索引
      * @param solrClient：solr客户端
@@ -37,7 +41,7 @@ public class SolrQueryService {
     public String getDoucmentByDocumentNumber(SolrClient solrClient, String DocumentNumber){
         SolrDocument document = null;
         try {
-            document = solrClient.getById(DocumentNumber);
+            document = solrService.getDoucmentByDocumentNumber(solrClient,DocumentNumber);
         } catch (Exception e) {
             e.printStackTrace();
             Map<String,Object> map = new HashMap<>();
@@ -206,7 +210,7 @@ public class SolrQueryService {
      * @param table_id 数据所在表的id
      * @return 拼接好的查询字符串
      */
-    public String buildQueryStr(String keyword, String table_id,String fileContentSolrName){
+    private String buildQueryStr(String keyword, String table_id,String fileContentSolrName){
         String querystring = null;
         if(keyword.isEmpty()){
             querystring = "all_text:* ";
@@ -230,7 +234,7 @@ public class SolrQueryService {
      * @param jsonObject Keyword，TableId
      * @return
      */
-    public SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject,String fileContentSolrName) {
+    private SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject,String fileContentSolrName) {
         String keyword = jsonObject.getString("Keyword");
         String tableId = jsonObject.getString("TableId");
         String querystring = null;
@@ -269,7 +273,7 @@ public class SolrQueryService {
      * @param fileContentSolrName 附件在solr中的字段名称
      * @return
      */
-    public SolrQuery buildSolrQuery4ConditionQuery(JSONObject jsonObject,String fileContentSolrName) {
+    private SolrQuery buildSolrQuery4ConditionQuery(JSONObject jsonObject,String fileContentSolrName) {
         String allKeyWord = jsonObject.getString("allKeyWord");
         String documentNumber = jsonObject.getString("documentNumber");
         String anyKeyWord = jsonObject.getString("anyKeyWord");

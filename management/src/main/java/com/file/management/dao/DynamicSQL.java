@@ -61,6 +61,17 @@ public class DynamicSQL {
     }
 
     /**
+     * 根据solr的最新更新时间选择表中最近更新的记录
+     * @param tableName 表名
+     * @return 返回抽象list
+     */
+    public List selectByTableName(String tableName){
+        String sql = "select * from " + tableName;
+        List resultList = entityManager.createNativeQuery(sql).getResultList();
+        return  resultList;
+    }
+
+    /**
      * 获取数据库表中的列的列名
      * @param tableName
      * @return
