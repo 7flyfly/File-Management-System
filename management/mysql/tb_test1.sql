@@ -1,0 +1,5 @@
+INSERT INTO `tb_test1`(`DocumentNo`, `PartNo`, `Title`, `PersonLiable`, `No`, `LAST_MODIFIED`, `IS_DEL`, `TABLE_ID`) VALUES ('2017-1WS0908.2-151', 170, '1924年，河海工程专门学校与并入的国立东南大学工科成立河海工科大学，仍隶属于全国水利局，茅以升任首届校长。', '洪毅', 2, '2019-04-26 16:17:30', 0, 2);
+INSERT INTO `tb_test1`(`DocumentNo`, `PartNo`, `Title`, `PersonLiable`, `No`, `LAST_MODIFIED`, `IS_DEL`, `TABLE_ID`) VALUES ('2017-1WS0908.2-156', 171, '1949年5月，成为南京大学工学院水利系。', '徐新', 5, '2019-04-26 16:17:30', 0, 2);
+INSERT INTO `tb_test1`(`DocumentNo`, `PartNo`, `Title`, `PersonLiable`, `No`, `LAST_MODIFIED`, `IS_DEL`, `TABLE_ID`) VALUES ('2017-1WS0908.2-166', 171, '1939年，中央大学成立工学研究所，其中土木工程部下设水利工程组。', '徐新', 5, '2019-04-26 16:17:30', 0, 2);
+INSERT INTO `tb_test1`(`DocumentNo`, `PartNo`, `Title`, `PersonLiable`, `No`, `LAST_MODIFIED`, `IS_DEL`, `TABLE_ID`) VALUES ('2017-1WS0908.2-171', 171, '1939年，中央大学成立工学研究所，其中土木工程部下设水利工程组。', '徐新', 5, '2019-04-26 16:17:30', 0, 2);
+INSERT INTO `tb_test1`(`DocumentNo`, `PartNo`, `Title`, `PersonLiable`, `No`, `LAST_MODIFIED`, `IS_DEL`, `TABLE_ID`) VALUES ('2017-ws-168', 172, '41年，水利组划归水利系。', '洪毅', 8, '2019-04-26 16:17:30', 0, 2);

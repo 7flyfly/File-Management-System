@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe44000f-35d7-47ef-ab7f-c3084f2dbecf" name="Default Changelist" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetadataController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/MenuRepository.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Menu.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManagement.java" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManagement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/management/src/main/resources/application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataTemplate.html" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataTemplate.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/TemplateDetails.html" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/TemplateDetails.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/main/resources/templates/public.html" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/public.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java" afterPath="$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java" />
+    <list default="true" id="6ac3d644-28e3-4668-9641-2541d7984094" name="Default Changelist" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/management/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/File_Management_System$ManagementApplication.coverage" NAME="ManagementApplication Coverage Results" MODIFIED="1557411882830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.file.management.*</FILTER>
+    </SUITE>
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ManagementApplicationTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7502">
-              <caret line="357" column="57" lean-forward="false" selection-start-line="357" selection-start-column="57" selection-end-line="357" selection-end-column="57" />
-              <folding />
+            <state relative-caret-position="-1525">
+              <caret line="364" selection-start-line="364" selection-end-line="364" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="public.html" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/public.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="826">
-              <caret line="76" column="11" lean-forward="false" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="130">
+              <caret line="35" column="159" selection-start-line="35" selection-start-column="159" selection-end-line="35" selection-end-column="159" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/MenuRepository.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/TableData.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+            <state relative-caret-position="589">
+              <caret line="141" column="31" selection-start-line="141" selection-start-column="31" selection-end-line="141" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetaDataController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,42 +60,59 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ManagementApplication.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/TemplateDetails.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="216">
+              <caret line="9" column="48" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/main.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/TableDetails.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/metadatamanagement.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="4248">
+              <caret line="177" column="23" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mywork.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataManagement.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="33" />
-              <folding />
+            <state relative-caret-position="-343">
+              <caret line="132" selection-start-line="132" selection-end-line="132" />
+              <folding>
+                <element signature="n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#form#0;n#div#1;n#div#0;n#div#0;n#div#2;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MetadataManagement.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="13" column="107" lean-forward="false" selection-start-line="13" selection-start-column="67" selection-end-line="13" selection-end-column="107" />
-              <folding />
+            <state relative-caret-position="240">
+              <caret line="34" column="27" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataTemplate.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="301">
+              <caret line="240" column="52" selection-start-line="240" selection-start-column="52" selection-end-line="240" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -119,15 +135,11 @@
       <find>List&lt;SolrTableEntity&gt; solrTableEntityList = solrEntityDocumentList.get(0).getSolrTableEntityList();</find>
       <find>solrEntityDocumentList.get(0).getSolrTableEntityList()</find>
       <find>solrEntityDocumentList.get(0)</find>
+      <find>formEdit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -140,25 +152,42 @@
         <option value="$PROJECT_DIR$/management/pom.xml" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Check.html" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TemplateService.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/FieldService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/TemplateDetails.html" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManagement.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/metadata/Field.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetadataController.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataTemplate.html" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/MenuRepository.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Menu.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" />
+        <option value="$PROJECT_DIR$/management/mysql/db_filemanagement.sql" />
         <option value="$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/TableData.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/myworkIndex.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/MyWork/ExpiredFile.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/MyWork/FileCount.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/MyWork/MatureFile.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetadataController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/public.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/TableData.js" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/TableData.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetaDataController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/mywork/MyWork.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/MetadataManagement.js" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataTemplate.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataManagement.html" />
       </list>
     </option>
   </component>
@@ -176,27 +205,17 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-46" />
+    <option name="y" value="216" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="1005" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,6 +232,12 @@
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
               <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
+              <item name="mysql" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
+              <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -237,7 +262,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="management" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
@@ -246,19 +271,8 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
@@ -275,7 +289,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
@@ -285,7 +299,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="SystemManagement" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
@@ -301,36 +314,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="file" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -344,7 +327,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/management/mysql" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -352,6 +335,15 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator.PC-20190422MXKW.000\Desktop\File-Management-System\management\mysql" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator.PC-20190422MXKW.000\Desktop\File-Management-System\management\src\main\resources\templates\mywork" />
+      <recent name="C:\Users\Administrator.PC-20190422MXKW.000\Desktop\File-Management-System\management\src\main\resources\templates\metadata" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -431,6 +423,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.file.management.ManagementApplication" />
+      <module name="management" />
+      <envs />
+    </configuration>
     <list>
       <item itemvalue="Application.ManagementApplication" />
       <item itemvalue="JUnit.ManagementApplicationTests" />
@@ -446,15 +444,12 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fe44000f-35d7-47ef-ab7f-c3084f2dbecf" name="Default Changelist" comment="" />
+      <changelist id="6ac3d644-28e3-4668-9641-2541d7984094" name="Default Changelist" comment="" />
       <created>1555056777651</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -463,6 +458,7 @@
       <workItem from="1556113467442" duration="3384000" />
       <workItem from="1556280663821" duration="28546000" />
       <workItem from="1556358976503" duration="69000" />
+      <workItem from="1557400900562" duration="9696000" />
     </task>
     <task id="LOCAL-00001" summary="修改Solr的相关方法">
       <created>1555911575657</created>
@@ -499,43 +495,64 @@
       <option name="project" value="LOCAL" />
       <updated>1556096316626</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557451952640</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557451952641</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557457342743</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1557457342743</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557465178664</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1557465178664</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 15h 14m 18s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 17h 13m 43s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 15h 17m 25s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 17h 16m 01s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 15h 33m 41s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 17h 32m 01s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 15h 33m 57s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 17h 33m 16s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 15h 36m 14s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 17h 34m 05s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 15h 42m 36s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 17h 35m 05s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 16h 24m 58s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 19h 28m 10s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 16h 28m 04s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 19h 29m 06s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 16h 28m 36s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.09 at 20h 21m 47s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.27 at 17h 12m 07s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.10 at 09h 04m 39s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32554000" />
+    <option name="totallyTimeSpent" value="42250000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -547,38 +564,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26439232" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22376789" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3296875" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49880764" weight="0.2953125" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3296875" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3296875" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.4328299" side_tool="true" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.5671701" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49960256" weight="0.3296875" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="right" id="Maven" order="10" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,23 +626,58 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改Solr的相关注释，增加solr的简单检索" />
     <MESSAGE value="考虑solr-data-config中没有entity的问题" />
     <MESSAGE value="修改Solr的相关方法" />
     <MESSAGE value="修改页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改页面" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java</url>
+          <line>620</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>!(AttrNameList.contains(annexDatabaseName)&amp;&amp;AttrNameList.contains(documentNumberDatabaseName))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>AttrNameList.contains(annexDatabaseName)&amp;&amp;AttrNameList.contains(documentNumberDatabaseName)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>this.deltaimportFiles(solrClient2,tableName,documentNumberDatabaseName,annexDatabaseName,arrSplit,fileContentSolrName)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>solrEntityDocumentList.get(0).getSolrTableEntityList()</expression-string>
         <language-id>JAVA</language-id>
@@ -644,136 +696,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java" />
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/UserResposity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/SolrDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/dom4j/dom4j/2.1.1/dom4j-2.1.1.jar!/org/dom4j/io/XMLWriter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="42" column="13" lean-forward="false" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/dom4j/dom4j/2.1.1/dom4j-2.1.1.jar!/org/dom4j/Node.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1773">
-          <caret line="58" column="11" lean-forward="false" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1617">
-          <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="84" column="47" lean-forward="false" selection-start-line="84" selection-start-column="47" selection-end-line="84" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strings_dom4j.xml" />
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/Map.java" />
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/SolrTableEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/SolrEntityDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="255" column="24" lean-forward="false" selection-start-line="255" selection-start-column="24" selection-end-line="255" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/SolrTableEntityColumn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/Metadata.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/DepartmentManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/bootstrap-treeview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Check.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3381">
-          <caret line="107" column="26" lean-forward="true" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/ProcessManagement.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/TemplateDetails.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="39" column="50" lean-forward="true" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata.java" />
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1176">
@@ -784,119 +706,50 @@
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/metadata/Template.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-757">
-          <caret line="20" column="21" lean-forward="false" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/UserLogin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntegratedQuery.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="21" column="35" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="35" />
+          <caret line="21" column="35" selection-start-line="20" selection-end-line="21" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Integer.java" />
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1342">
-          <caret line="79" column="62" lean-forward="false" selection-start-line="79" selection-start-column="62" selection-end-line="79" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="72" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TemplateService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
-          <caret line="71" column="22" lean-forward="false" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataTemplate.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2399">
-          <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-          <folding>
-            <marker date="1556286615187" expanded="false" signature="4921:4937" ph="..." />
-            <marker date="1556286615187" expanded="true" signature="7501:7517" ph="..." />
-            <marker date="1556286615187" expanded="true" signature="7805:7821" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <caret line="71" column="22" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/FieldRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1555917446000" expanded="true" signature="528:577" ph="select * fro... tb_field" />
-          </folding>
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/TablesRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
-          <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1555943132000" expanded="true" signature="631:669" ph="delete from " />
-            <marker date="1555943132000" expanded="true" signature="791:831" ph="delete from " />
-          </folding>
+          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/TemplateRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-          <folding>
-            <marker date="1556074888000" expanded="true" signature="549:574" ph="SELECT * FRO... tb_template" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-858">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetadataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1335">
-          <caret line="106" column="50" lean-forward="false" selection-start-line="106" selection-start-column="50" selection-end-line="106" selection-end-column="50" />
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -904,7 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="34" column="36" lean-forward="true" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -912,63 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="477">
           <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="210" column="57" lean-forward="false" selection-start-line="210" selection-start-column="47" selection-end-line="210" selection-end-column="57" />
-          <folding>
-            <marker date="1556262094000" expanded="true" signature="2202:2212" ph="/**...*/" />
-            <marker date="1556262094000" expanded="true" signature="4270:4295" ph="UPDATE CURRE... " />
-            <marker date="1556262094000" expanded="true" signature="7258:7334" ph="INSERT INTO missingValue... " />
-            <marker date="1556262094000" expanded="true" signature="8154:8234" ph="UPDATE missi... " />
-            <marker date="1556262094000" expanded="true" signature="8577:8647" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2457">
-          <caret line="139" column="44" lean-forward="true" selection-start-line="139" selection-start-column="44" selection-end-line="139" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1576#1577#0" expanded="true" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1646#1647#0" expanded="true" />
-            <element signature="e#1682#1683#0" expanded="true" />
-            <element signature="e#1717#1718#0" expanded="true" />
-            <element signature="e#1748#1749#0" expanded="true" />
-            <element signature="e#1796#1797#0" expanded="true" />
-            <element signature="e#1836#1837#0" expanded="true" />
-            <element signature="e#1869#1870#0" expanded="true" />
-            <element signature="e#1901#1902#0" expanded="true" />
-            <element signature="e#1948#1949#0" expanded="true" />
-            <element signature="e#1990#1991#0" expanded="true" />
-            <element signature="e#2025#2026#0" expanded="true" />
-            <element signature="e#2056#2057#0" expanded="true" />
-            <element signature="e#2104#2105#0" expanded="true" />
-            <element signature="e#2144#2145#0" expanded="true" />
-            <element signature="e#2339#2340#0" expanded="true" />
-            <element signature="e#2371#2372#0" expanded="true" />
-            <element signature="e#2418#2419#0" expanded="true" />
-            <element signature="e#2460#2461#0" expanded="true" />
-            <element signature="e#2495#2496#0" expanded="true" />
-            <element signature="e#2528#2529#0" expanded="true" />
-            <element signature="e#2578#2579#0" expanded="true" />
-            <element signature="e#2622#2623#0" expanded="true" />
-            <element signature="e#2665#2666#0" expanded="true" />
-            <element signature="e#2700#2701#0" expanded="true" />
-            <element signature="e#2760#2761#0" expanded="true" />
-            <element signature="e#2808#2809#0" expanded="true" />
-            <element signature="e#2844#2845#0" expanded="true" />
-            <element signature="e#2876#2877#0" expanded="true" />
-            <element signature="e#2926#2927#0" expanded="true" />
-            <element signature="e#2968#2969#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -976,75 +771,288 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-836">
           <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="38" column="25" lean-forward="false" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7502">
-          <caret line="357" column="57" lean-forward="false" selection-start-line="357" selection-start-column="57" selection-end-line="357" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="107" lean-forward="false" selection-start-line="13" selection-start-column="67" selection-end-line="13" selection-end-column="107" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/public.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="826">
-          <caret line="76" column="11" lean-forward="false" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/MenuRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12936">
+          <caret line="211" column="7" selection-start-line="211" selection-start-column="7" selection-end-line="211" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.15/mysql-connector-java-8.0.15.jar!/com/mysql/cj/jdbc/exceptions/SQLError.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/mysql/tb_state.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/mysql/tb_action.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/mysql/tb_message.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="15" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/mysql/db_filemanagement.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="30" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/mysql/tb_field.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-249">
+          <caret line="59" column="32" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/MatureFile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/FileCount.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/ExpiredFile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork2.html" />
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="306" column="42" selection-start-line="306" selection-start-column="42" selection-end-line="306" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/jquery.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/Metadata.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/tabledata.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1537">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="240">
+          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding>
+            <element signature="e#347#348#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/homepage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="72" column="30" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="30" />
+          <folding>
+            <element signature="n#style#0;n#iframe#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-87">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding>
+            <element signature="e#1216#1217#0" expanded="true" />
+            <element signature="e#1259#1260#0" expanded="true" />
+            <element signature="e#1333#1334#0" expanded="true" />
+            <element signature="e#1374#1375#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/myworkIndex.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/TableData.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="141" column="31" selection-start-line="141" selection-start-column="31" selection-end-line="141" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetaDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/metadatamanagement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4248">
+          <caret line="177" column="23" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataTemplate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="240" column="52" selection-start-line="240" selection-start-column="52" selection-end-line="240" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="34" column="27" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/TemplateDetails.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/TableDetails.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataManagement.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-343">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
+          <folding>
+            <element signature="n#form#0;n#div#1;n#div#0;n#div#0;n#div#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#div#1;n#div#0;n#div#0;n#div#2;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1525">
+          <caret line="364" selection-start-line="364" selection-end-line="364" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/public.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="35" column="159" selection-start-line="35" selection-start-column="159" selection-end-line="35" selection-end-column="159" />
         </state>
       </provider>
     </entry>
