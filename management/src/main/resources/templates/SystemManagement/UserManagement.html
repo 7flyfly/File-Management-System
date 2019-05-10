@@ -27,9 +27,8 @@
                     </a>
                 </li>
             </ol>
-            <div id="main-center">
-                <div id="mc-query" class="container-fluid">
-                    <div class="row">
+            <div id="main-center" class="container-fluid">
+                <div class="row">
                         <div class="col-sm-2 col-md-2 zero-padding">
                             <select class="form-control input-sm query-role">
                                 <option value="">所有角色</option>
@@ -67,95 +66,178 @@
                         <div class="col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 zero-padding">
                             <div role="group" class="btn-group btn-group-sm btn-group-xs-12 right zero-padding-lr">
                                 <button type="button" class="btn btn-default btn-add btn-block">
-                                    <i class="glyphicon glyphicon-plus">添加</i>
+                                    <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal">添加</i>
                                 </button>
+                            </div>
+                        </div>
+                </div>
+                <!--模态框-->
+                <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="addModalLabel"> 添加 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="info" class="form-horizontal" action="" method="post">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="name">姓名</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="name" name="name" placeholder="姓名" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="account">账号</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="account" name="account" placeholder="账号" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="password">密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="password" name="password" placeholder="密码" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="department">部门</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="department" name="department" placeholder="部门" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="mail">邮箱</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="mail" name="mail" placeholder="邮箱" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="phone">联系电话</label>
+                                        <div class="col-sm-10"><input type="text" autocomplete="off" class="form-control" id="phone" name="phone" placeholder="联系电话" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="role">角色</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="role" name="role" placeholder="角色" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="status">状态</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="status" name="status">
+                                                <option value="NORMAL">正常</option>
+                                                <option value="LOCK">锁定</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-primary" id="save" onclick="save(this)">保存</button>
+                                        <button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="mc-main" class="container-fluid">
-                    <div class="row">
-                        <div id="DataTables_Table_7_wrapper" class="dataTables_wrapper form-inline">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                <table id="DataTables_Table_7" class="table table-striped table-bordered nowrap hover no-footer" role="grid"
-                                       aria-describedby="DataTables_Table_7_info" style="width: 100%" width="100%" cellpadding="0">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 40.2px;">序号</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 70px;">姓名</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 90.2px;">账号</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 80.2px;">部门</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 152.2px;">邮箱</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 103.2px;">联系电话</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 82.2px;">角色</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_7" rowspan="1" colspan="1" style="width: 54.2px;">状态</th>
-                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 152px;" aria-label="操作">操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr role="row" class="even">
-                                        <td tabindex="0">1</td>
-                                        <td class="sorting_1">兼职档案员1</td>
-                                        <td>jzday1</td>
-                                        <td>校办</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>校办兼职档案组</td>
-                                        <td>正常</td>
-                                        <td>
-                                            <div class="btn-group btn-group-xs" role="group">
-                                                <button type="button" class="btn btn-default btn-edit">
-                                                    <i class="glyphicon glyphicon-pencil">编辑</i>
-                                                </button>
-                                                <button type="button" class="btn btn-default btn-editUserTemplaterestrict">
-                                                    <i class="glyphicon glyphicon-asterisk">库权限</i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td tabindex="0">2</td>
-                                        <td class="sorting_1">兼职档案员2</td>
-                                        <td>jzday2</td>
-                                        <td>国际教育学院</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>国际教育学院兼职档案组</td>
-                                        <td>正常</td>
-                                        <td>
-                                            <div class="btn-group btn-group-xs" role="group">
-                                                <button type="button" class="btn btn-default btn-edit">
-                                                    <i class="glyphicon glyphicon-pencil">编辑</i>
-                                                </button>
-                                                <button type="button" class="btn btn-default btn-editUserTemplaterestrict">
-                                                    <i class="glyphicon glyphicon-asterisk">库权限</i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td tabindex="0">4</td>
-                                        <td class="sorting_1">管理员</td>
-                                        <td>admin</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>管理组</td>
-                                        <td>正常</td>
-                                        <td>
-                                            <div class="btn-group btn-group-xs" role="group">
-                                                <button type="button" class="btn btn-default btn-edit">
-                                                    <i class="glyphicon glyphicon-pencil">编辑</i>
-                                                </button>
-                                                <button type="button" class="btn btn-default btn-editUserTemplaterestrict">
-                                                    <i class="glyphicon glyphicon-asterisk">库权限</i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+
+                <!--模态框-->
+                <div class="modal fade" id="editModal"   tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="editModalLabel"> 编辑 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="information" class="form-horizontal" action="" method="post">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="nameEdit">姓名</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="nameEdit" name="nameEdit" placeholder="姓名" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="accountEdit">账号</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly="true" autocomplete="off" class="form-control"id="accountEdit" name="accountEdit" placeholder="账号" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="passwordEdit">密码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly="true" autocomplete="off" class="form-control" id="passwordEdit" name="passwordEdit" placeholder="密码" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="departmentEdit">部门</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="departmentEdit" name="departmentEdit" placeholder="部门" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="mailEdit">邮箱</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="mailEdit" name="mailEdit" placeholder="邮箱" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="phoneEdit">联系电话</label>
+                                        <div class="col-sm-10"><input type="text" autocomplete="off" class="form-control" id="phoneEdit" name="phoneEdit" placeholder="联系电话" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="roleEdit">角色</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" id="roleEdit" name="roleEdit" placeholder="角色" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="statusEdit">状态</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="statusEdit" name="statusEdit">
+                                                <option value="NORMAL" id="NORMAL">正常</option>
+                                                <option value="LOCK" id="LOCK">锁定</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-primary" id="saveEdit" onclick="saveEdit(this)">保存</button>
+                                        <button class="btn btn-default" id="closeEdit" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="userTable"></table>
+                </div>
+                <!--库权限模态框-->
+                <div class="modal fade" id="kuModal"   tabindex="-1" role="dialog" aria-labelledby="kuModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="kuModalLabel"> 库权限设置 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <span>库授权模块</span>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-primary" id="ku-save" onclick="saveku(this)">保存</button>
+                                        <button class="btn btn-default" id="ku-close" data-dismiss="modal">关闭</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,6 +247,10 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script th:src="@{/js/SystemManagement/UserManage.js}"></script>
 </body>
 </html>

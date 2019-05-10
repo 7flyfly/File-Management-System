@@ -19,7 +19,7 @@ function load() {
         pageNumber : 1, // 如果设置了分布，首页页码
         search : false, // 是否显示搜索框
         sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-        contentType: "application/x-www-form-urlencoded",
+        contentType: "application/json;charset=utf-8",
 
         queryParams: function (params) {
             return{
@@ -29,7 +29,6 @@ function load() {
                 pageNumber:params.pageNumber, //页面大小
                 offset : params.offset, //页码
                 search : params.search,
-
             }
         },
         columns : [ {
@@ -37,129 +36,133 @@ function load() {
             field : 'id',
             align : 'center',
             valign : 'center',
-            width : '8%',
+            formatter : function (value, row, index) {
+                var pageSize = $('#table').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+                var pageNumber = $('#table').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+                return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
+            }
 
         }, {
             title : '单号',
             field : 'approvalNumber',
             align : 'center',
             valign : 'center',
-            width : '15%'
+            //width : '15%'
 
         },  {
             title : '利用类型',
             field : 'type',
             align : 'center',
             valign : 'center',
-            width : '10%'
+            //width : '10%'
         }, {
             title : '登记人',
             field : 'registrant',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '登记日期',
             field : 'recordDate',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '单位',
             field : 'unit',
             align : 'center',
             valign : 'center',
-            width : '15%'
+           // width : '15%'
         }, {
             title : '姓名',
             field : 'name',
             align : 'center',
             valign : 'center',
-            width : '5%'
+            //width : '5%'
         }, {
-            title : '日期',
+            title : '利用始日期',
             field : 'date',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '联系电话',
             field : 'telphone',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '证件类型',
             field : 'certificateType',
             align : 'center',
             valign : 'center',
-            width : '5%'
+            //width : '5%'
         }, {
             title : '证件号码',
             field : 'certificateNumber',
             align : 'center',
             valign : 'center',
-            width : '5%'
+            //width : '5%'
         }, {
             title : '目的',
             field : 'purpose',
             align : 'center',
             valign : 'center',
-            width : '5%'
+            //width : '5%'
         }, {
             title : '方式',
             field : 'way',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '内容',
             field : 'contant',
             align : 'center',
             valign : 'center',
-            width : '10%'
+            //width : '10%'
         }, {
             title : '状态',
             field : 'state',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '出借经办人',
             field : 'stloanAgentate',
             align : 'center',
             valign : 'center',
-            width : '8%'
+            //width : '8%'
         }, {
             title : '出借提交日期',
             field : 'loanUbmissionDate',
             align : 'center',
             valign : 'center',
-            width : '10%'
+            //width : '10%'
         }, {
             title : '出借日期',
             field : 'loanDate',
             align : 'center',
             valign : 'center',
-            width : '10%'
+           // width : '10%'
         }, {
             title : '出借天数',
             field : 'day',
             align : 'center',
             valign : 'center',
-            width : '10%'
+            //width : '10%'
         }, {
             title : '归还经办人',
             field : 'ReturnPerson',
             align : 'center',
             valign : 'center',
-            width : '10%'
+           // width : '10%'
         }, {
             title : '归还日期',
             field : 'reDate',
             align : 'center',
             valign : 'center',
-            width : '10%'
+            //width : '10%'
         }
         ]
     });

@@ -1,4 +1,4 @@
-package com.file.management.pojo;
+package com.file.management.pojo.LibraryUse;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,21 +6,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_registrationForm")
+@Table(name = "tb_registration")
 public class RegistrationForm {
-    //序号
-    @Id
-    @Column(name = "ID")
-    private int id;
     //单号
+    @Id
     @Column(name = "ODDNUMBERS")
     private String oddNumbers;
+
+    //审批单号
+    @Column(name = "APPROVENUMBER")
+    private String approvalNumber;
+
+    //审批意见
+    @Column(name = "OPINION")
+    private String opinion;
+
+    //审批结果
+    @Column(name = "RESULT")
+    private String result;
+
+    @Column(name = "REGISTRANT")
+    private String registrant;
+
     //类型
     @Column(name = "TYPE")
     private String type;
-    //登记人
-    @Column(name = "REGISTRANT")
-    private String registrant;
+
     //登记日期
     @Column(name = "RECORDDATE")
     private String recordDate;
@@ -68,21 +79,13 @@ public class RegistrationForm {
     private String day;
     //归还经办人
     @Column(name = "TURN")
-    private String Return;
+    private String turn;
     //归还日期
     @Column(name = "RETURNDATA")
     private String returnData;
     //操作
     @Column(name = "OPERATION")
     private String operation;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getOddNumbers() {
         return oddNumbers;
@@ -228,12 +231,12 @@ public class RegistrationForm {
         this.day = day;
     }
 
-    public String getReturn() {
-        return Return;
+    public String getTurn() {
+        return turn;
     }
 
-    public void setReturn(String aReturn) {
-        Return = aReturn;
+    public void setTurn(String aReturn) {
+        turn = aReturn;
     }
 
     public String getReturnData() {
@@ -250,5 +253,29 @@ public class RegistrationForm {
 
     public void setOperation(String operation) {
         this.operation = operation;
+    }
+
+    public String getApprovalNumber() {
+        return approvalNumber;
+    }
+
+    public void setApprovalNumber(String approvalNumber) {
+        this.approvalNumber = approvalNumber;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

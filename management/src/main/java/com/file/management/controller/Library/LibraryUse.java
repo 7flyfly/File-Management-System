@@ -1,14 +1,11 @@
 package com.file.management.controller.Library;
 
 
-import com.file.management.pojo.RegistrationForm;
 import com.file.management.service.LibraryUse.RegistrationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 /*
  * 借阅利用

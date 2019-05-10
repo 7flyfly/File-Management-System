@@ -20,14 +20,11 @@
         .table>thead >tr> th{
             text-align: center;
         }
-    </style>
-   <script>
-       $(document).ready(function () {
-           $('#table').DataTable({
 
-           });
-       })
-   </script>
+        .input-group .datepicker{
+            z-index: 10000;
+        }
+    </style>
 
 </head>
 <body>
@@ -52,13 +49,14 @@
                 <div class="row">
                     <div class="text-center zero-padding">
                         <span class="col-md-2 zero-padding-lr">
-                            <select class="form-control input-sm query-type">
+                            <select id="query-type" class="form-control input-sm query-type">
                                 <option value="">所有类型</option>
                                 <option value="0">馆内登记</option>
                                 <option value="1">网上登记</option>
                                 <option value="2">微信登记</option>
                             </select>
                         </span>
+                        <!--
                         <span class="col-md-2 zero-padding-lr">
                             <select class="form-control input-sm query-status">
                                 <option value=" ">所有状态</option>
@@ -69,6 +67,7 @@
                                 <option value="9">无需审核</option>
                             </select>
                         </span>
+
                         <span class="col-md-2 zero-padding-lr">
                             <select class="form-control input-sm query-reason">
                                 <option value="">所有利用目的</option>
@@ -85,21 +84,44 @@
                             </select>
                         </span>
                         <span class="col-md-1 zero-padding-lr">
-                            <input type="text" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="登记起时间" class="date readOnly form-control input-sm query-createdtime-start validate[custom[date]]">
+                            <input type="text" id="startDate" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="登记起时间" class="date readOnly form-control input-sm query-createdtime-start validate[custom[date]]">
                         </span>
+                        <script type="text/javascript">
+                            $(function(){
+                                $("#startDate").datetimepicker({
+                                    format: "yyyy-mm-dd",
+                                    autoclose: true,
+                                    todayBtn: true,
+                                    language:'zh-CN',
+                                    pickerPosition:"bottom-left"
+                                });
+                            });
+                        </script>
                         <span class="col-md-1 zero-padding-lr">
                             <input type="text" name="query-createdtime-end" data-force-parse="true" readonly="true" placeholder="登记止时间" class="date readOnly form-control input-sm query-createdtime-end validate[custom[date]]">
                         </span>
+                        -->
                         <span class="col-md-2 zero-padding-lr">
-                            <input class="form-control input-sm query-keywords" placeholder="单号或利用人账号、姓名">
+                            <input id="dd" class="form-control input-sm query-keywords" placeholder="利用人姓名">
                         </span>
                     </div>
+                    <script type="text/javascript">
+                        $(function(){
+                            $("#startDate").datetimepicker({
+                                format: "yyyy-mm-dd",
+                                autoclose: true,
+                                todayBtn: true,
+                                language:'zh-CN',
+                                pickerPosition:"bottom-left"
+                            });
+                        });
+                    </script>
                 </div>
                 <div class="row">
                     <div class="text-center">
                         <div class="btn-group btn-group-sm btn-group-xs" role="group">
                             <button class="btn btn-default " type="button">
-                                <i class="glyphicon glyphicon-search" onclick="search()">搜索</i>
+                                <i class="glyphicon glyphicon-search" onclick="searchR(this)">搜索</i>
                             </button>
                             <button class="btn btn-info" type="button">
                             <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal" onclick="add()">新建登记单</i>
@@ -110,7 +132,7 @@
                 <!--模态框-->
                 <form method="post" name="register" class="form-horizontal" role="form" id="form-data"  style="margin: 20px; width: 60%" >
                     <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog" style="width: 1100px" >
                             <div class="modal-content">
                                 <div class="modal-header" style="background-color: #007bff">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
@@ -150,19 +172,19 @@
                                                         输入利用者信息
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 单位</span>
-                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerUnit" placeholder="单位">
+                                                            <input class="form-control" id="unit" type="text" autocomplete="off" name="borrowerUnit" placeholder="单位">
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 姓名</span>
-                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerName" placeholder="姓名">
+                                                            <input class="form-control" id="name" type="text" autocomplete="off" name="borrowerName" placeholder="姓名">
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 联系方式</span>
-                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerPhone" placeholder="联系方式">
+                                                            <input class="form-control" id="phone" type="text" autocomplete="off" name="borrowerPhone" placeholder="联系方式">
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 证件类型</span>
-                                                            <select class="form-control" name="borrowerIdtype">
+                                                            <select class="form-control" id="certType" name="borrowerIdtype">
                                                                 <option value="">请选择</option>
                                                                 <option value="1">身份证</option>
                                                                 <option value="2">学生证</option>
@@ -171,7 +193,7 @@
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 证件号码</span>
-                                                            <input class="form-control" type="text" autocomplete="off" name="borrowerIdno" placeholder="证件号码">
+                                                            <input class="form-control" id="borrowerIdno" type="text" autocomplete="off" name="borrowerIdno" placeholder="证件号码">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -179,17 +201,27 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="borrowerDate" class="col-sm-3 control-label">利用日期</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="borrowerDate"  placeholder="请选择">
+                                            <div class="input-group input-append date form_datetime" id="use-date" >
+                                                <input type="text" id="borrowerDate" class="form-control datepicker"  name="borrowerDate">
+                                                <span style="position: relative;z-index: 9999;"></span>
                                                 <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                    <span class="add-on"><i class="glyphicon glyphicon-th"></i></span>
                                                 </span>
                                             </div>
+                                            <script type="text/javascript">
+                                                    $('.form_datetime').datetimepicker({
+                                                        format: 'yyyy-mm-dd',
+                                                        locale: moment.locale('zh-cn'),
+                                                        autoclose: true,
+                                                        todayBtn: true,
+                                                        pickerPosition: "bottom-right"
+                                                    });
+                                            </script>
                                         </div>
                                         <div class="form-group">
                                             <label for="reason" class="col-sm-3 control-label">利用目的</label>
                                             <div class="col-sm-3">
-                                                <select class="form-control" name="reason">
+                                                <select class="form-control" id="reason" name="reason">
                                                     <option value="">请选择</option>
                                                     <option value="401">出国查档</option>
                                                     <option value="402">调职查档</option>
@@ -200,73 +232,48 @@
                                             <label class="col-sm-3 control-label" for="way">利用方式</label>
                                             <div class="input-group ">
                                                 <div class="checkbox-panel form-control">
-                                                    <input class="origin" type="hidden" name="way" value="">
+                                                    <input class="origin" type="hidden" id="way" name="way" value="">
                                                     <span class="checkboxes-item">
-                                                        <input value="403" name="_cb_DVW" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="查阅">
+                                                        <input value="查阅" id="see" name="way" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="查阅">
                                                         <span class="checkboxes-item-text">查阅</span>
                                                     </span>
                                                     <span class="checkboxes-item">
-                                                        <input value="404" name="_cb_DVW" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="借阅">
+                                                        <input value="借阅" id="borrow" name="way" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="借阅">
                                                         <span class="checkboxes-item-text">借阅</span>
                                                     </span>
                                                     <span class="checkboxes-item">
-                                                        <input value="601" name="_cb_DVW" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="复制">
+                                                        <input value="复制" id="copy" name="way" class="validate[minCheckbox[1]]" data-errormessage-range-underflow="至少选择一项" type="checkbox" data-text="复制">
                                                         <span class="checkboxes-item-text">复制</span>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group form-group-content">
-                                            <label class="col-sm-3 control-label" for="content">内容</label>
-                                            <div class="input-group">
+                                            <label class="col-sm-1 control-label" for="content">内容</label>
+                                            <div class="col-sm-11">
                                                 <div role="group" class="btn-group btn-group-sm btn-group-xs-12 right">
                                                     <button type="button" class="btn btn-default btn-selToAdd btn-xs-block">
-                                                        <i class="glyphicon glyphicon-plus">选择档案库并添加</i>
+                                                        <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#fileModal">选择档案库并添加</i>
                                                     </button>
-                                                    <div class="dialog-panel dialog-tree-panel hide">
-                                                        <input type="hidden" class="origin" name="query-template" value="sxda_a">
-                                                        <div class="input-group input-group-sm"><input type="text" readonly="true" placeholder="请选择" class="form-control origin-text readOnly">
-                                                            <span class="input-group-btn"><button type="button" class="btn btn-default">
-                                                                <i class="glyphicon glyphicon-remove">清除</i>
-                                                            </button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dialog-panel dialog-custom-panel hide">
-                                                        <input type="hidden" class="origin" name="content" value="[]">
-                                                        <div class="input-group input-group-sm">
-                                                            <input type="text" readonly="true" placeholder="请选择" class="form-control origin-text readOnly">
-                                                            <span class="input-group-btn"><button type="button" class="btn btn-default">
-                                                                <i class="glyphicon glyphicon-remove">清除</i>
-                                                            </button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                <table class="table table-bordered nowrap" width="100%" cellspacing="0">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>档案库</th>
-                                                        <th>档案条目</th>
-                                                        <th>操作</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                </table>
+                                                <div class="row">
+                                                    <table id="contentTable" class="table table-bordered nowrap" width="100%" cellpadding="0"></table>
+                                                </div>
                                             </div>
+
                                         </div>
+
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="borrowday">出借天数</label>
                                             <div class="input-group">
-                                                <input type="text" autocomplete="off" class="form-control validate[custom[integer],min[0]]" name="borrowday" placeholder="出借天数">
+                                                <input type="text" id="borrowday" autocomplete="off" class="form-control validate[custom[integer],min[0]]" name="borrowday" placeholder="出借天数">
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="input" class="btn btn-primary que_add">提交</button>
+                                    <button type="input" class="btn btn-primary que_add" onclick="save(this)">提交</button>
                                     <span id="tip">
                                     </span>
                                 </div>
@@ -274,65 +281,107 @@
                         </div>
                     </div>
                 </form>
+
+                <!--添加档案模态框-->
+                <div class="modal fade" id="fileModal"   tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1200px" >
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="fileModalLabel"> 从库中选择 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select class="form-control database" id="database" >
+                                            <option value="">请选择库</option>
+                                            <option value="1">声像档案</option>
+                                        </select>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="btn-group btn-group-sm btn-group-xs" role="group">
+                                            <button class="btn btn-default " type="button">
+                                                <i class="glyphicon glyphicon-search" onclick="searchDatabase(this)">查询</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table id="mt-database"></table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="input" class="btn btn-primary que_add" data-dismiss="modal"  onclick="confirm_D(this)">确定</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--删除提示模态框-->
+                <div class="modal fade" id="delModal"   tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: red">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="delModalLabel"> 删除 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <span>确定删除吗？</span>
+                                <input id="approveNum" type="hidden">
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-danger" id="delete" onclick="removeForm(this)">删除</button>
+                                        <button class="btn btn-default" id="cancal" data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--归还提示模态框-->
+                <div class="modal fade" id="backModal"   tabindex="-1" role="dialog" aria-labelledby="backModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #f0ad4e">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="backModalLabel"> 提示 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <span>确定执行当前操作吗？</span>
+                                <input id="num" type="hidden">
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-warning" id="confirm" onclick="confirm(this)">确定</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div id="main">
-                <table id="table" class="display table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
-                    <thread>
-                        <tr>
-                            <th>序号</th>
-                            <th>单号</th>
-                            <th>类型</th>
-                            <th>登记人</th>
-                            <th>登记日期</th>
-                            <th>单位</th>
-                            <th>姓名</th>
-                            <th>日期</th>
-                            <th>联系电话</th>
-                            <th>证件类型</th>
-                            <th>证件号码</th>
-                            <th>目的</th>
-                            <th>方式</th>
-                            <th>内容</th>
-                            <th>状态</th>
-                            <th>出借经办人</th>
-                            <th>出借提交日期</th>
-                            <th>出借日期</th>
-                            <th>借阅天数</th>
-                            <th>归还经办人</th>
-                            <th>归还日期</th>
-                            <th>操作</th>
-                        </tr>
-                    </thread>
-                    <tbody>
-                      <tr th:each="content:${contentList}">
-                          <td th:text="${content.id}">0</td>
-                          <td th:text="${content.oddNumbers}">0</td>
-                          <td th:text="${content.registrant}">0</td>
-                          <td th:text="${content.recordDate}">0</td>
-                          <td th:text="${content.unit}">0</td>
-                          <td th:text="${content.name}">0</td>
-                          <td th:text="${content.date}">0</td>
-                          <td th:text="${content.telphone}">0</td>
-                          <td th:text="${content.certificateType}">0</td>
-                          <td th:text="${content.certificateNumber}">0</td>
-                          <td th:text="${content.purpose}">0</td>
-                          <td th:text="${content.way}">0</td>
-                          <td th:text="${content.contant}">0</td>
-                          <td th:text="${content.state}">0</td>
-                          <td th:text="${content.stloanAgentate}">0</td>
-                          <td th:text="${content.loanUbmissionDate}">0</td>
-                          <td th:text="${content.loanDate}">0</td>
-                          <td th:text="${content.day}">0</td>
-                          <td th:text="${content.Return}">0</td>
-                          <td th:text="${content.returnData}">0</td>
-                          <td th:text="${content.operation}">0</td>
-                      </tr>
-                    </tbody>
-                </table>
+            <div id="main" class="row">
+                <table id="registTable" class="table table-bordered table-striped" style="width:100%"></table>
+
             </div>
         </div>
     </div>
+    <script th:src="@{/js/bootstrap-datetimepicker/bootstrap-dateimepicker.min.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker/bootstrap-dateimepicker.zh-CN.js}"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
     <script type="text/javascript" th:src="@{/js/LibraryUse/Check.js}"></script>
 </div>
 </body>

@@ -1,4 +1,4 @@
-package com.file.management.controller;
+package com.file.management.controller.SystemManage;
 
 
 import com.file.management.pojo.metadata.Template;
@@ -45,10 +45,11 @@ public class SystemManagement {
     /*
      部门管理
     */
-    @RequestMapping("/SystemManagement/DepartmentManage")
-    public String departmentManagement(){
-        return "SystemManagement/DepartmentManage";
-    }
+
+//    @RequestMapping("/SystemManagement/DepartmentManage")
+//    public String departmentManagement(){
+//        return "SystemManagement/DepartmentManagement";
+//    }
 
     /*
     元数据

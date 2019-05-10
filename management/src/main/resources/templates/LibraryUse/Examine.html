@@ -29,6 +29,7 @@
                     <div class="row">
                         <div class="text-center zero-padding">
                             <span class="col-md-2 zero-padding-lr"></span>
+                            <!--
                             <span class="col-md-2 zero-padding-lr">
                                 <select class="form-control input-sm query-type">
                                     <option value="">所有类型</option>
@@ -37,21 +38,24 @@
                                     <option value="3">微信登记</option>
                                 </select>
                             </span>
+                            -->
                             <span class="col-md-2 zero-padding-lr">
-                                <select class="form-control input-sm query-checkstatus">
-                                    <option value="true">待审核</option>
-                                    <option value="false">已审核</option>
+                                <select id="query-checkstatus" class="form-control input-sm query-checkstatus">
+                                    <option value="1">待审批</option>
+                                    <option value="2">已审批</option>
                                 </select>
                             </span>
+                            <!--
                             <span class="col-md-2 zero-padding-lr">
                                 <input class="form-control input-sm query-check-keywords" placeholder="审批单号">
                             </span>
                             <span class="col-md-2 zero-padding-lr">
                                 <input class="form-control input-sm query-using-keywords" placeholder="利用单号或利用人账号、姓名">
                             </span>
+                            -->
                             <span class="col-md-1 zero-padding-lr">
                                 <button class="btn btn-primary btn-sm btn-xs" type="button">
-                                    <i class="glyphicon glyphicon-search">搜索</i>
+                                    <i class="glyphicon glyphicon-search" onclick="search(this)">搜索</i>
                                 </button>
                             </span>
                         </div>
@@ -71,7 +75,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="comment">审核意见</label>
                                 <div class="col-sm-5">
-                                    <textarea class="form-control validate[required]" data-errormessage-value-missing="请输入审核意见" name="comment"></textarea>
+                                    <textarea id="opinion" class="form-control validate[required]" data-errormessage-value-missing="请输入审核意见" name="comment"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -79,8 +83,8 @@
                     <div class="form-group">
                         <label class="hidden-xs col-sm-2 control-label"></label>
                         <div class="col-sm-5">
-                            <button class="btn btn-success btn-pass btn-xs-block" type="button">通过</button>
-                            <button class="btn btn-danger btn-xs-block" type="button">不通过</button>
+                            <button class="btn btn-success btn-pass btn-xs-block" onclick="pass(this)" type="button">通过</button>
+                            <button class="btn btn-danger btn-xs-block" onclick="unpass(this)" type="button">不通过</button>
                         </div>
                     </div>
                 </div>

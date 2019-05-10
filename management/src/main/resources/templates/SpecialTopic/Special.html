@@ -46,12 +46,78 @@
                       <div class="row">
                           <div class="text-center">
                               <div role="group" class="btn-group btn-group-sm btn-group-xs-12">
-                                  <button type="button" class="btn btn-default btn-search btn-xs-block">
-                                      <i class="glyphicon glyphicon-search">搜索</i>
+                                  <button id="search" type="button" class="btn btn-default btn-search btn-xs-block">
+                                      <i class="glyphicon glyphicon-search"data-toggle="modal" data-target="#searchModal">搜索</i>
                                   </button>
                                   <button type="button" class="btn btn-info btn-add btn-xs-block">
-                                      <i class="glyphicon glyphicon-plus">新建专题</i>
+                                      <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#specialModal">新建专题</i>
                                   </button>
+                              </div>
+                              <!--提示模态框-->
+                              <div class="modal fade" id="searchModal"   tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" style="width: 600px" >
+                                      <div class="modal-content">
+                                          <div class="modal-header" style="background-color: red">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                              <h4 class="modal-title" id="searchModalLabel"> 提示 </h4>
+                                          </div>
+                                          <div class="modal-body">
+                                             <span>该功能待实现</span>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!--模态框-->
+                              <div class="modal fade" id="specialModal"   tabindex="-1" role="dialog" aria-labelledby="specialModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" style="width: 600px" >
+                                      <div class="modal-content">
+                                          <div class="modal-header" style="background-color: #007bff">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                              <h4 class="modal-title" id="fileModalLabel"> 新建专题 </h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              <form id="info" class="form-horizontal" action="" method="post">
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 control-label" for="name">名称</label>
+                                                      <div class="col-sm-10">
+                                                          <input type="text" autocomplete="off" class="form-control"id="name" name="name" placeholder="名称" data-prompt-position="bottomLeft">
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 control-label" for="contant">内容</label>
+                                                      <div class="col-sm-10">
+                                                          <input type="text" autocomplete="off" class="form-control"id="contant" name="contant" placeholder="内容" data-prompt-position="bottomLeft">
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 control-label" for="creater">创建人</label>
+                                                      <div class="col-sm-10">
+                                                          <input type="text" autocomplete="off" class="form-control" id="creater" name="creater" placeholder="创建人" data-prompt-position="bottomLeft">
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 control-label" for="publisher">发布人</label>
+                                                      <div class="col-sm-10">
+                                                          <input type="text" autocomplete="off" class="form-control" id="publisher" name="publisher" placeholder="发布人" data-prompt-position="bottomLeft">
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label class="col-sm-2 control-label" for="r-time">发布时间</label>
+                                                      <div class="col-sm-10">
+                                                          <input type="text" autocomplete="off" class="form-control" id="r-time" name="r-time" placeholder="发布时间" data-prompt-position="bottomLeft">
+                                                      </div>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                              <button type="input" class="btn btn-primary que_add" onclick="save(this)">保存</button>
+                                          </div>
+                                      </div>
+                                  </div>
                               </div>
                           </div>
                       </div>
