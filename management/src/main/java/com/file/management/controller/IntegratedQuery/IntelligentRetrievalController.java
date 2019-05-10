@@ -311,7 +311,7 @@ public class IntelligentRetrievalController {
      */
     public String fullImportTable2Solr(){
         Map<String,Object> map = new HashMap<>();
-        HashMap<Boolean,String> hashMap = solrService.fullImportTable2Solr("tb_test2",
+        HashMap<Boolean,String> hashMap = solrService.fullImportTable2Solr("tb_test3",
                 null,null,null,null,null);
         map.put("result",hashMap);
         return map.toString();

@@ -29,7 +29,6 @@ var IntelligentRetrieval={
                                             ' alt="请检查文件，文件或不存在" >'+
                                             '</a> </div>')
         }
-
     },
     keySearchCheck:function(){
             IntelligentRetrieval.keyWord=$("#keyword").val();
