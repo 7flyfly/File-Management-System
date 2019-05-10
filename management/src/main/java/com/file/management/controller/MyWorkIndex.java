@@ -21,7 +21,7 @@ public class MyWorkIndex {
 
     @Autowired
     private  MessageService messageService;
-            @RequestMapping("/myworkindex")
+            @RequestMapping("/mywork/myworkindex")
             public String myWorkindex( Map<String,Object> map){
                 List<Message> lm = messageService.findAll();
                 int num = lm.size()-5;

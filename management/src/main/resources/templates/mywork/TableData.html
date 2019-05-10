@@ -12,8 +12,8 @@
 
     <!-- 新增数据按钮 -->
     <div style="margin-bottom:20px;">
-        <button id="btn_add" type="button" class="btn bg-primary">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="modal" data-target="#addData"></span>新增数据
+        <button id="btn_add" type="button" class="btn bg-primary" data-toggle="modal" data-target="#addData">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>新增数据
         </button>
     </div>
 
@@ -87,15 +87,15 @@
                     body += "<td></td>";
                 }
             }
-            body += '<td><button id="btn_del" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="modal" data-target="#delData"></span>删除数据</button>';
-            body += '<button id="btn_edit" type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target="#editData"></span>编辑数据</button>';
+            body += '<td><button id="btn_del" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delData"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除数据</button>';
+            body += '<button id="btn_edit" type="button" class="btn btn-default" data-toggle="modal" data-target="#editData"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑数据</button>';
             body += "</td></tr>";
         }
         $("#body").html(body);
 
         modalForm = "";
         for(i = 0; i <tableTitle.length; i++){
-            if(tableTitle[i] != "最近修改时间" && tableTitle[i] != "是否被删除"){
+            if(tableTitle[i] != "最近修改时间" && tableTitle[i] != "是否被删除" && tableTitle[i] != "档案号" && tableTitle[i] != "表格号"){
                 modalForm += "<div class=\"form-group\"><input type=\"text\" placeholder=\"" + tableTitle[i] + "\" id=\"formData" + i.toString() + "\" class=\"form-control\" /></div>";
             }
         }
@@ -104,7 +104,7 @@
 
         formEdit = "";
         for(i = 0; i <tableTitle.length; i++){
-            if (tableTitle[i] != "最近修改时间" && tableTitle[i] != "是否被删除") {
+            if (tableTitle[i] != "最近修改时间" && tableTitle[i] != "是否被删除" && tableTitle[i] != "档案号" && tableTitle[i] != "表格号") {
                 str = "edit" + i.toString();
                 formEdit += '<div class="form-group"><label class="col-sm-2 control-label" for="' + str + '">' + tableTitle[i] + '</label><div class="col-sm-10">';
                 formEdit += '<input type="text" autocomplete="off" class="form-control" id="' + str + '" name="' + str + '" placeholder="' + tableTitle[i] + '" data-prompt-position="bottomLeft"></div></div>';

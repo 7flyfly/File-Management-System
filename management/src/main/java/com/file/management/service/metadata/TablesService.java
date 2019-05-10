@@ -383,9 +383,6 @@ public class TablesService {
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {
-            if (flag) {
-
-            }
             res += hashMap.get(flag) + "\n";
         }
         return res;

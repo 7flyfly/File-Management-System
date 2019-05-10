@@ -125,8 +125,8 @@ function saveEdit(obj) {
         documentNo: documentNo,
         value: value,
         tableId: tableId,
-        // 最近修改时间+是否删除+操作
-        length: length-3
+        // 最近修改时间+是否删除+档案号+表格号+操作
+        length: length-5
     }
     eval(jsonObj);
 
@@ -136,9 +136,16 @@ function saveEdit(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(msg){
+            alert(msg);
+        },
+        error:function(msg){
+            console.log("errorMessage:"+JSON.stringify(msg))
         }
     });
     $('#editData').modal('hide');
 }
+
+$('#editData').ajaxSuccess(function(){
+    alert("成功！");
+})

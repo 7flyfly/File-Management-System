@@ -114,7 +114,7 @@ public class MyWork {
       编辑数据
      */
     @RequestMapping("/editData")
-    public void editData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+    public String editData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String tableId = (String)map.get("tableId");
         String documentNo = (String)map.get("documentNo");
         int length = (Integer)map.get("length");
@@ -125,6 +125,7 @@ public class MyWork {
                 hashMap.put(fieldService.getFieldByFieldName(value.get(2 * i)).getFieldEnglishName(), value.get(2 * i + 1));
             }
         }
-        tablesService.updateData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo,hashMap);
+        return (tablesService.updateData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo,hashMap));
+
     }
 }
