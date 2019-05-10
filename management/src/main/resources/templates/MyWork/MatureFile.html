@@ -1,0 +1,46 @@
+<!--到期档案管理<-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>到期档案管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/lib/css/homepage.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="header" th:replace="public:: #public-header"></div>
+
+    <div class="panel panel-default" style="width: 90%;margin-left: 5%">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="text-align:center">到期档案信息</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table4" width="80%" >
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>档案名</th>
+                    <th>档案类型</th>
+                    <th>档案位置</th>
+                    <th>到期时间</th>
+                    <th>负责人</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="file: ${filelist}">
+                    <td th:text="${file.getId()}"></td>
+                    <td th:text="${file.getName()}"></td>
+                    <td th:text="${file.getType()}"></td>
+                    <td th:text="${file.getAdd()}"></td>
+                    <td th:text="${file.getTime()}"></td>
+                    <td th:text="${file.getCharge()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
