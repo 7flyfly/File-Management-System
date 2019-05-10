@@ -33,12 +33,12 @@
                 </div>
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="nav-item"><a class="nav-link active" th:class="${activeUri=='mywork'?'nav-link active':'nav-link'}" th:href="@{/mywork}" href="#">我的工作</a> </li>
+                        <li class="nav-item"><a class="nav-link active" th:class="${activeUri=='mywork'?'nav-link active':'nav-link'}" th:href="@{/mywork/homepage}" href="#">我的工作</a> </li>
                         <li class="nav-item"><a class="nav-link" th:class="${activeUri=='borrow'?'nav-link active':'nav-link'}" th:href="@{/LibraryUse/Check}"  href="#">借阅利用</a> </li>
                         <li><a class="nav-link"th:class="${activeUri=='borrow'?'nav-link active':'nav-link'}" href="#"th:href="@{/IntegratedQuery/QueryHomePage}">综合查询</a> </li>
                         <li><a href="#" th:href="@{/SpecialTopic/Special}">专题编研</a> </li>
                         <li><a href="#"th:href="@{/FormStatistics/TabulateStatistics}">报表统计</a> </li>
-                        <li><a href="#"th:href="@{/SystemManagement/Metadata}" >系统管理</a> </li>
+                        <li><a href="#"th:href="@{/metadata/MetadataTemplate}" >系统管理</a> </li>
                     </ul>
                     <ul class="nav pull-right">
                         <li class="dropdown">

@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Controller
-@RequestMapping("/SystemManagement")
-public class MetadataController {
+@RequestMapping("/metadata")
+public class MetaDataController {
     @Autowired
     TemplateService templateService;
 
@@ -41,7 +41,7 @@ public class MetadataController {
    */
     @RequestMapping("/Metadata")
     public String Metadata(){
-        return "SystemManagement/Metadata";
+        return "metadata/Metadata";
     }
 
     /*
@@ -50,7 +50,7 @@ public class MetadataController {
     @RequestMapping("/MetadataTemplate")
     public String MetadataTemplate(Model model){
         model.addAttribute("templates",templateService.getAllTemplates());
-        return "SystemManagement/MetadataTemplate";
+        return "metadata/MetadataTemplate";
     }
 
     /*
@@ -60,7 +60,7 @@ public class MetadataController {
     public String MetadataTemplateDetails(@PathVariable("TemplateUuid") String TemplateUuid, Model model){
         Template template = templateService.getTemplateByTemplateUuid(TemplateUuid);
         model.addAttribute("template",template);
-        return "SystemManagement/TemplateDetails";
+        return "metadata/TemplateDetails";
     }
 
     /*
@@ -102,7 +102,7 @@ public class MetadataController {
         template.setPrimaryKey(fieldPk);
         templateService.saveOne(template);
 
-        return "SystemManagement/MetadataManagement";
+        return "metadata/MetadataManagement";
     }
 
     /*
@@ -125,7 +125,7 @@ public class MetadataController {
             menu.setMenuName(string + menu.getMenuName());
         }
         model.addAttribute("menuList",menuList);
-        return "SystemManagement/MetadataManagement";
+        return "metadata/MetadataManagement";
     }
     /*
       元数据管理删除菜单
@@ -143,7 +143,7 @@ public class MetadataController {
         }else{
             System.out.println("节点是叶子结点，可以删除。");
         }
-        return "SystemManagement/MetadataManagement";
+        return "metadata/MetadataManagement";
     }
 
     /*
@@ -155,7 +155,7 @@ public class MetadataController {
         Tables tables = menu.getMenuTable();
         List<Field> fieldList = new ArrayList<>(tables.getFields());
         model.addAttribute("fieldList",fieldList);
-        return "SystemManagement/TableDetails";
+        return "metadata/TableDetails";
     }
 
     /*
@@ -171,6 +171,9 @@ public class MetadataController {
         menuService.addMenu(menuParent,menuName,menuDescription,menuClassification);
     }
 
+    /*
+       修改菜单
+     */
     @RequestMapping("/saveMenuEdit")
     public void saveMenuEdit(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String menuDescription = (String)map.get("menuDescription");
@@ -184,6 +187,9 @@ public class MetadataController {
         menuService.editMenuOrder(Integer.parseInt(menuOrder),menuUuid);
     }
 
+    /*
+       添加模板
+     */
     @RequestMapping("/addTemplate")
     public void addTemplate(@RequestBody Map<String,String> map,HttpServletResponse httpServletResponse){
         String menuUuid = map.get("uuid");

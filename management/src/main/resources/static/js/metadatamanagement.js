@@ -44,7 +44,7 @@ function removeInfo(obj) {
     };
     $.ajax({
         type: "post",
-        url: "/SystemManagement/deleteMenu",
+        url: "/metadata/deleteMenu",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
@@ -88,7 +88,7 @@ function addMenu(obj) {
     };
     $.ajax({
         type: "post",
-        url: "/SystemManagement/addMenu",
+        url: "/metadata/addMenu",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
@@ -136,7 +136,7 @@ function saveEdit(obj) {
     };
     $.ajax({
         type: "post",
-        url: "/SystemManagement/saveMenuEdit",
+        url: "/metadata/saveMenuEdit",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
@@ -175,7 +175,7 @@ function saveAdd(obj) {
     };
     $.ajax({
         type: "post",
-        url: "/SystemManagement/addTemplate",
+        url: "/metadata/addTemplate",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",

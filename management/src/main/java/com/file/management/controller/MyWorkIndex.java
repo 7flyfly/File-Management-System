@@ -34,21 +34,21 @@ public class MyWorkIndex {
         }
         return "myworkindex";
     }
-    @RequestMapping("/MyWork/ExpiredFile")
+    @RequestMapping("/mywork/ExpiredFile")
     public  String ExpiredFile(){
-        return "MyWork/ExpiredFile";
+        return "mywork/ExpiredFile";
     }
 
-    @RequestMapping("/MyWork/FileCount")
+    @RequestMapping("/mywork/FileCount")
     public  String FileCount(){
-        return "MyWork/FileCount";
+        return "mywork/FileCount";
     }
     @Autowired
     private FileResposity fileResposity;
-    @RequestMapping(value = "/MyWork/MatureFile")
+    @RequestMapping(value = "/mywork/MatureFile")
     public String FileManagement(Model model){
         List<ExpiredFile> list = fileResposity.findAll();
         model.addAttribute("filelist",list);
-        return "/MyWork/MatureFile";
+        return "/mywork/MatureFile";
     }
 }

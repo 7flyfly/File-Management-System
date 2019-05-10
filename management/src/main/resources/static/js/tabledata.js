@@ -53,7 +53,7 @@ function addData(obj) {
 
     $.ajax({
         type: "post",
-        url: "/addData",
+        url: "/mywork/addData",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
@@ -82,7 +82,7 @@ function removeInfo(obj) {
     };
     $.ajax({
         type: "post",
-        url: "/deleteData",
+        url: "/mywork/deleteData",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
@@ -132,7 +132,7 @@ function saveEdit(obj) {
 
     $.ajax({
         type: "post",
-        url: "/editData",
+        url: "/mywork/editData",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",

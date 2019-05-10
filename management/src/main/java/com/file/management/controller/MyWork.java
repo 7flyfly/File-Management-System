@@ -24,6 +24,7 @@ import java.util.Map;
  我的工作
  */
 @Controller
+@RequestMapping("/mywork")
 public class MyWork {
     @Autowired
     private MenuService menuService;
@@ -34,7 +35,7 @@ public class MyWork {
     @Autowired
     private FieldService fieldService;
 
-    @RequestMapping("/mywork")
+    @RequestMapping("/homepage")
     public String myWork(Model model){
         List<Menu> menuRoot = menuService.getMenuRoot();
         Menu menuYlj = new Menu();
@@ -45,7 +46,7 @@ public class MyWork {
             }
         }
         model.addAttribute("jsondata",menuYlj.toString());
-        return "mywork";
+        return "mywork/homepage";
     }
 
     @RequestMapping("/main")
@@ -58,7 +59,7 @@ public class MyWork {
         return  "emps";
     }
 
-    @RequestMapping("/mywork/index")
+    @RequestMapping("/index")
     public String myworkIndex(){
         return "myworkIndex";
     }
@@ -66,7 +67,7 @@ public class MyWork {
     /*
       查看表格数据
      */
-    @RequestMapping("/mywork/{tableId}")
+    @RequestMapping("/{tableId}")
     public String tableData(@PathVariable("tableId") String tableId, Model model) {
         JSONObject result_jsonObject = new JSONObject();
         List<Map<String,String>> listMap = tablesService.queryDataFromDatabase(tableId);
@@ -81,7 +82,7 @@ public class MyWork {
         model.addAttribute("documentNoIndex",documentNoIndex);
         model.addAttribute("tableTitle",titleList);
         model.addAttribute("tableId",tableId);
-        return "TableData";
+        return "mywork/TableData";
     }
 
     /*

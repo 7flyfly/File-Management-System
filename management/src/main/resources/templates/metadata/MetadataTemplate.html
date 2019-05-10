@@ -194,7 +194,7 @@
 
                                         $.ajax({
                                             type: "post",
-                                            url: '/SystemManagement/postTemplateData',
+                                            url: '/metadata/postTemplateData',
                                             data: JSON.stringify(jsonObj),
                                             dataType: "json",
                                             contentType: "application/json",
@@ -238,7 +238,7 @@
                     <td th:text="${template.templateDescription}"></td>
                     <td>
                         <button type="button" class="btn btn-default btn-search btn-xs-block" id="detail">
-                            <a th:href="@{'/SystemManagement/MetadataTemplate/' + ${template.templateUuid}}">
+                            <a th:href="@{'/metadata/MetadataTemplate/' + ${template.templateUuid}}">
                                 <i class="glyphicon glyphicon-search"></i>
                                 <label for="detail">查看详情</label>
                             </a>

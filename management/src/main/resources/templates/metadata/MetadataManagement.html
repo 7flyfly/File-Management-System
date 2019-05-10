@@ -121,7 +121,7 @@
                 </div>
 
                 <!-- 元字段定义按钮 -->
-                <a class="btn btn-default btn-search btn-xs-block" id="detail" th:href="@{'/SystemManagement/MetadataManagement/' + ${menu.menuId}}">
+                <a class="btn btn-default btn-search btn-xs-block" id="detail" th:href="@{'/metadata/MetadataManagement/' + ${menu.menuId}}">
                     <span class="glyphicon glyphicon-search"></span>
                     <label for="detail">元数据字段定义</label>
                 </a>
@@ -234,21 +234,24 @@
                         var menuTable = [[${menu.menuTable}]];
                         var num = [[${iterStat.index}]];
 
+
                         if(menuTable === null){
                             $("[id=detail]")[num-numNull].remove();
                             numNull++;
                         }else{
                             $("[id=btn_edit]")[num-numNotNull].remove();
+                            $("[id=btn_template]")[num-numTemplate].remove();
+                            numTemplate++;
                             numNotNull++;
                         }
 
-                    </script>
+                </script>
             </td>
         </tr>
 
         </tbody>
     </table>
 </div>
-<script th:src="@{/js/MetadataManagement.js}"></script>
+<script th:src="@{/js/metadatamanagement.js}"></script>
 </body>
 </html>
