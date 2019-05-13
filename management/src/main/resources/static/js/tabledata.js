@@ -22,23 +22,38 @@ $('#table_id').DataTable({
     }
 });
 
+
 $('#uploadFile').fileinput({
-     showUpload : true,
-     showRemove : false,
-     uploadUrl:"${ctx}/upload/one/8",
-     language : 'zh',
-     allowedPreviewTypes : [ 'pdf' ],
-     allowedFileTypes : ['pdf'],
-     autoReplace:true,
-     maxFileCount:1,
+     uploadUrl: "/IntegratedQuery/IntelligentRetrieval/ImageUpload",//上传的地址
+     language: "zh",                 //设置语言
+     uploadAsync: false,              //异步上传
+     showCaption: false,              //是否显示标题
+     showRemove: true,               //是否显示移除按钮
+     showPreview : true,             //是否显示预览按钮
+     showUpload : true,              //是否显示上传按钮
      browseClass: "btn btn-primary", //按钮样式
-     dropZoneEnabled: true,//shidou显示拖拽
-     initialPreviewAsData: true,
-     initialPreviewFileType: 'pdf',
-     <c:if test="${periodicalResource.attachment!=null&&periodicalResource.attachment!=''}">initialPreview:["${periodicalResource.attachment}"]</c:if>
- }).on("fileuploaded", function (event, data) {
-     $("#attachment").val(data.response.attachment);
- });
+     dropZoneEnabled: true,         //是否显示拖拽区域
+     autoReplace:true,              //是否替换当前文件
+     enctype: 'multipart/form-data',
+     allowedFileExtensions: ["bmp","jpeg","psd","png","jpg","txt","doc","docx","xls","xlsx"], //接收的文件后缀
+     maxFileCount: 1,                        //最大上传文件数限制
+     minFileCount: 1,
+ }).on("filebatchselected",function(event, data) {
+     $(event.target).parent().siblings('.fileinput-upload').show();
+}).on("filebatchuploadsuccess", function(event, data, previewId, index) {   //文件上传失败
+   if(data.response.result=="success"){
+       //上传成功 隐藏上传按钮
+       $(event.target).parent().siblings('.fileinput-upload').hide();
+       console.log((data.files)[0].name);
+   }else{
+       alert(data.response.result);
+   }
+}).on('fileerror', function(event, data, msg) {  //文件上传失败
+   // 清除当前的预览图
+   // $(event.target).parent().siblings('.fileinput-upload').hide();
+   // $(event.target).fileinput('clear').fileinput('unlock');
+   // $(event.target).parent().siblings('.fileinput-remove').hide();
+});
 
 //新增下级菜单
 $('#addData').on('show.bs.modal',function (event) {
