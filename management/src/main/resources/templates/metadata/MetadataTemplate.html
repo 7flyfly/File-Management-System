@@ -8,85 +8,85 @@
 </head>
 
 <body>
-    <div class="header" th:replace="public:: #public-header"></div>
-    <div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar"></div>
-    <ol class="breadcrumb">
-        <li>
-            <a data-target="#i-menu-sidebar" data-toggle="sidebar" th:href="@{/SystemManagement/Metadata}">
-                <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
-                元数据库管理
-            </a>
-        </li>
-        <li class="active">
-            <a href="#">元数据管理</a>
-        </li>
-    </ol>
-    <div style="margin-bottom:20px;">
-        <button id="btn_add" type="button" class="btn bg-primary" data-toggle="modal" data-target="#addModal">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>新增模板
-        </button>
-    </div>
+<div class="header" th:replace="public:: #public-header"></div>
+<div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar"></div>
+<ol class="breadcrumb">
+    <li>
+        <a data-target="#i-menu-sidebar" data-toggle="sidebar" th:href="@{/SystemManagement/Metadata}">
+            <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
+            元数据库管理
+        </a>
+    </li>
+    <li class="active">
+        <a href="#">元数据管理</a>
+    </li>
+</ol>
+<div style="margin-bottom:20px;">
+    <button id="btn_add" type="button" class="btn bg-primary" data-toggle="modal" data-target="#addModal">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>新增模板
+    </button>
+</div>
 
-    <!--模态框-->
-    <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">模板信息</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="模板名称" id="templateName" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="模板描述" id="templateDescription" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <tr>
-                                <td class="tableleft">主键字段信息</td>
-                                <td>
-                                    <input type="text" placeholder="字段名称" id="fieldName" class="form-control" />
-                                    <input type="text" placeholder="字段英文名" id="fieldEnglishName" class="form-control" />
-                                    <!--<input type="text" placeholder="字段类型" id="fieldType" class="form-control" />-->
-                                    <select class="form-control" id="fieldType">
-                                        <option value="">字段类型</option>
-                                        <option value="varchar">varchar</option>
-                                        <option value="int">int</option>
-                                        <option value="data">data</option>
-                                    </select>
-                                    <input type="text" placeholder="字段最大长度" id="fieldLength" class="form-control" />
-                                    <!--<input type="text" placeholder="字段是否建索引" id="fieldIndex" class="form-control" />-->
-                                    <select class="form-control" id="fieldIndex">
-                                        <option value="">字段是否建索引</option>
-                                        <option value="true">true</option>
-                                        <option value="false">false</option>
-                                    </select>
-                                    <!--<input type="text" placeholder="字段是否可分词" id="fieldIk" class="form-control" />-->
+<!--模态框-->
+<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">模板信息</h4>
+            </div>
+            <div class="modal-body" style="height:450px; overflow:scroll;">
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="模板名称" id="templateName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="模板描述" id="templateDescription" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <tr>
+                            <td class="tableleft">主键字段信息</td>
+                            <td>
+                                <input type="text" placeholder="字段名称" id="fieldName" class="form-control" />
+                                <input type="text" placeholder="字段英文名" id="fieldEnglishName" class="form-control" />
+                                <!--<input type="text" placeholder="字段类型" id="fieldType" class="form-control" />-->
+                                <select class="form-control" id="fieldType">
+                                    <option value="">字段类型</option>
+                                    <option value="varchar">varchar</option>
+                                    <option value="int">int</option>
+                                    <option value="data">data</option>
+                                </select>
+                                <input type="text" placeholder="字段最大长度" id="fieldLength" class="form-control" />
+                                <!--<input type="text" placeholder="字段是否建索引" id="fieldIndex" class="form-control" />-->
+                                <select class="form-control" id="fieldIndex">
+                                    <option value="">字段是否建索引</option>
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                                </select>
+                                <!--<input type="text" placeholder="字段是否可分词" id="fieldIk" class="form-control" />-->
 
-                                    <select class="form-control" id="fieldIk">
-                                        <option value="">字段是否分词</option>
-                                        <option value="true">true</option>
-                                        <option value="false">false</option>
-                                    </select>
+                                <select class="form-control" id="fieldIk">
+                                    <option value="">字段是否分词</option>
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                                </select>
 
-                                    <button type="button" class="btn bg-primary"  id="addTable" onclick="add_tr(this)" style="margin-top:10px;">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加字段
-                                    </button>
-                                    <!--<button type="button" class="btn btn-success"  id="deleteTable" onclick="del_tr(this)" style="margin-top:10px;">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除该字段
-                                    </button>-->
-                                </td>
-                            </tr>
-                                <script>
+                                <button type="button" class="btn bg-primary"  id="addTable" onclick="add_tr(this)" style="margin-top:10px;">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加字段
+                                </button>
+                                <!--<button type="button" class="btn btn-success"  id="deleteTable" onclick="del_tr(this)" style="margin-top:10px;">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除该字段
+                                </button>-->
+                            </td>
+                        </tr>
+                        <script>
                                     window.a = 0;
                                     window.arr = [];
 
-                                    function del_tr(obj) {
+                                    /*function del_tr(obj) {
                                         $(obj).parent().remove();
                                         a--;
-                                    }
+                                    }*/
 
                                    function add_tr(obj){
                                         var tr = "<div class=\"form-group\"><tr>";
@@ -94,21 +94,18 @@
                                         tr += "<td><input type=\"text\" placeholder=\"字段名称\" id=\"fieldName" + a + "\" class=\"form-control\" />";
                                         tr += "<input type=\"text\" placeholder=\"字段英文名\" id=\"fieldEnglishName" + a + "\" class=\"form-control\" />";
 
-                                        /*tr += "<input type=\"text\" placeholder=\"字段类型\" id=\"fieldType" + a + "\" class=\"form-control\" />";*/
                                         tr += "<select class=\"form-control\" id=\"fieldType" + a + "\"><option value=\"\">字段类型</option><option value=\"varchar\">varchar</option><option value=\"int\">int</option><option value=\"data\">data</option></select>";
 
                                         tr += "<input type=\"text\" placeholder=\"字段最大长度\" id=\"fieldLength" + a + "\" class=\"form-control\" />";
 
-                                        /*tr += "<input type=\"text\" placeholder=\"字段是否建索引\" id=\"fieldIndex" + a + "\" class=\"form-control\" />"*/
                                         tr += "<select class=\"form-control\" id=\"fieldIndex" + a + "\"><option value=\"\">字段是否建索引</option><option value=\"true\">true</option><option value=\"false\">false</option></select>";
 
-                                        /*tr += "<input type=\"text\" placeholder=\"字段是否可分词\" id=\"fieldIk" + a + "\" class=\"form-control\" />"*/
                                         tr += "<select class=\"form-control\" id=\"fieldIk" + a + "\"><option value=\"\">字段是否分词</option><option value=\"true\">true</option><option value=\"false\">false</option></select>";
 
                                         tr += "<button type=\"button\" class=\"btn bg-primary\"  id=\"addTable\" onclick=\"add_tr(this)\" style=\"margin-top:10px;\">";
                                         tr += "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>添加字段";
-                                        tr += "</button><button type=\"button\" class=\"btn btn-success\"  id=\"deleteTable\" onclick=\"del_tr(this)\" style=\"margin-top:10px;\">";
-                                        tr += "<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>删除该字段</button>";
+                                        /*tr += "</button><button type=\"button\" class=\"btn btn-success\"  id=\"deleteTable\" onclick=\"del_tr(this)\" style=\"margin-top:10px;\">";
+                                        tr += "<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>删除该字段</button>";*/
                                         $(obj).parent().append(tr);
                                         arr.push(a);
                                         a++;
@@ -167,8 +164,6 @@
                                             eval("var indexIk" + i.toString() + " = selectIndex" + i.toString() + ".selectedIndex;");
                                             eval("var fieldIk" + i.toString() + " = selectIndex" + i.toString() + ".options[indexIk" + i.toString() + "].text;");
                                             eval("fieldIks.push(fieldIk" + i.toString() + ");");
-                                            /*eval("fieldIndexs.push($('#fieldIndex" + i.toString() + "').val());");
-                                            eval("fieldIks.push($('#fieldIk" + i.toString() + "').val());");*/
                                         }
 
                                         var stringA = a.toString();
@@ -207,47 +202,47 @@
                                     }
                                 </script>
 
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary que_add" onclick="update(this)" data-dismiss="modal">确定</button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary que_add" onclick="update(this)" data-dismiss="modal">确定</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <div class="col-sm-10 zero-padding-lr" >
-        <table id="table_id" class="table table-striped table-bordered row-border hover order-column" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>模板id</th>
-                    <th>模板uuid</th>
-                    <th>模板名称</th>
-                    <th>模板描述</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="template:${templates}">
-                    <td th:text="${template.templateId}"></td>
-                    <td th:text="${template.templateUuid}"></td>
-                    <td th:text="${template.templateName}"></td>
-                    <td th:text="${template.templateDescription}"></td>
-                    <td>
-                        <button type="button" class="btn btn-default btn-search btn-xs-block" id="detail">
-                            <a th:href="@{'/metadata/MetadataTemplate/' + ${template.templateUuid}}">
-                                <i class="glyphicon glyphicon-search"></i>
-                                <label for="detail">查看详情</label>
-                            </a>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <script>
+<div class="col-sm-10 zero-padding-lr" >
+    <table id="table_id" class="table table-striped table-bordered row-border hover order-column" cellspacing="0">
+        <thead>
+        <tr>
+            <th>模板id</th>
+            <th>模板uuid</th>
+            <th>模板名称</th>
+            <th>模板描述</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="template:${templates}">
+            <td th:text="${template.templateId}"></td>
+            <td th:text="${template.templateUuid}"></td>
+            <td th:text="${template.templateName}"></td>
+            <td th:text="${template.templateDescription}"></td>
+            <td>
+                <button type="button" class="btn btn-default btn-search btn-xs-block" id="detail">
+                    <a th:href="@{'/metadata/MetadataTemplate/' + ${template.templateUuid}}">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <label for="detail">查看详情</label>
+                    </a>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script>
             $(document).ready(function () {
                 $('#table_id').DataTable({
                     // 国际化
@@ -274,6 +269,6 @@
                 });
             });
         </script>
-    </div>
+</div>
 </body>
 </html>

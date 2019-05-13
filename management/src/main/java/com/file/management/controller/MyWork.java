@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -89,7 +90,8 @@ public class MyWork {
       添加数据
      */
     @RequestMapping("/addData")
-    public void addData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+    @ResponseBody
+    public Map<String,String> addData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String tableId = (String)map.get("tableId");
         int length = (Integer)map.get("length");
         ArrayList<String> value = (ArrayList<String>)map.get("value");
@@ -97,24 +99,32 @@ public class MyWork {
         for(int i=0;i<length;i++){
             hashMap.put(fieldService.getFieldByFieldName(value.get(2*i)).getFieldEnglishName(),value.get(2*i+1));
         }
-        tablesService.InsertData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),hashMap);
+        Map<String,String> mapReturn = new HashMap<>();
+        String messageValue = tablesService.InsertData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),hashMap);
+        mapReturn.put("msg",messageValue);
+        return mapReturn;
     }
 
     /*
       删除数据
      */
     @RequestMapping("/deleteData")
-    public void deleteData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+    @ResponseBody
+    public Map<String,String> deleteData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String tableId = (String)map.get("tableId");
         String documentNo = (String)map.get("documentNo");
-        tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo);
+        Map<String,String> mapReturn = new HashMap<>();
+        String messageValue = tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo);
+        mapReturn.put("msg",messageValue);
+        return mapReturn;
     }
 
     /*
       编辑数据
      */
     @RequestMapping("/editData")
-    public String editData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+    @ResponseBody
+    public Map<String,String> editData(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String tableId = (String)map.get("tableId");
         String documentNo = (String)map.get("documentNo");
         int length = (Integer)map.get("length");
@@ -125,7 +135,9 @@ public class MyWork {
                 hashMap.put(fieldService.getFieldByFieldName(value.get(2 * i)).getFieldEnglishName(), value.get(2 * i + 1));
             }
         }
-        return (tablesService.updateData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo,hashMap));
-
+        Map<String,String> mapReturn = new HashMap<>();
+        String messageValue = tablesService.updateData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo,hashMap);
+        mapReturn.put("msg",messageValue);
+        return mapReturn;
     }
 }

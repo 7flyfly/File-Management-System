@@ -22,6 +22,24 @@ $('#table_id').DataTable({
     }
 });
 
+$('#uploadFile').fileinput({
+     showUpload : true,
+     showRemove : false,
+     uploadUrl:"${ctx}/upload/one/8",
+     language : 'zh',
+     allowedPreviewTypes : [ 'pdf' ],
+     allowedFileTypes : ['pdf'],
+     autoReplace:true,
+     maxFileCount:1,
+     browseClass: "btn btn-primary", //按钮样式
+     dropZoneEnabled: true,//shidou显示拖拽
+     initialPreviewAsData: true,
+     initialPreviewFileType: 'pdf',
+     <c:if test="${periodicalResource.attachment!=null&&periodicalResource.attachment!=''}">initialPreview:["${periodicalResource.attachment}"]</c:if>
+ }).on("fileuploaded", function (event, data) {
+     $("#attachment").val(data.response.attachment);
+ });
+
 //新增下级菜单
 $('#addData').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
@@ -46,8 +64,8 @@ function addData(obj) {
     jsonObj = {
         value: value,
         tableId: tableId,
-        // 最近修改时间+是否删除+操作
-        length: length-3
+        // 最近修改时间+是否删除+操作+附件
+        length: length-4
     }
     eval(jsonObj);
 
@@ -57,14 +75,18 @@ function addData(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(data){
+            alert("成功新增数据");
+            location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
         }
     });
     $('#addData').modal('hide');
 }
 
-//删除菜单节点
+//删除数据
 $('#delData').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
@@ -86,8 +108,12 @@ function removeInfo(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(data){
+            alert("成功删除该数据");
+            location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
         }
     });
     $('#delData').modal('hide');
@@ -136,16 +162,13 @@ function saveEdit(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success:function(msg){
-            alert(msg);
+        success:function(data){
+            alert(data.msg);
+            location.reload();
         },
-        error:function(msg){
-            console.log("errorMessage:"+JSON.stringify(msg))
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
         }
     });
     $('#editData').modal('hide');
 }
-
-$('#editData').ajaxSuccess(function(){
-    alert("成功！");
-})

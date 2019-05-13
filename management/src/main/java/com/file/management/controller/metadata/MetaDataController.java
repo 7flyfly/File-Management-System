@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -131,19 +132,21 @@ public class MetaDataController {
       元数据管理删除菜单
      */
     @RequestMapping("/deleteMenu")
-    public String MetadataManagementRemoveMenu(@RequestBody Map<String,Object> map){
+    @ResponseBody
+    public Map<String,String> MetadataManagementRemoveMenu(@RequestBody Map<String,Object> map){
         String menuUuid = (String)map.get("uuid");
         int res = menuService.deleteMenuByMenuUuid(menuUuid);
+        Map<String,String> mapReturn = new HashMap<>();
         if(res == 0){
-            System.out.println("节点不存在。");
+            mapReturn.put("msg","删除失败：节点不存在。");
         }else if(res == 1){
-            System.out.println("节点是根节点，无法删除。");
+            mapReturn.put("msg","删除失败：节点是根节点，无法删除。");
         }else if(res == 2){
-            System.out.println("节点的子节点非空，无法删除。");
+            mapReturn.put("msg","删除失败：节点的子节点非空，无法删除。");
         }else{
-            System.out.println("节点是叶子结点，可以删除。");
+            mapReturn.put("msg","节点删除成功。");
         }
-        return "metadata/MetadataManagement";
+        return mapReturn;
     }
 
     /*

@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -154,7 +153,7 @@ public class TablesService {
      * @param tableName  表名
      * @param isTemplate 是否使用模板生成
      */
-    public void generateTables(Field primaryKey,Set<Field> fields, String tableName, boolean isTemplate) {
+    public void generateTables(Field primaryKey, Set<Field> fields, String tableName, boolean isTemplate) {
 
         //根据一些字段生成一张名为tableName的表
         String sqlCreateTable = "";
@@ -203,7 +202,7 @@ public class TablesService {
      * @param fields    表字段
      * @param tableName 表名
      */
-    public void generateTablesByUser(Field primaryKey,Set<Field> fields, String tableName) {
+    public void generateTablesByUser(Field primaryKey, Set<Field> fields, String tableName) {
         // 根据用户定义字段生成表
         generateTables(primaryKey,fields, tableName, false);
 
@@ -249,7 +248,7 @@ public class TablesService {
      * @param tableUuid 表uuid
      * @param map:      key为属性名称，value为属性值。
      */
-    public void InsertData(String tableUuid, HashMap<String, String> map) {
+    public String InsertData(String tableUuid, HashMap<String, String> map) {
         Tables tables = getTablesByTableUuid(tableUuid);
         String tableName = tables.getTableName();
         String keys = "";
@@ -267,7 +266,12 @@ public class TablesService {
         // 拼接字符串完成插入数据的sql语句
         String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
         jdbcTemplate.execute(sqlInsert);
-        solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
+        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
+        String str = "";
+        for(String s:hashMap.values()){
+            str += s;
+        }
+        return str;
     }
 
     /**
