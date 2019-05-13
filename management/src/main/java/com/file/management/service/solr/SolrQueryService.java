@@ -58,7 +58,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 对solr进行检索
+     * 对solr进行检索 全文检索
      * @param solrClient solr客户端
      * @param keyword 关键词
      * @return
@@ -143,7 +143,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 根据Phash值等信息去solr中进行查询
+     * 根据Phash值等信息去solr中进行查询 图片检索
      * @param solrClient
      * @param keyword 关键词
      * @param upLoadImagePHash 上传的图片的PHash值
@@ -244,7 +244,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 构造solr的查询语句
+     * 对于全文检索 构造solr的查询语句
      * @param jsonObject Keyword，TableId
      * @return
      */
@@ -282,7 +282,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 拼接查询字符串
+     * 对于全文检索 拼接查询字符串
      * @param keyword 关键词
      * @param table_id 数据所在表的id
      * @return 拼接好的查询字符串
@@ -307,7 +307,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 构造solr的查询语句
+     * 对于高级检索 构造solr的查询语句
      * @param jsonObject allKeyWord，keyword，anyKeyWord，noKeyWord，keyWordPosition，TableId，Offset，PageSize
      * @param fileContentSolrName 附件在solr中的字段名称
      * @return
@@ -331,6 +331,7 @@ public class SolrQueryService {
             if(keyWordPosition.equals("AnnexRetrieval")){ param = fileContentSolrName;}
         }
         //判断搜索关键词
+        //包含以下全部关键字
         if(allKeyWord!=null&&!allKeyWord.isEmpty()){
             StringBuffer buff = new StringBuffer();
             String[] keys = allKeyWord.split("\\+");
@@ -342,6 +343,7 @@ public class SolrQueryService {
             buff.append("("+param +":"+ keyStr +")");
             buffList.add(buff);
         }
+        //包含以下任意一个关键词
         if(anyKeyWord!=null&&!anyKeyWord.isEmpty()){
             StringBuffer buff = new StringBuffer();
             String[] keys = anyKeyWord.split("\\+");
@@ -355,6 +357,7 @@ public class SolrQueryService {
         }
 
         //判断搜索限制
+        //档案号
         if(documentNumber!=null&&!documentNumber.isEmpty()){
             String[] keys = documentNumber.split("\\+");
             String keyStr = "";
@@ -366,6 +369,7 @@ public class SolrQueryService {
             buff.append(" (document_number:"+ keyStr +")");
             buffList.add(buff);
         }
+        //节点名称
         if(table_id!=null&&!table_id.isEmpty()){
             String[] keys = table_id.split("\\+");
             String keyStr = "";
@@ -377,6 +381,7 @@ public class SolrQueryService {
             buff.append("("+"table_id_s:"+ keyStr +")");
             buffList.add(buff);
         }
+
         if(buffList.size()!=0){
             StringBuffer buffall = new StringBuffer();
             for(int i = 0; i < buffList.size()-1 ; i++){
@@ -385,6 +390,7 @@ public class SolrQueryService {
             }
             buffall.append(buffList.get(buffList.size()-1));
             StringBuffer buff = new StringBuffer();
+            //不包含一些关键词
             if(noKeyWord!=null&&!noKeyWord.isEmpty()){
                 String[] keys = noKeyWord.split("\\+");
                 String keyStr = "";
@@ -397,7 +403,6 @@ public class SolrQueryService {
             querystring = querystring + buffall.toString();
         }else{
             return null;
-
         }
 
         //分页

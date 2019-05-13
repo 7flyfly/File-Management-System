@@ -27,7 +27,7 @@ import java.util.Properties;
 public class SolrDataConfigService {
 
     /**
-     * 获得SolrDataConfig对象
+     * 获得SolrDataConfig对象，即solr-data-config文件,并转换为SolrDataConfig对象
      * @return SolrDataConfig对象
      */
     public SolrDataConfig getSolrDataConfig(){
@@ -39,7 +39,7 @@ public class SolrDataConfigService {
     }
 
     /**
-     * 保存SolrDataConfig对象
+     * 将SolrDataConfig对象转换为xml字符串，保存SolrDataConfig
      * @param solrDataConfig 需要保存的SolrDataConfig对象
      * @return
      */
@@ -50,6 +50,10 @@ public class SolrDataConfigService {
         return bool;
     }
 
+    /**
+     * 获得solr中数据的DataImportProperty文件，即solr索引的更新时间
+     * @return
+     */
     public Properties getDataImportProperty(){
         Properties p = new Properties();
         try {
@@ -62,7 +66,7 @@ public class SolrDataConfigService {
         return p;
     }
     /**
-     * 获得solr数据库的配置文件
+     * 获得solr数据库的配置文件，即solr-data-config文件
      * @param solrDataConfigPath solr数据库配置文件的绝对位置
      * @return
      */
@@ -93,7 +97,6 @@ public class SolrDataConfigService {
 //            Element root = document.getRootElement();
 //            Element data = root.element("document");//获取子节点
 //            Element entity = data.element("entity");//获取子节点
-//            System.out.println(entity.attributes());
             //使用dom4j的XMLWriter,&gt;无法转换为>，所以先转换为String
             String documentStr = XsteamUtil.xmlDocument2String(document);
             String documentStrReplace = documentStr.replaceAll("&gt;",">");

@@ -8,11 +8,16 @@ import lombok.NoArgsConstructor;
 
 @Data
 @XStreamAlias("field")
+/**
+ * 对应Solr-data-config文件中的document中的entity中的field
+ */
 public class SolrTableEntityColumn {
+    //数据库中字段的名称
     @XStreamAsAttribute
     @XStreamAlias("column")
     private String columnName;
 
+    //solr中对应的field名称
     @XStreamAsAttribute
     @XStreamAlias("name")
     private String solrColumnName;

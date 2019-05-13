@@ -39,7 +39,7 @@ public class XsteamUtil {
 
     /**
      * 将xml的document类型转换为String
-     * @param document xml
+     * @param document xml文件
      * @return
      */
     public static String xmlDocument2String(Document document){

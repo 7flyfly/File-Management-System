@@ -12,7 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @XStreamAlias("document")
+/**
+ * 对应Solr-data-config文件中的document
+ */
 public class SolrEntityDocument {
+    //具体的表的信息
     @XStreamImplicit(itemFieldName="entity")
     private List<SolrTableEntity> solrTableEntityList;
 
