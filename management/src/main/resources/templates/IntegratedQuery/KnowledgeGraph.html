@@ -1,0 +1,19 @@
+<!--知识图谱-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>知识图谱</title>
+</head>
+<body>
+<div class="header" th:replace="public:: #public-header"></div>
+<div class="sidebar" th:replace="IntegratedQuery/controlCenter:: #sidebar(activeUri='KnowledgeGraph')"></div>
+<div class="col-md-10">
+    <div id="knowledgeGraph_div">
+        <div id="knowledgeGraph_head" class="row" style=" padding-top: 50px margin-bottom:25px" >
+            <h1 class="text-center ">瑞拷得知识图谱</h1>
+        </div>
+    </div>
+</div>
+</body>
+</html>
