@@ -429,16 +429,17 @@ public class SolrService {
                     String fileNameStr =(String)attValue[Annex_index];
                     String[] fileUrlArr = fileNameStr.split(arrSplit);
                     for(String fileUrl : fileUrlArr){
-                        if(!fileUrl.contains("http")){
+                        if((!("").equals(fileUrl))&&(!fileUrl.contains("http"))){
                             System.out.println(fileUrl + "：文件导入失败！");
-                            continue;
                         }
                         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
                         String urlHead = fileUrl.replace(fileName,"");
                         URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误
                         URLConnection con = url.openConnection();
+                        con.setConnectTimeout(20000);
+                        con.setReadTimeout(20000);
                         String message = con.getHeaderField(0);
-                        if (StringUtils.hasText(message) && message.startsWith("HTTP/1.1 404")) {  //网络资源不存在
+                        if (!StringUtils.hasText(message) || message.startsWith("HTTP/1.1 404")) {  //网络资源不存在
                             System.out.println(fileName+":不存在!");
                             continue;
                         }
@@ -522,8 +523,10 @@ public class SolrService {
                         String urlHead = fileUrl.replace(fileName,"");
                         URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误
                         URLConnection con = url.openConnection();
+                        con.setConnectTimeout(20000);
+                        con.setReadTimeout(20000);
                         String message = con.getHeaderField(0);
-                        if (StringUtils.hasText(message) && message.startsWith("HTTP/1.1 404")) {  //网络资源不存在
+                        if (!StringUtils.hasText(message) || message.startsWith("HTTP/1.1 404")) {  //网络资源不存在
                             System.out.println(fileName+":不存在!");
                             continue;
                         }
@@ -711,22 +714,10 @@ public class SolrService {
             case "jpeg":
                 bool = true;
                 break;
-            case "gif":
-                bool = true;
-                break;
             case "psd":
                 bool = true;
                 break;
             case "png":
-                bool = true;
-                break;
-            case "tiff":
-                bool = true;
-                break;
-            case "tga":
-                bool = true;
-                break;
-            case "eps":
                 bool = true;
                 break;
             case "jpg":

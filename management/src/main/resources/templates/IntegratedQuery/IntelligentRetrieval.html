@@ -43,7 +43,7 @@
                     <div class="input-group input-group-lg text-center">
                         <input type="text" class="form-control" id="keyword" name="keyword" autofocus="" th:value="${keyword}">
                         <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.imgSearchCheck()">
+                        <button class="btn btn-primary" type="button" onclick="IntelligentRetrieval.imageSearchCheck()">
                             <span class="glyphicon glyphicon-picture"></span>
                             图片
                         </button>
@@ -80,7 +80,12 @@
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
-
+    <!--文件上传插件-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap-3.3.7/css/fileinput.css}" />
+    <script type="text/javascript" th:src="@{/js/fileinput.js}"></script>
+    <script type="text/javascript" th:src="@{/js/fileinput_locale_zh.js}"></script>
+    <!--b-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/plugins/piexif.min.js" type="text/javascript"></script>-->
     <!--模态框-->
     <div class="modal fade" tabindex="-1" role="dialog" id="detailModal">
         <div class="modal-dialog" role="document">
@@ -131,6 +136,27 @@
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
+            </div>
+        </div>
+    </div>
+    <!--模态框-->
+    <div class="modal fade " tabindex="-1" role="dialog" id="fileUpModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">选择图片</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form_import" method="post">
+                        <input id="imageUp" name="upLoadImages" type="file" >
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="fileUpModal_confirm"
+                            onclick="IntelligentRetrieval.imageSearch(IntelligentRetrieval.upLoadImagePHash)">查询</button>
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                </div>
             </div>
         </div>
     </div>
