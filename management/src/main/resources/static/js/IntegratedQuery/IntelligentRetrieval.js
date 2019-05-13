@@ -47,7 +47,7 @@ var IntelligentRetrieval={
             // $(event.target).parent().siblings('.fileinput-remove').hide();
         });
     },
-
+    //图片检索
     imageSearch:function(upLoadImagePHash){
         $("#intelligentRetrieval_container_head").remove();
         $("#intelligentRetrieval_container_tail").remove();
@@ -153,6 +153,7 @@ var IntelligentRetrieval={
                 alert("关键字不能为空!");
             }
     },
+    //全文检索
     keySearch: function () {
 //        var data = {
 //        "keyword":IntelligentRetrieval.keyWord,
@@ -263,6 +264,7 @@ var IntelligentRetrieval={
                         },]
             });
     },
+    //图片预览
     pictureView:function(document_number,fileAddressStr,fileNameStr){
 //        console.log(document_number);
 //        console.log(fileNameStr);

@@ -11,35 +11,46 @@ import java.util.List;
 
 @Data
 @XStreamAlias("entity")
+/**
+ * 对应Solr-data-config文件中的document中的entity
+ */
 public class SolrTableEntity {
+    //表的名称
     @XStreamAsAttribute
     @XStreamAlias("name")
     private String tableName;
 
+    //表的主键名称
     @XStreamAsAttribute
     @XStreamAlias("PK")
     private String primaryKey;
 
+    //表所对应的数据库名称
     @XStreamAsAttribute
     @XStreamAlias("dataSource")
     private String dataSourceName;
 
+    //导入时的查询语句
     @XStreamAsAttribute
     @XStreamAlias("query")
     private String fullImportQuery;
 
+    //增量导入时的查询语句
     @XStreamAsAttribute
     @XStreamAlias("deltaImportQuery")
     private String deltaImportQuery;
 
+    //删除时的查询语句
     @XStreamAsAttribute
     @XStreamAlias("deltaQuery")
     private String deltaQuery;
 
+    //根据主键进行删除的语句
     @XStreamAsAttribute
     @XStreamAlias("deletedPkQuery")
     private String deletedPkQuery;
 
+    //需要构建索引的字段
     @XStreamImplicit(itemFieldName="field")
     private List<SolrTableEntityColumn> solrTableEntityColumnList;
 

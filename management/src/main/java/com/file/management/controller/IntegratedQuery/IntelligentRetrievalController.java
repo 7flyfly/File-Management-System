@@ -72,7 +72,7 @@ public class IntelligentRetrievalController {
     @RequestMapping(value = "/ImageUpload")
     @ResponseBody
     /**
-     * 获取图片信息
+     * 获取上传的图片信息，返回PHash编码
      */
     public String imageUpload(@RequestParam(value="upLoadImages",required=false) MultipartFile[] upLoadImages,
                               @RequestParam(value="keyword",required=false) String keyword, String queryType){
@@ -100,7 +100,7 @@ public class IntelligentRetrievalController {
     @RequestMapping(value = "/ImageSearch")
     @ResponseBody
     /**
-     * 根据关键词查询结果,并返回给bootStrapTable
+     * 根据图片的PHash等信息查询档案，并返回给bootStrapTable
      */
     public String imageSearch(String keyword, String queryType, String upLoadImagePHash, String tableId,
                               String pageSize, String offset){
@@ -133,8 +133,7 @@ public class IntelligentRetrievalController {
     @RequestMapping(value = "/getDetail")
     @ResponseBody
     /**
-     * 根据关键词查询结果
-     * 目前 根据DocumentNumber检索
+     * 根据DocumentNumber查询档案详情
      */
     public String getDetail(String dataJson){
         JSONObject result_jsonObject = new JSONObject();
@@ -398,8 +397,8 @@ public class IntelligentRetrievalController {
      */
     public String oneImportTable2Solr(){
         Map<String,Object> map = new HashMap<>();
-        HashMap<Boolean,String> hashMap = solrService.refreshOneDocument2Solr("tb_test3","2018-1WS0908.3-171",
-                null,null,null,null);
+        HashMap<Boolean,String> hashMap = solrService.refreshOneDocument2Solr("tb_test2","2017-1WS0908.2-172",
+                null,null,null,null,null);
         map.put("result",hashMap);
         return map.toString();
     }

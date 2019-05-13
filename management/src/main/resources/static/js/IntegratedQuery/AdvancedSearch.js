@@ -28,6 +28,7 @@ var AdvancedSearch={
                 AdvancedSearch.conditionalSearch()
             }
     },
+    //图片预览
     pictureView:function(document_number,fileAddressStr,fileNameStr){
 //        console.log(document_number);
 //        console.log(fileNameStr);
