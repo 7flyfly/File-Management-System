@@ -322,7 +322,7 @@ public class SolrService {
     }
 
     /**
-     * 增量导入表，将表中的数据建立索引，根据DocumentNumber修改索引，根据软删除标识删除索引
+     * 增量导入表，将表中的数据建立索引，根据DocumentNumber修改索引
      * 更改软删除标识可以实现回滚
      * @param tableName 表名
      */
@@ -352,6 +352,50 @@ public class SolrService {
                         arrSplit,fileContentSolrName,imageContentSolrName,lastModified);
                 solrClient2.close();
                 if(bool1&&bool2){
+                    hashMap.put(true,"成功增量导入表："+tableName);
+                    return hashMap;
+                }else{
+                    hashMap.put(false,tableName+"增量导入失败!");
+                    return hashMap;
+                }
+            }else{
+                hashMap.put(false,"失败! 表名不能为空");
+                return hashMap;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            hashMap.put(false,e.getMessage());
+            return hashMap;
+        }
+    }
+
+    /**
+     * 删除索引 根据软删除标识删除索引
+     * 更改软删除标识可以实现回滚
+     * @param tableName 表名
+     */
+    public HashMap<Boolean,String> deleteDocumentTable2Solr(String tableName, String documentNumberDatabaseName,
+                                                         String annexDatabaseName, String arrSplit, String fileContentSolrName,
+                                                         String imageContentSolrName){
+        try{
+            if(documentNumberDatabaseName==null) documentNumberDatabaseName = ConstantString.DocumentNumberDatabaseName;
+            if(annexDatabaseName==null) annexDatabaseName = ConstantString.AnnexDatabaseName;
+            if(arrSplit==null) arrSplit = ConstantString.AnnexDatabaseSplitChar;
+            if(fileContentSolrName==null) fileContentSolrName = ConstantString.AnnexContentSolrName;
+            if(imageContentSolrName==null) imageContentSolrName = ConstantString.ImageContentSolrName;
+            HashMap<Boolean,String> hashMap = new HashMap<Boolean,String>();
+            if(tableName!=null&&!tableName.equals("")){
+                System.out.println("tableName:"+tableName);
+                SolrUtils solrUtils = new SolrUtils();
+                SolrClient solrClient1 = solrUtils.createSolrClient();
+                //事先获得该table的最新更新时间
+                Properties properties = solrDataConfigService.getDataImportProperty();
+                String lastModified = properties.getProperty(tableName + ".last_index_time");
+                //删除表
+                boolean bool1 = this.deltaImportTable(solrClient1,tableName);
+                solrClient1.close();
+                if(bool1){
                     hashMap.put(true,"成功增量导入表："+tableName);
                     return hashMap;
                 }else{
@@ -628,7 +672,7 @@ public class SolrService {
                         if(this.getFileContentType(fileUrl)){
                             //附件为富文本类型
                             Tika tika = new Tika();
-//                    System.out.println("filetype:"+tika.detect(filePath));  //利用Tika的detect方法检测文件的实际类型
+                            System.out.println("filetype:"+tika.detect(fileName));  //利用Tika的detect方法检测文件的实际类型
                             String fileContent = tika.parseToString(con.getInputStream());  //利用Tika的parseToString()方法读取文件的文本内容
                             solrInputDocument.addField(fileContentSolrName,fileContent);
                         }else if(this.getPictureTypeType(fileUrl)){

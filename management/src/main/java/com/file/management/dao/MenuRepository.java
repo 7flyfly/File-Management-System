@@ -74,4 +74,13 @@ public interface MenuRepository extends JpaRepository<Menu,Integer>{
     // 按照顺序号获取根节点的menu
     @Query(value = "SELECT * FROM TB_MENU WHERE PARENT_ID IS NULL ORDER BY MENU_ORDER", nativeQuery = true)
     List<Menu> findMenuRoot();
+
+    // 根据tableid查询menu
+    @Query(value = "SELECT * FROM TB_MENU WHERE TABLE_ID = ?1",nativeQuery = true)
+    Menu findMenuByTableId(int tableId);
+
+    // 根据菜单名称和分类查询菜单
+    @Query(value = "SELECT * FROM TB_MENU WHERE MENU_NAME = ?1 AND MENU_CLASSIFICATION = ?2",nativeQuery = true)
+    List<Menu> findMenuByMenuNameAndMenuClassification(String menuName,String menuClassification);
+
 }

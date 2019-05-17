@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -22,6 +23,10 @@ public interface FieldRepository extends JpaRepository<Field,Integer> {
     // 根据模糊字段名查询字段
     @Query(value = "select * from tb_field where field_name like %?1% ", nativeQuery = true)
     List<Field> findByFieldNameLike(String fieldName);
+
+    // 查询所有的模板
+    @Query(value = "SELECT * FROM tb_field", nativeQuery = true)
+    ArrayList<Field> findAllFields();
 
     // 根据字段号删除字段
     /*@Modifying

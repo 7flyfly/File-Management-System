@@ -2,7 +2,9 @@ package com.file.management.pojo.metadata;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -36,13 +38,13 @@ public class Tables implements Serializable{
 
 
     // 表对应的字段
-    @ManyToMany(cascade = CascadeType.MERGE,fetch=FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch=FetchType.LAZY)
     @JoinTable(
             name = "tb_table_field",
             joinColumns = {@JoinColumn(name="TABLE_ID")},
             inverseJoinColumns = {@JoinColumn(name="FIELD_ID")}
     )
-    private Set<Field> fields = new LinkedHashSet<>();
+    private List<Field> fields = new ArrayList<>();
 
     public int getTableId() {
         return tableId;
@@ -76,7 +78,7 @@ public class Tables implements Serializable{
         this.template = template;
     }
 
-    public Set<Field> getFields() {
+    public List<Field> getFields() {
         if(this.getTemplate() == null) {
             return fields;
         }else{
@@ -84,7 +86,7 @@ public class Tables implements Serializable{
         }
     }
 
-    public void setFields(Set<Field> fields) {
+    public void setFields(List<Field> fields) {
         this.fields = fields;
     }
 

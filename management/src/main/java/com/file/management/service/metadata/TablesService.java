@@ -7,6 +7,8 @@ import com.file.management.pojo.metadata.Field;
 import com.file.management.pojo.metadata.Tables;
 import com.file.management.pojo.metadata.Template;
 import com.file.management.service.solr.SolrService;
+import com.file.management.utils.ConstantString;
+import net.bytebuddy.asm.Advice;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -148,16 +150,69 @@ public class TablesService {
     /**
      * 生成表函数
      *
-     * @param primaryKey 该表的主键
      * @param fields     表字段
      * @param tableName  表名
-     * @param isTemplate 是否使用模板生成
+     * @param template   模板
      */
-    public void generateTables(Field primaryKey, Set<Field> fields, String tableName, boolean isTemplate) {
+    @Transactional
+    public void generateTables(List<Field> fields, String tableName, Template template) {
 
         //根据一些字段生成一张名为tableName的表
         String sqlCreateTable = "";
         sqlCreateTable += "CREATE TABLE " + tableName + "(\n";
+
+        Field primaryKey = new Field();
+        for(Field f:fields){
+            if(f.getFieldEnglishName().equals("No")){
+                primaryKey = f;
+                sqlCreateTable += f.getFieldEnglishName() + " " + f.getFieldType() + " "  + "PRIMARY KEY AUTO_INCREMENT,\n";
+            }
+        }
+
+        // 添加所需字段
+        for (Field f : fields) {
+            if(!(f.getFieldEnglishName().equals("No"))) {
+                if (f.getFieldLength() == 0) {
+                    sqlCreateTable += f.getFieldEnglishName() + " " + f.getFieldType() + ",\n";
+                } else {
+                    sqlCreateTable += f.getFieldEnglishName() + " " + f.getFieldType() + "(" + f.getFieldLength() + ")" + ",\n";
+                }
+            }
+        }
+
+        // 添加最后修改时间并设置默认值
+        sqlCreateTable += "LAST_MODIFIED TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+
+        // 添加软删除标识
+        sqlCreateTable += "IS_DEL int(11) DEFAULT 0,\n";
+
+        // 添加tableid
+        sqlCreateTable += "TABLE_ID int(11));";
+
+        // 执行建表语句
+        jdbcTemplate.execute(sqlCreateTable);
+
+        // 将新生成的表放入tb_tables中
+        Tables tables = new Tables();
+        tables.setTableName(tableName);
+        tables.setPrimaryKey(primaryKey);
+
+        // 如果不是模板，即用户自定义字段生成的模板建立table-field关联
+        if (template == null) {
+            tables.setFields(fields);
+        }else{
+            tables.setTemplate(template);
+        }
+        saveOne(tables);
+    }
+    /*@Transactional
+    public void generateTables(Field primaryKey, List<Field> fields, String tableName, Template template) {
+
+        //根据一些字段生成一张名为tableName的表
+        String sqlCreateTable = "";
+        sqlCreateTable += "CREATE TABLE " + tableName + "(\n";
+
+
 
         // 添加所需字段
         for (Field f : fields) {
@@ -189,22 +244,23 @@ public class TablesService {
         tables.setPrimaryKey(primaryKey);
 
         // 如果不是模板，即用户自定义字段生成的模板建立table-field关联
-        if (!isTemplate) {
+        if (template == null) {
             tables.setFields(fields);
+        }else{
+            tables.setTemplate(template);
         }
         saveOne(tables);
-    }
+    }*/
 
     /**
      * 使用用户自定义字段生成表
      *
-     * @param primaryKey 该表的主键
      * @param fields    表字段
      * @param tableName 表名
      */
-    public void generateTablesByUser(Field primaryKey, Set<Field> fields, String tableName) {
+    public void generateTablesByUser(List<Field> fields, String tableName) {
         // 根据用户定义字段生成表
-        generateTables(primaryKey,fields, tableName, false);
+        generateTables(fields, tableName, null);
 
         // 将表插入solr中
         addTableToSolr(getTablesByTableName(tableName));
@@ -216,16 +272,18 @@ public class TablesService {
      * @param templateId 模板id
      * @param tableName  表名
      */
+    @Transactional
     public void generateTablesByTemplateId(int templateId, String tableName) {
         Template template = templateService.getTemplateByTemplateId(templateId);
-        generateTables(template.getPrimaryKey(),template.getFields(), tableName, true);
+        generateTables(template.getFields(), tableName, template);
 
-        // 修改tb_table的模板id的sql语句
+        /*// 修改tb_table的模板id的sql语句
         String sqlUpdateTable = "";
         sqlUpdateTable += "UPDATE TB_TABLE SET TEMPLATE_ID = " + templateId + " WHERE TABLE_NAME = \"" + tableName + "\"";
 
         // 执行修改表的模板id的sql语句
-        jdbcTemplate.execute(sqlUpdateTable);
+        jdbcTemplate.execute(sqlUpdateTable);*/
+        tablesRepository.updateTemplateId(templateId,tableName);
 
         // 将表加入solr中
         addTableToSolr(getTablesByTableName(tableName));
@@ -303,7 +361,7 @@ public class TablesService {
         jdbcTemplate.execute(sqlUpdate);
 
         // 调用solrService的方法，看是否可以删除数据
-        HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
+        HashMap<Boolean, String> hashMap = solrService.deleteDocumentTable2Solr(tableName,null,null,null,null,null);
         String res = "";
 
         for (boolean flag : hashMap.keySet()) {
@@ -392,6 +450,36 @@ public class TablesService {
         return res;
     }
 
+    public void addAnnex(String tableUuid,String documentNo,String annex){
+        Tables tables = getTablesByTableUuid(tableUuid);
+        String tableName = tables.getTableName();
+        String sqlUpdate = "UPDATE " + tableName + " SET ANNEX = CONCAT(IFNULL(`Annex`,''), '" + annex + ";') WHERE DOCUMENTNO = '" + documentNo + "'";
+        jdbcTemplate.execute(sqlUpdate);
+        solrService.deltaImportTable2Solr(tableName,"DocumentNo","Annex",";", ConstantString.AnnexContentSolrName,ConstantString.ImageContentSolrName);
+    }
+
+    public boolean deleteAnnex(Tables tables,String documentNo,String annexName){
+        String tableName = tables.getTableName();
+        String sqlQuery = "SELECT ANNEX FROM " + tableName + " WHERE DOCUMENTNO = ?";
+        String annex = (String)jdbcTemplate.queryForObject(sqlQuery,String.class,new Object[]{documentNo});
+        String[] strs = annex.split(";");
+        boolean result = Arrays.asList(strs).contains(annexName);
+        if(result){
+            // 即包含所输入的附件
+            String ret = "";
+            for(String str:strs){
+                if(!str.equals(annexName)){
+                    ret += str + ";";
+                }
+            }
+            jdbcTemplate.execute("UPDATE " + tableName + " SET ANNEX = '" + ret + "' WHERE DOCUMENTNO = '" + documentNo + "'");
+            solrService.deltaImportTable2Solr(tableName,"DocumentNo","Annex",";", ConstantString.AnnexContentSolrName,ConstantString.ImageContentSolrName);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * 获得表中属性的中英文名称
      * @param tableName 表名
@@ -400,7 +488,7 @@ public class TablesService {
     public JSONObject getAttrECNameByTableName(String tableName){
         JSONObject jsonObject = new JSONObject();
         Tables tables = this.getTablesByTableName(tableName);
-        Set<Field> EAttrNameset = tables.getFields();
+        List<Field> EAttrNameset = tables.getFields();
         for (Field field : EAttrNameset) {
             jsonObject.put(field.getFieldEnglishName(),field.getFieldName());
         }
@@ -442,5 +530,20 @@ public class TablesService {
         return listMap;
     }
 
+    public HashMap<String,String> queryDataByTableIdAndDocumentNo(String tableId,String documentNo){
+        String tableName = getTableNameByTableId(Integer.parseInt(tableId));
+        List resultList = dynamicSQL.selectAllByTableNameAndDocumentNo(tableName,documentNo);
+        HashMap<String,String> hashMap = new HashMap<>();
+        // 查询结果只有一个
+        for(Object item:resultList){
+            Object[] obj = (Object[]) item;
+            for(int i=0;i<obj.length;i++){
+                if (obj[i] != null) {
+                    hashMap.put(String.valueOf(i),obj[i].toString());
+                }
+            }
+        }
+        return hashMap;
+    }
 
 }

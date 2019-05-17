@@ -11,7 +11,7 @@
  Target Server Version : 50528
  File Encoding         : 65001
 
- Date: 10/05/2019 09:26:42
+ Date: 17/05/2019 16:13:23
 */
 
 SET NAMES utf8mb4;
@@ -29,21 +29,15 @@ CREATE TABLE `tb_template`  (
   `field_id` int(11) NOT NULL,
   PRIMARY KEY (`template_id`) USING BTREE,
   INDEX `FK7a3jiv1x5bteaea7vy7xy61le`(`field_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_template
 -- ----------------------------
-INSERT INTO `tb_template` VALUES (1, '第一个模板demo', 'demo1', 'T_g8n0no6w', 2);
-INSERT INTO `tb_template` VALUES (2, '第二个模板demo', 'demo2', 'T_9visuj78', 2);
-INSERT INTO `tb_template` VALUES (3, '第三个模板demo', 'demo3', 'T_cvfsjzch', 2);
-INSERT INTO `tb_template` VALUES (4, '第四个模板demo', 'demo4', 'T_on4aqgx3', 2);
-INSERT INTO `tb_template` VALUES (5, '第五个模板demo', 'demo5', 'T_1kdai22i', 2);
-INSERT INTO `tb_template` VALUES (6, '第六个模板demo', 'demo6', 'T_9ihljltf', 2);
-INSERT INTO `tb_template` VALUES (7, '第七个模板demo', 'demo7', 'T_msbqs482', 2);
-INSERT INTO `tb_template` VALUES (8, '第八个模板demo', 'demo8', 'T_29kmpmb3', 2);
-INSERT INTO `tb_template` VALUES (9, '第九个模板demo', 'demo9', 'T_opu20d4g', 2);
-INSERT INTO `tb_template` VALUES (10, '第十个模板demo', 'demo10', 'T_0rkgl218', 2);
-INSERT INTO `tb_template` VALUES (11, '第十一个模板demo', 'demo11', 'T_mykv4u87', 2);
+INSERT INTO `tb_template` VALUES (1, '文书档案-文书-文件目录所使用的模板', '文书模板', 'T_p656ted5', 2);
+INSERT INTO `tb_template` VALUES (2, '文书档案-已故人事-文件目录所使用的模板', '已故人事模板', 'T_2afe1x59', 2);
+INSERT INTO `tb_template` VALUES (3, '文书档案-暂存文件-文件目录所使用的模板', '暂存文件模板', 'T_5zdy1n7u', 2);
+INSERT INTO `tb_template` VALUES (4, '文书档案-河海资料/文件资料汇编-文件目录所使用的模板', '河海资料/文件资料汇编模板', 'T_decy39ux', 2);
+INSERT INTO `tb_template` VALUES (5, '文书案卷-案卷目录/卷内目录', '文书案卷', 'T_uxefpvjk', 2);
 
 SET FOREIGN_KEY_CHECKS = 1;

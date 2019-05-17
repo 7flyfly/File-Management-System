@@ -97,6 +97,12 @@ public class MenuService {
 
     public Menu getMenuByMenuName(String menuName) { return menuRepository.findByMenuName(menuName); }
 
+    public Menu getMenuByTableId(int tableId) { return menuRepository.findMenuByTableId(tableId); }
+
+    public List<Menu> getMenuByMenuNameAndMenuClassification(String menuName,String menuClassification){
+        return menuRepository.findMenuByMenuNameAndMenuClassification(menuName,menuClassification);
+    }
+
 
 
     /**
@@ -176,13 +182,12 @@ public class MenuService {
     /**
      * 为菜单uuid为menuUuid的菜单配置一张用户自定义的表
      * @param menuUuid 菜单uuid
-     * @param primaryKey 主键
      * @param fields 字段
      * @param tableName 表名
      */
-    public void menuGenerateTablesByUser(String menuUuid,Field primaryKey, LinkedHashSet<Field> fields, String tableName){
+    public void menuGenerateTablesByUser(String menuUuid,List<Field> fields, String tableName){
         // 创建用户自定义表
-        tablesService.generateTablesByUser(primaryKey,fields,tableName);
+        tablesService.generateTablesByUser(fields,tableName);
 
         // 获取这张表
         Tables tables = tablesService.getTablesByTableName(tableName);

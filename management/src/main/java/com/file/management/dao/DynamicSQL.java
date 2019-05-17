@@ -71,6 +71,12 @@ public class DynamicSQL {
         return resultList;
     }
 
+    public List selectAllByTableNameAndDocumentNo(String tableName,String documentNo){
+        String sql = "SELECT * FROM " + tableName + " WHERE DOCUMENTNO = '" + documentNo + "'";
+        List resultList = entityManager.createNativeQuery(sql).getResultList();
+        return resultList;
+    }
+
     /**
      * 获取数据库表中的列的列名
      * @param tableName
