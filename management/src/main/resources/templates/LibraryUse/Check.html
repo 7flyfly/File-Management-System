@@ -56,51 +56,51 @@
                                 <option value="2">微信登记</option>
                             </select>
                         </span>
-                        <!--
-                        <span class="col-md-2 zero-padding-lr">
-                            <select class="form-control input-sm query-status">
-                                <option value=" ">所有状态</option>
-                                <option value="0">待提交</option>
-                                <option value="1">审核中</option>
-                                <option value="2">已通过</option>
-                                <option value="-2">未通过</option>
-                                <option value="9">无需审核</option>
-                            </select>
-                        </span>
 
                         <span class="col-md-2 zero-padding-lr">
-                            <select class="form-control input-sm query-reason">
-                                <option value="">所有利用目的</option>
-                                <option value="401">出国查档</option>
-                                <option value="402">调职查档</option>
+                            <select class="form-control input-sm query-status" id="status" onclick="getStatus(this)">
+                                <option value=" ">所有状态</option>
+                                <!--<option value="0">待提交</option>-->
+                                <!--<option value="1">审核中</option>-->
+                                <!--<option value="2">已通过</option>-->
+                                <!--<option value="-2">未通过</option>-->
+                                <!--<option value="9">无需审核</option>-->
                             </select>
                         </span>
-                        <span class="col-md-2 zero-padding-lr">
-                            <select class="form-control input-sm query-way">
-                                <option value="">所有利用方式</option>
-                                <option value="403">查阅</option>
-                                <option value="404">借阅</option>
-                                <option value="601">复制</option>
-                            </select>
-                        </span>
-                        <span class="col-md-1 zero-padding-lr">
-                            <input type="text" id="startDate" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="登记起时间" class="date readOnly form-control input-sm query-createdtime-start validate[custom[date]]">
-                        </span>
-                        <script type="text/javascript">
-                            $(function(){
-                                $("#startDate").datetimepicker({
-                                    format: "yyyy-mm-dd",
-                                    autoclose: true,
-                                    todayBtn: true,
-                                    language:'zh-CN',
-                                    pickerPosition:"bottom-left"
-                                });
-                            });
-                        </script>
-                        <span class="col-md-1 zero-padding-lr">
-                            <input type="text" name="query-createdtime-end" data-force-parse="true" readonly="true" placeholder="登记止时间" class="date readOnly form-control input-sm query-createdtime-end validate[custom[date]]">
-                        </span>
-                        -->
+                        <!--
+                       <span class="col-md-2 zero-padding-lr">
+                           <select class="form-control input-sm query-reason">
+                               <option value="">所有利用目的</option>
+                               <option value="401">出国查档</option>
+                               <option value="402">调职查档</option>
+                           </select>
+                       </span>
+                       <span class="col-md-2 zero-padding-lr">
+                           <select class="form-control input-sm query-way">
+                               <option value="">所有利用方式</option>
+                               <option value="403">查阅</option>
+                               <option value="404">借阅</option>
+                               <option value="601">复制</option>
+                           </select>
+                       </span>
+                       <span class="col-md-1 zero-padding-lr">
+                           <input type="text" id="startDate" name="query-createdtime-start" data-force-parse="true" readonly="true" placeholder="登记起时间" class="date readOnly form-control input-sm query-createdtime-start validate[custom[date]]">
+                       </span>
+                       <script type="text/javascript">
+                           $(function(){
+                               $("#startDate").datetimepicker({
+                                   format: "yyyy-mm-dd",
+                                   autoclose: true,
+                                   todayBtn: true,
+                                   language:'zh-CN',
+                                   pickerPosition:"bottom-left"
+                               });
+                           });
+                       </script>
+                       <span class="col-md-1 zero-padding-lr">
+                           <input type="text" name="query-createdtime-end" data-force-parse="true" readonly="true" placeholder="登记止时间" class="date readOnly form-control input-sm query-createdtime-end validate[custom[date]]">
+                       </span>
+                       -->
                         <span class="col-md-2 zero-padding-lr">
                             <input id="dd" class="form-control input-sm query-keywords" placeholder="利用人姓名">
                         </span>
@@ -124,7 +124,7 @@
                                 <i class="glyphicon glyphicon-search" onclick="searchR(this)">搜索</i>
                             </button>
                             <button class="btn btn-info" type="button">
-                            <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal" onclick="add()">新建登记单</i>
+                            <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal" onclick="add(this)">新建登记单</i>
                             </button>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                 <!--模态框-->
                 <form method="post" name="register" class="form-horizontal" role="form" id="form-data"  style="margin: 20px; width: 60%" >
                     <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" style="width: 1100px" >
+                        <div class="modal-dialog" style="width: 1300px; height: 1200px" >
                             <div class="modal-content">
                                 <div class="modal-header" style="background-color: #007bff">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
@@ -172,7 +172,10 @@
                                                         输入利用者信息
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 单位</span>
-                                                            <input class="form-control" id="unit" type="text" autocomplete="off" name="borrowerUnit" placeholder="单位">
+                                                            <!--<input class="form-control" id="unit" type="text" autocomplete="off" name="borrowerUnit" placeholder="单位">-->
+                                                            <select class="form-control" id="unit" name="type-text" onclick="getUnit(this)">
+                                                                <option value="">请选择</option>
+                                                            </select>
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 姓名</span>
@@ -184,11 +187,12 @@
                                                         </div>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> 证件类型</span>
-                                                            <select class="form-control" id="certType" name="borrowerIdtype">
+                                                            <select class="form-control" id="certType" name="borrowerIdtype" onclick="getcertType()">
                                                                 <option value="">请选择</option>
-                                                                <option value="1">身份证</option>
-                                                                <option value="2">学生证</option>
-                                                                <option value="3">教师证</option>
+                                                                <!--<option th:each="item:${roles}" th:text="${item.sequence}" th:value="${item.name}" ></option>-->
+                                                                <!--<option value="1">身份证</option>-->
+                                                                <!--<option value="2">学生证</option>-->
+                                                                <!--<option value="3">教师证</option>-->
                                                             </select>
                                                         </div>
                                                         <div class="input-group">
@@ -209,13 +213,16 @@
                                                 </span>
                                             </div>
                                             <script type="text/javascript">
-                                                    $('.form_datetime').datetimepicker({
-                                                        format: 'yyyy-mm-dd',
-                                                        locale: moment.locale('zh-cn'),
-                                                        autoclose: true,
-                                                        todayBtn: true,
-                                                        pickerPosition: "bottom-right"
+                                                $(function(){
+                                                    $("#borrowerDate").datetimepicker({
+                                                        minView: "month",
+                                                        format: "yyyy-mm-dd",
+                                                        autoclose: 1,
+                                                        todayBtn:1,
+                                                        language:'zh-CN',
+                                                        pickerPosition:"bottom-left"
                                                     });
+                                                });
                                             </script>
                                         </div>
                                         <div class="form-group">
@@ -260,9 +267,7 @@
                                                     <table id="contentTable" class="table table-bordered nowrap" width="100%" cellpadding="0"></table>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="borrowday">出借天数</label>
                                             <div class="input-group">
@@ -292,10 +297,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <select class="form-control database" id="database" >
-                                            <option value="">请选择库</option>
-                                            <option value="1">声像档案</option>
+                                    <div class="col-sm-2">
+                                        <select class="form-control selectpicker database" id="database" onclick="databaseBind(this)" >
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <select class="form-control selectpicker" id="fileContent" onclick="getContent(this)" >
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <select class="form-control selectpicker" id="catalogue" onclick="getCatalogue(this)" >
+                                            <option value="">请选择</option>
                                         </select>
                                     </div>
                                     <div class="text-center">

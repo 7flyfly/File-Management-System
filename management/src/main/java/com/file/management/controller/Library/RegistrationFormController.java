@@ -2,11 +2,16 @@ package com.file.management.controller.Library;
 
 import com.alibaba.fastjson.JSONObject;
 import com.file.management.dao.LibraryUse.DatabasesDao;
+import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
 import com.file.management.pojo.LibraryUse.DatabasesPojo;
 import com.file.management.pojo.LibraryUse.RegistrationForm;
+import com.file.management.pojo.Menu;
+import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
 import com.file.management.service.LibraryUse.RegistrationFormService;
+import com.file.management.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,10 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class RegistrationFormController {
@@ -97,6 +99,7 @@ public class RegistrationFormController {
         String phone = (String)map.get("phone");
         String way = (String) map.get("way");
         String state = "待审批";
+        String contant = (String)map.get("contant");
 
         registrationForm.setOddNumbers(num);
         registrationForm.setApprovalNumber(num2);
@@ -113,8 +116,9 @@ public class RegistrationFormController {
         registrationForm.setRecordDate(recordDate);
         registrationForm.setTelphone(phone);
         registrationForm.setWay(way);
-        //registrationForm.setState(state);
+        registrationForm.setState(state);
         registrationForm.setStloanAgentate(registrant);
+        registrationForm.setContant(contant);
         registrationFormService.saveAll(registrationForm);
 
         return "LibraryUse/Check";
@@ -135,24 +139,37 @@ public class RegistrationFormController {
         return null;
     }
 
+    @ResponseBody
     @RequestMapping("/deleteRegister")
-    public String deleteRegister(@RequestBody Map<String,Object> map){
-        String num=(String)map.get("approveNum");
-        System.out.println(num);
+    public String deleteRegister(String num){
         registrationFormService.deleteForm(num);
-        return "LibraryUse/Check";
+
+        JSONObject jsonObject=new JSONObject();
+        List<RegistrationForm> registrationFormList = registrationFormService.findAll();
+        if (registrationFormList != null){
+            jsonObject.put("rows",registrationFormList);
+            jsonObject.put("total",registrationFormList.size());
+            return jsonObject.toJSONString();
+        }else {
+            System.out.println("没数据");
+        }
+        return null;
+
     }
 
     //查询登记
     @ResponseBody
     @RequestMapping("/searchRegist")
-    public String searchRegist(String query_type, String query_keward){
+    public String searchRegist(String query_type,String status, String query_keward){
         JSONObject jsonObject=new JSONObject();
-        List<RegistrationForm> registrationFormList = registrationFormService.findByTypeAndName(query_type,query_keward);
+        System.out.println(query_type);
+        System.out.println(status);
         System.out.println(query_keward);
+        List<RegistrationForm> registrationFormList = registrationFormService.findByTypeAndNameAndStatus(query_type,query_keward,status);
         if (registrationFormList != null){
             jsonObject.put("rows",registrationFormList);
             jsonObject.put("total",registrationFormList.size());
+            System.out.println(jsonObject.toJSONString());
             return jsonObject.toJSONString();
         }else {
             System.out.println("没数据");
@@ -221,7 +238,7 @@ public class RegistrationFormController {
 
     @ResponseBody
     @RequestMapping("/showDatabase")
-    public String showDatabase(String documentNo, String database){
+    public String showDatabase(String documentNo,String database){
         JSONObject jsonObject=new JSONObject();
         List<DatabasesPojo> databasesPojoList = databasesDao.findAllByDocumentNoAndFilestore(documentNo,database);
         if (databasesPojoList != null){
@@ -233,4 +250,48 @@ public class RegistrationFormController {
         }
         return null;
     }
+
+
+    @Autowired
+    private DictionaryDao dictionaryDao;
+
+    @RequestMapping("/getCertType")
+    @ResponseBody
+    public List<DictionaryPojo> getcertType(){
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionary("4");
+        return dictionaryPojoList;
+    }
+
+    //向前台发送状态下拉框数据
+    @RequestMapping("/getStatus")
+    @ResponseBody
+    public List<DictionaryPojo> getStatus(){
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionary("5");
+        return dictionaryPojoList;
+    }
+
+    //向前台发送单位下拉框数据
+    @RequestMapping("/getUnit")
+    @ResponseBody
+    public List<DictionaryPojo> getUnit(){
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionary("3");
+        return dictionaryPojoList;
+    }
+
+    @Autowired
+    private MenuService menuService;
+    //向前台发送档案库下拉框数据
+    @RequestMapping("/getData")
+    @ResponseBody
+    public List<String> getData(){
+        List<String> str = new ArrayList<String>();
+        List<Menu> menuList =  menuService.getMenuRoot();
+        for (Menu menu:menuList){
+            str.add(menu.getMenuName());
+        }
+        return str;
+    }
 }
+
+
+

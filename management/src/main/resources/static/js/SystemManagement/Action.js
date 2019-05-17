@@ -1,8 +1,9 @@
 
-//$("#DepartmentTable").empty();
-$('#DepartmentTable').bootstrapTable({
-    url:'/departmentSerach',  //请求后台url
+
+$('#ActionTable').bootstrapTable({
+    url:'/actionSearch',  //请求后台url
     method:'get',
+    async:false,
     showRefresh:false, //是否显示刷新按钮
     cardView: false,   //是否显示详细视图
     showToggle : false, // 是否显示详细视图和列表视图的切换按钮
@@ -32,53 +33,35 @@ $('#DepartmentTable').bootstrapTable({
         valign : 'center',
         width:"100px",
         formatter : function (value, row, index) {
-            var pageSize = $('#DepartmentTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
-            var pageNumber = $('#DepartmentTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+            var pageSize = $('#ActionTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+            var pageNumber = $('#ActionTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
             return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
         }
 
     },{
-        title : '代码',
-        field : 'code',
+        title : '动作名',
+        field : 'name',
         align : 'center',
         valign : 'center',
         width:"100px",
     }, {
-        title : '名称',
-        field : 'name',
+        title : '类型',
+        field : 'type',
         align : 'center',
         valign : 'center',
         width:"150px",
     },  {
-        title : '父级',
-        field : 'parent',
+        title : '解释',
+        field : 'exp',
         align : 'center',
         valign : 'center',
-        width:"150px",
+        width:"600px",
     },  {
-        title : '主管',
-        field : 'charger',
+        title : '返回信息',
+        field : 'message',
         align : 'center',
         valign : 'center',
-        width:"150px",
-    }, {
-        title : '联系电话',
-        field : 'phone',
-        align : 'center',
-        valign : 'center',
-        width:"150px",
-    }, {
-        title : '传真',
-        field : 'fax',
-        align : 'center',
-        valign : 'center',
-        width:"150px",
-    }, {
-        title : '备注',
-        field : 'comment',
-        align : 'center',
-        valign : 'center',
-        width:"150px",
+        width:"600px",
     }, {
         title : '操作',
         field : 'operation',
@@ -95,65 +78,48 @@ $('#DepartmentTable').bootstrapTable({
 //把数据提交到编辑模态框
 function editInfo(obj) {
     var id=$(obj).attr("id");
-    var code=document.getElementById("DepartmentTable").rows[id].cells[1].innerText;
-    var name=document.getElementById("DepartmentTable").rows[id].cells[1].innerText;
-    $('#codeEdit').val(code);
+    var name=document.getElementById("ActionTable").rows[id].cells[1].innerText;
     $('#nameEdit').val(name);
-    $('#parentEdit').val("计算机");
-    $('#chargerEdit').val(tds.eq(4).text());
-    $('#phoneEdit').val(tds.eq(5).text());
-    $('#faxEdit').val(tds.eq(6).text());
-    $('#commentEdit').val(tds.eq(7).text());
-    // var sex = $('#sex').val(tds.eq(2).text());
-    // if (sex == '女') {
-    //     document.getElementById('women').checked = true;
-    // } else {
-    //     document.getElementById('man').checked = true;
-    //
-    //     $('#modal').modal('show');
-    // }
+    $('#typeEdit').val(tds.eq(2).text());
+    $('#explainEdit').val(tds.eq(3).text());
+    $('#messageEdit').val(tds.eq(4).text());
+
     $('#editModal').modal('show');
 }
 
 //提交更改
 function save(obj) {
     //获取模态框数据
-    var code = $('#code').val();
     var name = $('#name').val();
-    var parent= $('#parent').val();
-    var charger = $('#charger').val();
-    var phone = $('#phone').val();
-    var fax = $('#fax').val();
-    var comment = $('#comment').val();
-    //var sex = $('input:radio[name="sex"]:checked').val();
+    var type = $('#type').val();
+    var explain = $('#explain').val();
+    var message = $('#message').val();
+
     var jsonObj= {
-        'code':code,
         'name': name,
-        "parent": parent,
-        "charger": charger,
-        "phone": phone,
-        "fax": fax,
-        "comment": comment,
-    };
+        "type": type,
+        "explain": explain,
+        "message": message,
+    }
     $.ajax({
         type: "post",
-        url: "/postDepartementData",
+        url: "/postActionData",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
+        async:false,
         success: function(result) {
             window.location.reload();
-            //showData(result);
         }
     });
     $('#addModal').modal('hide');
 }
 
 function search(obj) {
-     $("#DepartmentTable").bootstrapTable('destroy');
+     $("#ActionTable").bootstrapTable('destroy');
      var text=$("#nametext").val();
-    $('#DepartmentTable').bootstrapTable({
-        url:'/search',  //请求后台url
+    $('#ActionTable').bootstrapTable({
+        url:'/searchAction',  //请求后台url
         method:'get',
         showRefresh:false, //是否显示刷新按钮
         cardView: false,   //是否显示详细视图
@@ -185,53 +151,35 @@ function search(obj) {
             valign : 'center',
             width:"100px",
             formatter : function (value, row, index) {
-                var pageSize = $('#DepartmentTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
-                var pageNumber = $('#DepartmentTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+                var pageSize = $('#ActionTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+                var pageNumber = $('#ActionTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
                 return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
             }
 
         },{
-            title : '代码',
-            field : 'code',
+            title : '动作名',
+            field : 'name',
             align : 'center',
             valign : 'center',
             width:"100px",
         }, {
-            title : '名称',
-            field : 'name',
+            title : '类型',
+            field : 'type',
             align : 'center',
             valign : 'center',
             width:"150px",
         },  {
-            title : '父级',
-            field : 'parent',
+            title : '解释',
+            field : 'exp',
             align : 'center',
             valign : 'center',
-            width:"150px",
+            width:"600px",
         },  {
-            title : '主管',
-            field : 'charger',
+            title : '返回信息',
+            field : 'message',
             align : 'center',
             valign : 'center',
-            width:"150px",
-        }, {
-            title : '联系电话',
-            field : 'phone',
-            align : 'center',
-            valign : 'center',
-            width:"150px",
-        }, {
-            title : '传真',
-            field : 'fax',
-            align : 'center',
-            valign : 'center',
-            width:"150px",
-        }, {
-            title : '备注',
-            field : 'comment',
-            align : 'center',
-            valign : 'center',
-            width:"150px",
+            width:"600px",
         }, {
             title : '操作',
             field : 'operation',
@@ -251,47 +199,36 @@ $('#editModal').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
     //var modalId = btnThis.data('id');   //解析出data-id的内容
-    var code= btnThis.closest('tr').find('td').eq(1).text();
-    var name= btnThis.closest('tr').find('td').eq(2).text();
-    var parent= btnThis.closest('tr').find('td').eq(3).text();
-    var charger= btnThis.closest('tr').find('td').eq(4).text();
-    var phone= btnThis.closest('tr').find('td').eq(5).text();
-    var fax= btnThis.closest('tr').find('td').eq(6).text();
-    var comment=btnThis.closest('tr').find('td').eq(7).text();
-    modal.find('#codeEdit').val(code);
+    var name= btnThis.closest('tr').find('td').eq(1).text();
+    var type= btnThis.closest('tr').find('td').eq(2).text();
+    var explain= btnThis.closest('tr').find('td').eq(3).text();
+    var message= btnThis.closest('tr').find('td').eq(4).text();
     modal.find('#nameEdit').val(name);
-    modal.find('#parentEdit').val(parent);
-    modal.find('#chargerEdit').val(charger);
-    modal.find('#phoneEdit').val(phone);
-    modal.find('#faxEdit').val(fax);
-    modal.find('#commentEdit').val(comment);
+    modal.find('#typeEdit').val(type);
+    modal.find('#explainEdit').val(explain);
+    modal.find('#messageEdit').val(message);
 });
 
 //保存修改
 function saveEdit(obj) {
     //获取模态框数据
-    var code = $('#codeEdit').val();
     var name = $('#nameEdit').val();
-    var parent=$('#parentEdit').val();
-    var charger= $('#chargerEdit').val();
-    var phone = $('#phoneEdit').val();
-    var fax = $('#faxEdit').val();
-    var comment = $('#commentEdit').val();
+    var type=$('#typeEdit').val();
+    var explain= $('#explainEdit').val();
+    var message = $('#messageEdit').val();
 
     var jsonObj= {
-        'code':code,
         'name': name,
-        'parent': parent,
-        "charger": charger,
-        "fax": fax,
-        "phone": phone,
-        "comment": comment,
+        "type": type,
+        "explain": explain,
+        "message": message,
     };
     $.ajax({
         type: "post",
-        url: "/saveDepartmentEdit",
+        url: "/saveActionEdit",
         data: JSON.stringify(jsonObj),
         dataType: "json",
+        async:false,
         contentType: "application/json",
         success: function(result) {
             window.location.reload();
@@ -304,25 +241,24 @@ function saveEdit(obj) {
 $('#delModal').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
-    var name= btnThis.closest('tr').find('td').eq(2).text();
-    var charger= btnThis.closest('tr').find('td').eq(4).text();
+    var name= btnThis.closest('tr').find('td').eq(1).text();
+    var type= btnThis.closest('tr').find('td').eq(2).text();
     modal.find("#name-del").val(name);
-    modal.find("#charger-del").val(charger);
+    modal.find("#type-del").val(type);
 });
 function removeInfo(obj) {
     var name= $('#name-del').val();
-    var charger=$('#charger-del').val();
     console.log(name);
     var jsonObj= {
         "name": name,
-        "charger": charger
     };
     $.ajax({
         type: "post",
-        url: "/deleteInfo",
+        url: "/deleteActionInfo",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
+        async:false,
         success: function(result) {
             window.location.reload();
         }

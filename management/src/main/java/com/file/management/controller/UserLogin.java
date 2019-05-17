@@ -37,7 +37,7 @@ public class UserLogin {
             User user=userService.findUser(username,password);
             if (user != null){
                 session.setAttribute("username",username);
-                return "center";
+                return "mywork/homepage";
             }else {
                 map.put("msg","账户或密码错误");
                 return "redirect:/index";

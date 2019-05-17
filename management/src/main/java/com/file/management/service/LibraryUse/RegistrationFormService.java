@@ -22,7 +22,8 @@ public interface RegistrationFormService {
     void deleteForm(String num);
 
     //查询利用登记
-    List<RegistrationForm> findByTypeAndName(String type,String name);
+    List<RegistrationForm> findByTypeAndNameAndStatus(String type,String name,String status);
+
 
     //查询利用审批
     List<RegistrationForm>findByStatus(String status);

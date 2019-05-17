@@ -1,0 +1,188 @@
+
+<!--动作库管理<-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>动作库管理</title>
+
+</head>
+<body>
+<div id="container">
+    <div class="header" th:replace="public:: #public-header"></div>
+    <div class="body">
+        <div class="sidebar" th:replace="SystemManagement/SystemManagePublic:: #sidebar" style="width: 20%;height: 90%; background-color: #cccccc"></div>
+        <div id="main" style="width: 85%;height: 90%;float: left ">
+            <div id="i-main-center">
+                <ol class="breadcrumb">
+                    <li>
+                        <a data-target="#i-menu-sidebar" data-toggle="sidebar" href="#">
+                            <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span>
+                            系统管理
+                        </a>
+                    </li>
+                    <li>
+                        状态管理
+                    </li>
+                    <li class="active">
+                        <a href="#">动作管理</a>
+                    </li>
+                </ol>
+                <div id="main-center">
+                    <div id="mc-main" class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 col-xs-12 zero-padding">
+                                <div role="group" class="btn-group btn-group-sm btn-group-xs-12 btn-group-xs-vertical right zero-padding-lr">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" id="nametext" class="form-control query-keywords" placeholder="动作名称">
+                                        <div class="input-group-btn">
+                                            <button type="button" id="search" class="btn btn-default btn-query">
+                                                <i class="glyphicon glyphicon-search" onclick="search(this)"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-add" data-toggle="modal" data-target="#addModal">
+                                                <i class="glyphicon glyphicon-plus">添加动作</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--模态框-->
+                        <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #007bff">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                        <h4 class="modal-title" id="addModalLabel"> 添加动作 </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="info" class="form-horizontal" action="" method="post">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="name">动作名</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control"id="name" name="name" placeholder="动作名" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="type">动作类型</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control"id="type" name="type" placeholder="动作类型（Alarm/Action/Remind/Message）" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="explain">动作解释</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control" id="explain" name="explain" placeholder="对动作的解释" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="message">返回信息</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control" id="message" name="message" placeholder="执行此动作返回的信息" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer" style="display: block;">
+                                        <div class="bootstrap-dialog-footer">
+                                            <div class="bootstrap-dialog-footer-buttons">
+                                                <button class="btn btn-primary" id="save" onclick="save(this)">保存</button>
+                                                <button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <table id="ActionTable"></table>
+                        </div>
+                        <!--编辑模态框-->
+                        <div class="modal fade" id="editModal"   tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #007bff">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                        <h4 class="modal-title" id="editModalLabel"> 编辑动作 </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="edit" class="form-horizontal" action="" method="post">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="nameEdit">动作名称</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" readonly="true" autocomplete="off" class="form-control"id="nameEdit" name="nameEdit" placeholder="动作名称" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="typeEdit">动作类型</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"  autocomplete="off" class="form-control"id="typeEdit" name="typeEdit" placeholder="动作类型" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="explainEdit">动作解释</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"  autocomplete="off" class="form-control"id="explainEdit" name="explainEdit" placeholder="动作解释" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="messageEdit">返回信息</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control" id="messageEdit" name="messageEdit" placeholder="返回信息" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer" style="display: block;">
+                                        <div class="bootstrap-dialog-footer">
+                                            <div class="bootstrap-dialog-footer-buttons">
+                                                <button class="btn btn-primary" id="saveEdit" onclick="saveEdit(this)">保存</button>
+                                                <button class="btn btn-default" id="closeEdit" data-dismiss="modal">关闭</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--删除提示模态框-->
+                        <div class="modal fade" id="delModal"   tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: red">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                        <h4 class="modal-title" id="delModalLabel"> 删除 </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span>确定删除此动作吗？</span>
+                                        <input id="name-del" type="hidden">
+                                    </div>
+                                    <div class="modal-footer" style="display: block;">
+                                        <div class="bootstrap-dialog-footer">
+                                            <div class="bootstrap-dialog-footer-buttons">
+                                                <button class="btn btn-danger" id="delete" onclick="removeInfo(this)">删除</button>
+                                                <button class="btn btn-default" id="cancal" data-dismiss="modal">取消</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script th:src="@{/js/SystemManagement/Action.js}"></script>
+</body>
+</html>
+
+
+
+

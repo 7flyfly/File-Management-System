@@ -1,6 +1,7 @@
 package com.file.management.controller.Library;
 
 
+import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
 import com.file.management.service.LibraryUse.RegistrationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class LibraryUse {
 
     @Autowired
     RegistrationFormService registrationFormService;
+    @Autowired
+    private DictionaryDao dictionaryDao;
+
     @RequestMapping("/borrow")
     public String borrow(){
         return "Library/controlCenter";

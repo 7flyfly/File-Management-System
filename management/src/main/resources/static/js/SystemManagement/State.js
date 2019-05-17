@@ -1,7 +1,7 @@
 
-//$("#DepartmentTable").empty();
-$('#DepartmentTable').bootstrapTable({
-    url:'/departmentSerach',  //请求后台url
+
+$('#StateTable').bootstrapTable({
+    url:'/stateSearch',  //请求后台url
     method:'get',
     showRefresh:false, //是否显示刷新按钮
     cardView: false,   //是否显示详细视图
@@ -32,53 +32,71 @@ $('#DepartmentTable').bootstrapTable({
         valign : 'center',
         width:"100px",
         formatter : function (value, row, index) {
-            var pageSize = $('#DepartmentTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
-            var pageNumber = $('#DepartmentTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+            var pageSize = $('#StateTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+            var pageNumber = $('#StateTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
             return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
         }
 
     },{
-        title : '代码',
-        field : 'code',
-        align : 'center',
-        valign : 'center',
-        width:"100px",
-    }, {
-        title : '名称',
+        title : '状态名',
         field : 'name',
         align : 'center',
         valign : 'center',
-        width:"150px",
+        width:"300px",
+    }, {
+        title : '状态来源',
+        field : 'source',
+        align : 'center',
+        valign : 'center',
+        width:"500px",
     },  {
-        title : '父级',
-        field : 'parent',
+        title : '状态解释',
+        field : 'exp',
         align : 'center',
         valign : 'center',
-        width:"150px",
+        width:"500px",
     },  {
-        title : '主管',
-        field : 'charger',
+        title : '范围下限',
+        field : 'min',
         align : 'center',
         valign : 'center',
-        width:"150px",
-    }, {
-        title : '联系电话',
-        field : 'phone',
+        width:"100px",
+    },  {
+        title : '范围上限',
+        field : 'max',
         align : 'center',
         valign : 'center',
-        width:"150px",
-    }, {
-        title : '传真',
-        field : 'fax',
+        width:"100px",
+    },  {
+        title : '真实数值',
+        field : 'num',
         align : 'center',
         valign : 'center',
-        width:"150px",
-    }, {
-        title : '备注',
-        field : 'comment',
+        width:"100px",
+    },  {
+        title : '过低动作',
+        field : 'less',
         align : 'center',
         valign : 'center',
-        width:"150px",
+        width:"200px",
+    },  {
+        title : '适合动作',
+        field : 'fit',
+        align : 'center',
+        valign : 'center',
+        width:"200px",
+    },  {
+        title : '过高动作',
+        field : 'more',
+        align : 'center',
+        valign : 'center',
+        width:"200px",
+    },  {
+        title : '是否执行',
+        field : 'bool',
+        align : 'center',
+        valign : 'center',
+        width:"100px",
     }, {
         title : '操作',
         field : 'operation',
@@ -95,65 +113,66 @@ $('#DepartmentTable').bootstrapTable({
 //把数据提交到编辑模态框
 function editInfo(obj) {
     var id=$(obj).attr("id");
-    var code=document.getElementById("DepartmentTable").rows[id].cells[1].innerText;
-    var name=document.getElementById("DepartmentTable").rows[id].cells[1].innerText;
-    $('#codeEdit').val(code);
+    var name=document.getElementById("StateTable").rows[id].cells[1].innerText;
     $('#nameEdit').val(name);
-    $('#parentEdit').val("计算机");
-    $('#chargerEdit').val(tds.eq(4).text());
-    $('#phoneEdit').val(tds.eq(5).text());
-    $('#faxEdit').val(tds.eq(6).text());
-    $('#commentEdit').val(tds.eq(7).text());
-    // var sex = $('#sex').val(tds.eq(2).text());
-    // if (sex == '女') {
-    //     document.getElementById('women').checked = true;
-    // } else {
-    //     document.getElementById('man').checked = true;
-    //
-    //     $('#modal').modal('show');
-    // }
+    $('#sourceEdit').val(tds.eq(2).text());
+    $('#explainEdit').val(tds.eq(3).text());
+    $('#minEdit').val(tds.eq(4).text());
+    $('#maxEdit').val(tds.eq(5).text());
+    $('#numEdit').val(tds.eq(6).text());
+    $('#lessEdit').val(tds.eq(7).text());
+    $('#fitEdit').val(tds.eq(8).text());
+    $('#moreEdit').val(tds.eq(9).text());
+    $('#boolEdit').val(tds.eq(10).text());
+
     $('#editModal').modal('show');
 }
 
-//提交更改
+//提交添加
 function save(obj) {
     //获取模态框数据
-    var code = $('#code').val();
     var name = $('#name').val();
-    var parent= $('#parent').val();
-    var charger = $('#charger').val();
-    var phone = $('#phone').val();
-    var fax = $('#fax').val();
-    var comment = $('#comment').val();
-    //var sex = $('input:radio[name="sex"]:checked').val();
+    var source = $('#source').val();
+    var explain = $('#explain').val();
+    var min = $('#min').val();
+    var max = $('#max').val();
+    var num = $('#num').val();
+    var less = $('#less').val();
+    var fit = $('#fit').val();
+    var more = $('#more').val();
+    var bool = $('#bool').val();
+
+
     var jsonObj= {
-        'code':code,
         'name': name,
-        "parent": parent,
-        "charger": charger,
-        "phone": phone,
-        "fax": fax,
-        "comment": comment,
+        "source": source,
+        "explain": explain,
+        "min": min,
+        "max": max,
+        "num": num,
+        "less": less,
+        "fit": fit,
+        "more": more,
+        "bool": bool,
     };
     $.ajax({
         type: "post",
-        url: "/postDepartementData",
+        url: "/postStateData",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
         success: function(result) {
             window.location.reload();
-            //showData(result);
         }
     });
     $('#addModal').modal('hide');
 }
 
 function search(obj) {
-     $("#DepartmentTable").bootstrapTable('destroy');
+     $("#StateTable").bootstrapTable('destroy');
      var text=$("#nametext").val();
-    $('#DepartmentTable').bootstrapTable({
-        url:'/search',  //请求后台url
+    $('#StateTable').bootstrapTable({
+        url:'/searchState',  //请求后台url
         method:'get',
         showRefresh:false, //是否显示刷新按钮
         cardView: false,   //是否显示详细视图
@@ -185,53 +204,71 @@ function search(obj) {
             valign : 'center',
             width:"100px",
             formatter : function (value, row, index) {
-                var pageSize = $('#DepartmentTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
-                var pageNumber = $('#DepartmentTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+                var pageSize = $('#StateTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+                var pageNumber = $('#StateTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
                 return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
             }
 
         },{
-            title : '代码',
-            field : 'code',
-            align : 'center',
-            valign : 'center',
-            width:"100px",
-        }, {
-            title : '名称',
+            title : '状态名',
             field : 'name',
             align : 'center',
             valign : 'center',
-            width:"150px",
+            width:"300px",
+        }, {
+            title : '状态来源',
+            field : 'source',
+            align : 'center',
+            valign : 'center',
+            width:"500px",
         },  {
-            title : '父级',
-            field : 'parent',
+            title : '状态解释',
+            field : 'exp',
             align : 'center',
             valign : 'center',
-            width:"150px",
+            width:"500px",
         },  {
-            title : '主管',
-            field : 'charger',
+            title : '范围下限',
+            field : 'min',
             align : 'center',
             valign : 'center',
-            width:"150px",
-        }, {
-            title : '联系电话',
-            field : 'phone',
+            width:"100px",
+        },  {
+            title : '范围上限',
+            field : 'max',
             align : 'center',
             valign : 'center',
-            width:"150px",
-        }, {
-            title : '传真',
-            field : 'fax',
+            width:"100px",
+        },  {
+            title : '真实数值',
+            field : 'num',
             align : 'center',
             valign : 'center',
-            width:"150px",
-        }, {
-            title : '备注',
-            field : 'comment',
+            width:"100px",
+        },  {
+            title : '过低动作',
+            field : 'less',
             align : 'center',
             valign : 'center',
-            width:"150px",
+            width:"200px",
+        },  {
+            title : '适合动作',
+            field : 'fit',
+            align : 'center',
+            valign : 'center',
+            width:"200px",
+        },  {
+            title : '过高动作',
+            field : 'more',
+            align : 'center',
+            valign : 'center',
+            width:"200px",
+        },  {
+            title : '是否执行',
+            field : 'bool',
+            align : 'center',
+            valign : 'center',
+            width:"100px",
         }, {
             title : '操作',
             field : 'operation',
@@ -251,45 +288,58 @@ $('#editModal').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
     //var modalId = btnThis.data('id');   //解析出data-id的内容
-    var code= btnThis.closest('tr').find('td').eq(1).text();
-    var name= btnThis.closest('tr').find('td').eq(2).text();
-    var parent= btnThis.closest('tr').find('td').eq(3).text();
-    var charger= btnThis.closest('tr').find('td').eq(4).text();
-    var phone= btnThis.closest('tr').find('td').eq(5).text();
-    var fax= btnThis.closest('tr').find('td').eq(6).text();
-    var comment=btnThis.closest('tr').find('td').eq(7).text();
-    modal.find('#codeEdit').val(code);
+    var name= btnThis.closest('tr').find('td').eq(1).text();
+    var source= btnThis.closest('tr').find('td').eq(2).text();
+    var explain= btnThis.closest('tr').find('td').eq(3).text();
+    var min= btnThis.closest('tr').find('td').eq(4).text();
+    var max= btnThis.closest('tr').find('td').eq(5).text();
+    var num= btnThis.closest('tr').find('td').eq(6).text();
+    var less= btnThis.closest('tr').find('td').eq(7).text();
+    var fit= btnThis.closest('tr').find('td').eq(8).text();
+    var more= btnThis.closest('tr').find('td').eq(9).text();
+    var bool= btnThis.closest('tr').find('td').eq(10).text();
     modal.find('#nameEdit').val(name);
-    modal.find('#parentEdit').val(parent);
-    modal.find('#chargerEdit').val(charger);
-    modal.find('#phoneEdit').val(phone);
-    modal.find('#faxEdit').val(fax);
-    modal.find('#commentEdit').val(comment);
+    modal.find('#sourceEdit').val(source);
+    modal.find('#explainEdit').val(explain);
+    modal.find('#minEdit').val(min);
+    modal.find('#maxEdit').val(max);
+    modal.find('#numEdit').val(num);
+    modal.find('#lessEdit').val(less);
+    modal.find('#fitEdit').val(fit);
+    modal.find('#moreEdit').val(more);
+    modal.find('#boolEdit').val(bool);
 });
 
 //保存修改
 function saveEdit(obj) {
     //获取模态框数据
-    var code = $('#codeEdit').val();
     var name = $('#nameEdit').val();
-    var parent=$('#parentEdit').val();
-    var charger= $('#chargerEdit').val();
-    var phone = $('#phoneEdit').val();
-    var fax = $('#faxEdit').val();
-    var comment = $('#commentEdit').val();
+    var source = $('#sourceEdit').val();
+    var explain = $('#explainEdit').val();
+    var min = $('#minEdit').val();
+    var max = $('#maxEdit').val();
+    var num = $('#numEdit').val();
+    var less = $('#lessEdit').val();
+    var fit = $('#fitEdit').val();
+    var more = $('#moreEdit').val();
+    var bool = $('#boolEdit').val();
+
 
     var jsonObj= {
-        'code':code,
         'name': name,
-        'parent': parent,
-        "charger": charger,
-        "fax": fax,
-        "phone": phone,
-        "comment": comment,
+        "source": source,
+        "explain": explain,
+        "min": min,
+        "max": max,
+        "num": num,
+        "less": less,
+        "fit": fit,
+        "more": more,
+        "bool": bool,
     };
     $.ajax({
         type: "post",
-        url: "/saveDepartmentEdit",
+        url: "/saveStateEdit",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
@@ -304,22 +354,20 @@ function saveEdit(obj) {
 $('#delModal').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
-    var name= btnThis.closest('tr').find('td').eq(2).text();
-    var charger= btnThis.closest('tr').find('td').eq(4).text();
+    var name= btnThis.closest('tr').find('td').eq(1).text();
+    var type= btnThis.closest('tr').find('td').eq(2).text();
     modal.find("#name-del").val(name);
-    modal.find("#charger-del").val(charger);
+    modal.find("#type-del").val(type);
 });
 function removeInfo(obj) {
     var name= $('#name-del').val();
-    var charger=$('#charger-del').val();
     console.log(name);
     var jsonObj= {
         "name": name,
-        "charger": charger
     };
     $.ajax({
         type: "post",
-        url: "/deleteInfo",
+        url: "/deleteStateInfo",
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",

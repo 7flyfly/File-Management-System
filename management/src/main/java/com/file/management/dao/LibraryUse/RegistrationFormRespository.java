@@ -28,7 +28,7 @@ public interface RegistrationFormRespository extends JpaRepository<RegistrationF
     void deleteByOddNumbers(String num);
 
     //查询利用登记
-    List<RegistrationForm> findAllByTypeAndRegistrant(String type,String name);
+    List<RegistrationForm> findAllByTypeAndNameAndState(String type,String name,String status);
 
     //查询利用审批
     List<RegistrationForm> findAllByState(String status);
