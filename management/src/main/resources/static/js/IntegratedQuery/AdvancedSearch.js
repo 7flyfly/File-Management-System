@@ -4,30 +4,75 @@ var AdvancedSearch={
     anyKeyWord: "",
     noKeyWord: "",
     nodeName: "",
-    keyWordPosition: "",
-    SearchCheck:function(){
-            AdvancedSearch.allKeyWord=$("#contain_allKeyWord").val();
-            AdvancedSearch.documentNumber=$("#contian_documentNumber").val();
-            AdvancedSearch.anyKeyWord=$("#contian_anyKeyWord").val();
-            AdvancedSearch.noKeyWord=$("#contian_noKeyWord").val();
-            AdvancedSearch.nodeName=$("#contian_nodeName").val();
-            AdvancedSearch.keyWordPosition=$("input[name='keyWordPositionOptionsRadios']:checked").val();
-            if(AdvancedSearch.allKeyWord==null&&AdvancedSearch.allKeyWord==""&&
-            AdvancedSearch.documentNumber==null&&AdvancedSearch.documentNumber==""&&
-            AdvancedSearch.nodeName==null&&AdvancedSearch.nodeName==""&&
-            AdvancedSearch.anyKeyWord==null&&AdvancedSearch.anyKeyWord==""&&
-            AdvancedSearch.noKeyWord==null&&AdvancedSearch.noKeyWord==""){
-                alert("关键字不能为空!");
-            }else{
-                console.log(AdvancedSearch.allKeyWord);
-                console.log(AdvancedSearch.documentNumber);
-                console.log(AdvancedSearch.anyKeyWord);
-                console.log(AdvancedSearch.noKeyWord);
-                console.log(AdvancedSearch.nodeName);
-                console.log(AdvancedSearch.keyWordPosition);
-                AdvancedSearch.conditionalSearch()
-            }
+    searchArea: "",
+    searchOptions: "",
+    searchTermNum: 0,
+    searchTermArr: [0],
+    searchConditionArr:[],
+    addSearchTerm:function(obj){
+        AdvancedSearch.searchTermNum++;
+        AdvancedSearch.searchTermArr.push(AdvancedSearch.searchTermNum);
+        var searchContextTr = "searchContextTr" + AdvancedSearch.searchTermNum;
+        var searchCondition = "searchCondition" + AdvancedSearch.searchTermNum;
+        var searchOperation = "searchOperation" + AdvancedSearch.searchTermNum;
+        var searchText = "searchText" + AdvancedSearch.searchTermNum;
+        var term ='<tr style="height:50" id="'+ searchContextTr +'"> <td class="col-lg-1" align="center"> <table border="0"> <tbody> <tr> '+
+        '<td height="35" width="40" align="center"><button type="button" class="btn btn-group btn-default" value="'+ AdvancedSearch.searchTermNum +'" onclick="AdvancedSearch.addSearchTerm(this)">'+
+        '<i class="glyphicon glyphicon-plus" title="增加检索条件"></i></button></td><td height="35" width="60" align="center">'+
+        '<button type="button" style="margin-left:20px" class="btn btn-group btn-default" value="'+ AdvancedSearch.searchTermNum +'" onclick="AdvancedSearch.removeSearchTerm(this)">'+
+        '<i class="glyphicon glyphicon-minus" title="减少检索条件"></i></button></td></tr></tbody></table></td>'+
+        '<td height="40" class="col-lg-2" align="center" id="searchConditionTd"><select id="'+ searchCondition +'" name="'+ searchCondition +'" class="form-control">'+
+        '<option value="allYext">全文</option><option value="catalog">目录</option><option value="annex">附件</option>'+
+        '<option value="table_name">节点名称</option><option value="title">题名</option><option value="documentNumber">档号</option>'+
+        '<option value="author">责任者</option></select></td><td height="40" class="col-lg-6" id="searchTextTd">'+
+        '<input type="text" id="'+ searchText +'" name="'+ searchText +'" class="form-control" style="margin-left:10px"></td>'+
+        '<td height="40" class="col-lg-2" align="right" style="margin-left:5px"><select id="'+ searchOperation +'" name="'+ searchOperation +'" class="form-control" style="margin-left:10px">'+
+        '<option value="andOperation">并且</option><option value="orOperation">或者</option><option value="notOperation">不含</option>'+
+        '</select></td></tr>';
+        $("#searchContextTbody").append(term);
     },
+    removeSearchTerm:function(obj){
+        $("#searchContextTr"+obj.value).remove();
+        AdvancedSearch.searchTermArr.splice(obj.value,1)
+    },
+
+    SearchCheck:function(){
+        AdvancedSearch.searchConditionArr=[];
+        for(var index in AdvancedSearch.searchTermArr){
+            AdvancedSearch.searchConditionArr[index]={
+                 searchCondition:$("#searchCondition"+AdvancedSearch.searchTermArr[index]).val(),
+                 searchOperation:$("#searchOperation"+AdvancedSearch.searchTermArr[index]).val(),
+                 searchText:$("#searchText"+AdvancedSearch.searchTermArr[index]).val()
+            }
+        }
+        AdvancedSearch.searchArea=$("input[name='searchAreaRadios']:checked").val();
+        AdvancedSearch.searchOptions=$("input[name='searchOptionsRadios']:checked").val();
+        AdvancedSearch.conditionalSearch();
+    },
+
+//    SearchCheck:function(){
+//            AdvancedSearch.allKeyWord=$("#contain_allKeyWord").val();
+//            AdvancedSearch.documentNumber=$("#contian_documentNumber").val();
+//            AdvancedSearch.anyKeyWord=$("#contian_anyKeyWord").val();
+//            AdvancedSearch.noKeyWord=$("#contian_noKeyWord").val();
+//            AdvancedSearch.nodeName=$("#contian_nodeName").val();
+//            AdvancedSearch.keyWordPosition=$("input[name='keyWordPositionOptionsRadios']:checked").val();
+//            if(AdvancedSearch.allKeyWord==null&&AdvancedSearch.allKeyWord==""&&
+//            AdvancedSearch.documentNumber==null&&AdvancedSearch.documentNumber==""&&
+//            AdvancedSearch.nodeName==null&&AdvancedSearch.nodeName==""&&
+//            AdvancedSearch.anyKeyWord==null&&AdvancedSearch.anyKeyWord==""&&
+//            AdvancedSearch.noKeyWord==null&&AdvancedSearch.noKeyWord==""){
+//                alert("关键字不能为空!");
+//            }else{
+//                console.log(AdvancedSearch.allKeyWord);
+//                console.log(AdvancedSearch.documentNumber);
+//                console.log(AdvancedSearch.anyKeyWord);
+//                console.log(AdvancedSearch.noKeyWord);
+//                console.log(AdvancedSearch.nodeName);
+//                console.log(AdvancedSearch.keyWordPosition);
+//                AdvancedSearch.conditionalSearch()
+//            }
+//    },
     //图片预览
     pictureView:function(document_number,fileAddressStr,fileNameStr){
 //        console.log(document_number);
@@ -74,18 +119,15 @@ var AdvancedSearch={
                 pageNumber : 1, // 如果设置了分布，首页页码
                 pageList: [5, 10, 15, 20],  //可供选择的每页的行数
                 search : false, // 是否显示搜索框
-                sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
                 contentType: "application/json;charset=utf-8",
                 queryParams: function (params) {
                     return{
-                        allKeyWord: AdvancedSearch.allKeyWord,
-                        documentNumber: AdvancedSearch.documentNumber,
-                        anyKeyWord: AdvancedSearch.anyKeyWord,
-                        noKeyWord: AdvancedSearch.noKeyWord,
-                        keyWordPosition: AdvancedSearch.keyWordPosition,
-                        nodeName: AdvancedSearch.nodeName,
-                        pageSize : params.limit, // 每页显示数量
-                        offset : params.offset, // 起始索引
+                            searchConditionArr: JSON.stringify(AdvancedSearch.searchConditionArr),
+                            searchArea: AdvancedSearch.searchArea,
+                            searchOptions: AdvancedSearch.searchOptions,
+                            pageSize: params.limit, // 每页显示数量
+                            offset: params.offset, // 起始索引
                     }
                 },
                 columns : [ {
