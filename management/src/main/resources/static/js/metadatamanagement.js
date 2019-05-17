@@ -48,8 +48,12 @@ function removeInfo(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(data){
+            alert(data.msg);
+            location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
         }
     });
     $('#delMenu').modal('hide');
@@ -92,8 +96,9 @@ function addMenu(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(data){
+            alert("成功添加下级菜单");
+            location.reload();
         }
     });
     $('#addMenu').modal('hide');
@@ -140,8 +145,9 @@ function saveEdit(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(data){
+            alert("成功修改菜单");
+            location.reload();
         }
     });
     $('#editMenu').modal('hide');
@@ -179,8 +185,12 @@ function saveAdd(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success: function(result) {
-            window.location.reload();
+        success:function(data){
+            alert(data.msg);
+            location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
         }
     });
     $('#addTemplate').modal('hide');

@@ -170,28 +170,4 @@ public class ImageProcessService {
         }
         return nMatrix;
     }
-
-//    /**
-//     * DCT变换输出
-//     * @param srcPath
-//     * @param destPath
-//     * @param format
-//     */
-//    public void dctTrans(String srcPath, String destPath, String format) {
-//        BufferedImage img = ImageDigital.readImg(srcPath);
-//        int w = img.getWidth();
-//        int h = img.getHeight();
-//        int[] pix = new int[w * h];
-//        img.getRGB(0, 0, w, h, pix, 0, w);
-//        pix = AmplificatingAndShrinking.shrink(pix, w, h, N, N);
-//        int newpix[] = ImageDigital.grayImage(pix, N, N);
-//		/*DCT2 dct = new DCT2();
-//		int dctPix[] = dct.dctTrans(newpix, N, N, 256, 1);*/
-//        int dctPix[] = DCT(newpix, 256);
-//        for(int i=0; i<N*N; i++) {
-//            newpix[i] = 255<<24 | dctPix[i]<<16 |  dctPix[i]<<8 |  dctPix[i];
-//        }
-//        img.setRGB(0, 0, w, h, newpix, 0, w);
-//        ImageDigital.writeImg(img, format, destPath);
-//    }
 }

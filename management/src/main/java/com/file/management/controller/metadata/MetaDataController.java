@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -50,6 +51,15 @@ public class MetaDataController {
     @RequestMapping("/MetadataTemplate")
     public String MetadataTemplate(Model model){
         model.addAttribute("templates",templateService.getAllTemplates());
+        List<Field> fields = fieldService.getAllFields();
+        Iterator<Field> it = fields.iterator();
+        while(it.hasNext()){
+            Field f = it.next();
+            if(f.getFieldName().equals("序号") || f.getFieldName().equals("档案号")){
+                it.remove();
+            }
+        }
+        model.addAttribute("fields",fields);
         return "metadata/MetadataTemplate";
     }
 
@@ -68,20 +78,7 @@ public class MetaDataController {
      */
     @RequestMapping("/postTemplateData")
     public String returnTemplate(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
-        Field fieldPk = new Field();
-        fieldPk.setFieldName((String)map.get("fieldName"));
-        fieldPk.setFieldEnglishName((String)map.get("fieldEnglishName"));
-        fieldPk.setFieldLength(Integer.parseInt((String)map.get("fieldLength")));
-        fieldPk.setFieldType((String)map.get("fieldType"));
-        fieldPk.setFieldIndex(Boolean.parseBoolean((String)map.get("fieldIndex")));
-        fieldPk.setFieldIk(Boolean.parseBoolean((String)map.get("fieldIk")));
-        fieldService.saveOne(fieldPk);
-
-        LinkedHashSet<Field> fields = new LinkedHashSet<>();
-        fields.add(fieldPk);
-
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine se = manager.getEngineByName("js");
+        List<Field> fields = new ArrayList<>();
 
         for(int i=0;i<Integer.parseInt((String)map.get("stringA"));i++){
             Field field = new Field();
@@ -89,11 +86,23 @@ public class MetaDataController {
             field.setFieldEnglishName(((ArrayList<String>)map.get("fieldEnglishNames")).get(i));
             field.setFieldLength(Integer.parseInt(((ArrayList<String>)map.get("fieldLengths")).get(i)));
             field.setFieldType(((ArrayList<String>)map.get("fieldTypes")).get(i));
-            field.setFieldIndex(Boolean.parseBoolean(((ArrayList<String>)map.get("fieldIndexs")).get(i)));
+            field.setFieldIndex(Boolean.parseBoolean(((ArrayList<String>)map.get("fieldIndexes")).get(i)));
             field.setFieldIk(Boolean.parseBoolean(((ArrayList<String>)map.get("fieldIks")).get(i)));
             fieldService.saveOne(field);
             fields.add(field);
         }
+
+        String str = (String)map.get("fieldSelected");
+        String[] strArray = str.split("\\|\\|");
+
+        for(String strEach:strArray){
+            fields.add(fieldService.getFieldByFieldName(strEach));
+        }
+
+        Field fieldPk = fieldService.getFieldByFieldName("档案号");
+        fields.add(fieldPk);
+        Field fieldNo = fieldService.getFieldByFieldName("序号");
+        fields.add(fieldNo);
 
         Template template = new Template();
         template.setTemplateName((String)map.get("templateName"));
@@ -131,19 +140,21 @@ public class MetaDataController {
       元数据管理删除菜单
      */
     @RequestMapping("/deleteMenu")
-    public String MetadataManagementRemoveMenu(@RequestBody Map<String,Object> map){
+    @ResponseBody
+    public Map<String,String> MetadataManagementRemoveMenu(@RequestBody Map<String,Object> map){
         String menuUuid = (String)map.get("uuid");
         int res = menuService.deleteMenuByMenuUuid(menuUuid);
+        Map<String,String> mapReturn = new HashMap<>();
         if(res == 0){
-            System.out.println("节点不存在。");
+            mapReturn.put("msg","删除失败：节点不存在。");
         }else if(res == 1){
-            System.out.println("节点是根节点，无法删除。");
+            mapReturn.put("msg","删除失败：节点是根节点，无法删除。");
         }else if(res == 2){
-            System.out.println("节点的子节点非空，无法删除。");
+            mapReturn.put("msg","删除失败：节点的子节点非空，无法删除。");
         }else{
-            System.out.println("节点是叶子结点，可以删除。");
+            mapReturn.put("msg","节点删除成功。");
         }
-        return "metadata/MetadataManagement";
+        return mapReturn;
     }
 
     /*
@@ -188,16 +199,27 @@ public class MetaDataController {
     }
 
     /*
-       添加模板
+       引入模板
      */
     @RequestMapping("/addTemplate")
-    public void addTemplate(@RequestBody Map<String,String> map,HttpServletResponse httpServletResponse){
+    @ResponseBody
+    public Map<String,String> addTemplate(@RequestBody Map<String,String> map,HttpServletResponse httpServletResponse){
         String menuUuid = map.get("uuid");
         String templateName = map.get("templateName");
         String tableName = map.get("tableName");
         Template template = templateService.getTemplateByTemplateName(templateName);
-        tablesService.generateTablesByTemplateId(template.getTemplateId(),tableName);
-        Tables tables = tablesService.getTablesByTableName(tableName);
-        menuService.updateMenuTableId(tables.getTableId(),menuService.getMenuByMenuUUid(menuUuid).getMenuId());
+        Menu menu = menuService.getMenuByMenuUUid(menuUuid);
+        Map<String,String> mapReturn = new HashMap<>();
+
+        if(menu.getMenuChildren() == null || menu.getMenuChildren().isEmpty()) {
+            tablesService.generateTablesByTemplateId(template.getTemplateId(),tableName);
+            Tables tables = tablesService.getTablesByTableName(tableName);
+            menuService.updateMenuTableId(tables.getTableId(), menu.getMenuId());
+            mapReturn.put("msg","引入模板成功！");
+        }
+        else{
+            mapReturn.put("msg","引入模板失败：节点非叶子节点。");
+        }
+        return mapReturn;
     }
 }

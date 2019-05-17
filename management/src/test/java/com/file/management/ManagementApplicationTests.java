@@ -154,6 +154,105 @@ public class ManagementApplicationTests {
         field16.setFieldLength(11);
         field16.setFieldIndex(false);
 
+        Field field17 = new Field();
+        field17.setFieldName("文号");
+        field17.setFieldEnglishName("ReferenceNo");
+        field17.setFieldType("varchar");
+        field17.setFieldLength(123);
+        field17.setFieldIndex(true);
+
+        Field field18 = new Field();
+        field18.setFieldName("保管期限");
+        field18.setFieldEnglishName("RetentionPeriod");
+        field18.setFieldType("varchar");
+        field18.setFieldLength(123);
+        field18.setFieldIndex(true);
+
+        Field field19 = new Field();
+        field19.setFieldName("归档时间");
+        field19.setFieldEnglishName("FilingTime");
+        field19.setFieldType("varchar");
+        field19.setFieldLength(123);
+        field19.setFieldIndex(false);
+
+        Field field20 = new Field();
+        field20.setFieldName("姓名");
+        field20.setFieldEnglishName("Name");
+        field20.setFieldType("varchar");
+        field20.setFieldLength(123);
+        field20.setFieldIndex(true);
+
+        Field field21 = new Field();
+        field21.setFieldName("获奖名称");
+        field21.setFieldEnglishName("Prize");
+        field21.setFieldType("varchar");
+        field21.setFieldLength(123);
+        field21.setFieldIndex(true);
+
+        Field field22 = new Field();
+        field22.setFieldName("获奖时间");
+        field22.setFieldEnglishName("PrizeTime");
+        field22.setFieldType("varchar");
+        field22.setFieldLength(123);
+        field22.setFieldIndex(false);
+
+        Field field23 = new Field();
+        field23.setFieldName("收到时间");
+        field23.setFieldEnglishName("ReceiveTime");
+        field23.setFieldType("varchar");
+        field23.setFieldLength(123);
+        field23.setFieldIndex(false);
+
+        Field field24 = new Field();
+        field24.setFieldName("来源");
+        field24.setFieldEnglishName("Source");
+        field24.setFieldType("varchar");
+        field24.setFieldLength(123);
+        field24.setFieldIndex(false);
+
+        Field field25 = new Field();
+        field25.setFieldName("份数");
+        field25.setFieldEnglishName("CopieNo");
+        field25.setFieldType("int");
+        field25.setFieldLength(11);
+        field25.setFieldIndex(false);
+
+        Field field26 = new Field();
+        field26.setFieldName("名称");
+        field26.setFieldEnglishName("Designation");
+        field26.setFieldType("varchar");
+        field26.setFieldLength(123);
+        field26.setFieldIndex(false);
+
+        Field field27 = new Field();
+        field27.setFieldName("处理号");
+        field27.setFieldEnglishName("TransactionNo");
+        field27.setFieldType("int");
+        field27.setFieldLength(11);
+        field27.setFieldIndex(false);
+
+        Field field28 = new Field();
+        field28.setFieldName("合作者");
+        field28.setFieldEnglishName("Collaborator");
+        field28.setFieldType("varchar");
+        field28.setFieldLength(123);
+        field28.setFieldIndex(true);
+
+        Field field29 = new Field();
+        field29.setFieldName("规格");
+        field29.setFieldEnglishName("Specifications");
+        field29.setFieldType("varchar");
+        field29.setFieldLength(123);
+        field29.setFieldIndex(true);
+
+        Field field30 = new Field();
+        field30.setFieldName("主题词");
+        field30.setFieldEnglishName("Subject");
+        field30.setFieldType("varchar");
+        field30.setFieldLength(123);
+        field30.setFieldIndex(true);
+
+
         List<Field> list = new ArrayList<>();
         list.add(field1);
         list.add(field2);
@@ -171,125 +270,135 @@ public class ManagementApplicationTests {
         list.add(field14);
         list.add(field15);
         list.add(field16);
+        list.add(field17);
+        list.add(field18);
+        list.add(field19);
+        list.add(field20);
+        list.add(field21);
+        list.add(field22);
+        list.add(field23);
+        list.add(field24);
+        list.add(field25);
+        list.add(field26);
+        list.add(field27);
+        list.add(field28);
+        list.add(field29);
+        list.add(field30);
         fieldService.saveAll(list);
 
-        Set<Field> set = new LinkedHashSet<>();
-        set.add(field1);
-        set.add(field2);
-        set.add(field3);
-        set.add(field4);
-        set.add(field5);
+        List<Field> set1 = new ArrayList<>();
+        set1.add(field1);
+        set1.add(field6);
+        set1.add(field7);
+        set1.add(field8);
+        set1.add(field3);
+        set1.add(field17);
+        set1.add(field2);
+        set1.add(field4);
+        set1.add(field9);
+        set1.add(field5);
+        set1.add(field10);
+        set1.add(field11);
+        set1.add(field18);
+        set1.add(field12);
+        set1.add(field13);
+        set1.add(field19);
 
-        Set<Field> set2 = new LinkedHashSet<>();
+        Template t1 = new Template();
+        t1.setFields(set1);
+        t1.setTemplateName("文书模板");
+        t1.setPrimaryKey(field2);
+        t1.setTemplateDescription("文书档案-文书-文件目录所使用的模板");
+        templateService.saveOne(t1);
+
+        List<Field> set2 = new ArrayList<>();
         set2.add(field1);
+        set2.add(field6);
         set2.add(field2);
         set2.add(field3);
         set2.add(field4);
         set2.add(field5);
-        set2.add(field10);
-
-        Template t1 = new Template();
-        t1.setFields(set);
-        t1.setTemplateName("demo1");
-        t1.setPrimaryKey(field2);
-        t1.setTemplateDescription("第一个模板demo");
-        templateService.saveOne(t1);
+        set2.add(field20);
 
         Template t2 = new Template();
-        t2.setFields(set);
-        t2.setTemplateName("demo2");
+        t2.setFields(set2);
+        t2.setTemplateName("已故人事模板");
         t2.setPrimaryKey(field2);
-        t2.setTemplateDescription("第二个模板demo");
+        t2.setTemplateDescription("文书档案-已故人事-文件目录所使用的模板");
         templateService.saveOne(t2);
 
+        List<Field> set3 = new ArrayList<>();
+        set3.add(field1);
+        set3.add(field2);
+        set3.add(field21);
+        set3.add(field22);
+
         Template t3 = new Template();
-        t3.setFields(set);
-        t3.setTemplateName("demo3");
+        t3.setFields(set3);
+        t3.setTemplateName("暂存文件模板");
         t3.setPrimaryKey(field2);
-        t3.setTemplateDescription("第三个模板demo");
+        t3.setTemplateDescription("文书档案-暂存文件-文件目录所使用的模板");
         templateService.saveOne(t3);
 
+        List<Field> set4 = new ArrayList<>();
+        set4.add(field1);
+        set4.add(field2);
+        set4.add(field8);
+        set4.add(field23);
+        set4.add(field24);
+        set4.add(field25);
+        set4.add(field26);
+
         Template t4 = new Template();
-        t4.setFields(set);
-        t4.setTemplateName("demo4");
+        t4.setFields(set4);
+        t4.setTemplateName("河海资料/文件资料汇编模板");
         t4.setPrimaryKey(field2);
-        t4.setTemplateDescription("第四个模板demo");
+        t4.setTemplateDescription("文书档案-河海资料/文件资料汇编-文件目录所使用的模板");
         templateService.saveOne(t4);
 
+        List<Field> set5 = new ArrayList<>();
+        set5.add(field1);
+        set5.add(field2);
+        set5.add(field27);
+        set5.add(field4);
+        set5.add(field5);
+        set5.add(field28);
+        set5.add(field26);
+        set5.add(field25);
+        set5.add(field18);
+        set5.add(field7);
+        set5.add(field8);
+        set5.add(field12);
+        set5.add(field29);
+        set5.add(field30);
+
         Template t5 = new Template();
-        t5.setFields(set);
-        t5.setTemplateName("demo5");
+        t5.setFields(set5);
+        t5.setTemplateName("文书案卷");
         t5.setPrimaryKey(field2);
-        t5.setTemplateDescription("第五个模板demo");
+        t5.setTemplateDescription("文书案卷-案卷目录/卷内目录");
         templateService.saveOne(t5);
 
-        Template t6 = new Template();
-        t6.setFields(set);
-        t6.setTemplateName("demo6");
-        t6.setPrimaryKey(field2);
-        t6.setTemplateDescription("第六个模板demo");
-        templateService.saveOne(t6);
 
-        Template t7 = new Template();
-        t7.setFields(set);
-        t7.setTemplateName("demo7");
-        t7.setPrimaryKey(field2);
-        t7.setTemplateDescription("第七个模板demo");
-        templateService.saveOne(t7);
-
-        Template t8 = new Template();
-        t8.setFields(set);
-        t8.setTemplateName("demo8");
-        t8.setPrimaryKey(field2);
-        t8.setTemplateDescription("第八个模板demo");
-        templateService.saveOne(t8);
-
-        Template t9 = new Template();
-        t9.setFields(set);
-        t9.setTemplateName("demo9");
-        t9.setPrimaryKey(field2);
-        t9.setTemplateDescription("第九个模板demo");
-        templateService.saveOne(t9);
-
-        Template t10 = new Template();
-        t10.setFields(set);
-        t10.setTemplateName("demo10");
-        t10.setPrimaryKey(field2);
-        t10.setTemplateDescription("第十个模板demo");
-        templateService.saveOne(t10);
-
-        Template t11 = new Template();
-        t11.setFields(set);
-        t11.setTemplateName("demo11");
-        t11.setPrimaryKey(field2);
-        t11.setTemplateDescription("第十一个模板demo");
-        templateService.saveOne(t11);
-
-
-        // 用模板tb_test2的使用的是field1 field2
-        tablesService.generateTablesByUser(field2,set2,"tb_test3");
-        tablesService.generateTablesByTemplateId(1,"tb_test1");
-        tablesService.generateTablesByTemplateId(1,"tb_test2");
-
-        Menu menu1 = menuService.addMenu(null,"预立卷","","预立卷库");
-        Menu menu2 = menuService.addMenu(menu1,"文书档案","文书档案","预立卷库");
-        Menu menu3 = menuService.addMenu(menu2,"文书","","预立卷库");
-        Menu menu4 = menuService.addMenu(menu3,"文件目录","","预立卷库");
-        Menu menu5 = menuService.addMenu(menu2,"已故人事","","预立卷库");
-        Menu menu6 = menuService.addMenu(menu5,"文件目录","","预立卷库");
-        Menu menu7 = menuService.addMenu(menu2,"暂存文件","","预立卷库");
-        Menu menu8 = menuService.addMenu(menu7,"文件目录","","预立卷库");
-        Menu menu9 = menuService.addMenu(menu2,"河海资料","","预立卷库");
-        Menu menu10 = menuService.addMenu(menu9,"文件目录","","预立卷库");
-        Menu menu11 = menuService.addMenu(menu2,"文件资料汇编","","预立卷库");
-        Menu menu12 = menuService.addMenu(menu11,"文件目录","","预立卷库");
-        Menu menu13 = menuService.addMenu(menu2,"文书案卷","","预立卷库");
-        Menu menu14 = menuService.addMenu(menu13,"案卷目录","","预立卷库");
-        Menu menu15 = menuService.addMenu(menu13,"卷内目录","","预立卷库");
-        Menu menu16 = menuService.addMenu(menu1,"教学档案","教学档案","预立卷库");
-        Menu menu17 = menuService.addMenu(menu16,"学籍卡","","预立卷库");
-        Menu menu18 = menuService.addMenu(menu17,"案卷目录","","预立卷库");
-        Menu menu19 = menuService.addMenu(menu17,"卷内目录","","预立卷库");
+        Menu menu1 = menuService.addMenu(null,"预立库","","预立库");
+        Menu menu2 = menuService.addMenu(menu1,"文书档案","文书档案","预立库");
+        Menu menu3 = menuService.addMenu(menu2,"文书","","预立库");
+        Menu menu4 = menuService.addMenu(menu3,"文件目录","","预立库");
+        Menu menu5 = menuService.addMenu(menu2,"已故人事","","预立库");
+        Menu menu6 = menuService.addMenu(menu5,"文件目录","","预立库");
+        Menu menu7 = menuService.addMenu(menu2,"暂存文件","","预立库");
+        Menu menu8 = menuService.addMenu(menu7,"文件目录","","预立库");
+        Menu menu9 = menuService.addMenu(menu2,"河海资料","","预立库");
+        Menu menu10 = menuService.addMenu(menu9,"文件目录","","预立库");
+        Menu menu11 = menuService.addMenu(menu2,"文件资料汇编","","预立库");
+        Menu menu12 = menuService.addMenu(menu11,"文件目录","","预立库");
+        Menu menu13 = menuService.addMenu(menu2,"文书案卷","","预立库");
+        Menu menu14 = menuService.addMenu(menu13,"案卷目录","","预立库");
+        Menu menu15 = menuService.addMenu(menu13,"卷内目录","","预立库");
+        Menu menu16 = menuService.addMenu(menu1,"教学档案","教学档案","预立库");
+        Menu menu17 = menuService.addMenu(menu16,"学籍卡","","预立库");
+        Menu menu18 = menuService.addMenu(menu17,"案卷目录","","预立库");
+        Menu menu19 = menuService.addMenu(menu17,"卷内目录","","预立库");
 
         Menu menu20 = menuService.addMenu(null,"整理库","","整理库");
         Menu menu21 = menuService.addMenu(menu20,"文书档案","文书档案","整理库");
@@ -311,10 +420,35 @@ public class ManagementApplicationTests {
         Menu menu37 = menuService.addMenu(menu36,"案卷目录","","整理库");
         Menu menu38 = menuService.addMenu(menu36,"卷内目录","","整理库");
 
-        menuService.updateMenuTableId(1,4);
-        menuService.updateMenuTableId(2,6);
+        Menu menu39 = menuService.addMenu(null,"档案库","","档案库");
+        Menu menu40 = menuService.addMenu(menu39,"文书档案","文书档案","档案库");
+        Menu menu41 = menuService.addMenu(menu40,"文书","","档案库");
+        Menu menu42 = menuService.addMenu(menu41,"文件目录","","档案库");
+        Menu menu43 = menuService.addMenu(menu40,"已故人事","","档案库");
+        Menu menu44 = menuService.addMenu(menu43,"文件目录","","档案库");
+        Menu menu45 = menuService.addMenu(menu40,"暂存文件","","档案库");
+        Menu menu46 = menuService.addMenu(menu45,"文件目录","","档案库");
+        Menu menu47 = menuService.addMenu(menu40,"河海资料","","档案库");
+        Menu menu48 = menuService.addMenu(menu47,"文件目录","","档案库");
+        Menu menu49 = menuService.addMenu(menu40,"文件资料汇编","","档案库");
+        Menu menu50 = menuService.addMenu(menu49,"文件目录","","档案库");
+        Menu menu51 = menuService.addMenu(menu40,"文书案卷","","档案库");
+        Menu menu52 = menuService.addMenu(menu51,"案卷目录","","档案库");
+        Menu menu53 = menuService.addMenu(menu51,"卷内目录","","档案库");
+        Menu menu54 = menuService.addMenu(menu39,"教学档案","教学档案","档案库");
+        Menu menu55 = menuService.addMenu(menu54,"学籍卡","","档案库");
+        Menu menu56 = menuService.addMenu(menu55,"案卷目录","","档案库");
+        Menu menu57 = menuService.addMenu(menu55,"卷内目录","","档案库");
 
-        System.out.println(tablesService.queryDataFromDatabase("1").toString());
+        // 用模板tb_test2的使用的是field1 field2
+        /*tablesService.generateTablesByTemplateId(1,"tb_test1");
+        tablesService.generateTablesByTemplateId(1,"tb_test2");*/
+
+
+        /*menuService.updateMenuTableId(1,4);
+        menuService.updateMenuTableId(2,6);*/
+
+//        System.out.println(tablesService.queryDataFromDatabase("1").toString());
         // menuService.editMenuOrder(2,"M_m1mhn6pf");
 
         /*List<Menu> menuList = menuService.getAllMenuByOrder();

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.file.management.dao.DynamicSQL;
-import com.file.management.dao.metadata.TablesRepository;
+import com.file.management.service.ImageProcessing.ImagePHashService;
 import com.file.management.service.metadata.TablesService;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -27,12 +27,11 @@ public class SolrQueryService {
     @Autowired
     private TablesService tablesService;
     @Autowired
-    private TablesRepository tablesRepository;
-    @Autowired
     private DynamicSQL dynamicSQL;
     @Autowired
     private SolrService solrService;
-
+    @Autowired
+    private ImagePHashService imagePHashService;
     /**
      * 根据id查询索引
      * @param solrClient：solr客户端
@@ -59,13 +58,13 @@ public class SolrQueryService {
     }
 
     /**
-     * 对solr进行检索
+     * 对solr进行检索 全文检索
      * @param solrClient solr客户端
      * @param keyword 关键词
      * @return
      */
     public JSONObject queryKeywordbySolr(SolrClient solrClient, String keyword, String tableId, String pageSize,
-                                         String offset,String fileContentSolrName){
+                                         String offset){
         JSONObject jsonObject = new JSONObject();
         JSONObject result_jsonObject = new JSONObject();
         jsonObject.put("Keyword",keyword);
@@ -75,7 +74,7 @@ public class SolrQueryService {
         SolrDocumentList docs = null;
         JSONArray docsJsonArray = new JSONArray();
         try {
-            SolrQuery solrQuery = this.buildSolrQuery4queryKeyword(jsonObject,fileContentSolrName);
+            SolrQuery solrQuery = this.buildSolrQuery4queryKeyword(jsonObject);
             //开始检索
             QueryResponse queryResponse = solrClient.query(solrQuery);
             docs = queryResponse.getResults();
@@ -100,8 +99,8 @@ public class SolrQueryService {
      * @param noKeyWord 不包括以下关键词
      * @param keyWordPosition 查询关键词位于
      * @param nodeName 节点名称
-     * @param pageSize
-     * @param offset
+     * @param pageSize 每页结果的数量
+     * @param offset 偏移值
      * @return
      */
     public JSONObject ConditionQuerybySolr(SolrClient solrClient, String allKeyWord, String documentNumber, String anyKeyWord,
@@ -137,6 +136,46 @@ public class SolrQueryService {
                 result_jsonObject.put("documentList",docsJsonArray);
                 return result_jsonObject;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result_jsonObject;
+        }
+    }
+
+    /**
+     * 根据Phash值等信息去solr中进行查询 图片检索
+     * @param solrClient
+     * @param keyword 关键词
+     * @param upLoadImagePHash 上传的图片的PHash值
+     * @param tableId 表ID
+     * @param pageSize 每一页结果的数量
+     * @param offset 便宜值
+     * @param imagePHashSolrName PHash在solr中字段的名称
+     * @return
+     */
+    public JSONObject imageSearchbySolr(SolrClient solrClient, String keyword, String upLoadImagePHash,
+                                        String tableId, String pageSize,String offset, String imagePHashSolrName){
+        JSONObject jsonObject = new JSONObject();
+        JSONObject result_jsonObject = new JSONObject();
+        jsonObject.put("Keyword",keyword);
+        jsonObject.put("UpLoadImagePHash",upLoadImagePHash);
+        jsonObject.put("TableId",tableId);
+        jsonObject.put("PageSize",pageSize);
+        jsonObject.put("Offset",offset);
+        SolrDocumentList docs = null;
+        JSONArray docsJsonArray = new JSONArray();
+        try {
+            SolrQuery solrQuery = this.buildSolrQuery4ImageSearch(jsonObject,imagePHashSolrName);
+            //开始检索
+            QueryResponse queryResponse = solrClient.query(solrQuery);
+            docs = queryResponse.getResults();
+            Long numFound = docs.getNumFound();
+            docsJsonArray= (JSONArray)JSONArray.toJSON(docs);
+            docsJsonArray = imagePHashService.getSimilarImages(upLoadImagePHash,docsJsonArray,imagePHashSolrName,3);
+            result_jsonObject.put("keyword",keyword);
+            result_jsonObject.put("numFound",docsJsonArray.size());
+            result_jsonObject.put("documentList",docsJsonArray);
+            return result_jsonObject;
         } catch (Exception e) {
             e.printStackTrace();
             return result_jsonObject;
@@ -205,42 +244,17 @@ public class SolrQueryService {
     }
 
     /**
-     * 拼接查询字符串
-     * @param keyword 关键词
-     * @param table_id 数据所在表的id
-     * @return 拼接好的查询字符串
-     */
-    private String buildQueryStr(String keyword, String table_id,String fileContentSolrName){
-        String querystring = null;
-        if(keyword.isEmpty()){
-            querystring = "all_text:* ";
-            if(!table_id.isEmpty()){
-                querystring = "table_id_s"+":"+table_id;
-            }
-        }else{
-            StringBuffer buff = new StringBuffer();
-            buff.append("("+"all_text:"+keyword+" "+"OR"+" "+"document_number:"+keyword+")");
-            if(!table_id.isEmpty()){
-                buff.append(" AND ");
-                buff.append("table_id_s"+":"+table_id);
-            }
-            querystring = buff.toString();
-        }
-        return querystring;
-    }
-
-    /**
-     * 构造solr的查询语句
+     * 对于全文检索 构造solr的查询语句
      * @param jsonObject Keyword，TableId
      * @return
      */
-    private SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject,String fileContentSolrName) {
+    private SolrQuery buildSolrQuery4queryKeyword(JSONObject jsonObject) {
         String keyword = jsonObject.getString("Keyword");
         String tableId = jsonObject.getString("TableId");
         String querystring = null;
         SolrQuery solrQuery = new SolrQuery();
         //当输入为空时的特殊处理
-        querystring = this.buildQueryStr(keyword,tableId,fileContentSolrName);
+        querystring = this.buildQueryStr(keyword,tableId);
         //分页
         int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
         int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
@@ -268,7 +282,32 @@ public class SolrQueryService {
     }
 
     /**
-     * 构造solr的查询语句
+     * 对于全文检索 拼接查询字符串
+     * @param keyword 关键词
+     * @param table_id 数据所在表的id
+     * @return 拼接好的查询字符串
+     */
+    private String buildQueryStr(String keyword, String table_id){
+        String querystring = null;
+        if(keyword.isEmpty()){
+            querystring = "all_text:*";
+            if(!table_id.isEmpty()){
+                querystring = "table_id_s"+":"+table_id;
+            }
+        }else{
+            StringBuffer buff = new StringBuffer();
+            buff.append("("+"all_text:"+keyword+" "+"OR"+" "+"document_number:"+keyword+")");
+            if(!table_id.isEmpty()){
+                buff.append(" AND ");
+                buff.append("table_id_s"+":"+table_id);
+            }
+            querystring = buff.toString();
+        }
+        return querystring;
+    }
+
+    /**
+     * 对于高级检索 构造solr的查询语句
      * @param jsonObject allKeyWord，keyword，anyKeyWord，noKeyWord，keyWordPosition，TableId，Offset，PageSize
      * @param fileContentSolrName 附件在solr中的字段名称
      * @return
@@ -292,6 +331,7 @@ public class SolrQueryService {
             if(keyWordPosition.equals("AnnexRetrieval")){ param = fileContentSolrName;}
         }
         //判断搜索关键词
+        //包含以下全部关键字
         if(allKeyWord!=null&&!allKeyWord.isEmpty()){
             StringBuffer buff = new StringBuffer();
             String[] keys = allKeyWord.split("\\+");
@@ -303,6 +343,7 @@ public class SolrQueryService {
             buff.append("("+param +":"+ keyStr +")");
             buffList.add(buff);
         }
+        //包含以下任意一个关键词
         if(anyKeyWord!=null&&!anyKeyWord.isEmpty()){
             StringBuffer buff = new StringBuffer();
             String[] keys = anyKeyWord.split("\\+");
@@ -316,6 +357,7 @@ public class SolrQueryService {
         }
 
         //判断搜索限制
+        //档案号
         if(documentNumber!=null&&!documentNumber.isEmpty()){
             String[] keys = documentNumber.split("\\+");
             String keyStr = "";
@@ -327,6 +369,7 @@ public class SolrQueryService {
             buff.append(" (document_number:"+ keyStr +")");
             buffList.add(buff);
         }
+        //节点名称
         if(table_id!=null&&!table_id.isEmpty()){
             String[] keys = table_id.split("\\+");
             String keyStr = "";
@@ -338,6 +381,7 @@ public class SolrQueryService {
             buff.append("("+"table_id_s:"+ keyStr +")");
             buffList.add(buff);
         }
+
         if(buffList.size()!=0){
             StringBuffer buffall = new StringBuffer();
             for(int i = 0; i < buffList.size()-1 ; i++){
@@ -346,6 +390,7 @@ public class SolrQueryService {
             }
             buffall.append(buffList.get(buffList.size()-1));
             StringBuffer buff = new StringBuffer();
+            //不包含一些关键词
             if(noKeyWord!=null&&!noKeyWord.isEmpty()){
                 String[] keys = noKeyWord.split("\\+");
                 String keyStr = "";
@@ -358,7 +403,6 @@ public class SolrQueryService {
             querystring = querystring + buffall.toString();
         }else{
             return null;
-
         }
 
         //分页
@@ -379,6 +423,62 @@ public class SolrQueryService {
 //            solrQuery.setHighlightFragsize(0);
 //        }
         solrQuery.set("q", querystring);
+        solrQuery.set("q.op", "AND");  //默认操作符
+        System.out.println("solrQuery = " + solrQuery);
+        return  solrQuery;
+    }
+
+    /**
+     * 构造图片查询的solr语句
+     * @param jsonObject  Keyword，UpLoadImagePHash，TableId，PageSize，Offset
+     * @param imagePHashSolrName PHash在solr中field的名称
+     * @return
+     */
+    private SolrQuery buildSolrQuery4ImageSearch(JSONObject jsonObject,String imagePHashSolrName) {
+        String keyword = jsonObject.getString("Keyword");
+        String tableId = jsonObject.getString("TableId");
+        String upLoadImagePHash = jsonObject.getString("UpLoadImagePHash");
+        String querystring = null;
+        SolrQuery solrQuery = new SolrQuery();
+        //当输入为空时的特殊处理
+        StringBuffer buff = new StringBuffer();
+        if(keyword.isEmpty()){
+//            buff.append(imagePHashSolrName + ":*");
+            buff.append(imagePHashSolrName + ":"+upLoadImagePHash);
+            if(!tableId.isEmpty()){
+                buff.append(" AND ");
+                buff.append("table_id_s"+":"+tableId);
+            }
+        }else{
+            buff.append("all_text:" + keyword);
+            buff.append(" AND ");
+            buff.append(imagePHashSolrName + ":*");
+            if(!tableId.isEmpty()){
+                buff.append(" AND ");
+                buff.append("table_id_s"+":"+tableId);
+            }
+        }
+        querystring = buff.toString();
+        //分页
+//        int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
+//        int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
+//        if(offset!=-1 && PageSize!=-1 ){
+//            solrQuery.set("start", offset);
+//            solrQuery.set("rows", PageSize);
+//        }
+        //todo 优化查询结果
+        solrQuery.set("rows", "100000");
+        solrQuery.set("wt", "json");
+        //高亮
+//        if (!keyword.equals("")){
+//            solrQuery.setHighlight(true);
+//            solrQuery.set("hl.fl","keyword,idtitle,id");
+//            solrQuery.setHighlightSnippets(1);
+//            solrQuery.setHighlightSimplePre("<font color=\"red\">");
+//            solrQuery.setHighlightSimplePost("</font>");
+//            solrQuery.setHighlightFragsize(0);
+//        }
+          solrQuery.set("q", querystring);
         solrQuery.set("q.op", "AND");  //默认操作符
         System.out.println("solrQuery = " + solrQuery);
         return  solrQuery;

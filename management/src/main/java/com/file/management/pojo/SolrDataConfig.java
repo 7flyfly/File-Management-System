@@ -12,10 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @XStreamAlias("dataConfig")
+/**
+ * 对应Solr-data-config文件
+ */
 public class SolrDataConfig {
+    //solr中数据库源
     @XStreamImplicit(itemFieldName="dataSource")
     private List<SolrDataSource> solrDataSourceList;
 
+    //数据库中需要导入solr中的表
     @XStreamImplicit(itemFieldName="document")
     private List<SolrEntityDocument>  solrEntityDocumentList;
 

@@ -18,6 +18,7 @@ import org.dom4j.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,7 +41,7 @@ public class IntelligentRetrievalController {
     /**
      * 根据关键词查询结果,并返回给bootStrapTable
      */
-    public String KeySerach(String keyword, String queryType, String tableId, String pageSize, String offset){
+    public String keySerach(String keyword, String queryType, String tableId, String pageSize, String offset){
         SolrClient solrClient = null;
         JSONObject result_jsonObject = new JSONObject();
         try {
@@ -49,7 +50,7 @@ public class IntelligentRetrievalController {
             solrClient = solrUtils.createSolrClient();
             System.out.println(keyword);
             JSONObject docsJsonObject = solrQueryService.queryKeywordbySolr(solrClient,keyword,tableId,pageSize,
-                    offset,"annex_content");
+                    offset);
             solrClient.close();
             result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
             result_jsonObject.put("total",docsJsonObject.getString("numFound"));
@@ -68,12 +69,71 @@ public class IntelligentRetrievalController {
         }
     }
 
+    @RequestMapping(value = "/ImageUpload")
+    @ResponseBody
+    /**
+     * 获取上传的图片信息，返回PHash编码
+     */
+    public String imageUpload(@RequestParam(value="upLoadImages",required=false) MultipartFile[] upLoadImages,
+                              @RequestParam(value="keyword",required=false) String keyword, String queryType){
+        JSONObject result_jsonObject = new JSONObject();
+        try {
+            if(upLoadImages.length>1){
+                result_jsonObject.put("result","error");
+                result_jsonObject.put("message","只能上传一张图片");
+                return  result_jsonObject.toString();
+            }else{
+                MultipartFile upLoadImage = upLoadImages[0];
+                String upLoadImagePHash = imagePHashService.getPHash(upLoadImage.getInputStream());
+                result_jsonObject.put("result","success");
+                result_jsonObject.put("upLoadImagePHash",upLoadImagePHash);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            result_jsonObject.put("result","error");
+            result_jsonObject.put("message",e.getMessage());
+            return  result_jsonObject.toString();
+        }
+        return  result_jsonObject.toString();
+    }
 
+    @RequestMapping(value = "/ImageSearch")
+    @ResponseBody
+    /**
+     * 根据图片的PHash等信息查询档案，并返回给bootStrapTable
+     */
+    public String imageSearch(String keyword, String queryType, String upLoadImagePHash, String tableId,
+                              String pageSize, String offset){
+        SolrClient solrClient = null;
+        JSONObject result_jsonObject = new JSONObject();
+        try {
+            if(tableId==null) tableId = "";
+            SolrUtils solrUtils = new SolrUtils();
+            solrClient = solrUtils.createSolrClient();
+            System.out.println(keyword);
+            JSONObject docsJsonObject = solrQueryService.imageSearchbySolr(solrClient,keyword,upLoadImagePHash,
+                    tableId, pageSize, offset,"phash_numsplit");
+            solrClient.close();
+            result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
+            result_jsonObject.put("total",docsJsonObject.getString("numFound"));
+            System.out.println(result_jsonObject);
+            return result_jsonObject.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            try {
+                solrClient.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            result_jsonObject.put("result","error");
+            result_jsonObject.put("message",e.getMessage());
+            return result_jsonObject.toString();
+        }
+    }
     @RequestMapping(value = "/getDetail")
     @ResponseBody
     /**
-     * 根据关键词查询结果
-     * 目前 根据DocumentNumber检索
+     * 根据DocumentNumber查询档案详情
      */
     public String getDetail(String dataJson){
         JSONObject result_jsonObject = new JSONObject();
@@ -311,7 +371,7 @@ public class IntelligentRetrievalController {
      */
     public String fullImportTable2Solr(){
         Map<String,Object> map = new HashMap<>();
-        HashMap<Boolean,String> hashMap = solrService.fullImportTable2Solr("tb_test2",
+        HashMap<Boolean,String> hashMap = solrService.fullImportTable2Solr("tb_test3",
                 null,null,null,null,null);
         map.put("result",hashMap);
         return map.toString();
@@ -337,8 +397,8 @@ public class IntelligentRetrievalController {
      */
     public String oneImportTable2Solr(){
         Map<String,Object> map = new HashMap<>();
-        HashMap<Boolean,String> hashMap = solrService.refreshOneDocument2Solr("tb_test3","2018-1WS0908.3-171",
-                null,null,null,null);
+        HashMap<Boolean,String> hashMap = solrService.refreshOneDocument2Solr("tb_test2","2017-1WS0908.2-172",
+                null,null,null,null,null);
         map.put("result",hashMap);
         return map.toString();
     }

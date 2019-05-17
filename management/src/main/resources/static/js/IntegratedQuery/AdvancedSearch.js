@@ -28,12 +28,36 @@ var AdvancedSearch={
                 AdvancedSearch.conditionalSearch()
             }
     },
+    //图片预览
+    pictureView:function(document_number,fileAddressStr,fileNameStr){
+//        console.log(document_number);
+//        console.log(fileNameStr);
+//        console.log(fileAddressStr);
+        $("#detailModal_confirm").trigger("click");
+        $('#pictureViewModal').modal("show");
+        $('#picture_carousel_inner').empty();
+        $('#picture_carousel-indicators').empty();
+        var fileNameArr = fileNameStr.split(";");
+        var fileAddressArr = fileAddressStr.split(";");
+        $('#picture_carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="0" class="active"></li>')
+        $('#picture_carousel_inner').append('<div class="item active" align="center">'+
+                                '<a href="'+ fileNameArr[0] +'">'+
+                                ' <img src="'+ fileAddressArr[0] + '" style="height:400; width:400;"'+
+                                ' alt="请检查文件，文件或不存在" >'+
+                                '</a> </div>')
+        for ( var i = 1; i <fileNameArr.length-1; i++){  //末尾多一个分号
+                    $('#picture_carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="0" ></li>')
+                    $('#picture_carousel_inner').append('<div class="item" align="center">'+
+                                            '<a href="'+ fileNameArr[i] +'">'+
+                                            ' <img src="'+ fileAddressArr[i] +'"style="height:400; width:400;"'+
+                                            ' alt="请检查文件，文件或不存在" >'+
+                                            '</a> </div>')
+        }
+    },
     conditionalSearch: function () {
         $("#advancedSearch_head").remove();
         $("#advancedSearch_div").css({"border-bottom":"2px solid #337ab7"});
-        $("#advancedSearch_bootstrapTable").bootstrapTable('destroy');
-        $("#advancedSearch_bootstrapTable").css({"table-layout":"fixed"});
-        $('#advancedSearch_bootstrapTable').bootstrapTable({
+        $("#advancedSearch_bootstrapTable").bootstrapTable('destroy').css({"table-layout":"fixed"}).bootstrapTable({
                 url:'/IntegratedQuery/AdvancedSearch/conditionalSearch',  //请求后台url
                 method:'get',
                 showRefresh:false, //是否显示刷新按钮
@@ -50,7 +74,7 @@ var AdvancedSearch={
                 pageNumber : 1, // 如果设置了分布，首页页码
                 pageList: [5, 10, 15, 20],  //可供选择的每页的行数
                 search : false, // 是否显示搜索框
-                sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者 "server"
                 contentType: "application/json;charset=utf-8",
                 queryParams: function (params) {
                     return{
@@ -115,9 +139,7 @@ var AdvancedSearch={
                             width : '10%',
                             events : operateEvents,
                             formatter : function (value, row, index) {
-                                return[ '<button id="table_btn_detail" class="btn btn-info table_btn amend btn-sm" data-toggle="modal" data-target="#detailModal" >详情</button>&nbsp;&nbsp;&nbsp;&nbsp;',
-                                        '<button id="table_btn_fullText" class="btn btn-info table_btn amend btn-sm" type="button">全文</button>',
-                                ].join("")
+                                return[ '&nbsp;&nbsp;<button id="table_btn_detail" class="btn btn-info table_btn amend btn-sm" data-toggle="modal" data-target="#detailModal" >详情</button>&nbsp;&nbsp;']
                             }
                         },]
             });

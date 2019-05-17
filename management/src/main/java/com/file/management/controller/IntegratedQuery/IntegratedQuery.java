@@ -37,5 +37,9 @@ public class IntegratedQuery {
         return "IntegratedQuery/AdvancedSearch";
     }
 
+    @RequestMapping("/KnowledgeGraph")
+    public String KnowledgeGraph(){
+        return "IntegratedQuery/KnowledgeGraph";
+    }
 
 }

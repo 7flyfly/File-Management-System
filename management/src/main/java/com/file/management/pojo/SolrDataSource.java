@@ -8,27 +8,36 @@ import lombok.NoArgsConstructor;
 
 @Data
 @XStreamAlias("dataSource")
+/**
+ * 对应Solr-data-config文件中的dataSource
+ */
 public class SolrDataSource {
+    //用户名
     @XStreamAsAttribute
     @XStreamAlias("name")
     private String dataSourceName;
 
+    //数据库类型
     @XStreamAsAttribute
     @XStreamAlias("type")
     private String dataSourceType;
 
+    //数据库驱动类型
     @XStreamAsAttribute
     @XStreamAlias("driver")
     private String dataSourceDriver;
 
+    //数据库链接地址
     @XStreamAsAttribute
     @XStreamAlias("url")
     private String dataSourceUrl;
 
+    //用户名称
     @XStreamAsAttribute
     @XStreamAlias("user")
     private String dataSourceUser;
 
+    //用户密码
     @XStreamAsAttribute
     @XStreamAlias("password")
     private String dataSourcePassword;

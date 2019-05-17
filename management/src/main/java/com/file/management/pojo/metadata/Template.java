@@ -2,7 +2,9 @@ package com.file.management.pojo.metadata;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,7 +32,7 @@ public class Template implements Serializable {
                 joinColumns = {@JoinColumn(name="TEMPLATE_ID")},
                 inverseJoinColumns = {@JoinColumn(name="FIELD_ID")}
     )
-    private Set<Field> fields = new LinkedHashSet<>();
+    private List<Field> fields = new ArrayList<>();
 
     // 模板的主键
     @OneToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
@@ -66,11 +68,11 @@ public class Template implements Serializable {
         this.templateUuid = templateUuid;
     }
 
-    public Set<Field> getFields() {
+    public List<Field> getFields() {
         return fields;
     }
 
-    public void setFields(Set<Field> fields) {
+    public void setFields(List<Field> fields) {
         this.fields = fields;
     }
 

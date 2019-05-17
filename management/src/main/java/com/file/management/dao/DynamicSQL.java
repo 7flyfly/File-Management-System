@@ -55,20 +55,26 @@ public class DynamicSQL {
      * @return 返回抽象list
      */
     public List selectLastModifiedByTableName(String tableName, String lastModified){
-        String sql = "select * from " + tableName + " where LAST_MODIFIED >  \"" + lastModified +" \"";
+        String sql = "select * from " + tableName + " where LAST_MODIFIED >=  \"" + lastModified +" \"";
         List resultList = entityManager.createNativeQuery(sql).getResultList();
         return  resultList;
     }
-
+    
     /**
-     * 根据solr的最新更新时间选择表中最近更新的记录
+     * 查询表中的全部记录
      * @param tableName 表名
      * @return 返回抽象list
      */
-    public List selectByTableName(String tableName){
+    public List selectAllByTableName(String tableName){
         String sql = "select * from " + tableName;
         List resultList = entityManager.createNativeQuery(sql).getResultList();
-        return  resultList;
+        return resultList;
+    }
+
+    public List selectAllByTableNameAndDocumentNo(String tableName,String documentNo){
+        String sql = "SELECT * FROM " + tableName + " WHERE DOCUMENTNO = '" + documentNo + "'";
+        List resultList = entityManager.createNativeQuery(sql).getResultList();
+        return resultList;
     }
 
     /**
@@ -82,11 +88,7 @@ public class DynamicSQL {
         return  resultList;
     }
 
-    public List selectAllByTableName(String tableName){
-        String sql = "select * from " + tableName;
-        List resultList = entityManager.createNativeQuery(sql).getResultList();
-        return resultList;
-    }
+
 
 //    public String getAttrCNameByTableId(String TableId, String colEName){
 //

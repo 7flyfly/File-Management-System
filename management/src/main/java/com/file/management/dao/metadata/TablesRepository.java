@@ -29,6 +29,10 @@ public interface TablesRepository extends JpaRepository<Tables,Integer> {
     @Query(value = "delete from tb_table where table_uuid=?1 ", nativeQuery = true)
     void deleteTableByTableUuid(String tableUuid);
 
+    @Modifying
+    @Query(value = "UPDATE TB_TABLE SET TEMPLATE_ID =?1 WHERE TABLE_NAME =?2",nativeQuery = true)
+    void updateTemplateId(int templateId,String tableName);
+
     /*// 修改指定表格的模板
     @Modifying
     @Query(value = "update tb_table t set t.template_id=?1 where t.table_id=?2", nativeQuery = true)

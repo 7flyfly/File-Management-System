@@ -83,6 +83,10 @@ public class FieldService {
     public List<Field> getFieldByFieldNameLike(String fieldName){
         return fieldRepository.findByFieldNameLike(fieldName);
     }
+
+    public List<Field> getAllFields(){
+        return fieldRepository.findAllFields();
+    }
     
     /*public void deleteFieldByFieldId(int fieldId){
         fieldRepository.deleteFieldByFieldId(fieldId);

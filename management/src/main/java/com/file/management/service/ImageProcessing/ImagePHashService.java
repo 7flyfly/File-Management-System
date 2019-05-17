@@ -1,10 +1,15 @@
 package com.file.management.service.ImageProcessing;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 @Service
 public class ImagePHashService {
@@ -17,6 +22,43 @@ public class ImagePHashService {
     //图片缩小后的高
     private static final int FHEIGHT = 8;
 
+    /**
+     * 以从solr中查询出的结果为基础，计算PHash的hamming距离
+     * @param queryImagePhash 当前查询图片的PHash
+     * @param rawResult_JSONArr 从solr中查询出的结果
+     * @param imagePHashSolrName PHash在solr中filed的名称
+     * @param hammingDistanceValue hamming距离的阈值
+     * @return
+     */
+    public JSONArray getSimilarImages(String queryImagePhash, JSONArray rawResult_JSONArr,String imagePHashSolrName,
+                                        int hammingDistanceValue){
+        JSONArray result_JSONArr = new JSONArray();
+        for(int i=0; i<rawResult_JSONArr.size(); i++){
+            JSONObject result_JSON = rawResult_JSONArr.getJSONObject(i);
+            if(result_JSON.containsKey(imagePHashSolrName)){
+                //将原生PHash字段中的其他字符去除（PHash为多值）
+                String rawResultImagePHash = result_JSON.getString(imagePHashSolrName).replace("\"","").
+                        replace("[","").replace("]","");
+                ArrayList<String> resultImagePHashList = new ArrayList<>();
+                if(rawResultImagePHash.contains(",")){
+                    //多个PHash值
+                    String[] rawResultImagePHashArr = rawResultImagePHash.split(",");
+                    resultImagePHashList= new ArrayList<>(Arrays.asList(rawResultImagePHashArr));
+                }else{
+                    //单个PHash值
+                    resultImagePHashList.add(rawResultImagePHash);
+                }
+                //计算hamming距离保存小于等于阈值的结果
+                for(String resultImagePHash: resultImagePHashList){
+                    if(this.hammingDistance(queryImagePhash,resultImagePHash)<=hammingDistanceValue){
+                        result_JSONArr.add(result_JSON);
+                        break;
+                    }
+                }
+            }
+        }
+        return result_JSONArr;
+    }
     /**
      * 基于pHash算法的指纹数
      * @param inputStream 图片的输入流
@@ -69,16 +111,6 @@ public class ImagePHashService {
         return sb.toString();
     }
 
-//    public void getHammingDistance(String srcPathUser, String[] srcPath) {
-//        String s1 = null, s2 = null;
-//        s1 =  this.getPHash(srcPathUser);
-//        System.out.println("source: " + s1);
-//        for(int i=0; i<srcPath.length; i++) {
-//            s2 =  getPHash(srcPath[i]);
-//            System.out.print(i + "-" + hammingDistance(s1, s2) + "\t");
-//        }
-//    }
-
     /**
      * 求灰度图像的均值
      * @param pix 图像的像素矩阵
@@ -101,7 +133,7 @@ public class ImagePHashService {
      * @param s2 指纹数2
      * @return 汉明距离
      */
-    public int hammingDistance(String s1, String s2) {
+    private int hammingDistance(String s1, String s2) {
         int count = 0;
         for(int i=0; i<s1.length(); i++) {
             if(s1.charAt(i) != s2.charAt(i)) {
