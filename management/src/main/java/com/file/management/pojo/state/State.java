@@ -112,8 +112,16 @@ public class State {
     private String  more;
     @Column(name = "BOOL")
     private String  bool;
+    @Column(name = "PLUG")
+    private String plug;
 
+    public String getPlug() {
+        return plug;
+    }
 
+    public void setPlug(String plug) {
+        this.plug = plug;
+    }
 
 
 }

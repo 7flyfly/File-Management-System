@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>到期档案管理</title>
+    <title>异常档案管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/lib/css/homepage.css">
@@ -14,7 +14,7 @@
 
     <div class="panel panel-default" style="width: 90%;margin-left: 5%">
         <div class="panel-heading">
-            <h3 class="panel-title" style="text-align:center">到期档案信息</h3>
+            <h3 class="panel-title" style="text-align:center">异常档案信息</h3>
         </div>
         <div class="panel-body">
             <table class="table4" width="100%" >
@@ -24,12 +24,12 @@
                     <th>档案名</th>
                     <th>档案类型</th>
                     <th>档案位置</th>
-                    <th>到期时间</th>
+                    <th>递交时间</th>
                     <th>负责人</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="file: ${filelist}">
+                <tr th:each="file: ${errorfilelist}">
                     <td th:text="${file.getId()}"></td>
                     <td th:text="${file.getName()}"></td>
                     <td th:text="${file.getType()}"></td>

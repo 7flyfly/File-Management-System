@@ -1,7 +1,6 @@
 package com.file.management.service.state;
 
 
-import com.file.management.pojo.state.Action;
 import com.file.management.pojo.state.State;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public interface StateService {
       void saveState(State state);
 
       //插入编辑后数据
-      void insertInfo(String name, String source, String explain, String min,String max,String num,String less,String fit,String more,String bool);
+      void insertInfo(String name, String source, String explain, String min, String max, String num, String less, String fit, String more, String bool, String plug);
 
       //删除
       void deleteInfo(String name);

@@ -29,8 +29,8 @@ public interface StateRepository extends JpaRepository<State,String> {
 
     //插入编辑后数据
     @Modifying
-    @Query(value = "update tb_state t set t.SOURCE=?2,t.EXP=?3, t.MIN=?4 , t.MAX=?5 , t.NUM=?6 , t.LESS=?7 , t.FIT=?8 , t.MORE=?9 , t.BOOL=?10 where t.NAME=?1 ",nativeQuery = true)
-    void insertInfo(String name, String source, String explain, String min, String max, String num, String less, String fit, String more, String bool);
+    @Query(value = "update tb_state t set t.SOURCE=?2,t.EXP=?3, t.MIN=?4 , t.MAX=?5 , t.NUM=?6 , t.LESS=?7 , t.FIT=?8 , t.MORE=?9 , t.BOOL=?10,t.PLUG=?11 where t.NAME=?1 ",nativeQuery = true)
+    void insertInfo(String name, String source, String explain, String min, String max, String num, String less, String fit, String more, String bool, String plug);
 
     //删除
     void deleteByName(String name);

@@ -45,6 +45,7 @@ public class SchedulerTask {
                 String message = a.getMessage();
                 Submit(type, message);
                 stateService.updateBoolByName(s.getName(), "1");
+
             }
             //0~100%的状态，例如进度，完整度，只关心100%的状态
             if (min == 0 && s.getMore() != null && s.getMore().equals("")==false && num == max && bool == 0) {
@@ -54,6 +55,7 @@ public class SchedulerTask {
                 String message = a.getMessage();
                 Submit(type, message);
                 stateService.updateBoolByName(s.getName(), "1");
+
             }
             //有固定的适宜范围，如温度，湿度
             if (min != 0 && max != 0) {
@@ -64,6 +66,7 @@ public class SchedulerTask {
                     String message = a.getMessage();
                     Submit(type, message);
                     stateService.updateBoolByName(s.getName(), "1");
+
                 }
                 if (min < num && num < max && bool == 1) {
                     String action = s.getFit();
@@ -72,6 +75,7 @@ public class SchedulerTask {
                     String message = a.getMessage();
                     Submit(type, message);
                     stateService.updateBoolByName(s.getName(), "0");
+
                 }
                 if (num >= max && bool == 0) {
                     String action = s.getMore();
@@ -80,6 +84,7 @@ public class SchedulerTask {
                     String message = a.getMessage();
                     Submit(type, message);
                     stateService.updateBoolByName(s.getName(), "1");
+                    
                 }
             }
         }
