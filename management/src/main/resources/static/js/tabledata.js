@@ -28,7 +28,7 @@ var tableData = {
     documentNoIndex: "",
     addAnnex:function(obj){
         tableData.tableId = $("#tableId").val();
-        tableData.documentNoIndex = $("#documentNoIndex").val();
+        tableData.documentNoIndex = parseInt($("#documentNoIndex").val())+1;
         tableData.documentNo = $(obj).parent().parent().find('td').eq(tableData.documentNoIndex).text();
         $('#uploadFile').fileinput({
              uploadUrl: "/mywork/addAnnex",  //上传的地址
@@ -51,13 +51,8 @@ var tableData = {
              },
          }).on("filebatchselected",function(event, data) {
              $(event.target).parent().siblings('.fileinput-upload').show();
-        }).on("filebatchuploadsuccess", function(event, data, msg) {   //文件上传失败
-           if(data.response.result=="success"){
-               //上传成功 隐藏上传按钮
-               $(event.target).parent().siblings('.fileinput-upload').hide();
-           }else{
-               alert(data.response.result);
-           }
+        }).on("filebatchuploadsuccess", function(event, data, msg) {
+
         }).on('fileerror', function(event, data, msg) {  //文件上传失败
            // 清除当前的预览图
            // $(event.target).parent().siblings('.fileinput-upload').hide();
@@ -67,10 +62,25 @@ var tableData = {
     }
 }
 
+// 全选
+function allcheck() {
+     var nn = $("#allboxs").is(":checked"); //判断th中的checkbox是否被选中，如果被选中则nn为true，反之为false
+     if(nn == true) {
+         var namebox = $("input[name^='boxs']");  //获取name值为boxs的所有input
+         for(i = 0; i < namebox.length; i++) {
+             namebox[i].checked=true;    //js操作选中checkbox
+         }
+     }
+     if(nn == false) {
+         var namebox = $("input[name^='boxs']");
+         for(i = 0; i < namebox.length; i++) {
+             namebox[i].checked=false;
+         }
+     }
+}
 
 
-
-//新增下级菜单
+//新增数据
 $('#addData').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
@@ -94,8 +104,8 @@ function addData(obj) {
     jsonObj = {
         value: value,
         tableId: tableId,
-        // 最近修改时间+[是否删除]+操作+附件+[表格号]+序号
-        length: length-4
+        // 最近修改时间+[是否删除]+操作+附件+[表格号]+序号+选择框
+        length: length-5
     }
     eval(jsonObj);
 
@@ -106,7 +116,7 @@ function addData(obj) {
         dataType: "json",
         contentType: "application/json",
         success:function(data){
-            alert("成功新增数据");
+            alert(data.msg);
             location.reload();
         },
         error:function(data){
@@ -120,7 +130,9 @@ function addData(obj) {
 $('#delData').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
-    var documentNoIndex = $("#documentNoIndex").val();
+    // 1是第一列全选框
+    var documentNoIndex = parseInt($("#documentNoIndex").val())+1;
+    console.log(documentNoIndex);
     var documentNo = btnThis.closest('tr').find('td').eq(documentNoIndex).text();
     modal.find("#documentNo-del").val(documentNo);
 });
@@ -139,7 +151,7 @@ function removeInfo(obj) {
         dataType: "json",
         contentType: "application/json",
         success:function(data){
-            alert("成功删除该数据");
+            alert(data.msg);
             location.reload();
         },
         error:function(data){
@@ -149,11 +161,47 @@ function removeInfo(obj) {
     $('#delData').modal('hide');
 }
 
+//批量删除数据
+function removeInfos(obj) {
+    var tableId = $("#tableId").val();
+    var documentNos = [];
+    var documentNoIndex = parseInt($("#documentNoIndex").val())+1;
+    $("#table_id").find(":checkbox:checked").each(function(){
+        var val = $(this).parent();
+        for(i=0;i<documentNoIndex;i++){
+            val = val.next();
+        }
+        val = val.text();
+        documentNos.push(val);
+    });
+    console.log(documentNos);
+    var jsonObj= {
+        "tableId": tableId,
+        "documentNos": documentNos
+    };
+    $.ajax({
+        type: "post",
+        url: "/mywork/deleteDatas",
+        data: JSON.stringify(jsonObj),
+        dataType: "json",
+        contentType: "application/json",
+        success:function(data){
+            alert(data.msg);
+            location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
+        }
+    });
+    $('#delDatas').modal('hide');
+}
+
 // 编辑数据
 $('#editData').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
-    var documentNoIndex = $("#documentNoIndex").val();
+    // 1是第一列全选框
+    var documentNoIndex = parseInt($("#documentNoIndex").val())+1;
     var documentNo = btnThis.closest('tr').find('td').eq(documentNoIndex).text();
     modal.find("#documentNo-edit").val(documentNo);
 
@@ -176,13 +224,12 @@ function saveEdit(obj) {
     console.log(value);
     console.log(tableId);
 
-
     jsonObj = {
         documentNo: documentNo,
         value: value,
         tableId: tableId,
-        // 最近修改时间+[是否删除]+档案号+[表格号]+操作+序号+附件
-        length: length-5
+        // 最近修改时间+[是否删除]+档案号+[表格号]+操作+序号+附件+选择框
+        length: length-6
     }
     eval(jsonObj);
 
@@ -207,7 +254,8 @@ function saveEdit(obj) {
 $('#delAnnex').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
-    var documentNoIndex = $("#documentNoIndex").val();
+    // 1是第一列全选框
+    var documentNoIndex = parseInt($("#documentNoIndex").val())+1;
     var documentNo = btnThis.closest('tr').find('td').eq(documentNoIndex).text();
     modal.find("#documentNo-annexdel").val(documentNo);
 });
@@ -241,13 +289,15 @@ function fileDel(obj) {
 $('#archiving').on('show.bs.modal',function (event) {
     var btnThis=$(event.relatedTarget);//触发事件的按钮
     var modal=$(this);//当前模态框
-    var documentNoIndex = $("#documentNoIndex").val();
+    // 1是第一列全选框
+    var documentNoIndex = parseInt($("#documentNoIndex").val())+1;
     var documentNo = btnThis.closest('tr').find('td').eq(documentNoIndex).text();
     modal.find("#documentNo-archiving").val(documentNo);
 
     var length = document.getElementById("tr1").childNodes.length;
     var value = "";
-    for(i=0;i<length-1;i++){
+    // 不需要第一列的数据
+    for(i=1;i<length-1;i++){
         value += document.getElementById("tr1").childNodes[i].innerHTML + "||";
         value += btnThis.closest('tr').find('td').eq(i).text() + "||";
     }
@@ -258,17 +308,14 @@ $('#archiving').on('show.bs.modal',function (event) {
 function archivingChange(obj) {
     var tableId = $("#tableId").val();
     var documentNo= $('#documentNo-archiving').val();
-    var select = document.getElementById("classificationEdit");
-    var index = select.selectedIndex;
-    var menuClassification = select.options[index].text;
     var length = document.getElementById("tr1").childNodes.length;
     var value = $('#value').val();
     console.log(value);
     var jsonObj= {
         "tableId": tableId,
         "documentNo": documentNo,
-        "menuClassification": menuClassification,
-        "length": length,
+        // 不需要第一列
+        "length": length-1,
         "value": value
     };
     $.ajax({
@@ -286,4 +333,54 @@ function archivingChange(obj) {
         }
     });
     $('#archiving').modal('hide');
+}
+
+// 批量移交归档
+function archivingsChange(obj) {
+    var tableId = $("#tableId").val();
+    var length = document.getElementById("tr1").childNodes.length;
+    var documentNos = [];
+    var documentNoIndex = parseInt($("#documentNoIndex").val())+1;
+    $("#table_id").find(":checkbox:checked").each(function(){
+        var val = $(this).parent();
+        for(i=0;i<documentNoIndex;i++){
+            val = val.next();
+        }
+        val = val.text();
+        documentNos.push(val);
+    });
+    console.log(documentNos);
+    var values = [];
+    $("#table_id").find(":checkbox:checked").each(function(){
+        var value = $(this).parent();
+        for(i=1;i<length;i++){
+            values.push(document.getElementById("tr1").childNodes[i].innerHTML)
+            value = value.next();
+            values.push(value.text());
+        }
+    });
+    console.log(length);
+    console.log(values);
+    var jsonObj= {
+        "tableId": tableId,
+        "documentNos": documentNos,
+        // 不需要第一列
+        "length": length-1,
+        "values": values
+    };
+    $.ajax({
+        type: "post",
+        url: "/mywork/archivings",
+        data: JSON.stringify(jsonObj),
+        dataType: "json",
+        contentType: "application/json",
+        success:function(data){
+            alert(data.msg);
+            location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
+        }
+    });
+    $('#archivings').modal('hide');
 }

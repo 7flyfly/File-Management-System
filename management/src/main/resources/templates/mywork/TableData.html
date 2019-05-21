@@ -10,11 +10,24 @@
     <input type = "hidden" id = "tableId" th:value= "${tableId}">
     <input type = "hidden" id = "documentNoIndex" th:value="${documentNoIndex}">
 
-    <!-- 新增数据按钮 -->
-    <div style="margin-bottom:20px;">
-        <button id="btn_add" type="button" class="btn bg-primary" data-toggle="modal" data-target="#addData">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>新增数据
-        </button>
+    <div>
+        <!-- 新增数据按钮 -->
+        <div style="margin-bottom:20px;float:left;margin-right:10px">
+            <button id="btn_add" type="button" class="btn bg-primary" data-toggle="modal" data-target="#addData">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>新增数据
+            </button>
+        </div>
+
+        <!-- 数据批处理按钮 -->
+        <div class="btn-group" style="margin-bottom:20px;float:left">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                数据批处理<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a data-toggle="modal" data-target="#delDatas">批量删除</a></li>
+                <li><a data-toggle="modal" data-target="#archivings">批量移交归档</a></li>
+            </ul>
+        </div>
     </div>
 
     <!--新增数据模态框-->
@@ -69,6 +82,7 @@
     <script th:inline="javascript">
         tableTitle = [[${tableTitle}]];
         head = "<tr id=\"tr1\">";
+        head += '<th><input id="allboxs" onclick="allcheck()" type="checkbox"/></th>'
         for (i = 0; i <tableTitle.length; i++){
             if(tableTitle[i] != "是否被删除" && tableTitle[i] != "表格号"){
                 head += "<th>" + tableTitle[i] + "</th>";
@@ -80,6 +94,7 @@
         body = "";
         for(i = 0; i <tableData.length; i++){
             body += "<tr>";
+            body += '<td><input name="boxs" type="checkbox"/></td>';
             for(j =0;j<tableTitle.length; j++){
                 if(tableTitle[j] != "是否被删除" && tableTitle[j] != "表格号"){
                     if(tableData[i][j.toString()] !== undefined) {
@@ -131,7 +146,6 @@
                     <form>
                         <div class="form-group">
                             <label for="message-text" class="control-label">确定要删除该数据？</label>
-                            <input id="documentNo" type="hidden">
                         </div>
                     </form>
                 </div>
@@ -139,6 +153,29 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="removeInfo(this)">确认</button>
                     <input type = "hidden" id = "documentNo-del">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量删除数据模态框 -->
+    <div class="modal fade" id="delDatas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">提示</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">确定要批量删除这组数据？</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="removeInfos(this)">确认</button>
                 </div>
             </div>
         </div>
@@ -202,17 +239,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     <h4 class="modal-title" >提示</h4>
                 </div>
-                <div class="modal-body" style="height: 135px">
+                <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">请选择要移交的库</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="classificationEdit">
-                                <option value="预立库">预立库</option>
-                                <option value="整理库">整理库</option>
-                                <option value="档案库">档案库</option>
-                            </select>
+                            <label for="message-text" class="control-label">请确定是否要移交归档？</label>
                         </div>
                     </form>
                 </div>
@@ -221,6 +251,30 @@
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="archivingChange(this)">确认</button>
                     <input type = "hidden" id = "documentNo-archiving">
                     <input type = "hidden" id = "value">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量移交归档模态框 -->
+    <div class="modal fade" id="archivings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" >提示</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">请确定是否要批量移交归档？</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="archivingsChange(this)">确认</button>
+                    <input type = "hidden" id = "documentNos-archiving">
                 </div>
             </div>
         </div>
