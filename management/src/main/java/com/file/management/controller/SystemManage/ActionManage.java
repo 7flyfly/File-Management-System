@@ -51,11 +51,13 @@ public class ActionManage {
         String type = (String) map.get("type");
         String explain = (String) map.get("explain");
         String message =(String) map.get("message");
+        String plug =(String) map.get("plug");
 
        action.setName(name);
        action.setType(type);
        action.setExp(explain);
        action.setMessage(message);
+        action.setMessage(plug);
         try {
             actionService.saveAction(action);
         }catch (Exception e){
@@ -87,8 +89,9 @@ public class ActionManage {
         String type = (String) map.get("type");
         String explain = (String) map.get("explain");
         String message =(String) map.get("message");
+        String plug =(String) map.get("plug");
 
-        actionService.insertInfo(name,type,explain,message);
+        actionService.insertInfo(name,type,explain,message,plug);
         return "SystemManagement/ActionManagement";
     }
 
@@ -100,6 +103,20 @@ public class ActionManage {
         String name=(String)map.get("name");
         actionService.deleteInfo(name);
         return "SystemManagement/ActionManagement";
+    }
+
+    /*
+     *安装动作插件
+     */
+    @RequestMapping("/installAction")
+    public String installAction(@RequestBody Map<String,Object> map){
+        String name=(String)map.get("name");
+        Action a = actionService.findActionByName(name);
+        String plug = a.getPlug();
+        System.out.println(name);
+        System.out.println("加载JS："+ plug);
+
+        return "SystemManagement/StateManagement";
     }
 }
 

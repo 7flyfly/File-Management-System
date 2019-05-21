@@ -98,16 +98,31 @@ $('#StateTable').bootstrapTable({
         valign : 'center',
         width:"100px",
     }, {
+        title : '插件名称',
+        field : 'plug',
+        align : 'center',
+        valign : 'center',
+        width:"200px",
+    }, {
         title : '操作',
         field : 'operation',
-        width:"200px",
+        width:"100px",
         formatter : function (value, row, index) {
             return[ '<button id="table_edit" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" ' +
             'data-toggle="modal" data-target="#editModal"  type="button">编辑</button>',
                 '<button id="del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal" type="button">删除</button>',
             ].join("")
         }
-    },]
+    },{
+        title : '安装插件',
+        field : 'operation',
+        width:"100px",
+        formatter : function (value, row, index) {
+            return[
+                '<button id="install" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" data-toggle="modal" data-target="#installModal" type="button">安装</button>',
+            ].join("")
+        }
+    }]
 });
 
 //把数据提交到编辑模态框
@@ -124,6 +139,7 @@ function editInfo(obj) {
     $('#fitEdit').val(tds.eq(8).text());
     $('#moreEdit').val(tds.eq(9).text());
     $('#boolEdit').val(tds.eq(10).text());
+    $('#plugEdit').val(tds.eq(11).text());
 
     $('#editModal').modal('show');
 }
@@ -141,6 +157,7 @@ function save(obj) {
     var fit = $('#fit').val();
     var more = $('#more').val();
     var bool = $('#bool').val();
+    var plug = $('#plug').val();
 
 
     var jsonObj= {
@@ -154,6 +171,7 @@ function save(obj) {
         "fit": fit,
         "more": more,
         "bool": bool,
+        "plug": plug
     };
     $.ajax({
         type: "post",
@@ -269,17 +287,32 @@ function search(obj) {
             align : 'center',
             valign : 'center',
             width:"100px",
-        }, {
+        },   {
+            title : '插件名称',
+            field : 'plug',
+            align : 'center',
+            valign : 'center',
+            width:"200px",
+        },{
             title : '操作',
             field : 'operation',
-            width:"200px",
+            width:"100px",
             formatter : function (value, row, index) {
                 return[ '<button id="table_edit" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" ' +
                 'data-toggle="modal" data-target="#editModal"  type="button">编辑</button>',
                     '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" type="button">删除</button>',
                 ].join("")
             }
-        },]
+        },{
+            title : '安装插件',
+            field : 'operation',
+            width:"100px",
+            formatter : function (value, row, index) {
+                return[
+                    '<button id="install" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" data-toggle="modal" data-target="#installModal" type="button">安装</button>',
+                ].join("")
+            }
+        }]
     });
  }
 
@@ -298,6 +331,7 @@ $('#editModal').on('show.bs.modal',function (event) {
     var fit= btnThis.closest('tr').find('td').eq(8).text();
     var more= btnThis.closest('tr').find('td').eq(9).text();
     var bool= btnThis.closest('tr').find('td').eq(10).text();
+    var plug= btnThis.closest('tr').find('td').eq(11).text();
     modal.find('#nameEdit').val(name);
     modal.find('#sourceEdit').val(source);
     modal.find('#explainEdit').val(explain);
@@ -308,6 +342,7 @@ $('#editModal').on('show.bs.modal',function (event) {
     modal.find('#fitEdit').val(fit);
     modal.find('#moreEdit').val(more);
     modal.find('#boolEdit').val(bool);
+    modal.find('#plugEdit').val(plug);
 });
 
 //保存修改
@@ -323,7 +358,7 @@ function saveEdit(obj) {
     var fit = $('#fitEdit').val();
     var more = $('#moreEdit').val();
     var bool = $('#boolEdit').val();
-
+    var plug = $('#plugEdit').val();
 
     var jsonObj= {
         'name': name,
@@ -336,6 +371,7 @@ function saveEdit(obj) {
         "fit": fit,
         "more": more,
         "bool": bool,
+        "plug": plug
     };
     $.ajax({
         type: "post",
@@ -356,7 +392,7 @@ $('#delModal').on('show.bs.modal',function (event) {
     var modal=$(this);//当前模态框
     var name= btnThis.closest('tr').find('td').eq(1).text();
     var type= btnThis.closest('tr').find('td').eq(2).text();
-    modal.find("#name-del").val(name);
+    modal.find("#name-install").val(name);
     modal.find("#type-del").val(type);
 });
 function removeInfo(obj) {
@@ -376,4 +412,33 @@ function removeInfo(obj) {
         }
     });
     $('#delModal').modal('hide');
+}
+
+//安装插件
+$('#installModal').on('show.bs.modal',function (event) {
+    var btnThis=$(event.relatedTarget);//触发事件的按钮
+    var modal=$(this);//当前模态框
+    var name= btnThis.closest('tr').find('td').eq(1).text();
+    var type= btnThis.closest('tr').find('td').eq(2).text();
+    modal.find("#name-install").val(name);
+    modal.find("#type-del").val(type);
+});
+function install(obj) {
+    var name= $('#name-install').val();
+    console.log(name);
+    var jsonObj= {
+        "name": name,
+    };
+    $.ajax({
+        type: "post",
+        url: "/installState",
+        data: JSON.stringify(jsonObj),
+        dataType: "json",
+        contentType: "application/json",
+        async:false,
+        success: function(result) {
+            window.location.reload();
+        }
+    });
+    $('#installModal').modal('hide');
 }

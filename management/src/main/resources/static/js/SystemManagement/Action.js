@@ -1,9 +1,8 @@
 
 
-$('#ActionTable').bootstrapTable({
+$('#ActionTable').bootstrapTable('destroy').css({"table-layout":"fixed"}).bootstrapTable({
     url:'/actionSearch',  //请求后台url
     method:'get',
-    async:false,
     showRefresh:false, //是否显示刷新按钮
     cardView: false,   //是否显示详细视图
     showToggle : false, // 是否显示详细视图和列表视图的切换按钮
@@ -49,30 +48,45 @@ $('#ActionTable').bootstrapTable({
         field : 'type',
         align : 'center',
         valign : 'center',
-        width:"150px",
+        width:"100px",
     },  {
         title : '解释',
         field : 'exp',
         align : 'center',
         valign : 'center',
-        width:"600px",
+        width:"300px",
     },  {
         title : '返回信息',
         field : 'message',
         align : 'center',
         valign : 'center',
-        width:"600px",
+        width:"300px",
     }, {
+        title : '插件名称',
+        field : 'plug',
+        align : 'center',
+        valign : 'center',
+        width:"200px",
+    },{
         title : '操作',
         field : 'operation',
-        width:"200px",
+        width:"100px",
         formatter : function (value, row, index) {
             return[ '<button id="table_edit" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" ' +
             'data-toggle="modal" data-target="#editModal"  type="button">编辑</button>',
                 '<button id="del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal" type="button">删除</button>',
             ].join("")
         }
-    },]
+    },{
+        title : '安装插件',
+        field : 'operation',
+        width:"100px",
+        formatter : function (value, row, index) {
+            return[
+                '<button id="install" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" data-toggle="modal" data-target="#installModal" type="button">安装</button>',
+            ].join("")
+        }
+    }]
 });
 
 //把数据提交到编辑模态框
@@ -83,6 +97,7 @@ function editInfo(obj) {
     $('#typeEdit').val(tds.eq(2).text());
     $('#explainEdit').val(tds.eq(3).text());
     $('#messageEdit').val(tds.eq(4).text());
+    $('#plugEdit').val(tds.eq(5).text());
 
     $('#editModal').modal('show');
 }
@@ -94,12 +109,14 @@ function save(obj) {
     var type = $('#type').val();
     var explain = $('#explain').val();
     var message = $('#message').val();
+    var plug = $('#plug').val();
 
     var jsonObj= {
         'name': name,
         "type": type,
         "explain": explain,
         "message": message,
+        "plug": plug
     }
     $.ajax({
         type: "post",
@@ -167,30 +184,45 @@ function search(obj) {
             field : 'type',
             align : 'center',
             valign : 'center',
-            width:"150px",
+            width:"100px",
         },  {
             title : '解释',
             field : 'exp',
             align : 'center',
             valign : 'center',
-            width:"600px",
+            width:"300px",
         },  {
             title : '返回信息',
             field : 'message',
             align : 'center',
             valign : 'center',
-            width:"600px",
-        }, {
+            width:"300px",
+        },  {
+            title : '插件名称',
+            field : 'plug',
+            align : 'center',
+            valign : 'center',
+            width:"200px",
+        },{
             title : '操作',
             field : 'operation',
-            width:"200px",
+            width:"100px",
             formatter : function (value, row, index) {
                 return[ '<button id="table_edit" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" ' +
                 'data-toggle="modal" data-target="#editModal"  type="button">编辑</button>',
                     '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" type="button">删除</button>',
                 ].join("")
             }
-        },]
+        },{
+            title : '安装插件',
+            field : 'operation',
+            width:"100px",
+            formatter : function (value, row, index) {
+                return[
+                    '<button id="install" class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" data-toggle="modal" data-target="#installModal" type="button">安装</button>',
+                ].join("")
+            }
+        }]
     });
  }
 
@@ -203,10 +235,12 @@ $('#editModal').on('show.bs.modal',function (event) {
     var type= btnThis.closest('tr').find('td').eq(2).text();
     var explain= btnThis.closest('tr').find('td').eq(3).text();
     var message= btnThis.closest('tr').find('td').eq(4).text();
+    var plug= btnThis.closest('tr').find('td').eq(5).text();
     modal.find('#nameEdit').val(name);
     modal.find('#typeEdit').val(type);
     modal.find('#explainEdit').val(explain);
     modal.find('#messageEdit').val(message);
+    modal.find('#plugEdit').val(plug);
 });
 
 //保存修改
@@ -216,12 +250,14 @@ function saveEdit(obj) {
     var type=$('#typeEdit').val();
     var explain= $('#explainEdit').val();
     var message = $('#messageEdit').val();
+    var plug = $('#plugEdit').val();
 
     var jsonObj= {
         'name': name,
         "type": type,
         "explain": explain,
         "message": message,
+        "plug": plug
     };
     $.ajax({
         type: "post",
@@ -264,4 +300,33 @@ function removeInfo(obj) {
         }
     });
     $('#delModal').modal('hide');
+}
+
+//安装插件
+$('#installModal').on('show.bs.modal',function (event) {
+    var btnThis=$(event.relatedTarget);//触发事件的按钮
+    var modal=$(this);//当前模态框
+    var name= btnThis.closest('tr').find('td').eq(1).text();
+    var type= btnThis.closest('tr').find('td').eq(2).text();
+    modal.find("#name-install").val(name);
+    modal.find("#type-del").val(type);
+});
+function install(obj) {
+    var name= $('#name-install').val();
+    console.log(name);
+    var jsonObj= {
+        "name": name,
+    };
+    $.ajax({
+        type: "post",
+        url: "/installAction",
+        data: JSON.stringify(jsonObj),
+        dataType: "json",
+        contentType: "application/json",
+        async:false,
+        success: function(result) {
+            window.location.reload();
+        }
+    });
+    $('#installModal').modal('hide');
 }

@@ -82,6 +82,12 @@
                                                     <input type="text" autocomplete="off" class="form-control" id="message" name="message" placeholder="执行此动作返回的信息" data-prompt-position="bottomLeft">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="plug">插件名称</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control" id="plug" name="messageEdit" placeholder="插件名称" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer" style="display: block;">
@@ -132,6 +138,12 @@
                                                     <input type="text" autocomplete="off" class="form-control" id="messageEdit" name="messageEdit" placeholder="返回信息" data-prompt-position="bottomLeft">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="plugEdit">插件名称</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" autocomplete="off" class="form-control" id="plugEdit" name="messageEdit" placeholder="插件名称" data-prompt-position="bottomLeft">
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer" style="display: block;">
@@ -163,6 +175,31 @@
                                             <div class="bootstrap-dialog-footer-buttons">
                                                 <button class="btn btn-danger" id="delete" onclick="removeInfo(this)">删除</button>
                                                 <button class="btn btn-default" id="cancal" data-dismiss="modal">取消</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--安装插件提示模态框-->
+                        <div class="modal fade" id="installModal"   tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: red">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                        <h4 class="modal-title" id="installModalLabel"> 安装此模块插件 </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span>确定安装此插件吗？</span>
+                                        <input id="name-install" type="hidden">
+                                    </div>
+                                    <div class="modal-footer" style="display: block;">
+                                        <div class="bootstrap-dialog-footer">
+                                            <div class="bootstrap-dialog-footer-buttons">
+                                                <button class="btn btn-danger" id="install" onclick="install(this)">安装</button>
+                                                <button class="btn btn-default" id="cancalinstall" data-dismiss="modal">取消</button>
                                             </div>
                                         </div>
                                     </div>

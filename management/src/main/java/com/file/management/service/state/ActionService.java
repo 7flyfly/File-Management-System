@@ -14,12 +14,12 @@ public interface ActionService {
 
       List<Action> findByName(String name);
 
-      void changeName(String oldname,String newname);
+      void changeName(String oldname, String newname);
       //保存action
       void saveAction(Action action);
 
       //插入编辑后数据
-      void insertInfo(String name, String type, String explain, String message);
+      void insertInfo(String name, String type, String explain, String message, String plug);
 
       //删除
       void deleteInfo(String name);

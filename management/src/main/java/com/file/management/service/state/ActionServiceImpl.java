@@ -21,8 +21,8 @@ public class ActionServiceImpl implements ActionService {
     }
 
     @Override
-    public void insertInfo(String name, String type, String explain, String message) {
-        actionRepository.insertInfo(name,type,explain,message);
+    public void insertInfo(String name, String type, String explain, String message,String plug) {
+        actionRepository.insertInfo(name,type,explain,message,plug);
     }
 
     @Override

@@ -1,48 +1,58 @@
 <!--到期档案处理-->
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
-<head th:replace="public:: #public_head">
+<head>
     <meta charset="UTF-8">
     <title>到期档案处理</title>
 </head>
 <body>
 
-<!--sidebar-->
-<div>处理档案</div>
-
-<table width="50%" class="table">
-    <tr>
-        <th>档案编号</th>
-        <th>档案名称</th>
-        <th>到期时间</th>
-        <th>档案具体信息</th>
-        <th>档案负责人</th>
-        <th>进行处理</th>
-    </tr>
-    <tr>
-        <td>d01</td>
-        <td>科技档案</td>
-        <td>09d</td>
-        <td>A区01号</td>
-        <td>王某</td>
-        <td><a th:href="@{/#}" name="register">修改</a></td>
-    </tr>
-    <tr>
-        <td>d02</td>
-        <td>文学档案</td>
-        <td>10d</td>
-        <td>A区02号</td>
-        <td>李某</td>
-        <td><a th:href="@{/#}" name="register">修改</a></td>
-    </tr>
-    <tr>
-        <td>d03</td>
-        <td>水利档案</td>
-        <td>10d</td>
-        <td>A区03号</td>
-        <td>朱某</td>
-        <td><a th:href="@{/#}" name="register">修改</a></td>
-    </tr>
-</table>
+<div class="panel panel-default" style="width: 90%;margin-left: 5%">
+    <div class="panel-heading">
+        <h3 class="panel-title" style="text-align:center">待处理档案</h3>
+    </div>
+    <div class="panel-body">
+    <div class="table">
+        <table width="100%" class="table">
+            <thead>
+            <tr>
+                <th>档案编号</th>
+                <th>档案名称</th>
+                <th>到期时间</th>
+                <th>档案具体信息</th>
+                <th>档案负责人</th>
+                <th>进行处理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>d01</td>
+                <td>科技档案</td>
+                <td>09d</td>
+                <td>A区01号</td>
+                <td>王某</td>
+                <td><a th:href="@{/#}" name="register">修改</a></td>
+            </tr>
+            <tr>
+                <td>d02</td>
+                <td>文学档案</td>
+                <td>10d</td>
+                <td>A区02号</td>
+                <td>李某</td>
+                <td><a th:href="@{/#}" name="register">修改</a></td>
+            </tr>
+            <tr>
+                <td>d03</td>
+                <td>水利档案</td>
+                <td>10d</td>
+                <td>A区03号</td>
+                <td>朱某</td>
+                <td><a th:href="@{/#}" name="register">修改</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
 </body>
-</html>
+<body>
