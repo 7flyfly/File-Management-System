@@ -7,7 +7,6 @@ import java.util.List;
 public interface RegistrationFormService {
     //查询登记表中所有登记信息
     List<RegistrationForm> findAll();
-
     void saveAll(RegistrationForm registrationForm);
 
     //查询单号

@@ -83,4 +83,8 @@ public interface MenuRepository extends JpaRepository<Menu,Integer>{
     @Query(value = "SELECT * FROM TB_MENU WHERE MENU_NAME = ?1 AND MENU_CLASSIFICATION = ?2",nativeQuery = true)
     List<Menu> findMenuByMenuNameAndMenuClassification(String menuName,String menuClassification);
 
+    // 根据菜单名称和分类查询菜单
+    @Query(value = "SELECT * FROM TB_MENU WHERE MENU_NAME = ?1 AND TABLE_ID is not null ",nativeQuery = true)
+    List<Menu> findMenuByMenuName(String menuName);
+
 }

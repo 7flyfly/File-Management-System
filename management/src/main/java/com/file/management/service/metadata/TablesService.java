@@ -203,6 +203,7 @@ public class TablesService {
         }else{
             tables.setTemplate(template);
         }
+
         saveOne(tables);
     }
     /*@Transactional
