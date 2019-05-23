@@ -5,6 +5,7 @@ import com.drew.tools.FileUtil;
 import com.file.management.dao.DynamicSQL;
 import com.file.management.pojo.Menu;
 import com.file.management.pojo.metadata.Tables;
+import com.file.management.service.DictionaryService;
 import com.file.management.service.MenuService;
 import com.file.management.service.metadata.FieldService;
 import com.file.management.service.metadata.TablesService;
@@ -46,6 +47,9 @@ public class MyWork {
 
     @Autowired
     private FieldService fieldService;
+
+    @Autowired
+    private DictionaryService dictionaryService;
 
     @RequestMapping("/homepage")
     public String myWork(Model model){
@@ -92,6 +96,10 @@ public class MyWork {
         List<Map<String,String>> listMap = tablesService.queryDataFromDatabase(tableId);
         model.addAttribute("tableData",listMap);
         List<String> titleList = tablesService.queryTitleFromDatabase(tableId);
+        List<List<String>> listList = new ArrayList<>();
+        for(String title:titleList){
+            listList.add(dictionaryService.getListByName(title));
+        }
         int documentNoIndex = -1;
         for(int i=0;i<titleList.size();i++){
             if(titleList.get(i).equals("档案号")){
@@ -101,6 +109,7 @@ public class MyWork {
         model.addAttribute("documentNoIndex",documentNoIndex);
         model.addAttribute("tableTitle",titleList);
         model.addAttribute("tableId",tableId);
+        model.addAttribute("listList",listList);
         return "mywork/TableData";
     }
 

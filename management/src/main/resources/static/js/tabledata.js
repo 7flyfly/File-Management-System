@@ -88,15 +88,33 @@ $('#addData').on('show.bs.modal',function (event) {
     console.log(test);
 
 });
+
+
+//var select = document.getElementById("menuClassification");
+//var index = select.selectedIndex;
+//var menuClassification = select.options[index].text;
+
 function addData(obj) {
     var length = document.getElementById("tr1").childNodes.length;
     var value = [];
     for(i=0;i<length;i++){
         var str = "formData" + i.toString();
+        console.log(document.getElementById(str));
         if(document.getElementById(str)){
+            if (document.getElementById(str).childNodes.length != 1) {
+                 eval("value.push($('#" + str + "').attr('placeholder'))");
+                 eval("value.push($('#" + str + "').val())");
+            }else{
+                var select = document.getElementById("str");
+                var index = select.selectedIndex;
+                eval("value.push($('#" + str + "').attr('placeholder'))");
+                eval("value.push(select.option[" + index + "].text)");
+            }
+        }
+        /*if(document.getElementById(str)){
             eval("value.push($('#" + str + "').attr('placeholder'))");
             eval("value.push($('#" + str + "').val())")
-        }
+        }*/
     }
     console.log(value);
     var tableId = $("#tableId").val();

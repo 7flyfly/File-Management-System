@@ -19,13 +19,11 @@ public interface DictionaryDao extends JpaRepository<DictionaryPojo,String> {
 //
 //    List<DictionaryPojo> findAllByDictionary(String dictionary);
 
-    @Modifying
     @Query(value = "select * from tb_dictionary t group by t.dictionaryname",nativeQuery = true)
     List<DictionaryPojo> findDictionary();
 
     List<DictionaryPojo> findAllByDictionaryname(String name);
 
-    @Modifying
     @Query(value = "select * from tb_dictionary t where t.dictionaryname=?1 and t.code is not null order by t.SEQUENCE",nativeQuery = true)
     List<DictionaryPojo> findAllInfo(String name);
 

@@ -325,6 +325,10 @@ public class TablesService {
         // 拼接字符串完成插入数据的sql语句
         String sqlInsert = "INSERT INTO " + tableName + "(" + keys + ")" + " VALUES" + "(" + values + ")";
         jdbcTemplate.execute(sqlInsert);
+
+        String sqlInsertTableId = "INSERT INTO" + tableName + "(TABLE_ID) VALUES(" + tables.getTableId() + ")";
+        jdbcTemplate.execute(sqlInsertTableId);
+
         HashMap<Boolean, String> hashMap = solrService.deltaImportTable2Solr(tableName,null,null,null,null,null);
         String str = "";
         for(String s:hashMap.values()){
