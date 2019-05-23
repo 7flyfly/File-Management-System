@@ -49,6 +49,11 @@ public class RegistrationFormServiceImpl implements RegistrationFormService {
     }
 
     @Override
+    public List<RegistrationForm> findByTypeAndStatus(String type, String status) {
+        return respository.findAllByTypeAndState(type,status);
+    }
+
+    @Override
     public List<RegistrationForm> findByStatus(String status) {
         return respository.findAllByState(status);
     }

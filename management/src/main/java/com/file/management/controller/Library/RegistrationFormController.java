@@ -9,6 +9,7 @@ import com.file.management.pojo.Menu;
 import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
 import com.file.management.service.LibraryUse.RegistrationFormService;
 import com.file.management.service.MenuService;
+import lombok.experimental.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -140,6 +141,21 @@ public class RegistrationFormController {
     }
 
     @ResponseBody
+    @RequestMapping("/searchTypeAndStatus")
+    public String searchTypeAndStatus(String query_type, String query_status){
+        JSONObject jsonObject=new JSONObject();
+        List<RegistrationForm> registrationFormList = registrationFormService.findByTypeAndStatus(query_type,query_status);
+        if (registrationFormList != null){
+            jsonObject.put("rows",registrationFormList);
+            jsonObject.put("total",registrationFormList.size());
+            return jsonObject.toJSONString();
+        }else {
+            System.out.println("没数据");
+        }
+        return null;
+    }
+
+    @ResponseBody
     @RequestMapping("/deleteRegister")
     public String deleteRegister(String num){
         registrationFormService.deleteForm(num);
@@ -258,7 +274,7 @@ public class RegistrationFormController {
     @RequestMapping("/getCertType")
     @ResponseBody
     public List<DictionaryPojo> getcertType(){
-        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionary("4");
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo("证件类型");
         return dictionaryPojoList;
     }
 
@@ -266,7 +282,15 @@ public class RegistrationFormController {
     @RequestMapping("/getStatus")
     @ResponseBody
     public List<DictionaryPojo> getStatus(){
-        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionary("5");
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo("状态");
+        return dictionaryPojoList;
+    }
+
+    //向前台利用查询界面发送状态下拉框数据
+    @RequestMapping("/getSearchStatus")
+    @ResponseBody
+    public List<DictionaryPojo> getSearchStatus(){
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo("状态");
         return dictionaryPojoList;
     }
 
@@ -274,7 +298,7 @@ public class RegistrationFormController {
     @RequestMapping("/getUnit")
     @ResponseBody
     public List<DictionaryPojo> getUnit(){
-        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionary("3");
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo("归档单位");
         return dictionaryPojoList;
     }
 
@@ -285,10 +309,27 @@ public class RegistrationFormController {
     @ResponseBody
     public List<String> getData(){
         List<String> str = new ArrayList<String>();
-        List<Menu> menuList =  menuService.getMenuRoot();
-        for (Menu menu:menuList){
-            str.add(menu.getMenuName());
-        }
+//        List<Menu> menuList =  menuService.getMenuRoot();
+//        for (Menu menu:menuList){
+//            str.add(menu.getMenuName());
+//        }
+        str.add("预立卷");
+        str.add("整理库");
+        return str;
+    }
+
+    @RequestMapping("/getFileContent")
+    @ResponseBody
+    public List<String> getFileContent(@RequestBody Map<String,Object> map){
+        String database = (String)map.get("database") ;
+        System.out.println(database);
+        List<String> str = new ArrayList<String>();
+//        List<Menu> menuList =  menuService.getMenuRoot();
+//        for (Menu menu:menuList){
+//            str.add(menu.getMenuName());
+//        }
+        str.add("预立卷");
+        str.add("整理库");
         return str;
     }
 }

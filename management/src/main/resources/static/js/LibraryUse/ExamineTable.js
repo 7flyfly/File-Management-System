@@ -342,3 +342,30 @@ function search(obj) {
             }]
     });
 }
+
+//获取状态
+function getStatus(obj){
+    $.ajax({
+        url: "/getExamineStatus",
+        async: true,
+        type:"get",
+        dataType: "json",
+        success: function (data,htmlData) {
+            var array = new Array();
+            $("#query-checkstatus option").each(function () {
+                var txt = $(this).text();
+                if (txt != "所有状态")
+                    array.push(txt);
+            });
+            for(var i=0;i<data.length;i++){
+                var value = data[i].sequence;
+                var lable = data[i].name;
+                if (array.indexOf(lable)<0 )
+                    $('#query-checkstatus').append("<option value="+value+">"+lable+"</option>");
+            }
+            $('#query-checkstatus').selectpicker('refresh');
+        },
+        error: function (data) {
+            //alert("没数据");
+        } });
+}

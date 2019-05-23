@@ -24,6 +24,7 @@ public interface RegistrationFormService {
     //查询利用登记
     List<RegistrationForm> findByTypeAndNameAndStatus(String type,String name,String status);
 
+    List<RegistrationForm> findByTypeAndStatus(String type,String status);
 
     //查询利用审批
     List<RegistrationForm>findByStatus(String status);

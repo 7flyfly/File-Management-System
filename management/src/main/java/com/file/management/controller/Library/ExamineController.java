@@ -1,7 +1,9 @@
 package com.file.management.controller.Library;
 
 import com.alibaba.fastjson.JSONObject;
+import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
 import com.file.management.pojo.LibraryUse.RegistrationForm;
+import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
 import com.file.management.service.LibraryUse.RegistrationFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,4 +67,13 @@ public class ExamineController {
         return null;
     }
 
+    @Autowired
+    private DictionaryDao dictionaryDao;
+    //向前台发送状态下拉框数据
+    @RequestMapping("/getExamineStatus")
+    @ResponseBody
+    public List<DictionaryPojo> getExamineStatus(){
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo("状态");
+        return dictionaryPojoList;
+    }
 }

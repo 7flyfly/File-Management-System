@@ -13,6 +13,9 @@ public interface RegistrationFormRespository extends JpaRepository<RegistrationF
     //查找所有
       List<RegistrationForm> findAll();
 
+      //利用查询
+
+
     //查询单号
     RegistrationForm findByOddNumbers(String oddNumber);
 
@@ -29,6 +32,8 @@ public interface RegistrationFormRespository extends JpaRepository<RegistrationF
 
     //查询利用登记
     List<RegistrationForm> findAllByTypeAndNameAndState(String type,String name,String status);
+
+    List<RegistrationForm>findAllByTypeAndState(String type,String status);
 
     //查询利用审批
     List<RegistrationForm> findAllByState(String status);

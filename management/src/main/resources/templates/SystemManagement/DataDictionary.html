@@ -19,230 +19,234 @@
                             <span aria-hidden="true" class="glyphicon glyphicon-align-left"></span> 基础数据
                         </a>
                     </li>
-                    <li class="active"><a href="#">数字词典</a></li></ol>
+                    <li class="active">
+                        <a href="#">数字词典</a>
+                    </li>
+                </ol>
                 <div id="main-center">
                     <div id="mc-section" class="container-fluid">
                         <div class="row">
-                            <ul class="nav nav-tabs" id="myTab">
-                                <li class="active" >
-                                    <a href="#tab1" data-toggle="tab" data-id="1">
-                                        <span>全宗号</span>
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </li>
-                                <li class="" >
-                                    <a href="#tab2" data-toggle="tab" data-id="2" >
-                                        <span>分类号</span>
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </li>
-                                <li class="" >
-                                    <a href="#tab3" data-toggle="tab" data-id="3">
-                                        <span>归档单位</span>
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </li>
-                                <li class="" >
-                                    <a href="#tab4" data-toggle="tab" data-id="4">
-                                        <span>证件类型</span>
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </li>
-                                <li class="" >
-                                    <a href="#tab5" data-toggle="tab" data-id="5">
-                                        <span>审核状态</span>
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <button type="button" class="btn btn-default btn-add btn-xs-12"  data-toggle="modal" data-target="#addDictionary">
+                                <i class="glyphicon glyphicon-plus">添加字典</i>
+                            </button>
                         </div>
-                        <div id="mc-main" class="container-fluid">
-                            <div class="row">
-                                <div id="myTabContent" class="tab-content">
-                                    <div class="tab-pane  in active" id="tab1">
-                                        <span class="pathnav"><a class="btn" href="javascript:void(0);">全宗号</a></span>
-                                        <div role="group" class="btn-group btn-group-sm btn-group-xs-12 btn-group-xs-vertical text-center ">
-                                            <button type="button" class="btn btn-default btn-add btn-xs-12" data-toggle="modal" data-target="#addModal">
-                                                <i class="glyphicon glyphicon-plus">添加</i>
-                                            </button>
-                                        </div>
-                                        <div class="row">
-                                            <table id="rootTable"></table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane  " id="tab2">
-                                        <span class="pathnav"><a class="btn" href="javascript:void(0);">分类号</a></span>
-                                        <div role="group" class="btn-group btn-group-sm btn-group-xs-12 btn-group-xs-vertical text-center">
-                                            <button type="button" class="btn btn-default btn-add btn-xs-12" data-toggle="modal" data-target="#addModal">
-                                                <i class="glyphicon glyphicon-plus">添加</i>
-                                            </button>
-                                        </div>
-                                        <div class="row">
-                                            <table id="table2"></table>
+                        <div class="row" >
+                            <table id="dictionaryTable"></table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--模态框-->
+                <div class="modal fade" id="addDictionary"   tabindex="-1" role="dialog" aria-labelledby="addDictionaryLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: red">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="addDictionaryLabel"> 添加字典 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="info" class="form-horizontal" action="" method="post">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="code">代码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="code" name="code" placeholder="代码" data-prompt-position="bottomLeft">
                                         </div>
                                     </div>
-                                    <div class="tab-pane  " id="tab3">
-                                        <span class="pathnav"><a class="btn" href="javascript:void(0);">归档单位</a></span>
-                                        <div role="group" class="btn-group btn-group-sm btn-group-xs-12 btn-group-xs-vertical text-center">
-                                            <button type="button" class="btn btn-default btn-add btn-xs-12" data-toggle="modal" data-target="#addModal">
-                                                <i class="glyphicon glyphicon-plus">添加</i>
-                                            </button>
-                                        </div>
-                                        <div class="row">
-                                            <table id="table3"></table>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="name">名称</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="name" name="name" placeholder="名称" data-prompt-position="bottomLeft">
                                         </div>
                                     </div>
-                                    <div class="tab-pane  " id="tab4">
-                                        <span class="pathnav"><a class="btn" href="javascript:void(0);">证件类型</a></span>
-                                        <div role="group" class="btn-group btn-group-sm btn-group-xs-12 btn-group-xs-vertical text-center">
-                                            <button type="button" class="btn btn-default btn-add btn-xs-12" data-toggle="modal" data-target="#addModal">
-                                                <i class="glyphicon glyphicon-plus">添加</i>
-                                            </button>
-                                        </div>
-                                        <div class="row">
-                                            <table id="table4"></table>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane  " id="tab5">
-                                        <span class="pathnav"><a class="btn" href="javascript:void(0);">审核状态</a></span>
-                                        <div role="group" class="btn-group btn-group-sm btn-group-xs-12 btn-group-xs-vertical text-center">
-                                            <button type="button" class="btn btn-default btn-add btn-xs-12" data-toggle="modal" data-target="#addModal">
-                                                <i class="glyphicon glyphicon-plus">添加</i>
-                                            </button>
-                                        </div>
-                                        <div class="row">
-                                            <table id="table5"></table>
-                                        </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-success" data-dismiss="modal" onclick="saveInfo(this)">保存</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">关闭</button>
                                     </div>
                                 </div>
                             </div>
-                            <!--模态框-->
-                            <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="background-color: #007bff">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-                                            <h4 class="modal-title" id="addModalLabel"> 添加 </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="info" class="form-horizontal" action="" method="post">
-                                                <input type="hidden" id="dictionary">
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="code">代码</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" autocomplete="off" class="form-control"id="code" name="code" placeholder="代码" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="name">名称</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" autocomplete="off" class="form-control"id="name" name="name" placeholder="名称" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="parent">父级</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" readonly value="父级"  autocomplete="off" class="form-control" id="parent" name="parent" placeholder="父级" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="charger">顺序</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" autocomplete="off" class="form-control" id="charger" name="charger" placeholder="顺序" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="comment">备注</label>
-                                                    <div class="col-sm-10">
-                                                        <textarea id="comment" name="comment" data-prompt-position="bottomLeft"></textarea>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer" style="display: block;">
-                                            <div class="bootstrap-dialog-footer">
-                                                <div class="bootstrap-dialog-footer-buttons">
-                                                    <button class="btn btn-primary" id="save"data-dismiss="modal" onclick="saveboot(this)">保存</button>
-                                                    <button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="searchDictionaryModal"   tabindex="-1" role="dialog" aria-labelledby="searchDictionaryModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="searchDictionaryModalLabel"> 详情 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <button type="button" class="btn btn-default btn-add btn-xs-12"  data-toggle="modal" data-target="#addContent">
+                                        <i class="glyphicon glyphicon-plus">添加字段</i>
+                                    </button>
+                                    <input type="hidden" id="name1" value="">
+                                    <input type="hidden" id="code1" value="">
+                                </div>
+                                <div class="row">
+                                    <table id="d-table"></table>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-primary" id="save"data-dismiss="modal" onclick="save(this)">保存</button>
+                                        <button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>
                                     </div>
                                 </div>
                             </div>
-                            <!--编辑模态框-->
-                            <div class="modal fade" id="editModal"   tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="background-color: #007bff">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-                                            <h4 class="modal-title" id="editModalLabel"> 编辑 </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="editinfo" class="form-horizontal" action="" method="post">
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="code">代码</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" readonly autocomplete="off" class="form-control"id="editcode" name="code" placeholder="代码" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="name">名称</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" autocomplete="off" class="form-control"id="editname" name="name" placeholder="名称" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="parent">父级</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" readonly value="父级"  autocomplete="off" class="form-control" id="editparent" name="parent" placeholder="父级" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="charger">顺序</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" autocomplete="off" class="form-control" id="editcharger" name="charger" placeholder="顺序" data-prompt-position="bottomLeft">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label" for="comment">备注</label>
-                                                    <div class="col-sm-10">
-                                                        <textarea id="editcomment" name="comment" data-prompt-position="bottomLeft"></textarea>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer" style="display: block;">
-                                            <div class="bootstrap-dialog-footer">
-                                                <div class="bootstrap-dialog-footer-buttons">
-                                                    <button class="btn btn-primary" id="saveedit"data-dismiss="modal" onclick="saveEdit(this)">保存</button>
-                                                    <button class="btn btn-default" id="closeedit" data-dismiss="modal">关闭</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delModal"   tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: red">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="delModalLabel"> 删除 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="delname">
+                                <span>确定删除吗？</span>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-danger" data-dismiss="modal" onclick="deleteInfo(this)">确定</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">关闭</button>
                                     </div>
                                 </div>
                             </div>
-                            <!--删除提示模态框-->
-                            <div class="modal fade" id="delModal"   tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="background-color: red">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-                                            <h4 class="modal-title" id="delModalLabel"> 删除 </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="addContent"   tabindex="-1" role="dialog" aria-labelledby="addContentLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="addContentLabel"> 添加字段 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="dictionary-name" value="">
+                                <input type="hidden" id="dictionary-code">
+                                <form  class="form-horizontal" action="" method="post">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="code">代码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="add-code"  placeholder="代码" data-prompt-position="bottomLeft">
                                         </div>
-                                        <div class="modal-body">
-                                            <span>确定删除吗？</span>
-                                            <input id="code-del" type="hidden">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="name">名称</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="add-name"  placeholder="名称" data-prompt-position="bottomLeft">
                                         </div>
-                                        <div class="modal-footer" style="display: block;">
-                                            <div class="bootstrap-dialog-footer">
-                                                <div class="bootstrap-dialog-footer-buttons">
-                                                    <button class="btn btn-danger" id="delete" data-dismiss="modal" onclick="removeInfo(this)">删除</button>
-                                                    <button class="btn btn-default" id="cancal" data-dismiss="modal">取消</button>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="add-parent">父级</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly autocomplete="off" class="form-control"id="add-parent"  placeholder="父级" data-prompt-position="bottomLeft">
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="add-sequence">顺序</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="add-sequence"  placeholder="顺序" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="add-comment">备注</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="add-comment"  placeholder="备注" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-success" data-dismiss="modal" onclick="saveDictionary(this)">保存</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="editModal"   tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #007bff">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="editModalLabel"> 编辑 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="edit-dictionary-name" value="">
+                                <form  class="form-horizontal" action="" method="post">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="code">代码</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="edit-code"  placeholder="代码" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="name">名称</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="edit-name"  placeholder="名称" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="add-parent">父级</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly autocomplete="off" class="form-control"id="edit-parent"  placeholder="父级" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="add-sequence">顺序</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="edit-sequence"  placeholder="顺序" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="add-comment">备注</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control"id="edit-comment"  placeholder="备注" data-prompt-position="bottomLeft">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-success" data-dismiss="modal" onclick="saveEdit(this)">保存</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteModal"   tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: red">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="deleteModalLabel"> 删除 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="delete-code">
+                                <input type="hidden" id="d-name">
+                                <span>确定删除吗？</span>
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-danger" data-dismiss="modal" onclick="deleteConfirm(this)">确定</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">关闭</button>
                                     </div>
                                 </div>
                             </div>

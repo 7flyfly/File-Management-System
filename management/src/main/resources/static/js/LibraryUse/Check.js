@@ -157,8 +157,6 @@ function save(obj) {
     var file= aa[0].filestore;
     var docunmentno =aa[0].documentNo;
     var contant= file + '/'+docunmentno;
-    console.log("sda"+aa);
-
     //var sex = $('input:radio[name="sex"]:checked').val();
     var jsonObj= {
         'type':type,
@@ -201,7 +199,7 @@ function add(obj){
 
             },
         error: function (data) {
-            alert("没数据");
+            //alert("没数据");
         } });
 }
 
@@ -228,7 +226,7 @@ function getStatus(obj){
             $('#status').selectpicker('refresh');
             },
         error: function (data) {
-            alert("没数据");
+            //alert("没数据");
         } });
 }
 //单位
@@ -254,7 +252,7 @@ function getUnit(obj){
             $('#unit').selectpicker('refresh');
         },
         error: function (data) {
-            alert("没数据");
+            //alert("没数据");
         } });
 }
 
@@ -281,7 +279,7 @@ function getFile(obj){
             $('#database').selectpicker('refresh');
         },
         error: function (data) {
-            alert("没数据");
+            //alert("没数据");
         } });
 }
 
@@ -951,83 +949,4 @@ function getcertType() {
 }
 
 
-//多级联
-$(function () {
-    databaseBind();
-    $('#database').change(function () {
-        fileContentBind();
-    });
-    $('#fileContent').change(function () {
-        catalogueBind();
-    })
-});
-function databaseBind() {
-    $.ajax({
-        url: "/getData",
-        async: true,
-        type:"get",
-        dataType: "json",
-        success:function (data) {
-            console.log(data);
-            for (var i=0;i<data.length;i++) {
-                var label = data[i];
-                $('#database').append("<option value="+i+">"+lable+"</option>");
-            }
-            $('#database').selectpicker('refresh');
-            $('#Province').selectpicker('render');
-        },
-        error:function () {
-            alert("Error");
-        }
-    });
-    
-}
-
-function fileContentBind() {
-    var options=$("#database option:selected");
-    var database = options.val();
-    if(province==""){
-        return;
-    }
-    $.ajax({
-        url: "/getFileContent",
-        data:{
-            "database":database,
-        },
-        success:function (data) {
-            for (var i=0;i<data.length;i++) {
-                var value = data[i].enumValue;
-                var label = data[i].enumLabel;
-                $('#fileContent').append("<option value="+value+">"+lable+"</option>");
-            }
-            $('#fileContent').selectpicker('refresh');
-            $('#fileContent').selectpicker('render');
-        },
-        error:function(){alert("Error");}
-    })
-}
-
-function catalogueBind() {
-    var options=$("#fileContent option:selected");
-    var file=options.val();
-    if(file==""){
-        return;
-    }
-    $.ajax({
-        url: "/getCatalogue",
-        data:{
-            "file":file,
-        },
-        success:function (data) {
-            for (var i=0;i<data.length;i++) {
-                var value = data[i].enumValue;
-                var label = data[i].enumLabel;
-                $('#catalogue').append("<option value="+value+">"+lable+"</option>");
-            }
-            $('#catalogue').selectpicker('refresh');
-            $('#catalogue').selectpicker('render');
-        },
-        error:function(){alert("Error");}
-    })
-}
 

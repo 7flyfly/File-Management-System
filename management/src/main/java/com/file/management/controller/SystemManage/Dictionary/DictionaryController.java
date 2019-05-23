@@ -5,10 +5,12 @@ import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
 import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DictionaryController {
@@ -16,122 +18,129 @@ public class DictionaryController {
     private DictionaryDao dictionaryDao;
 
     @ResponseBody
-    @RequestMapping("/showCase")
-    public String showCase(){
-        System.out.println("宗号");
+    @RequestMapping("/getDictionary")
+    public String getDictionary() {
+        System.out.println("1");
         JSONObject jsonObject = new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary("1");
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findDictionary();
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
             return jsonObject.toJSONString();
-        }else {
+        } else {
+            System.out.println("没数据");
+        }
+        return null;
+    }
+
+    //返回词典具体内容
+    @ResponseBody
+    @RequestMapping("/getDetail")
+    public String getDetail(String name){
+        JSONObject jsonObject = new JSONObject();
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionaryname(name);
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
+            return jsonObject.toJSONString();
+        } else {
+            System.out.println("没数据");
+        }
+        return null;
+    }
+    /*
+     *删除信息
+     */
+    @ResponseBody
+    @RequestMapping("/delDictionary")
+    public String deleteInfo(String name){
+        dictionaryDao.deleteAllByDictionaryname(name);
+        JSONObject jsonObject = new JSONObject();
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findDictionary();
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
+            return jsonObject.toJSONString();
+        } else {
+            System.out.println("没数据");
+        }
+        return null;
+    }
+
+    //删除字段
+    @ResponseBody
+    @RequestMapping("/deleteField")
+    public String deleteField(String code,String name){
+        dictionaryDao.deleteByCode(code);
+        JSONObject jsonObject = new JSONObject();
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo(name);
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
+            return jsonObject.toJSONString();
+        } else {
+            System.out.println("没数据");
+        }
+        return null;
+    }
+    //添加
+    @ResponseBody
+    @RequestMapping("/addDictionary")
+    public String addDictionary(String name,String code){
+        DictionaryPojo dictionaryPojo = new DictionaryPojo();
+        dictionaryPojo.setDictionarycode(code);
+        dictionaryPojo.setDictionaryname(name);
+        dictionaryDao.save(dictionaryPojo);
+
+        JSONObject jsonObject = new JSONObject();
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findDictionary();
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
+            return jsonObject.toJSONString();
+        } else {
             System.out.println("没数据");
         }
         return null;
     }
 
     @ResponseBody
-    @RequestMapping("/showClassfiy")
-    public String showClassfiy(){
-        JSONObject jsonObject = new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary("2");
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
-            System.out.println(jsonObject.toJSONString());
-            return jsonObject.toJSONString();
-        }else {
-            System.out.println("没数据");
-        }
-        return null;
-    }
-
-    @ResponseBody
-    @RequestMapping("/showArchive")
-    public String showArchive(){
-        JSONObject jsonObject = new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary("3");
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
-            return jsonObject.toJSONString();
-        }else {
-            System.out.println("没数据");
-        }
-        return null;
-    }
-
-    @ResponseBody
-    @RequestMapping("/showType")
-    public String showType(){
-        JSONObject jsonObject = new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary("4");
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
-            return jsonObject.toJSONString();
-        }else {
-            System.out.println("没数据");
-        }
-        return null;
-    }
-
-    //保存和查询
-    @ResponseBody
-    @RequestMapping("/saveboot")
-    public  String saveInformation(String code, String name,String order,String comment,String dictionary){
+    @RequestMapping("/addContent")
+    public String addContent(String dictionary_name,String dictionary_code, String name,String code,String parent,String comment,String sequence){
         DictionaryPojo dictionaryPojo = new DictionaryPojo();
         dictionaryPojo.setCode(code);
         dictionaryPojo.setName(name);
-        dictionaryPojo.setDictionary(dictionary);
-        dictionaryPojo.setSequence(order);
+        dictionaryPojo.setParent(parent);
         dictionaryPojo.setComment(comment);
+        dictionaryPojo.setSequence(sequence);
+        dictionaryPojo.setDictionaryname(dictionary_name);
+        dictionaryPojo.setDictionarycode(dictionary_code);
         dictionaryDao.save(dictionaryPojo);
 
-        JSONObject jsonObject=new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary(dictionary);
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
+        JSONObject jsonObject = new JSONObject();
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo(dictionary_name);
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
             return jsonObject.toJSONString();
-        }else {
+        } else {
             System.out.println("没数据");
         }
         return null;
     }
 
-
-    //保存和查询
+    //editInfo修改
     @ResponseBody
-    @RequestMapping("/editboot")
-    public  String editInformation(String code, String name,String order,String comment,String dictionary){
-        dictionaryDao.insertInfo(name, order, comment, code,dictionary);
-        JSONObject jsonObject=new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary(dictionary);
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
+    @RequestMapping("/editInfo")
+    public String editInfo(String code, String name,String sequence,String comment){
+        dictionaryDao.updateInfo(sequence,comment,code);
+        JSONObject jsonObject = new JSONObject();
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo(name);
+        if (dictionaryPojoList != null) {
+            jsonObject.put("rows", dictionaryPojoList);
+            jsonObject.put("total", dictionaryPojoList.size());
             return jsonObject.toJSONString();
-        }else {
-            System.out.println("没数据");
-        }
-        return null;
-    }
-
-    //删除
-    @ResponseBody
-    @RequestMapping("/delboot")
-    public String delBoot(String code,String dictionary){
-        dictionaryDao.deleteByCodeAndDictionary(code,dictionary);
-
-        JSONObject jsonObject=new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList=dictionaryDao.findAllByDictionary(dictionary);
-        if (dictionaryPojoList != null){
-            jsonObject.put("rows",dictionaryPojoList);
-            jsonObject.put("total",dictionaryPojoList.size());
-            return jsonObject.toJSONString();
-        }else {
+        } else {
             System.out.println("没数据");
         }
         return null;

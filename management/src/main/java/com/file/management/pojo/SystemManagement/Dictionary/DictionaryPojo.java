@@ -1,31 +1,42 @@
 package com.file.management.pojo.SystemManagement.Dictionary;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_dictionary")
 public class DictionaryPojo {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @Column(name = "CODE")
     private String code;
 
-    @Column(name = "DICTIONARY")
-    private String dictionary; //词典
+    @Column(name = "DICTIONARYNAME")
+    private String dictionaryname; //词典
+
+    @Column(name = "DICTIONARYCODE")
+    private String dictionarycode;
 
     @Column(name = "NAME")
-    private String name;
+    private String name;//
 
     @Column(name = "PARENT")
     private String parent;
 
     @Column(name = "SEQUENCE")
-    private String sequence;
+    private String sequence;//
 
     @Column(name = "COMMENT")
     private String comment;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;
@@ -35,13 +46,22 @@ public class DictionaryPojo {
         this.code = code;
     }
 
-    public String getDictionary() {
-        return dictionary;
+    public String getDictionaryname() {
+        return dictionaryname;
     }
 
-    public void setDictionary(String dictionary) {
-        this.dictionary = dictionary;
+    public void setDictionaryname(String dictionaryname) {
+        this.dictionaryname = dictionaryname;
     }
+
+    public String getDictionarycode() {
+        return dictionarycode;
+    }
+
+    public void setDictionarycode(String dictionarycode) {
+        this.dictionarycode = dictionarycode;
+    }
+
 
     public String getName() {
         return name;
@@ -74,4 +94,5 @@ public class DictionaryPojo {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
 }
