@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.file.management.dao.DynamicSQL;
+import com.file.management.dao.MenuRepository;
+import com.file.management.pojo.Menu;
 import com.file.management.service.ImageProcessing.ImagePHashService;
 import com.file.management.service.metadata.TablesService;
 import com.file.management.utils.ConstantString;
@@ -33,6 +35,8 @@ public class SolrQueryService {
     private SolrService solrService;
     @Autowired
     private ImagePHashService imagePHashService;
+    @Autowired
+    private MenuRepository menuRepository;
     /**
      * 根据id查询索引
      * @param solrClient：solr客户端
@@ -108,7 +112,6 @@ public class SolrQueryService {
         jsonObject.put("searchConditionArr",searchConditionArr);
         jsonObject.put("searchArea",searchArea);
         jsonObject.put("searchOptions",searchOptions);
-        //TODO 根据节点名称获取表的tableid
         jsonObject.put("PageSize",pageSize);
         jsonObject.put("Offset",offset);
         SolrDocumentList docs = null;
@@ -260,11 +263,10 @@ public class SolrQueryService {
         //高亮
 //        if (!keyword.equals("")){
 //            solrQuery.setHighlight(true);
-//            solrQuery.set("hl.fl","keyword,idtitle,id");
+//            solrQuery.set("hl.fl","title_ik_c");
 //            solrQuery.setHighlightSnippets(1);
 //            solrQuery.setHighlightSimplePre("<font color=\"red\">");
 //            solrQuery.setHighlightSimplePost("</font>");
-//            solrQuery.setHighlightFragsize(0);
 //        }
         if(querystring==null)
             solrQuery.set("q", keyword);
@@ -321,11 +323,26 @@ public class SolrQueryService {
             String searchCondition = searchConditionJSONObject.getString("searchCondition");
             String searchOperation = searchConditionJSONObject.getString("searchOperation");
             String searchText = searchConditionJSONObject.getString("searchText");
-            if(i!=0){stringBuffer.append(" "+this.getOperation(searchOperation)+" ");}
             String searchConditionSolrName = this.getSolrName(searchCondition);
-            stringBuffer.append(this.getSearchArea(searchArea,searchOptions,searchConditionSolrName));
-            stringBuffer.append(":");
-            stringBuffer.append(searchText);
+            if("table_name".equals(searchCondition)){
+                StringBuffer stringBuffer2 = new StringBuffer();
+                List<Menu> menuList = menuRepository.findMenuByMenuName(searchText);
+                if(menuList.size()==0) continue;
+                if(i!=0){stringBuffer.append(" "+this.getOperation(searchOperation)+" ");}
+                stringBuffer2.append("(");
+                for(int j = 0; j < menuList.size()-1; j++){
+                    stringBuffer2.append(searchConditionSolrName + ":" + menuList.get(j).getMenuTable().getTableId());
+                    stringBuffer2.append(" OR ");
+                }
+                stringBuffer2.append(searchConditionSolrName + ":" + menuList.get(menuList.size()-1).getMenuTable().getTableId());
+                stringBuffer2.append(")");
+                stringBuffer.append(stringBuffer2);
+            }else{
+                if(i!=0){stringBuffer.append(" "+this.getOperation(searchOperation)+" ");}
+                stringBuffer.append(this.getSearchArea(searchArea,searchOptions,searchConditionSolrName));
+                stringBuffer.append(":");
+                stringBuffer.append(searchText);
+            }
         }
         querystring = stringBuffer.toString();
         int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
