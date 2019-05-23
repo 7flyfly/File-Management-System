@@ -74,44 +74,50 @@ public class MetaDataController {
     }
 
     /*
-      元数据模板添加模板成功
+      元数据模板添加模板
      */
     @RequestMapping("/postTemplateData")
-    public String returnTemplate(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+    @ResponseBody
+    public Map<String,String> returnTemplate(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         List<Field> fields = new ArrayList<>();
+        Map<String,String> mapReturn = new HashMap<>();
+        try {
+            for (int i = 0; i < Integer.parseInt((String) map.get("stringA")); i++) {
+                Field field = new Field();
+                field.setFieldName(((ArrayList<String>) map.get("fieldNames")).get(i));
+                field.setFieldEnglishName(((ArrayList<String>) map.get("fieldEnglishNames")).get(i));
+                field.setFieldLength(Integer.parseInt(((ArrayList<String>) map.get("fieldLengths")).get(i)));
+                field.setFieldType(((ArrayList<String>) map.get("fieldTypes")).get(i));
+                field.setFieldIndex(Boolean.parseBoolean(((ArrayList<String>) map.get("fieldIndexes")).get(i)));
+                field.setFieldIk(Boolean.parseBoolean(((ArrayList<String>) map.get("fieldIks")).get(i)));
+                fieldService.saveOne(field);
+                fields.add(field);
+            }
 
-        for(int i=0;i<Integer.parseInt((String)map.get("stringA"));i++){
-            Field field = new Field();
-            field.setFieldName(((ArrayList<String>)map.get("fieldNames")).get(i));
-            field.setFieldEnglishName(((ArrayList<String>)map.get("fieldEnglishNames")).get(i));
-            field.setFieldLength(Integer.parseInt(((ArrayList<String>)map.get("fieldLengths")).get(i)));
-            field.setFieldType(((ArrayList<String>)map.get("fieldTypes")).get(i));
-            field.setFieldIndex(Boolean.parseBoolean(((ArrayList<String>)map.get("fieldIndexes")).get(i)));
-            field.setFieldIk(Boolean.parseBoolean(((ArrayList<String>)map.get("fieldIks")).get(i)));
-            fieldService.saveOne(field);
-            fields.add(field);
+            String str = (String) map.get("fieldSelected");
+            String[] strArray = str.split("\\|\\|");
+
+            for (String strEach : strArray) {
+                fields.add(fieldService.getFieldByFieldName(strEach));
+            }
+
+            Field fieldPk = fieldService.getFieldByFieldName("档案号");
+            fields.add(fieldPk);
+            Field fieldNo = fieldService.getFieldByFieldName("序号");
+            fields.add(fieldNo);
+
+            Template template = new Template();
+            template.setTemplateName((String) map.get("templateName"));
+            template.setTemplateDescription((String) map.get("templateDescription"));
+            template.setFields(fields);
+            template.setPrimaryKey(fieldPk);
+            templateService.saveOne(template);
+            mapReturn.put("msg", "新增模板成功！");
+            return mapReturn;
+        }catch(Exception ex){
+            mapReturn.put("msg", "新增模板失败！");
+            return mapReturn;
         }
-
-        String str = (String)map.get("fieldSelected");
-        String[] strArray = str.split("\\|\\|");
-
-        for(String strEach:strArray){
-            fields.add(fieldService.getFieldByFieldName(strEach));
-        }
-
-        Field fieldPk = fieldService.getFieldByFieldName("档案号");
-        fields.add(fieldPk);
-        Field fieldNo = fieldService.getFieldByFieldName("序号");
-        fields.add(fieldNo);
-
-        Template template = new Template();
-        template.setTemplateName((String)map.get("templateName"));
-        template.setTemplateDescription((String)map.get("templateDescription"));
-        template.setFields(fields);
-        template.setPrimaryKey(fieldPk);
-        templateService.saveOne(template);
-
-        return "metadata/MetadataManagement";
     }
 
     /*

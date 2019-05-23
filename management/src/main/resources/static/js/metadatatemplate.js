@@ -110,9 +110,12 @@ function update(obj) {
         data: JSON.stringify(jsonObj),
         dataType: "json",
         contentType: "application/json",
-        success:function(data) {
-            alert(data);
+        success:function(data){
+            alert(data.msg);
             location.reload();
+        },
+        error:function(data){
+            console.log("errorMessage:"+JSON.stringify(data.msg));
         }
     });
     $('#modal').modal('hide');
