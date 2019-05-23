@@ -114,12 +114,16 @@ public class MyWork {
         int length = (Integer)map.get("length");
         ArrayList<String> value = (ArrayList<String>)map.get("value");
         HashMap<String,String> hashMap = new HashMap<>();
+        Map<String,String> mapReturn = new HashMap<>();
         for(int i=0;i<length;i++){
+            if(fieldService.getFieldByFieldName(value.get(2*i)).getFieldName().equals("档案号")&&value.get(2*i+1).equals("")){
+                mapReturn.put("msg","添加失败：档案号不能为空！");
+                return mapReturn;
+            }
             hashMap.put(fieldService.getFieldByFieldName(value.get(2*i)).getFieldEnglishName(),value.get(2*i+1));
         }
-        Map<String,String> mapReturn = new HashMap<>();
         String messageValue = tablesService.InsertData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),hashMap);
-        mapReturn.put("msg",messageValue);
+        mapReturn.put("msg","成功添加数据！");
         return mapReturn;
     }
 
@@ -133,8 +137,30 @@ public class MyWork {
         String documentNo = (String)map.get("documentNo");
         Map<String,String> mapReturn = new HashMap<>();
         String messageValue = tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo);
-        mapReturn.put("msg",messageValue);
+        mapReturn.put("msg", "成功删除该数据！");
         return mapReturn;
+    }
+
+    /*
+      批量删除数据
+     */
+    @RequestMapping("/deleteDatas")
+    @ResponseBody
+    public Map<String,String> deleteDatas(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+        String tableId = (String)map.get("tableId");
+        ArrayList<String> documentNos = (ArrayList<String>)map.get("documentNos");
+        Map<String,String> mapReturn = new HashMap<>();
+        String messageValue = "";
+        if(documentNos.size()==0) {
+            mapReturn.put("msg","请至少选择一条数据！");
+            return mapReturn;
+        }else {
+            for (String documentNo : documentNos) {
+                messageValue += tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(), documentNo);
+            }
+            mapReturn.put("msg", "成功批量删除数据！");
+            return mapReturn;
+        }
     }
 
     /*
@@ -155,7 +181,7 @@ public class MyWork {
         }
         Map<String,String> mapReturn = new HashMap<>();
         String messageValue = tablesService.updateData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo,hashMap);
-        mapReturn.put("msg",messageValue);
+        mapReturn.put("msg","成功编辑数据！");
         return mapReturn;
     }
 
@@ -224,15 +250,22 @@ public class MyWork {
     public Map<String,String> archiving(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
         String tableId = (String)map.get("tableId");
         String documentNo = (String)map.get("documentNo");
-        String menuClassification = (String)map.get("menuClassification");
         int length = (Integer)map.get("length");
         String value = (String)map.get("value");
         String[] values = value.split("\\|\\|");
-
+        String menuClassification;
         Map<String,String> mapReturn = new HashMap<>();
 
         Menu menu = menuService.getMenuByTableId(Integer.parseInt(tableId));
         String menuName = menu.getMenuName();
+        if(menu.getMenuClassification().equals("预立库")){
+            menuClassification = "整理库";
+        }else if(menu.getMenuClassification().equals("整理库")){
+            menuClassification = "档案库";
+        }else{
+            mapReturn.put("msg","已在档案库，无法移库！");
+            return mapReturn;
+        }
 
         List<Menu> menuList = menuService.getMenuByMenuNameAndMenuClassification(menuName,menuClassification);
 
@@ -249,17 +282,76 @@ public class MyWork {
 
         HashMap<String,String> hashMap = new HashMap<>();
         for(int i=0;i<length;i++){
-            if(!values[2*i].equals("序号") && !values[2*i].equals("最近修改时间") && !values[2*i].equals("操作"))
-            hashMap.put(fieldService.getFieldByFieldName(values[2*i]).getFieldEnglishName(),values[2*i+1]);
+            if(!values[2*i].equals("序号") && !values[2*i].equals("最近修改时间") && !values[2*i].equals("操作")&&!values[2*i+1].equals("")) {
+                hashMap.put(fieldService.getFieldByFieldName(values[2 * i]).getFieldEnglishName(), values[2 * i + 1]);
+            }
         }
         String msg1 = tablesService.InsertData(menuOtherClassification.getMenuTable().getTableUuid(),hashMap);
 
         // 删除menu中的这条数据
         String msg2 = tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(),documentNo);
-
-        mapReturn.put("msg", msg1 + msg2);
-
+        mapReturn.put("msg", "移交归档成功！");
         return mapReturn;
+    }
+
+
+
+    /*
+      批量移交归档
+    */
+    @RequestMapping("/archivings")
+    @ResponseBody
+    public Map<String,String> archivings(@RequestBody Map<String,Object> map, HttpServletResponse httpServletResponse){
+        String tableId = (String)map.get("tableId");
+        ArrayList<String> documentNos = (ArrayList<String>)map.get("documentNos");
+        ArrayList<String> values = (ArrayList<String>)map.get("values");
+        int length = (Integer)map.get("length");
+        String menuClassification;
+        Map<String,String> mapReturn = new HashMap<>();
+        if(documentNos.size()==0) {
+            mapReturn.put("msg","请至少选择一条数据！");
+            return mapReturn;
+        }else {
+            Menu menu = menuService.getMenuByTableId(Integer.parseInt(tableId));
+            String menuName = menu.getMenuName();
+            if (menu.getMenuClassification().equals("预立库")) {
+                menuClassification = "整理库";
+            } else if (menu.getMenuClassification().equals("整理库")) {
+                menuClassification = "档案库";
+            } else {
+                mapReturn.put("msg", "已在档案库，无法移库！");
+                return mapReturn;
+            }
+            List<Menu> menuList = menuService.getMenuByMenuNameAndMenuClassification(menuName, menuClassification);
+
+            // 不同类别的同种菜单
+            Menu menuOtherClassification = new Menu();
+            for (Menu m : menuList) {
+                if (m.getMenuParent().getMenuName().equals(menu.getMenuParent().getMenuName())) {
+                    menuOtherClassification = m;
+                    break;
+                }
+            }
+
+            String msg = "";
+            // 在menuOtherClassification中添加这条数据
+            for (int i = 0; i < values.size() / length / 2; i++) {
+                HashMap<String, String> hashMap = new HashMap<>();
+                for (int j = i * length; j < (i + 1) * length; j++) {
+                    if (!values.get(2 * j).equals("序号") && !values.get(2 * j).equals("最近修改时间") && !values.get(2 * j).equals("操作") && !values.get(2 * j + 1).equals("")) {
+                        hashMap.put(fieldService.getFieldByFieldName(values.get(2 * j)).getFieldEnglishName(), values.get(2 * j + 1));
+                    }
+                }
+                String msg1 = tablesService.InsertData(menuOtherClassification.getMenuTable().getTableUuid(), hashMap);
+
+                // 删除menu中的这条数据
+                String msg2 = tablesService.deleteData(tablesService.getTablesByTableId(Integer.parseInt(tableId)).getTableUuid(), documentNos.get(i));
+
+                msg += msg1 + msg2;
+            }
+            mapReturn.put("msg", "批量移交归档成功！");
+            return mapReturn;
+        }
     }
 
 }

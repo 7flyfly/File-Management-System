@@ -45,9 +45,9 @@
                     <div class="form-group">
                         <label for="message-text" class="control-label" style="font-size:15px">请勾选已有字段【序号/档案号已默认添加】</label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="font-size: 14px; font-family: Tahoma;">
                         <tr th:each="field:${fields}">
-                            <td><input th:type="checkbox" th:name="fieldSelected" th:value="${field.fieldName}" th:text="${field.fieldName}"></td>
+                            <td><input th:type="checkbox" th:name="fieldSelected" th:value="${field.fieldName}" th:text="${field.fieldName}" style="vertical-align：-2px;zoom:130%"></td>
                         </tr>
                     </div>
                     <div class="form-group">

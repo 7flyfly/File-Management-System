@@ -1,7 +1,10 @@
 package com.file.management.pojo.state;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_action")
@@ -15,6 +18,8 @@ public class Action {
     private String exp;
     @Column(name = "MESSAGE")
     private String message;
+    @Column(name = "PLUG")
+    private String plug;
 
 
     public String getName() {
@@ -47,6 +52,14 @@ public class Action {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getPlug() {
+        return plug;
+    }
+
+    public void setPlug(String plug) {
+        this.plug = plug;
     }
 }
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.file.management.service.solr.SolrDataConfigService;
 import com.file.management.service.solr.SolrQueryService;
 import com.file.management.service.solr.SolrService;
+import com.file.management.utils.ConstantString;
 import com.file.management.utils.SolrUtils;
 import org.apache.solr.client.solrj.SolrClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,14 @@ public class AdvancedSearchController {
     /**
      * 根据关键词查询结果,并返回给bootStrapTable
      */
-    public String KeySerach(String allKeyWord, String documentNumber, String anyKeyWord, String noKeyWord,
-                            String keyWordPosition, String nodeName ,String pageSize, String offset){
+    public String KeySerach(String searchConditionArr, String searchArea, String searchOptions, String pageSize, String offset){
         SolrClient solrClient = null;
         JSONObject result_jsonObject = new JSONObject();
         try {
-            if(nodeName==null) nodeName = "";
             SolrUtils solrUtils = new SolrUtils();
             solrClient = solrUtils.createSolrClient();
-            JSONObject docsJsonObject = solrQueryService.ConditionQuerybySolr(solrClient,allKeyWord,documentNumber,anyKeyWord,
-                    noKeyWord,keyWordPosition,nodeName,pageSize,offset,"annex_content");
+            JSONObject docsJsonObject = solrQueryService.ConditionQuerybySolr(solrClient,searchConditionArr,searchArea,searchOptions,
+                    pageSize,offset, ConstantString.AnnexContentSolrName);
             solrClient.close();
             result_jsonObject.put("rows",docsJsonObject.getJSONArray("documentList"));
             result_jsonObject.put("total",docsJsonObject.getString("numFound"));

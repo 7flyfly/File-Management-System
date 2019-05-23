@@ -4,8 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.file.management.dao.DynamicSQL;
+import com.file.management.dao.MenuRepository;
+import com.file.management.pojo.Menu;
 import com.file.management.service.ImageProcessing.ImagePHashService;
 import com.file.management.service.metadata.TablesService;
+import com.file.management.utils.ConstantString;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.QueryResponse;
@@ -32,6 +35,8 @@ public class SolrQueryService {
     private SolrService solrService;
     @Autowired
     private ImagePHashService imagePHashService;
+    @Autowired
+    private MenuRepository menuRepository;
     /**
      * 根据id查询索引
      * @param solrClient：solr客户端
@@ -93,28 +98,20 @@ public class SolrQueryService {
     /**
      * 高级搜索
      * @param solrClient
-     * @param allKeyWord 包含以下全部关键字
-     * @param documentNumber 档案号
-     * @param anyKeyWord 包含以下任意一个关键词
-     * @param noKeyWord 不包括以下关键词
-     * @param keyWordPosition 查询关键词位于
-     * @param nodeName 节点名称
+     * @param searchConditionArr 搜索项，word，operation
+     * @param searchArea 全文检索、附件检索、目录检索
+     * @param searchOptions 模糊检索、精确检索
      * @param pageSize 每页结果的数量
      * @param offset 偏移值
      * @return
      */
-    public JSONObject ConditionQuerybySolr(SolrClient solrClient, String allKeyWord, String documentNumber, String anyKeyWord,
-                                           String noKeyWord, String keyWordPosition, String nodeName ,String pageSize,
-                                           String offset, String fileContentSolrName){
+    public JSONObject ConditionQuerybySolr(SolrClient solrClient, String searchConditionArr, String searchArea, String searchOptions,
+                                           String pageSize,String offset, String fileContentSolrName){
         JSONObject jsonObject = new JSONObject();
         JSONObject result_jsonObject = new JSONObject();
-        jsonObject.put("allKeyWord",allKeyWord);
-        jsonObject.put("documentNumber",documentNumber);
-        jsonObject.put("anyKeyWord",anyKeyWord);
-        jsonObject.put("noKeyWord",noKeyWord);
-        jsonObject.put("keyWordPosition",keyWordPosition);
-        //TODO 根据节点名称获取表的tableid
-        jsonObject.put("TableId",nodeName);
+        jsonObject.put("searchConditionArr",searchConditionArr);
+        jsonObject.put("searchArea",searchArea);
+        jsonObject.put("searchOptions",searchOptions);
         jsonObject.put("PageSize",pageSize);
         jsonObject.put("Offset",offset);
         SolrDocumentList docs = null;
@@ -266,11 +263,10 @@ public class SolrQueryService {
         //高亮
 //        if (!keyword.equals("")){
 //            solrQuery.setHighlight(true);
-//            solrQuery.set("hl.fl","keyword,idtitle,id");
+//            solrQuery.set("hl.fl","title_ik_c");
 //            solrQuery.setHighlightSnippets(1);
 //            solrQuery.setHighlightSimplePre("<font color=\"red\">");
 //            solrQuery.setHighlightSimplePost("</font>");
-//            solrQuery.setHighlightFragsize(0);
 //        }
         if(querystring==null)
             solrQuery.set("q", keyword);
@@ -313,6 +309,71 @@ public class SolrQueryService {
      * @return
      */
     private SolrQuery buildSolrQuery4ConditionQuery(JSONObject jsonObject,String fileContentSolrName) {
+        JSONArray searchConditionJSONArray = jsonObject.getJSONArray("searchConditionArr");
+        String searchArea = jsonObject.getString("searchArea");
+        String searchOptions = jsonObject.getString("searchOptions");
+        String querystring = "";
+        SolrQuery solrQuery = new SolrQuery();
+        //当输入为空时的特殊处理
+        ArrayList<StringBuffer> buffList = new ArrayList<>();
+        StringBuffer stringBuffer = new StringBuffer();
+        String param = "all_text";
+        for(int i=0;i<searchConditionJSONArray.size();i++){
+            JSONObject searchConditionJSONObject = searchConditionJSONArray.getJSONObject(i);
+            String searchCondition = searchConditionJSONObject.getString("searchCondition");
+            String searchOperation = searchConditionJSONObject.getString("searchOperation");
+            String searchText = searchConditionJSONObject.getString("searchText");
+            String searchConditionSolrName = this.getSolrName(searchCondition);
+            if("table_name".equals(searchCondition)){
+                StringBuffer stringBuffer2 = new StringBuffer();
+                List<Menu> menuList = menuRepository.findMenuByMenuName(searchText);
+                if(menuList.size()==0) continue;
+                if(i!=0){stringBuffer.append(" "+this.getOperation(searchOperation)+" ");}
+                stringBuffer2.append("(");
+                for(int j = 0; j < menuList.size()-1; j++){
+                    stringBuffer2.append(searchConditionSolrName + ":" + menuList.get(j).getMenuTable().getTableId());
+                    stringBuffer2.append(" OR ");
+                }
+                stringBuffer2.append(searchConditionSolrName + ":" + menuList.get(menuList.size()-1).getMenuTable().getTableId());
+                stringBuffer2.append(")");
+                stringBuffer.append(stringBuffer2);
+            }else{
+                if(i!=0){stringBuffer.append(" "+this.getOperation(searchOperation)+" ");}
+                stringBuffer.append(this.getSearchArea(searchArea,searchOptions,searchConditionSolrName));
+                stringBuffer.append(":");
+                stringBuffer.append(searchText);
+            }
+        }
+        querystring = stringBuffer.toString();
+        int offset = jsonObject.containsKey("Offset")? Integer.parseInt(jsonObject.getString("Offset")):-1;
+        int PageSize = jsonObject.containsKey("PageSize")? Integer.parseInt(jsonObject.getString("PageSize")):-1;
+        if(offset!=-1 && PageSize!=-1 ){
+            solrQuery.set("start", offset);
+            solrQuery.set("rows", PageSize);
+        }
+        solrQuery.set("wt", "json");
+        //高亮
+//        if (!keyword.equals("")){
+//            solrQuery.setHighlight(true);
+//            solrQuery.set("hl.fl","keyword,idtitle,id");
+//            solrQuery.setHighlightSnippets(1);
+//            solrQuery.setHighlightSimplePre("<font color=\"red\">");
+//            solrQuery.setHighlightSimplePost("</font>");
+//            solrQuery.setHighlightFragsize(0);
+//        }
+        solrQuery.set("q", querystring);
+        solrQuery.set("q.op", "AND");  //默认操作符
+        System.out.println("solrQuery = " + solrQuery);
+        return  solrQuery;
+    }
+
+    /**
+     * 对于高级检索 构造solr的查询语句
+     * @param jsonObject allKeyWord，keyword，anyKeyWord，noKeyWord，keyWordPosition，TableId，Offset，PageSize
+     * @param fileContentSolrName 附件在solr中的字段名称
+     * @return
+     */
+    private SolrQuery buildSolrQuery4ConditionQuery2(JSONObject jsonObject,String fileContentSolrName) {
         String allKeyWord = jsonObject.getString("allKeyWord");
         String documentNumber = jsonObject.getString("documentNumber");
         String anyKeyWord = jsonObject.getString("anyKeyWord");
@@ -482,5 +543,94 @@ public class SolrQueryService {
         solrQuery.set("q.op", "AND");  //默认操作符
         System.out.println("solrQuery = " + solrQuery);
         return  solrQuery;
+    }
+
+    /**
+     * 获取对应的运算符
+     */
+    private String getOperation(String operationStr) {
+        String operation = "";
+        switch(operationStr) {
+            case "notOperation":
+                operation = "NOT";
+                break;
+            case "orOperation":
+                operation = "OR";
+                break;
+            case "andOperation":
+                operation = "AND";
+                break;
+            default:
+                operation = "AND";
+        }
+        return operation;
+    }
+
+    /**
+     * 获得字段对应的solrName
+     * @param searchCondition 字段的名称
+     * @return
+     */
+    private String getSolrName(String searchCondition){
+        String solrName = "";
+        switch(searchCondition) {
+            case "allText":
+                solrName = "all_text";
+                break;
+            case "catalog":
+                solrName = "text";
+                break;
+            case "annex":
+                solrName = ConstantString.AnnexContentSolrName;
+                break;
+            case "table_name":
+                solrName = "table_id_s";
+                break;
+            case "title":
+                solrName = "title_ik_c";
+                break;
+            case "documentNumber":
+                solrName = "document_number";
+                break;
+            case "author":
+                solrName = "personliable_s_c";
+                break;
+            default:
+                solrName = "all_text";
+        }
+        return solrName;
+    }
+
+    /**
+     * 获得搜索范围
+     * @param searchArea 搜索范围
+     * @param searchOptions 搜索精度
+     * @param searchCondition 搜索字段
+     * @return
+     */
+    private String getSearchArea(String searchArea,String searchOptions,String searchCondition){
+        String SearchArea = "";
+        if("all_text".equals(searchCondition)||"text".equals(searchCondition)||"annex_content".equals(searchCondition)){
+            if(searchArea!=null&&!searchArea.isEmpty()&&searchOptions!=null&&!searchOptions.isEmpty()){
+                if(searchOptions.equals("accurateSearch")&&searchArea.equals("fullTextArea")){
+                    SearchArea = "all_exact_text";
+                }else if(searchOptions.equals("accurateSearch")&&searchArea.equals("catalogArea")){
+                    SearchArea = "exact_text";
+                }else if(searchOptions.equals("accurateSearch")&&searchArea.equals("annexArea")){
+                    SearchArea = ConstantString.AnnexContentSolrName + "_text_exact";
+                }else if(searchOptions.equals("fuzzySearch")&&searchArea.equals("fullTextArea")){
+                    SearchArea = "all_text";
+                }else if(searchOptions.equals("fuzzySearch")&&searchArea.equals("catalogArea")){
+                    SearchArea = "text";
+                }else if(searchOptions.equals("fuzzySearch")&&searchArea.equals("annexArea")){
+                    SearchArea = ConstantString.AnnexContentSolrName;
+                }else{
+                    SearchArea = "all_text";
+                }
+            }
+        }else{
+            SearchArea = searchCondition;
+        }
+        return SearchArea;
     }
 }

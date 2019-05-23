@@ -6,9 +6,12 @@ var IntelligentRetrieval={
     imageSearchCheck:function(){
         IntelligentRetrieval.keyWord=$("#keyword").val();
         IntelligentRetrieval.queryType=$("input[name='queryTypeOptionsRadios']:checked").val();
-        if(("imageRetrieval"!=IntelligentRetrieval.queryType)&&("fullTextSearch"!=IntelligentRetrieval.queryType)){
-            alert("请选择正确的搜索类型！");
-            return;
+        if("fullTextSearch"==IntelligentRetrieval.queryType){
+                $("#fullTextSearch").removeAttr("checked");
+                $("#imageRetrieval").attr("checked","checked")
+        }else if("imageRetrieval"!=IntelligentRetrieval.queryType){
+                alert("请选择正确的搜索类型！");
+                return;
         }
         $('#fileUpModal').modal("show");
         $("#imageUp").fileinput('destroy').fileinput({

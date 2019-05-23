@@ -34,8 +34,8 @@ public class StateServiceImpl implements StateService {
     }
 
     @Override
-    public void insertInfo(String name, String source, String explain, String min, String max, String num, String less, String fit, String more, String bool) {
-        stateRepository.insertInfo(name,source,explain,min,max,num,less,fit,more,bool);
+    public void insertInfo(String name, String source, String explain, String min, String max, String num, String less, String fit, String more, String bool,String plug) {
+        stateRepository.insertInfo(name,source,explain,min,max,num,less,fit,more,bool,plug);
     }
 
     @Override

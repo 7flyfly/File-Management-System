@@ -26,7 +26,7 @@ public class StateManage {
     private ActionService actionService;
 
     @RequestMapping("/SystemManagement/StateManagement")
-    public String StateManage(){
+    public String StateManage(HttpServletResponse response, Model model){
         return "SystemManagement/StateManagement";
     }
 
@@ -62,6 +62,8 @@ public class StateManage {
         String fit = (String) map.get("fit");
         String more = (String) map.get("more");
         String bool =(String) map.get("bool");
+        String plug =(String) map.get("plug");
+
         if(less != null && less.equals("")==false){
             action.setName(less);
             try {
@@ -96,6 +98,7 @@ public class StateManage {
         state.setFit(fit);
         state.setMore(more);
         state.setBool(bool);
+        state.setPlug(plug);
 
         try {
             stateService.saveState(state);
@@ -134,6 +137,7 @@ public class StateManage {
         String fit = (String) map.get("fit");
         String more = (String) map.get("more");
         String bool =(String) map.get("bool");
+        String plug =(String) map.get("plug");
 
         State state = stateService.findStateByName(name);
         if(state.getLess() != null && state.getLess().equals("")==false){
@@ -169,17 +173,30 @@ public class StateManage {
                 }
             }
         }
-        stateService.insertInfo(name,sonrce,explain,min,max,num,less,fit,more,bool);
+        stateService.insertInfo(name,sonrce,explain,min,max,num,less,fit,more,bool,plug);
         return "SystemManagement/StateManagement";
     }
 
     /*
-    *删除信息
+     *删除信息
      */
     @RequestMapping("/deleteStateInfo")
     public String deleteActionInfo(@RequestBody Map<String,Object> map){
         String name=(String)map.get("name");
         stateService.deleteInfo(name);
+        return "SystemManagement/StateManagement";
+    }
+
+    /*
+     *安装状态插件
+     */
+    @RequestMapping("/installState")
+    public String installState(@RequestBody Map<String,Object> map){
+        String name=(String)map.get("name");
+        State s = stateService.findStateByName(name);
+        String plug = s.getPlug();
+        System.out.println(name);
+        System.out.println("加载JS :"+plug);
         return "SystemManagement/StateManagement";
     }
 }

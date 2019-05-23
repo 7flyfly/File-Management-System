@@ -22,8 +22,8 @@ public interface ActionRepository extends JpaRepository<Action,String> {
 
     //插入编辑后数据
     @Modifying
-    @Query(value = "update tb_action t set t.TYPE=?2,t.EXP=?3, t.MESSAGE=?4 where t.NAME=?1 ",nativeQuery = true)
-    void insertInfo(String name, String type, String explain, String message);
+    @Query(value = "update tb_action t set t.TYPE=?2,t.EXP=?3, t.MESSAGE=?4 , t.PLUG=?5 where t.NAME=?1 ",nativeQuery = true)
+    void insertInfo(String name, String type, String explain, String message, String plug);
 
     //改变名称
     @Modifying

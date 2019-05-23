@@ -1,8 +1,8 @@
 //$("#MenuTable").empty();
 
 $('#MenuTable').DataTable({
-    // 初始显示25条数据
-    pageLength: 25,
+    // 初始显示150条数据
+    pageLength: 150,
     // 禁止排序
     ordering : false,
     // 国际化
