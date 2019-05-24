@@ -20,7 +20,7 @@ public class DictionaryController {
     @ResponseBody
     @RequestMapping("/getDictionary")
     public String getDictionary() {
-        System.out.println("1");
+        //System.out.println("1");
         JSONObject jsonObject = new JSONObject();
         List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findDictionary();
         if (dictionaryPojoList != null) {
@@ -38,7 +38,7 @@ public class DictionaryController {
     @RequestMapping("/getDetail")
     public String getDetail(String name){
         JSONObject jsonObject = new JSONObject();
-        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllByDictionaryname(name);
+        List<DictionaryPojo> dictionaryPojoList = dictionaryDao.findAllInfo(name);
         if (dictionaryPojoList != null) {
             jsonObject.put("rows", dictionaryPojoList);
             jsonObject.put("total", dictionaryPojoList.size());

@@ -770,6 +770,7 @@ $('#addContent').on('show.bs.modal',function (event) {
     modal.find('#dictionary-name').val(dictionaryname);
     modal.find('#dictionary-code').val(dictionarycode);
 });
+
 function  saveDictionary(){
     var dictionary_name = $('#dictionary-name').val();
     var dictionary_code = $('#dictionary-code').val();
@@ -868,6 +869,7 @@ $('#deleteModal').on('show.bs.modal',function (event) {
     modal.find("#delete-code").val(code);
     modal.find("#d-name").val(name);
 });
+
 function deleteConfirm(){
     var code = $("#delete-code").val();
     var name = $("#d-name").val();
