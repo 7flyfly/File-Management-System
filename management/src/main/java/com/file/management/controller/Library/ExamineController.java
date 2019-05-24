@@ -51,6 +51,19 @@ public class ExamineController {
         return "LibraryUse/Examine";
     }
 
+    @RequestMapping("/unexamine")
+    public String unexamine(@RequestBody Map<String,Object> map){
+
+        String approveNum = (String)map.get("approvalNumber");
+        String opinion = (String)map.get("opinion");
+        String result = (String)map.get("result");
+
+        String state = "未通过";
+
+        registrationFormService.updateOpinion(opinion,result,state,approveNum);
+        return "LibraryUse/Examine";
+    }
+
     //查询登记
     @ResponseBody
     @RequestMapping("/searchExamine")

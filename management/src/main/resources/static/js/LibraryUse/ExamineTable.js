@@ -182,6 +182,29 @@ function pass(obj) {
     });
 
 }
+function unpass(obj) {
+    var getSeectRows = $('#table').bootstrapTable('getSelections',function (row) {
+        return row;
+    });
+    var id= getSeectRows[0].approvalNumber;
+    var opinion= $('#opinion').val();
+    var result="未通过";
+    var jsonObj={
+        'approvalNumber':id,
+        'opinion':opinion,
+        'result':result,
+    };
+    $.ajax({
+        type: "post",
+        url: "/unexamine",
+        data: JSON.stringify(jsonObj),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(result) {
+            window.location.reload();
+        }
+    });
+}
 
 //查询
 function search(obj) {

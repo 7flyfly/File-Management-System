@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 //定时任务
-@EnableScheduling
+//@EnableScheduling
 @SpringBootApplication
 public class ManagementApplication {
 

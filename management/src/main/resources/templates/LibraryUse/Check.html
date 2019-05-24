@@ -156,17 +156,17 @@
                                             <label for="borrower" class="col-sm-3 control-label">利用人</label>
                                             <div class="col-sm-9">
                                                 <div class="container-fluid">
-                                                    <div class="row">
-                                                        <input type="radio" name="borrower-type-rb" value="0">
-                                                        选择用户
-                                                        <div class="input-group input-group-sm">
-                                                            <input id="register" class="form-control " type="text" placeholder="请选择" >
-                                                            <span class="input-group-btn">
-                                                                <i class="glyphicon glyphicon-remove">清除</i>
-                                                                <button class="btn btn-default" type="button"></button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                                    <!--<div class="row">-->
+                                                        <!--<input type="radio" name="borrower-type-rb" value="0">-->
+                                                        <!--选择用户-->
+                                                        <!--<div class="input-group input-group-sm">-->
+                                                            <!--<input id="register" class="form-control " type="text" placeholder="请选择" >-->
+                                                            <!--<span class="input-group-btn">-->
+                                                                <!--<i class="glyphicon glyphicon-remove">清除</i>-->
+                                                                <!--<button class="btn btn-default" type="button"></button>-->
+                                                            <!--</span>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
                                                     <div class="row">
                                                         <input type="radio" name="borrower-type-rb" value="1" checked="true">
                                                         输入利用者信息
@@ -299,7 +299,7 @@
                                 <div class="row">
                                     <div class="col-sm-2">
                                         <select class="form-control input-sm" id="database" onclick="databaseBind(this)" >
-                                            <option value="">请选择</option>
+                                            <option value="">声像档案</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2" id="select2">
@@ -359,6 +359,29 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="deletModal"   tabindex="-1" role="dialog" aria-labelledby="deletModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: red">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                <h4 class="modal-title" id="deletModalLabel"> 删除 </h4>
+                            </div>
+                            <div class="modal-body">
+                                <span>确定删除吗？</span>
+                                <input id="docunmentNo" type="hidden">
+                                <input id="document" type="hidden">
+                            </div>
+                            <div class="modal-footer" style="display: block;">
+                                <div class="bootstrap-dialog-footer">
+                                    <div class="bootstrap-dialog-footer-buttons">
+                                        <button class="btn btn-danger"  onclick="dd(this)"data-dismiss="modal">删除</button>
+                                        <button class="btn btn-default"  data-dismiss="modal">取消</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!--归还提示模态框-->
                 <div class="modal fade" id="backModal"   tabindex="-1" role="dialog" aria-labelledby="backModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

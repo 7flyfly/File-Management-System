@@ -323,14 +323,31 @@ $('#contentTable').bootstrapTable({
         }, {
             title : '操作',
             field : 'operation',
+            //events:operateEvents, // 给按钮注册事件
+            //formatter:addFunctionAlty, //添加按钮
             formatter : function (value, row, index) {
-                return[
-                    '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" onclick="dd()"  type="button">删除</button>'
-                ].join("")
+                var str = "";
+                str += "<a onclick='dd(\"documentNo\", \"" + row.documentNo + "\");' "
+                    + "href='javascript:void(0);' class='btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove' >"
+                    + "删除" + "</a>";
+                return str;
+                // return[
+                //     '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" onclick="dd(" +row+ ")"  type="button">删除</button>'
+                // ].join("")
             }
         },]
 });
 
+// function addFunctionAlty(value,row,index) {
+//     return[
+//              '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove"  type="button">删除</button>'
+//          ].join("")
+// }
+// window.operateEvents = {
+//     "click #table_del":function (e,value,row,index) {
+//         $(this).parent().parent().remove();
+//     }
+// }
 //查询
 function searchR(obj) {
     var select = document.getElementById("query-type");
@@ -911,9 +928,14 @@ function confirm_D(obj) {
                 title : '操作',
                 field : 'operation',
                 formatter : function (value, row, index) {
-                    return[
-                        '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" onclick="dd()"  type="button">删除</button>'
-                    ].join("")
+                    var str = "";
+                    str += "<a onclick='dd(\"documentNo\", \"" + row.documentNo + "\");' "
+                        + "href='javascript:void(0);' class='btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove' >"
+                        + "删除" + "</a>";
+                    return str;
+                    // return[
+                    //     '<button id="table_del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove"  type="button" data-toggle="modal" data-target="#deletModal">删除</button>'
+                    // ].join("")
                 }
             },]
     });
@@ -924,10 +946,18 @@ $('#fileModal').on('hidden.bs.modal',function () {
 
 });
 
-function dd() {
-    var aa= $("#contentTable").bootstrapTable('getData');
-    console.log(aa);
-   alert("确定删除？");
+$('#deletModal').on('show.bs.modal',function (event) {
+    var btnThis=$(event.relatedTarget);//触发事件的按钮
+    var modal=$(this);//当前模态框
+    var name= btnThis.closest('tr').find('td').eq(0).text();
+    var num= btnThis.closest('tr').find('td').eq(1).text();
+    modal.find("#documentNo").val(num);
+    modal.find("#document").val(name);
+});
+
+function dd(field,value) {
+     //console.log(value);
+    $("#contentTable").bootstrapTable('remove',{field:field,values:[value]});
 }
 
 function getcertType() {
