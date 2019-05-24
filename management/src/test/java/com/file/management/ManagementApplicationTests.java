@@ -1,9 +1,12 @@
 package com.file.management;
 
 import com.file.management.dao.MenuRepository;
+import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
 import com.file.management.pojo.Menu;
+import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
 import com.file.management.pojo.metadata.Field;
 import com.file.management.pojo.metadata.Template;
+import com.file.management.service.DictionaryService;
 import com.file.management.service.MenuService;
 import com.file.management.service.metadata.FieldService;
 import com.file.management.service.metadata.TablesService;
@@ -35,6 +38,9 @@ public class ManagementApplicationTests {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private DictionaryService dictionaryService;
+
     @Test
     public void contextLoads() {
        /* HashMap<String,String> hashMap = new HashMap<>();
@@ -42,7 +48,7 @@ public class ManagementApplicationTests {
         hashMap.put("PartNo","10");
         hashMap.put("Title","xixi");
         tablesService.updateData("T_v5fqrpkd","2018-1WS0908.3-171",hashMap);*/
-        Field field1 = new Field();
+        /*Field field1 = new Field();
         field1.setFieldName("序号");
         field1.setFieldEnglishName("No");
         field1.setFieldType("int");
@@ -438,7 +444,10 @@ public class ManagementApplicationTests {
         Menu menu54 = menuService.addMenu(menu39,"教学档案","教学档案","档案库");
         Menu menu55 = menuService.addMenu(menu54,"学籍卡","","档案库");
         Menu menu56 = menuService.addMenu(menu55,"案卷目录","","档案库");
-        Menu menu57 = menuService.addMenu(menu55,"卷内目录","","档案库");
+        Menu menu57 = menuService.addMenu(menu55,"卷内目录","","档案库");*/
+
+
+
 
         // 用模板tb_test2的使用的是field1 field2
         /*tablesService.generateTablesByTemplateId(1,"tb_test1");

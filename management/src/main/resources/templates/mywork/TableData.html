@@ -81,6 +81,7 @@
 
     <script th:inline="javascript">
         tableTitle = [[${tableTitle}]];
+        listList = [[${listList}]];
         head = "<tr id=\"tr1\">";
         head += '<th><input id="allboxs" onclick="allcheck()" type="checkbox"/></th>'
         for (i = 0; i <tableTitle.length; i++){
@@ -117,10 +118,18 @@
             if(tableTitle[i] != "最近修改时间" && tableTitle[i] != "是否被删除" && tableTitle[i] != "附件" && tableTitle[i] != "表格号" && tableTitle[i] != "序号"){
                 str = "formData" + i.toString();
                 modalForm += '<div class="form-group"><label align="right" class="col-sm-2 control-label" for="' + str + '">' + tableTitle[i] + '</label><div class="col-sm-4">';
-                modalForm += '<input align="left" type="text" autocomplete="off" class="form-control" id="' + str + '" name="' + str + '" placeholder="' + tableTitle[i] + '" data-prompt-position="bottomLeft"></div></div>';
+                if(listList[i].length != 0){
+                    modalForm += '<select class="form-control" id="' + str + '" name="' + str + '" placeholder="' + tableTitle[i] + '">';
+                    for(j=0;j<listList[i].length;j++){
+                        modalForm += '<option value="' + listList[i][j] + '">' + listList[i][j] + '</option>'
+                     }
+                     modalForm += '</select></div></div>';
+                }else{
+                    modalForm += '<input align="left" type="text" autocomplete="off" class="form-control" id="' + str + '" name="' + str + '" placeholder="' + tableTitle[i] + '" data-prompt-position="bottomLeft"></div></div>';
+                }
             }
         }
-        //console.log(modalForm);
+        console.log(modalForm);
         $("#modalForm").html(modalForm);
         formEdit = "";
         for(i = 0; i <tableTitle.length; i++){
