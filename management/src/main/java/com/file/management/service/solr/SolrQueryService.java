@@ -86,6 +86,7 @@ public class SolrQueryService {
             Long numFound = docs.getNumFound();
             docsJsonArray= (JSONArray)JSONArray.toJSON(docs);
             result_jsonObject.put("keyword",keyword);
+            //对应bootstrap table的要求
             result_jsonObject.put("numFound",numFound);
             result_jsonObject.put("documentList",docsJsonArray);
             return result_jsonObject;
@@ -129,6 +130,7 @@ public class SolrQueryService {
                 docs = queryResponse.getResults();
                 Long numFound = docs.getNumFound();
                 docsJsonArray= (JSONArray)JSONArray.toJSON(docs);
+                //对应bootstrap table的要求
                 result_jsonObject.put("numFound",numFound);
                 result_jsonObject.put("documentList",docsJsonArray);
                 return result_jsonObject;
@@ -168,8 +170,10 @@ public class SolrQueryService {
             docs = queryResponse.getResults();
             Long numFound = docs.getNumFound();
             docsJsonArray= (JSONArray)JSONArray.toJSON(docs);
+            //获得相似的图片
             docsJsonArray = imagePHashService.getSimilarImages(upLoadImagePHash,docsJsonArray,imagePHashSolrName,3);
             result_jsonObject.put("keyword",keyword);
+            //对应bootstrap table的要求
             result_jsonObject.put("numFound",docsJsonArray.size());
             result_jsonObject.put("documentList",docsJsonArray);
             return result_jsonObject;
@@ -180,7 +184,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 根据document_number和Table_id从数据库中查询档案,并未展示做准备
+     * 根据document_number和Table_id从数据库中查询档案的详细信息,并为展示做准备
      * @param table_id 表id
      * @param document_number 档案号
      * @param documentNumberDatabaseName 档案号在数据库中的字段名称
@@ -203,18 +207,18 @@ public class SolrQueryService {
                 JSONObject jsonObject = tablesService.getAttrECNameByTableName(tableName);
                 for(int i = 0; i<AttrNameList.size(); i++){
                     String attEName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
-                    if(AttrNameList.get(i).toString().equals(annexDatabaseName)){
+                    if(AttrNameList.get(i).toString().equals(annexDatabaseName)){ //判断是否是附件字段
                         String fileNameStr = "";
                         String fileAddressStr = "";
-                        String attCName = jsonObject.getString(attEName);
+                        String attCName = jsonObject.getString(attEName);//获取字段中文名称
                         String[] fileNames = attValue[i].toString().split(arrSplit);
                         int sum = 0; //附件数
                         for(String filename : fileNames){
-                            if(!filename.contains("http")){
+                            if(!filename.contains("http")){ //不包含http，则附件格式错误
                                 continue;
                             }
                             sum ++;
-                            if(!solrService.getPictureTypeType(filename)){
+                            if(!solrService.getPictureTypeType(filename)){  //如果是非图片的其他富文本，根据文件后缀，获得固定的缩略图
                                 fileAddressStr = fileAddressStr + "../../imgs/" +
                                         filename.substring(filename.lastIndexOf(".") + 1) +".jpg"+ "; "; //根据后缀获得富文本对应的图片
                             }else{
@@ -323,8 +327,9 @@ public class SolrQueryService {
             String searchCondition = searchConditionJSONObject.getString("searchCondition");
             String searchOperation = searchConditionJSONObject.getString("searchOperation");
             String searchText = searchConditionJSONObject.getString("searchText");
+            //获得对应的solr field的名称
             String searchConditionSolrName = this.getSolrName(searchCondition);
-            if("table_name".equals(searchCondition)){
+            if("table_name".equals(searchCondition)){   //如果是指定表名，需要去数据库中查询对应的table_id
                 StringBuffer stringBuffer2 = new StringBuffer();
                 List<Menu> menuList = menuRepository.findMenuByMenuName(searchText);
                 if(menuList.size()==0) continue;
@@ -337,7 +342,7 @@ public class SolrQueryService {
                 stringBuffer2.append(searchConditionSolrName + ":" + menuList.get(menuList.size()-1).getMenuTable().getTableId());
                 stringBuffer2.append(")");
                 stringBuffer.append(stringBuffer2);
-            }else{
+            }else{  //否则直接拼接就可以
                 if(i!=0){stringBuffer.append(" "+this.getOperation(searchOperation)+" ");}
                 stringBuffer.append(this.getSearchArea(searchArea,searchOptions,searchConditionSolrName));
                 stringBuffer.append(":");
@@ -567,7 +572,7 @@ public class SolrQueryService {
     }
 
     /**
-     * 获得字段对应的solrName
+     * 获得搜索条件字段对应的solrName
      * @param searchCondition 字段的名称
      * @return
      */
@@ -610,6 +615,8 @@ public class SolrQueryService {
      */
     private String getSearchArea(String searchArea,String searchOptions,String searchCondition){
         String SearchArea = "";
+        //exact_text,all_exact_text未进行分词，text，all_text进行了分词，可以模糊检索
+        //all_exact_text，all_text包含了所有solr中的字段，exact_text，text包含了除附件外的所有字段
         if("all_text".equals(searchCondition)||"text".equals(searchCondition)||"annex_content".equals(searchCondition)){
             if(searchArea!=null&&!searchArea.isEmpty()&&searchOptions!=null&&!searchOptions.isEmpty()){
                 if(searchOptions.equals("accurateSearch")&&searchArea.equals("fullTextArea")){

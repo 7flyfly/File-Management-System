@@ -2,6 +2,10 @@ package com.file.management.utils;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * 保存solr的访问信息
+ * 保存solr中的关键字段的名称
+ */
 public class ConstantString {
     //DocumentNumber在数据库中所对应的字段名称
     public final static String DocumentNumberDatabaseName= "DocumentNo";

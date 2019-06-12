@@ -1,29 +1,17 @@
 package com.file.management.controller.IntegratedQuery;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.file.management.pojo.*;
 import com.file.management.service.ImageProcessing.ImagePHashService;
-import com.file.management.service.solr.SolrDataConfigService;
 import com.file.management.service.solr.SolrQueryService;
 import com.file.management.service.solr.SolrService;
 import com.file.management.utils.SolrUtils;
-import com.file.management.utils.XsteamUtil;
 import org.apache.solr.client.solrj.SolrClient;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.common.SolrDocument;
-import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.SolrInputDocument;
-import org.dom4j.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller

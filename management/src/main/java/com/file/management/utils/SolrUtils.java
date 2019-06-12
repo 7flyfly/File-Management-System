@@ -6,6 +6,9 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 
 import javax.persistence.Entity;
 
+/**
+ * 创建solr连接
+ */
 public class SolrUtils {
     private  SolrClient solrClient; //Solr服务器链接的
     //创建solr客户端
