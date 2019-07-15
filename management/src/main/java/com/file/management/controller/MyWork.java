@@ -14,6 +14,7 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 import net.sf.ehcache.util.TimeUtil;
 import org.apache.commons.io.FileUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.solr.common.util.Hash;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class MyWork {
     private DictionaryService dictionaryService;
 
     @RequestMapping("/homepage")
+    //@RequiresPermissions("mywork:homepage")//权限管理;
     public String myWork(Model model){
         List<Menu> menuRoot = menuService.getMenuRoot();
         Menu menuYlj = new Menu();
@@ -66,6 +68,7 @@ public class MyWork {
                 menuDak = menuRoot.get(i);
             }
         }
+
         model.addAttribute("jsondataYlj",menuYlj.toString());
         model.addAttribute("jsondataZlk",menuZlk.toString());
         model.addAttribute("jsondataDak",menuDak.toString());

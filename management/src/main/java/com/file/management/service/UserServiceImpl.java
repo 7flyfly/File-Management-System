@@ -16,8 +16,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUser(String username, String password) {
         System.out.println("s:"+username);
-        User user=userResposity.findByUserNameAndPassWord(username,password);
+        User user=userResposity.findByUsernameAndPassword(username,password);
         return user;
+    }
+
+    @Override
+    public User findUsername(String username) {
+        System.out.println("UserServiceImpl.findByUsername()");
+        return userResposity.findByUsername(username);
     }
 
     //添加用户

@@ -1,6 +1,7 @@
 <!--综合查询控制中心-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>综合查询</title>
@@ -12,7 +13,7 @@
     <nav class="d-none d-md-block bg-light sidebar" >
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
-                <li class="nav-item">
+                <li class="nav-item" shiro:hasPermission="IntegratedQuery:IntelligentRetrieval">
                     <a class="nav-link active"
                        th:class="${activeUri=='IntelligentRetrieval'?'nav-link active':'nav-link'}"
                        href="#" th:href="@{/IntegratedQuery/IntelligentRetrieval}">
@@ -28,7 +29,7 @@
                 </li>
                 <!--th:class="${activeUri=='main'?'nav-link active':'nav-link'}"-->
                 <!--th:class="${activeUri=='emps'?'nav-link active':'nav-link'}"-->
-                <li class="nav-item">
+                <li class="nav-item" shiro:hasPermission="IntegratedQuery:AdvancedSearch">
                     <a class="nav-link"
                        th:class="${activeUri=='AdvancedSearch'?'nav-link active':'nav-link'}"
                        href="#" th:href="@{/IntegratedQuery/AdvancedSearch}">
@@ -41,7 +42,7 @@
                         高级搜索
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" shiro:hasPermission="IntegratedQuery:KnowledgeGraph">
                     <a class="nav-link"
                        th:class="${activeUri=='AdvancedSearch'?'nav-link active':'nav-link'}"
                        href="#" th:href="@{/IntegratedQuery/KnowledgeGraph}">

@@ -9,11 +9,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public interface UsersManageDao extends JpaRepository<UserManage,String> {
+public interface UsersManageDao extends JpaRepository<UserManage,Long> {
 
     List<UserManage> findAll();
 
     @Modifying
-    @Query(value = "update tb_usersmanage t set t.NAME=?1,t.PHONE=?2,t.DEPARTMENT=?3, t.MAIL=?4, t.ROLE=?5, t.STATUS=?6 where t.ACCOUNT=?7",nativeQuery = true)
-    void insertInfo(String name, String phone, String department, String mail, String role, String status, String account);
+    @Query(value = "update tb_usersmanage t set t.NAME=?1,t.PHONE=?2,t.DEPARTMENT=?3, t.MAIL=?4, t.STATUS=?5 where t.USERNAME=?6",nativeQuery = true)
+    void insertInfo(String name, String phone, String department, String mail, String status, String account);
+
 }

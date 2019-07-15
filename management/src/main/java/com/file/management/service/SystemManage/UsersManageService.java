@@ -10,5 +10,5 @@ public interface UsersManageService {
 
     void saveUserInfo(UserManage userManage);
     //插入编辑后数据
-    void insertInfo(String name, String phone, String department, String mail, String role, String status, String account);
+    void insertInfo(String name, String phone, String department, String mail, String status, String account);
 }

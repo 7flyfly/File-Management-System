@@ -1,4 +1,4 @@
-<!--用户管理-->
+<!--角色管理-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
@@ -6,7 +6,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>角色管理</title>
 </head>
 <body>
 <div id="Container">
@@ -26,120 +26,46 @@
                 </li>
                 <li class="active">
                     <a href="#">
-                        用户管理
+                        角色管理
                     </a>
                 </li>
             </ol>
             <div id="main-center" class="container-fluid">
                 <div class="row">
-                        <div class="col-sm-2 col-md-2 zero-padding">
-                            <select class="form-control input-sm query-role">
-                                <option value="">所有角色</option>
-                                <option value="0">管理组</option>
-                                <option value="1">校办兼职档案组</option>
-                                <option value="2">国际教育学院兼职档案组</option>
-                                <option value="3">行政部门档案审核组</option>
-                                <option value="4">学院档案审核组</option>
-                                <option value="5">档案管理组</option>
-                            </select>
-                        </div>
-                        <!--<div class="col-sm-2 col-md-2 zero-padding">-->
-                            <!--<div class="dialog-panel dialog-tree-panel">-->
-                                <!--<input type="hidden" class="origin" name="query-department">-->
-                                <!--<div class="input-group input-group-sm">-->
-                                    <!--<input type="text" readonly="true" placeholder="选择部门" class="form-control origin-text readOnly">-->
-                                    <!--<span class="input-group-btn">-->
-                                        <!--<button type="button" class="btn btn-default">-->
-                                            <!--<i class="glyphicon glyphicon-remove">清除</i>-->
-                                        <!--</button>-->
-                                    <!--</span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <div class="col-sm-2 col-md-2 zero-padding">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control query-keywords" placeholder="账号">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default btn-query">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 zero-padding" >
-                            <div role="group" class="btn-group btn-group-sm btn-group-xs-12 right zero-padding-lr">
-                                <button type="button" class="btn btn-default btn-add btn-block">
-                                    <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal">添加</i>
+                    <div class="col-sm-2 col-md-2 zero-padding">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control query-keywords" placeholder="账号">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-query">
+                                    <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
                         </div>
+                    </div>
+                    <!--<div class="col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 zero-padding" >-->
+                        <!--<div role="group" class="btn-group btn-group-sm btn-group-xs-12 right zero-padding-lr">-->
+                            <!--<button type="button" class="btn btn-default btn-add btn-block">-->
+                                <!--<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addRoleModal">添加角色</i>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
-                <!--模态框-->
-                <div class="modal fade" id="addModal"   tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <!--授权角色模态框-->
+                <div class="modal fade" id="giveRoleModal"   tabindex="-1" role="dialog" aria-labelledby="giveRoleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1200px">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color: #007bff">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-                                <h4 class="modal-title" id="addModalLabel"> 添加 </h4>
+                                <h4 class="modal-title" id="giveRoleModalLabel"> 设置用户角色</h4>
                             </div>
                             <div class="modal-body">
-                                <form id="info" class="form-horizontal" action="" method="post">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="name">姓名</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" id="name" name="name" placeholder="姓名" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="account">账号</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control"id="account" name="account" placeholder="账号" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="password">密码</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" id="password" name="password" placeholder="密码" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="department">部门</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" id="department" name="department" placeholder="部门" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="mail">邮箱</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" id="mail" name="mail" placeholder="邮箱" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="phone">联系电话</label>
-                                        <div class="col-sm-10"><input type="text" autocomplete="off" class="form-control" id="phone" name="phone" placeholder="联系电话" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
-                                    <!--<div class="form-group">-->
-                                        <!--<label class="col-sm-2 control-label" for="role">角色</label>-->
-                                        <!--<div class="col-sm-10">-->
-                                            <!--<input type="text" autocomplete="off" class="form-control" id="role" name="role" placeholder="角色" data-prompt-position="bottomLeft">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="status">状态</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" id="status" name="status">
-                                                <option value="NORMAL">正常</option>
-                                                <option value="LOCK">锁定</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
+                                <input type="text" id="userid" hidden="true">
+                                <table id="user_role"></table>
                             </div>
                             <div class="modal-footer" style="display: block;">
                                 <div class="bootstrap-dialog-footer">
                                     <div class="bootstrap-dialog-footer-buttons">
-                                        <button class="btn btn-primary" id="save" onclick="saveAll(this)">保存</button>
+                                        <button class="btn btn-primary" id="save" data-dismiss="modal">保存</button>
                                         <button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>
                                     </div>
                                 </div>
@@ -194,10 +120,10 @@
                                         </div>
                                     </div>
                                     <!--<div class="form-group">-->
-                                        <!--<label class="col-sm-2 control-label" for="roleEdit">角色</label>-->
-                                        <!--<div class="col-sm-10">-->
-                                            <!--<input type="text" autocomplete="off" class="form-control" id="roleEdit" name="roleEdit" placeholder="角色" data-prompt-position="bottomLeft">-->
-                                        <!--</div>-->
+                                    <!--<label class="col-sm-2 control-label" for="roleEdit">角色</label>-->
+                                    <!--<div class="col-sm-10">-->
+                                    <!--<input type="text" autocomplete="off" class="form-control" id="roleEdit" name="roleEdit" placeholder="角色" data-prompt-position="bottomLeft">-->
+                                    <!--</div>-->
                                     <!--</div>-->
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="statusEdit">状态</label>
@@ -222,20 +148,102 @@
                     </div>
                 </div>
                 <div class="row">
-                    <table id="userTable"></table>
+                    <table id="userRoleTable"></table>
                 </div>
+                <script type="text/javascript">
+                    $('#userRoleTable').bootstrapTable({
+                        url:'/UserRoleTable',  //请求后台url
+                        method:'get',
+                        showRefresh:false, //是否显示刷新按钮
+                        cardView: false,   //是否显示详细视图
+                        showToggle : true, // 是否显示详细视图和列表视图的切换按钮
+                        showColumns : true, // 是否显示列操作按钮
+                        detailView : false, // 是否显示详细视图
+                        striped : true, // 设置为true会有隔行变色效果
+                        dataType : "json", // 服务器返回的数据类型
+                        pagination : true, // 设置为true会在底部显示分页条
+                        singleSelect : true, // 设置为true将禁止多选
+                        clickToSelect : true, // 是否启用点击选中行
+                        pageSize : 10, // 如果设置了分页，每页数据条数
+                        pageNumber : 1, // 如果设置了分布，首页页码
+                        pageList: [5, 10, 15, 20],  //可供选择的每页的行数
+                        search : false, // 是否显示搜索框
+                        showRefresh:true,
+                        sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                        contentType: "application/json;charset=utf-8",
+                        queryParams: function (params) {
+                            return{
+                                pageSize : params.limit, // 每页显示数量
+                                offset : params.offset, // 起始索引
+                            }
+                        },
+                        columns : [
+                            {
+                                title : '序号',
+                                field : 'id',
+                                align : 'center',
+                                valign : 'center',
+                                formatter : function (value, row, index) {
+                                    var pageSize = $('#userRoleTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+                                    var pageNumber = $('#userRoleTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+                                    return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
+                                }
+                            },{
+                                title : '姓名',
+                                field : 'name',
+                                align : 'center',
+                                valign : 'center',
+                            }, {
+                                title : '账号',
+                                field : 'username',
+                                align : 'center',
+                                valign : 'center',
+                            },
+                            {
+                                title : '部门',
+                                field : 'department',
+                                align : 'center',
+                                valign : 'center',
+                            },  {
+                                title : '角色',
+                                field : 'role',
+                                align : 'center',
+                                valign : 'center',
+                            }, {
+                                title : '授权人',
+                                field : 'authorizer',
+                                align : 'center',
+                                valign : 'center',
+                            },
+                            {
+                                title : '授权时间',
+                                field : 'authorize_time',
+                                align : 'center',
+                                valign : 'center',
+                            }, {
+                                title : '操作',
+                                field : 'operation',
+                                width:"150px",
+                                formatter : function (value, row, index) {
+                                    return['<shiro:hasRole name="GLY"><button id="add" class="btn btn-primary btn-xs btn-default glyphicon glyphicon-user" data-toggle="modal" data-target="#giveRoleModal"  type="button">角色分配</button></shiro:hasRole>',
+                                        '<button id="del" class="btn btn-primary btn-xs btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#delModal" type="button">删除</button>',
+                                    ].join("")
+                                }
+                            },],
+                    });
+                </script>
                 <!--库权限模态框-->
-                <!--<shiro:hasAnyRoles name="admin,JXYmanager">-->
-                <div class="modal fade" id="kuModal" tabindex="-1" role="dialog" aria-labelledby="kuModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" style="width: 1000px">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color: #007bff">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-                                <h4 class="modal-title" id="kuModalLabel"> 库权限设置 </h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" id="username">
-                                <div class="form-group">
+                <shiro:hasAnyRoles name="admin,JXYmanager">
+                    <div class="modal fade" id="kuModal" tabindex="-1" role="dialog" aria-labelledby="kuModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="width: 1000px">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color: #007bff">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                                    <h4 class="modal-title" id="kuModalLabel"> 库权限设置 </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="username">
+                                    <div class="form-group">
                                         <label class="col-sm-3 control-label" for="way">权限配置</label>
                                         <div class="input-group ">
                                             <div class="checkbox-panel form-control ">
@@ -319,19 +327,19 @@
                                             </div>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="modal-footer" style="display: block;">
-                                <div class="bootstrap-dialog-footer">
-                                    <div class="bootstrap-dialog-footer-buttons">
-                                        <button class="btn btn-primary" id="ku-save"data-dismiss="modal" onclick="save(this)">保存</button>
-                                        <button class="btn btn-default" id="ku-close" data-dismiss="modal" onclick="closemodal(this)">关闭</button>
+                                </div>
+                                <div class="modal-footer" style="display: block;">
+                                    <div class="bootstrap-dialog-footer">
+                                        <div class="bootstrap-dialog-footer-buttons">
+                                            <button class="btn btn-primary" id="ku-save"data-dismiss="modal" onclick="save(this)">保存</button>
+                                            <button class="btn btn-default" id="ku-close" data-dismiss="modal" onclick="closemodal(this)">关闭</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--</shiro:hasAnyRoles>-->
+                </shiro:hasAnyRoles>
             </div>
         </div>
     </div>
@@ -340,6 +348,6 @@
 <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
-<script th:src="@{/js/SystemManagement/UserManage.js}"></script>
+<script th:src="@{/js/SystemManagement/RoleManage.js}"></script>
 </body>
 </html>

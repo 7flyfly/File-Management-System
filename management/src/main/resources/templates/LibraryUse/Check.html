@@ -1,6 +1,8 @@
 <!--利用登记-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>利用登记</title>
@@ -31,7 +33,7 @@
 <div id="container" >
     <div class="header" th:replace="public :: #public-header"></div>
     <link rel="stylesheet" type="text/css" href="/static/css/check.css">
-    <div class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar" style="width: 20%;height: 90%; background-color: #cccccc"></div>
+    <div  class="sidebar" th:replace="LibraryUse/LibrarycontrolCenter:: #sidebar" style="width: 20%;height: 90%; background-color: #cccccc"></div>
     <div class="center" style="width: 78%;height: 90%;float: left ">
         <ol class="breadcrumb">
             <li>
@@ -297,28 +299,55 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        <select class="form-control input-sm" id="database" onclick="databaseBind(this)" >
-                                            <option value="">声像档案</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-2" id="select2">
-                                        <select class="form-control input-sm" id="fileContent" onclick="getContent(this)" >
-                                            <option value="">请选择</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-2" id="select3">
-                                        <select class="form-control input-sm" id="catalogue" onclick="getCatalogue(this)" >
-                                            <option value="">请选择</option>
-                                        </select>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="btn-group btn-group-sm btn-group-xs" role="group">
-                                            <button class="btn btn-default " type="button">
-                                                <i class="glyphicon glyphicon-search" onclick="searchDatabase(this)">查询</i>
+                                    <fieldset>
+                                        <form action="#">
+                                            <label for="addr-show">您选择的是：
+                                                <input type="text" value="" id="addr-show">
+                                            </label>
+                                            <br/>
+
+                                            <!--省份选择-->
+                                            <select id="prov" onchange="showCity(this)">
+                                                <option>=请选择省份=</option>
+                                            </select>
+
+                                            <!--城市选择-->
+                                            <select id="city" onchange="showCountry(this)">
+                                                <option>=请选择城市=</option>
+                                            </select>
+
+                                            <!--县区选择-->
+                                            <select id="country" onchange="selecCountry(this)">
+                                                <option>=请选择县区=</option>
+                                            </select>
+                                            <button class="btn btn-default met1 " type="button">
+                                                <i class="glyphicon glyphicon-search" onclick="showAddr()">查询</i>
                                             </button>
-                                        </div>
-                                    </div>
+                                        </form>
+                                    </fieldset>
+
+                                    <!--<div class="col-sm-2">-->
+                                        <!--<select class="form-control input-sm" id="database" onclick="databaseBind(this)" >-->
+                                            <!--<option value="">声像档案</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-2" id="select2">-->
+                                        <!--<select class="form-control input-sm" id="fileContent" onclick="getContent(this)" >-->
+                                            <!--<option value="">请选择</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-2" id="select3">-->
+                                        <!--<select class="form-control input-sm" id="catalogue" onclick="getCatalogue(this)" >-->
+                                            <!--<option value="">请选择</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="text-center">-->
+                                        <!--<div class="btn-group btn-group-sm btn-group-xs" role="group">-->
+                                            <!--<button class="btn btn-default met1 " type="button">-->
+                                                <!--<i class="glyphicon glyphicon-search" onclick="searchDatabase(this)">查询</i>-->
+                                            <!--</button>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                 </div>
                                 <div class="row">
                                     <table id="mt-database"></table>
@@ -420,6 +449,7 @@
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
     <script type="text/javascript" th:src="@{/js/LibraryUse/Check.js}"></script>
+    <script type="text/javascript" th:src="@{/js/LibraryUse/linkage.js}"></script>
 </div>
 </body>
 </html>
