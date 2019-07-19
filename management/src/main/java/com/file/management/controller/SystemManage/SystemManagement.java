@@ -64,4 +64,12 @@ public class SystemManagement {
     public String UserManagement(){
         return "SystemManagement/UserManagement";
     }
+
+    /*
+    角色管理
+   */
+    @RequestMapping("/SystemManagement/RoleManagement")
+    public String UserRoleManagement(){
+        return "SystemManagement/RoleManagement";
+    }
 }

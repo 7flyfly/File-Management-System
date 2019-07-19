@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 @Service
+/**
+ * PHash相关方法的封装
+ */
 public class ImagePHashService {
     @Autowired
     private ImageService imageService;

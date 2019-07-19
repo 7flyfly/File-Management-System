@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head th:replace="public:: #public_head">
 
 </head>
 <body>
-     <div class="header" th:replace="public:: #public-header"></div>
+     <div class="header" th:replace="public:: #public-header" ></div>
      <!--sidebar-->
      <nav class="col-md-2 d-none d-md-block bg-light sidebar" id="sidebar">
           <div class="sidebar-sticky">
                <ul class="nav flex-column">
-                    <li class="nav-item">
+                    <li class="nav-item" shiro:hasPermission="LibraryUse:Check">
                          <a class="nav-link active"
                             th:class="${activeUri=='check'?'nav-link active':'nav-link'}"
                             href="#" th:href="@{/LibraryUse/Check}">
@@ -17,13 +19,13 @@
                          </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item" shiro:hasPermission="LibraryUse:Examine">
                          <a class="nav-link" href="#" th:href="@{/LibraryUse/Examine}"
                             th:class="${activeUri=='examine'?'nav-link active':'nav-link'}">
                                利用审批
                           </a>
                      </li>
-                     <li class="nav-item">
+                     <li class="nav-item" shiro:hasPermission="LibraryUse:Query">
                           <a class="nav-link" href="#" th:href="@{/LibraryUse/Query}"
                              th:class="${activeUri=='query'?'nav-link active':'nav-link'}">
                                利用查询

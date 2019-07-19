@@ -4,6 +4,7 @@ package com.file.management.controller.SystemManage;
 import com.alibaba.fastjson.JSONObject;
 import com.file.management.pojo.Department;
 import com.file.management.service.SystemManage.DepartmentService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class DepartmentManage {
     @Autowired
     private DepartmentService departmentService;
     @RequestMapping("/SystemManagement/DepartmentManage")
+    @RequiresPermissions("SystemManagement:DepartmentManage")//权限管理;
     public String returnTable(HttpServletResponse response, Model model){
         return "SystemManagement/DepartmentManagement";
     }

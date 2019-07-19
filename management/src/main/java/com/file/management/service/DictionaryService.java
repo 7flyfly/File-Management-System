@@ -20,4 +20,9 @@ public class DictionaryService {
         }
         return nameList;
     }
+
+    public List<DictionaryPojo> getDictionary(String name){
+        List<DictionaryPojo> dictionaryPojos = dictionaryDao.findAllInfo(name);
+        return dictionaryPojos;
+    }
 }

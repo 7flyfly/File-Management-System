@@ -9,6 +9,7 @@ var AdvancedSearch={
     searchTermNum: 0,
     searchTermArr: [0],
     searchConditionArr:[],
+    //增加搜索条件项
     addSearchTerm:function(obj){
         AdvancedSearch.searchTermNum++;
         AdvancedSearch.searchTermArr.push(AdvancedSearch.searchTermNum);
@@ -31,11 +32,12 @@ var AdvancedSearch={
         '</select></td></tr>';
         $("#searchContextTbody").append(term);
     },
+    //去除搜索条件项
     removeSearchTerm:function(obj){
         $("#searchContextTr"+obj.value).remove();
         AdvancedSearch.searchTermArr.splice(obj.value,1)
     },
-
+    //搜索条件检查
     SearchCheck:function(){
         AdvancedSearch.searchConditionArr=[];
         for(var index in AdvancedSearch.searchTermArr){
@@ -99,6 +101,7 @@ var AdvancedSearch={
                                             '</a> </div>')
         }
     },
+    //高级检索功能
     conditionalSearch: function () {
         $("#advancedSearch_head").remove();
         $("#advancedSearch_div").css({"border-bottom":"2px solid #337ab7"});
@@ -194,7 +197,7 @@ function paramsMatter(value, row, index) {
     var value1 = value.replace(/\s+/g,'&nbsp;');
     return "<span title="+value1+">"+value1+"</span>";
 }
-
+//详情按钮
 window.operateEvents = {
     "click #table_btn_detail":function(e, row, index){
             if(typeof(index)!="undefined"){

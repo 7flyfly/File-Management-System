@@ -24,7 +24,7 @@ public class UsersManageServiceImpl implements UsersManageService {
     }
 
     @Override
-    public void insertInfo(String name, String phone, String department, String mail, String role, String status, String account) {
-        usersManageDao.insertInfo(name,phone,department,mail,role,status,account);
+    public void insertInfo(String name, String phone, String department, String mail, String status, String account) {
+        usersManageDao.insertInfo(name,phone,department,mail,status,account);
     }
 }

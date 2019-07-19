@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
@@ -16,11 +17,11 @@
 <!--sidebar-->
 <nav class="col-xs-2 d-none d-md-block bg-light sidebar" id="sidebar">
     <ul id="myTab" class="nav nav-tabs">
-        <li class="active">
+        <li class="active" shiro:hasPermission="mywork:ylk">
             <a href="#ylj" data-toggle="tab">预立库</a>
         </li>
-        <li><a href="#zlk" data-toggle="tab">整理库</a></li>
-        <li><a href="#dak" data-toggle="tab">档案库</a></li>
+        <li shiro:hasPermission="mywork:zlk"><a href="#zlk" data-toggle="tab">整理库</a></li>
+        <li shiro:hasPermission="mywork:dak"><a href="#dak" data-toggle="tab">档案库</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="ylj">

@@ -8,7 +8,11 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-public class XsteamUtil {
+/**
+ * 利用dom4j读取xml转换为dom4j的document
+ * 利用XStream将xml的String转换为pojo
+ */
+public class XStreamUtil {
     /**
      * XML转对象
      * @param clazz 对象类

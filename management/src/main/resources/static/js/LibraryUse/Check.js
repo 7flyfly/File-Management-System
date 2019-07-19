@@ -869,22 +869,6 @@ function confirm_D(obj) {
     var index = select.selectedIndex;
     var database= select.options[index].text;//选中的值
 
-    //alert("确定此操作");
-    // varjsonObj= {
-    //     'documentNo':documentNo,
-    //     'database': database,
-    // };
-    // $.ajax({
-    //     type: "post",
-    //     url: "/sendDatabase",
-    //     data: JSON.stringify(jsonObj),
-    //     dataType: "json",
-    //     contentType: "application/json",
-    //     success: function(result) {
-    //         //window.location.reload();
-    //     }
-    // });
-
     $("#contentTable").bootstrapTable('destroy');
     $('#contentTable').bootstrapTable({
         url:'/showDatabase',  //请求后台url

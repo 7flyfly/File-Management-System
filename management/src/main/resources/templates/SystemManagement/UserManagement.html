@@ -1,6 +1,9 @@
 <!--用户管理-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>用户管理</title>
@@ -63,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 zero-padding">
+                        <div class="col-sm-2 col-sm-offset-4 col-md-2 col-md-offset-4 zero-padding" >
                             <div role="group" class="btn-group btn-group-sm btn-group-xs-12 right zero-padding-lr">
                                 <button type="button" class="btn btn-default btn-add btn-block">
                                     <i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addModal">添加</i>
@@ -116,12 +119,12 @@
                                         <div class="col-sm-10"><input type="text" autocomplete="off" class="form-control" id="phone" name="phone" placeholder="联系电话" data-prompt-position="bottomLeft">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="role">角色</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" id="role" name="role" placeholder="角色" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="col-sm-2 control-label" for="role">角色</label>-->
+                                        <!--<div class="col-sm-10">-->
+                                            <!--<input type="text" autocomplete="off" class="form-control" id="role" name="role" placeholder="角色" data-prompt-position="bottomLeft">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="status">状态</label>
                                         <div class="col-sm-10">
@@ -136,7 +139,7 @@
                             <div class="modal-footer" style="display: block;">
                                 <div class="bootstrap-dialog-footer">
                                     <div class="bootstrap-dialog-footer-buttons">
-                                        <button class="btn btn-primary" id="save" onclick="save(this)">保存</button>
+                                        <button class="btn btn-primary" id="save" onclick="saveAll(this)">保存</button>
                                         <button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>
                                     </div>
                                 </div>
@@ -190,12 +193,12 @@
                                         <div class="col-sm-10"><input type="text" autocomplete="off" class="form-control" id="phoneEdit" name="phoneEdit" placeholder="联系电话" data-prompt-position="bottomLeft">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="roleEdit">角色</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" id="roleEdit" name="roleEdit" placeholder="角色" data-prompt-position="bottomLeft">
-                                        </div>
-                                    </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="col-sm-2 control-label" for="roleEdit">角色</label>-->
+                                        <!--<div class="col-sm-10">-->
+                                            <!--<input type="text" autocomplete="off" class="form-control" id="roleEdit" name="roleEdit" placeholder="角色" data-prompt-position="bottomLeft">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="statusEdit">状态</label>
                                         <div class="col-sm-10">
@@ -222,27 +225,113 @@
                     <table id="userTable"></table>
                 </div>
                 <!--库权限模态框-->
-                <div class="modal fade" id="kuModal"   tabindex="-1" role="dialog" aria-labelledby="kuModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <!--<shiro:hasAnyRoles name="admin,JXYmanager">-->
+                <div class="modal fade" id="kuModal" tabindex="-1" role="dialog" aria-labelledby="kuModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 1000px">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color: #007bff">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
                                 <h4 class="modal-title" id="kuModalLabel"> 库权限设置 </h4>
                             </div>
                             <div class="modal-body">
-                                <span>库授权模块</span>
+                                <input type="hidden" id="username">
+                                <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="way">权限配置</label>
+                                        <div class="input-group ">
+                                            <div class="checkbox-panel form-control ">
+                                                <input class="origin" type="hidden" id="way"  value="">
+                                                <span class="checkboxes-item">
+                                                        <input value="利用登记" id="use-register"name="way" type="checkbox" data-text="利用登记">
+                                                        <span class="checkboxes-item-text">利用登记</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="利用审批" id="use-examine" name="way" type="checkbox" data-text="利用审批">
+                                                        <span class="checkboxes-item-text">利用审批</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="利用查询" id="use-search"name="way" type="checkbox" data-text="利用查询">
+                                                        <span class="checkboxes-item-text">利用查询</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="智能检索" id="intellegence-intrival"name="way" type="checkbox" data-text="智能检索">
+                                                        <span class="checkboxes-item-text">智能检索</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="高级搜索" id="intellegence-search"name="way" type="checkbox" data-text="高级搜索">
+                                                        <span class="checkboxes-item-text">高级搜索</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="知识图谱" id="mapping-knowledge"name="way" type="checkbox" data-text="知识图谱">
+                                                        <span class="checkboxes-item-text">知识图谱</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="专题" id="special-topic"name="way" type="checkbox" data-text="专题">
+                                                        <span class="checkboxes-item-text">专题</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="汇总统计" id="tabulate-statistics"name="way" type="checkbox" data-text="汇总统计">
+                                                        <span class="checkboxes-item-text">汇总统计</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="分项统计" id="breakdown" name="way"type="checkbox" data-text="分项统计">
+                                                        <span class="checkboxes-item-text">分项统计</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="元数据模板管理" id="metadataTemplate"name="way" type="checkbox" data-text="元数据模板管理">
+                                                        <span class="checkboxes-item-text">元数据模板管理</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="元数据管理" id="metadataManagement"name="way" type="checkbox" data-text="元数据管理">
+                                                        <span class="checkboxes-item-text">元数据管理</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="数字词典" id="dataDictionary"name="way" type="checkbox" data-text="数字词典">
+                                                        <span class="checkboxes-item-text">数字词典</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="部门管理" id="departmentManage" name="way"type="checkbox" data-text="部门管理">
+                                                        <span class="checkboxes-item-text">部门管理</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="用户管理" id="userManagement" name="way"type="checkbox" data-text="用户管理">
+                                                        <span class="checkboxes-item-text">用户管理</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="状态管理" id="stateManagement"name="way" type="checkbox" data-text="状态管理">
+                                                        <span class="checkboxes-item-text">状态管理</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="动作管理" id="actionManagement"name="way" type="checkbox" data-text="动作管理">
+                                                        <span class="checkboxes-item-text">动作管理</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="预立库" id="ylk"name="way" type="checkbox" data-text="预立库">
+                                                        <span class="checkboxes-item-text">预立库</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="整理库" id="zlk"name="way" type="checkbox" data-text="整理库">
+                                                        <span class="checkboxes-item-text">整理库</span>
+                                                </span>
+                                                <span class="checkboxes-item">
+                                                        <input value="档案库" id="dak"name="way" type="checkbox" data-text="档案库">
+                                                        <span class="checkboxes-item-text">档案库</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                             <div class="modal-footer" style="display: block;">
                                 <div class="bootstrap-dialog-footer">
                                     <div class="bootstrap-dialog-footer-buttons">
-                                        <button class="btn btn-primary" id="ku-save" onclick="saveku(this)">保存</button>
-                                        <button class="btn btn-default" id="ku-close" data-dismiss="modal">关闭</button>
+                                        <button class="btn btn-primary" id="ku-save"data-dismiss="modal" onclick="save(this)">保存</button>
+                                        <button class="btn btn-default" id="ku-close" data-dismiss="modal" onclick="closemodal(this)">关闭</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--</shiro:hasAnyRoles>-->
             </div>
         </div>
     </div>

@@ -203,7 +203,7 @@ public class SolrQueryService {
                 JSONObject jsonObject = tablesService.getAttrECNameByTableName(tableName);
                 for(int i = 0; i<AttrNameList.size(); i++){
                     String attEName = AttrNameList.get(i) == null ? "" : (String)AttrNameList.get(i);
-                    if(AttrNameList.get(i).toString().equals(annexDatabaseName)&&attValue[i]!=null){
+                    if(AttrNameList.get(i).toString().equals(annexDatabaseName)){
                         String fileNameStr = "";
                         String fileAddressStr = "";
                         String attCName = jsonObject.getString(attEName);

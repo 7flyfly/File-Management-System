@@ -1,6 +1,8 @@
 package com.file.management.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.drew.tools.FileUtil;
+import com.file.management.dao.DynamicSQL;
 import com.file.management.pojo.Menu;
 import com.file.management.pojo.metadata.Tables;
 import com.file.management.service.DictionaryService;
@@ -8,14 +10,26 @@ import com.file.management.service.MenuService;
 import com.file.management.service.metadata.FieldService;
 import com.file.management.service.metadata.TablesService;
 import com.file.management.utils.uploadFileUtils;
+import com.google.common.hash.Hashing;
+import com.google.common.io.Files;
+import net.sf.ehcache.util.TimeUtil;
+import org.apache.commons.io.FileUtils;
+import org.apache.solr.common.util.Hash;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import sun.security.pkcs11.wrapper.Constants;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.channels.FileLockInterruptionException;
 import java.util.*;
 
 
@@ -348,4 +362,5 @@ public class MyWork {
             return mapReturn;
         }
     }
+
 }

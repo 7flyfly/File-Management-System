@@ -1,17 +1,17 @@
 package com.file.management.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_usersmanage")
 public class UserManage {
 
     @Id
-    @Column(name = "ACCOUNT")
-    private String account;
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "USERNAME")
+    private String username;
 
     @Column(name = "NAME")
     private String name;
@@ -34,12 +34,20 @@ public class UserManage {
     @Column(name = "STATUS")
     private String status;
 
-    public String getAccount() {
-        return account;
+    public Long getId() {
+        return id;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

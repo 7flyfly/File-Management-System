@@ -3,6 +3,7 @@ var IntelligentRetrieval={
     tableId: "",
     queryType: "",
     upLoadImagePHash: "",
+    //图片检索条件的检查，并上传图片，返回图片的Hash值
     imageSearchCheck:function(){
         IntelligentRetrieval.keyWord=$("#keyword").val();
         IntelligentRetrieval.queryType=$("input[name='queryTypeOptionsRadios']:checked").val();
@@ -50,7 +51,7 @@ var IntelligentRetrieval={
             // $(event.target).parent().siblings('.fileinput-remove').hide();
         });
     },
-    //图片检索
+    //图片检索，返回的结果通过bootstrap table返回
     imageSearch:function(upLoadImagePHash){
         $("#intelligentRetrieval_container_head").remove();
         $("#intelligentRetrieval_container_tail").remove();
@@ -141,6 +142,7 @@ var IntelligentRetrieval={
                 },]
         });
     },
+    //全文检索条件的检查
     keySearchCheck:function(){
             IntelligentRetrieval.keyWord=$("#keyword").val();
             IntelligentRetrieval.queryType=$("input[name='queryTypeOptionsRadios']:checked").val();
@@ -301,7 +303,7 @@ function paramsMatter(value, row, index) {
     var value1 = value.replace(/\s+/g,'&nbsp;');
     return "<span title="+value1+">"+value1+"</span>";
 }
-
+//详情按钮
 window.operateEvents = {
     "click #table_btn_detail":function(e, row, index){
             if(typeof(index)!="undefined"){

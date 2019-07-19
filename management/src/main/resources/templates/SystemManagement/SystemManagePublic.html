@@ -1,6 +1,7 @@
 <!--系统管理公共部分-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head th:replace="public:: #public_head">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -17,10 +18,10 @@
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <li class="list-group-item"shiro:hasPermission="metadata:MetadataTemplate">
                         <a th:href="@{/metadata/MetadataTemplate}">元数据模板管理</a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" shiro:hasPermission="metadata:MetadataManagement">
                         <a th:href="@{/metadata/MetadataManagement}">元数据管理</a>
                     </li>
                 </ul>
@@ -32,7 +33,7 @@
             </div>
             <div id="collapse2" class="panel-collapse collapse">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <li class="list-group-item" shiro:hasPermission="SystemManagement:DataDictionary">
                         <a th:href="@{/SystemManagement/DataDictionary}">数字词典</a>
                     </li>
                 </ul>
@@ -44,17 +45,18 @@
             </div>
             <div id="collapse3" class="panel-collapse collapse">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <li class="list-group-item"shiro:hasPermission="SystemManagement:DepartmentManage">
                         <a th:href="@{/SystemManagement/DepartmentManage}">部门管理</a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" >
                         <a th:href="@{/SystemManagement/UserManagement}">用户管理</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">角色管理</a>
+                        <a th:href="@{/SystemManagement/RoleManagement}" href="#">角色管理</a>
                     </li>
                 </ul>
             </div>
+
 
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -64,10 +66,10 @@
 
             <div id="collapse4" class="panel-collapse collapse">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                    <li class="list-group-item"shiro:hasPermission="SystemManagement:StateManagement">
                         <a th:href="@{/SystemManagement/StateManagement}">状态管理</a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item"shiro:hasPermission="SystemManagement:ActionManagement">
                         <a th:href="@{/SystemManagement/ActionManagement}">动作管理</a>
                     </li>
                 </ul>

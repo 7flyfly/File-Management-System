@@ -5,14 +5,10 @@ import com.file.management.pojo.SolrDataSource;
 import com.file.management.pojo.SolrTableEntity;
 import com.file.management.pojo.SolrTableEntityColumn;
 import com.file.management.utils.SolrUtils;
-import com.file.management.utils.XsteamUtil;
+import com.file.management.utils.XStreamUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -21,7 +17,9 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * 对Solr配置文件SolrDataConfig的配置
+ * 对Solr数据库导入配置文件SolrDataConfig的配置
+ * 对Solr的索引导入时间DataImportProperty的配置
+ * 对Solr的配置文件Schema的设置之前通过手工的方法已经配置完毕，在功能上不需要再进行修改
  */
 @Service
 public class SolrDataConfigService {
@@ -33,8 +31,8 @@ public class SolrDataConfigService {
     public SolrDataConfig getSolrDataConfig(){
         SolrUtils solrUtils = new SolrUtils();
         Document document = this.loadSolrDataConfig(solrUtils.getSolrDataConfigPath());
-        String xmlStr = XsteamUtil.xmlDocument2String(document);
-        SolrDataConfig solrDataConfig = (SolrDataConfig)XsteamUtil.toBean(SolrDataConfig.class,xmlStr);
+        String xmlStr = XStreamUtil.xmlDocument2String(document);
+        SolrDataConfig solrDataConfig = (SolrDataConfig) XStreamUtil.toBean(SolrDataConfig.class,xmlStr);
         return solrDataConfig;
     }
 
@@ -45,7 +43,7 @@ public class SolrDataConfigService {
      */
     public boolean saveSolrDataConfig(SolrDataConfig solrDataConfig){
         SolrUtils solrUtils = new SolrUtils();
-        String xmlStr = XsteamUtil.toXml(solrDataConfig);
+        String xmlStr = XStreamUtil.toXml(solrDataConfig);
         boolean bool = this.rewriteSolrDataConfig(solrUtils.getSolrDataConfigPath(),xmlStr);
         return bool;
     }
@@ -93,12 +91,12 @@ public class SolrDataConfigService {
         try {
             File xmlFile = new File(solrDataConfigPath);
             fileWritter = new FileWriter(xmlFile);
-            Document document = XsteamUtil.string2XMLDocument(xmlStr);
+            Document document = XStreamUtil.string2XMLDocument(xmlStr);
 //            Element root = document.getRootElement();
 //            Element data = root.element("document");//获取子节点
 //            Element entity = data.element("entity");//获取子节点
             //使用dom4j的XMLWriter,&gt;无法转换为>，所以先转换为String
-            String documentStr = XsteamUtil.xmlDocument2String(document);
+            String documentStr = XStreamUtil.xmlDocument2String(document);
             String documentStrReplace = documentStr.replaceAll("&gt;",">");
             fileWritter.write(documentStrReplace);
             return true;
@@ -296,7 +294,7 @@ public class SolrDataConfigService {
     }
 
     /**
-     * 根据list的名称，将数据库表字段组装为solr中dynamicField的格式
+     * 根据list的名称，将数据库表字段组装为solr的schema中指定的dynamicField的格式
      * @param SolrTableEntityColumnList 构造好的SolrTableEntityColumnList，可直接用于构造TableEntity
      * @param tableColumnList 需要转换的数据库表的list
      * @param switchFlag list变量名的String，当做switch的flag(变量名不建议改变)

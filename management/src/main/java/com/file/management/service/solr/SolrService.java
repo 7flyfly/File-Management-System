@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 对solr的一些操作
+ * 对solr配置文件修改操作的封装
+ * 对solr DIH导入结构化数据功能的封装
  */
 @Service
 public class SolrService {
@@ -39,6 +41,7 @@ public class SolrService {
     private ImagePHashService imagePHashService;
 
     /**
+     * 对Solr数据库配置文件solr-data-config的修改
      * 新增需要将数据变为索引的数据库信息
      * @param dataSourceName 数据库名 "db_test"
      * @param driveName 驱动名 "com.mysql.jdbc.Driver"
@@ -85,6 +88,7 @@ public class SolrService {
     }
 
     /**
+     * 对Solr数据库配置文件solr-data-config的修改
      * 新增需要将数据变为索引的数据库表的信息
      * @param dataSourceName 所在数据库名(默认配置文件中的数据库名，先指定db_fileManagement todo 根据Springboot的数据库配置文件选择)
      * @param tableName 数据库表名
@@ -157,6 +161,7 @@ public class SolrService {
     }
 
     /**
+     * 对solr DIH导入结构化数据功能的封装
      * 针对表中的某一条档案进行更新
      * @param tableName 表名
      * @param document_number 档案号
@@ -191,6 +196,7 @@ public class SolrService {
                 //table含有附件字段，获取附件字段的位置
                 Annex_index = AttrNameList.indexOf(annexDatabaseName);
             }
+            //获取documentNumber字段在list中的位置
             documentNumber_index= AttrNameList.indexOf(documentNumberDatabaseName);
             SolrUtils solrUtils = new SolrUtils();
             SolrClient solrClient = solrUtils.createSolrClient();
@@ -238,6 +244,7 @@ public class SolrService {
                             System.out.println(fileUrl + "：文件导入失败！");
                             continue;
                         }
+                        //替换url中的中文文件名
                         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
                         String urlHead = fileUrl.replace(fileName,"");
                         URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误 中文编码
@@ -278,7 +285,8 @@ public class SolrService {
     }
 
     /**
-     * 导入表，将表中的数据建立索引
+     * 对solr DIH导入结构化数据功能的封装
+     * 全量导入表，将表中的数据建立索引
      * @param tableName 表名，非空
      */
     public HashMap<Boolean,String> fullImportTable2Solr(String tableName, String documentNumberDatabaseName, String annexDatabaseName,
@@ -322,6 +330,7 @@ public class SolrService {
     }
 
     /**
+     * 对solr DIH导入结构化数据功能的封装
      * 增量导入表，将表中的数据建立索引，根据DocumentNumber修改索引
      * 更改软删除标识可以实现回滚
      * @param tableName 表名
@@ -371,6 +380,7 @@ public class SolrService {
     }
 
     /**
+     * 对solr DIH导入结构化数据功能的封装
      * 删除索引 根据软删除标识删除索引
      * 更改软删除标识可以实现回滚
      * @param tableName 表名
@@ -546,6 +556,7 @@ public class SolrService {
                             System.out.println(fileUrl + "：文件导入失败！");
                             continue;
                         }
+                        //替换url中的中文文件名
                         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
                         String urlHead = fileUrl.replace(fileName,"");
                         URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误 中文编码
@@ -658,6 +669,7 @@ public class SolrService {
                             System.out.println(fileUrl + "：文件导入失败！");
                             continue;
                         }
+                        //替换url中的中文文件名
                         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
                         String urlHead = fileUrl.replace(fileName,"");
                         URL url= new URL(urlHead + URLEncoder.encode(fileName,"utf-8")); //直接使用会报400错误 中文编码
@@ -759,7 +771,7 @@ public class SolrService {
     }
 
     /**
-     * 获得导入状态
+     * 获得结构化数据的导入状态
      * @param solrClient solr客户端
      */
     private boolean getImportInfo(SolrClient solrClient){
