@@ -1,7 +1,7 @@
 
 
-$('#registTable').bootstrapTable({
-    url:'/getApplication',  //请求后台url
+$('#borrowTable').bootstrapTable({
+    url:'/getBorrow2',  //请求后台url
     method:'get',
     showRefresh:false, //是否显示刷新按钮
     cardView: false,   //是否显示详细视图
@@ -33,8 +33,8 @@ $('#registTable').bootstrapTable({
             title : '序号',
             field : 'id',
             formatter : function (value, row, index) {
-                var pageSize = $('#registTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
-                var pageNumber = $('#registTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
+                var pageSize = $('#borrowTable').bootstrapTable('getOptions').pageSize;     //通过table的#id 得到每页多少条
+                var pageNumber = $('#borrowTable').bootstrapTable('getOptions').pageNumber; //通过table的#id 得到当前第几页
                 return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
             }
         },{

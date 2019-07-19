@@ -1,13 +1,16 @@
 package com.file.management.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.file.management.dao.FileResposity;
 import com.file.management.dao.NewFileResposity;
 import com.file.management.dao.VideoDao;
 import com.file.management.pojo.ExpiredFile;
+import com.file.management.pojo.LibraryUse.RegistrationForm;
 import com.file.management.pojo.NewFile;
 import com.file.management.pojo.Video;
 import com.file.management.pojo.state.Message;
 import com.file.management.pojo.state.State;
+import com.file.management.service.LibraryUse.RegistrationFormService;
 import com.file.management.service.state.MessageService;
 import com.file.management.service.state.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,18 +116,9 @@ public class MyWorkIndex {
         return "/mywork/Video";
     }
 
-    @RequestMapping("/mywork/watch")
-    public String watch(HttpServletRequest request){
-        int videoid = Integer.parseInt(request.getParameter("videoname"));
-        Video v = videoDao.findById(videoid);
-        String url = "/images/"+v.getName();
-        return url;
-    }
-
-
     private String  url;
 
-    @RequestMapping(value="mywork/uploadFile",produces="application/json;charset=UTF-8")
+    @RequestMapping(value="/mywork/uploadFile",produces="application/json;charset=UTF-8")
     @ResponseBody
     public String uploadFile(@RequestParam("fileName") MultipartFile file) {
 
@@ -139,7 +133,6 @@ public class MyWorkIndex {
         System.out.println(path);
         //创建文件路径
         File dest = new File(path);
-        System.out.println("SUCCESS01");
 
         //判断文件是否已经存在
         if (dest.exists()) {
@@ -153,14 +146,12 @@ public class MyWorkIndex {
         try {
             //上传文件
             file.transferTo(dest); //保存文件
-            System.out.println("SUCCESS02");
             url="http://localhost:8080/images/"+fileName;//本地运行项目
             Video v = new Video();
             v.setName(fileName);
             v.setUrl(url);
             v.setLocalpath(path);
             videoDao.save(v);
-            System.out.println("SUCCESS03");
 
         } catch (IOException e) {
             return "上传失败";
@@ -176,4 +167,25 @@ public class MyWorkIndex {
         return "/mywork/UserManage";
     }
 
+    @RequestMapping("/mywork/borrow")
+    public String borrow(){
+        return "/mywork/borrow";
+    }
+
+    @Autowired
+    RegistrationFormService registrationFormService;
+
+    //借阅申请查询
+    @ResponseBody
+    @RequestMapping("/getBorrow2")
+    public String getBorrow(){
+        //System.out.println("1");
+        List<RegistrationForm> examines=registrationFormService.findByStatus("待审批");
+        int total=examines.size();
+        JSONObject result= new JSONObject();
+        result.put("rows",examines);
+        result.put("total",total);
+
+        return result.toJSONString();
+    }
 }

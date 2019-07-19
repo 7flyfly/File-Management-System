@@ -486,7 +486,7 @@ public class TablesService {
     }
 
     /**
-     * 获得表中属性的中英文名称
+     * 根据表名获取表中所有属性的中英文名称
      * @param tableName 表名
      * @return
      */
@@ -500,6 +500,11 @@ public class TablesService {
         return jsonObject;
     }
 
+    /**
+     * 根据表格id获得这张表格的所有属性名
+     * @param table_id
+     * @return
+     */
     public List<String> queryTitleFromDatabase(String table_id){
         String tableName = getTableNameByTableId(Integer.parseInt(table_id));
         List AttrNameList = dynamicSQL.selectAttrNameByTableName(tableName);
@@ -510,6 +515,12 @@ public class TablesService {
         }
         return AttrNameList;
     }
+
+    /**
+     * 根据表格id获得这张表格的所有数据
+     * @param table_id
+     * @return
+     */
     public List<Map<String,String>> queryDataFromDatabase(String table_id){
         List<Map<String,String>> listMap = new ArrayList<>();
         String tableName = getTableNameByTableId(Integer.parseInt(table_id));
@@ -535,6 +546,12 @@ public class TablesService {
         return listMap;
     }
 
+    /**
+     * 根据table_id和档案号获得指定的一条数据
+     * @param tableId
+     * @param documentNo
+     * @return
+     */
     public HashMap<String,String> queryDataByTableIdAndDocumentNo(String tableId,String documentNo){
         String tableName = getTableNameByTableId(Integer.parseInt(tableId));
         List resultList = dynamicSQL.selectAllByTableNameAndDocumentNo(tableName,documentNo);

@@ -1,49 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe44000f-35d7-47ef-ab7f-c3084f2dbecf" name="Default Changelist" comment="增加全文检索的页面">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ognl_ognl_3_1_15.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_struts_struts2_core_2_5_16.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_freemarker_freemarker_2_3_28.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/NewFileResposity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/OldFileResposity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/VideoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/NewFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Video.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/WebAppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/Environment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/ErrorFile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/NewFile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/UserManage.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/Video.html" afterDir="false" />
+    <list default="true" id="6ac3d644-28e3-4668-9641-2541d7984094" name="Default Changelist" comment="修改页面 添加方法">
+      <change afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/borrow.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/Library/wanglei.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/ActionManage.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/ActionManage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/StateManage.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/StateManage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/ActionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/ActionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/StateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/StateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/Action.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/ActionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/ActionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/ActionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/ActionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/MessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/MessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/MessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/SchedulerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/SchedulerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/UserLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/static/js/SystemManagement/Action.js" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/SystemManagement/Action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/static/js/SystemManagement/State.js" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/SystemManagement/State.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/ActionManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/ActionManagement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/StateManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/StateManagement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/ExpiredFile.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/ExpiredFile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/FileCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/FileCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/MatureFile.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/MatureFile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/homepage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/static/js/LibraryUse/wanglei.js" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/LibraryUse/borrow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/static/js/tabledata.js" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/static/js/tabledata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/TableData.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/TableData.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/Video.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/Video.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/myworkIndex.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/mywork/myworkIndex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/src/main/resources/templates/public.html" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/templates/public.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/management/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,103 +30,113 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/File_Management_System$ManagementApplication.coverage" NAME="ManagementApplication Coverage Results" MODIFIED="1557411882830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.file.management.*</FILTER>
+    </SUITE>
+  </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="File-Management-System" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/StateManagement.html">
+        <entry file="file://$PROJECT_DIR$/management/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6617" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-              <folding>
-                <element signature="e#350#351#0" expanded="true" />
-                <element signature="e#422#423#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/SchedulerTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-975">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="800">
+              <caret line="125" column="48" lean-forward="true" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/FieldService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="65" column="48" lean-forward="true" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
+            <state relative-caret-position="330">
+              <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/StateManage.java">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/FieldRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="e#1005#1006#0" expanded="true" />
-                <element signature="e#1062#1063#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="144">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/ActionRepository.java">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/LibraryUse/DatabasesDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/StateRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/State.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
+            <state relative-caret-position="96">
               <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="216">
+              <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="22" column="44" lean-forward="true" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/Register.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              <folding>
+                <element signature="e#502#503#0" expanded="true" />
+                <element signature="e#535#536#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/UserLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="576">
+              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+              <folding>
+                <element signature="e#637#638#0" expanded="true" />
+                <element signature="e#667#668#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/metadata/Field.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1128">
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -158,6 +146,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="HTML File" />
         <option value="Class" />
       </list>
@@ -165,36 +154,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>solrService</find>
-      <find>Switch</find>
-      <find>tablesService</find>
-      <find>file_content</find>
-      <find>solrClient</find>
-      <find>commit</find>
-      <find>filetype:</find>
-      <find>File f = new File(filePath);</find>
-      <find>fileContentSolrName</find>
-      <find>_dt</find>
-      <find>导入失败</find>
-      <find>Lower</find>
-      <find>toLowerCase</find>
-      <find>butto</find>
-      <find>detailModal</find>
-      <find>detailList</find>
-      <find>params.limit</find>
-      <find>pagination</find>
-      <find>pageSize</find>
-      <find>DOCUMENT_NUMBER</find>
-      <find>水利系</find>
-      <find>getFieldValue</find>
-      <find>S0908.3-175</find>
-      <find>getDetail</find>
-      <find>mm</find>
-      <find>intelligentRetrieval_container_row</find>
-      <find>nodeName</find>
-      <find>offset</find>
-      <find>advancedSearch_bootstrapTable</find>
-      <find>document_number</find>
+      <find>solrEntityDocumentList.get(0).getSolrTableEntityList()</find>
+      <find>solrEntityDocumentList.get(0)</find>
+      <find>formEdit</find>
+      <find>imageSearchCheck</find>
+      <find>script</find>
+      <find>fileUp</find>
+      <find>upLoadImage</find>
+      <find>upLoad</find>
+      <find>filebatchuploadsuccess</find>
+      <find>fileUpload</find>
+      <find>filebatchselected</find>
+      <find>webkitRelativePath</find>
+      <find>typeImg</find>
+      <find>fileSrc</find>
+      <find>upLoadImages</find>
+      <find>tbody</find>
+      <find>upload===</find>
+      <find>selectAllByTableName</find>
+      <find>jdbcTempla</find>
+      <find>upload</find>
+      <find>tr1</find>
+      <find>formData</find>
+      <find>地址为空！</find>
+      <find>预立卷</find>
+      <find>fieldIndexs</find>
+      <find>getmenuroot</find>
+      <find>treeview</find>
+      <find>update</find>
+      <find>DefaultErrorAttributes</find>
+      <find>getError</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,55 +192,65 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/solr/SolrController.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Solr.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntegratedQuery.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/SolrController.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/XsteamUtil.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Check.html" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TemplateService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/FieldService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/TemplateDetails.html" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManagement.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataManagement.html" />
-        <option value="$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/controlCenter.html" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/HibernateSQLImpl.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/HibernateSQL.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/HibernateAutoConfiguration.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/public.html" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/MetadataTemplate.html" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/TablesRepository.java" />
-        <option value="$PROJECT_DIR$/management/pom.xml" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/SolrUtils.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/mywork/MyWork.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/MetadataManagement.js" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/metadata/TableDetails.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/metadata/TemplateDetails.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/uploadUtil.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/uploadAction.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/UploadUtil.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrDataConfigService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/DynamicSQL.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/IntelligentRetrieval.html" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/IntelligentRetrieval.js" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/IntelligentRetrievalController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/TablesRepository.java" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/IntegratedQuery/AdvancedSearch.js" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Video.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/VideoDao.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/OldFileResposity.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/ActionRepository.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/WebAppConfig.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateServiceImpl.java" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/myworkIndex.html" />
-        <option value="$PROJECT_DIR$/management/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/ActionManage.java" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/metadata/Template.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/metadata/Tables.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/DynamicSQL.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/utils/uploadFileUtils.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/FieldRepository.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/FieldService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataManagement.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/homepage.js" />
         <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/homepage.html" />
-        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/StateManage.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataTemplate.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/MenuRepository.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/metadatamanagement.js" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/metadatatemplate.js" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetaDataController.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/SystemManagement/Dictionary/DictionaryPojo.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/dao/SystemManage/Dictionary/DictionaryDao.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/DictionaryService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Check.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/TableData.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/tabledata.js" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/FormStatistics/Breakdown.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/Video.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/borrow.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/static/js/LibraryUse/borrow.js" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/mywork/myworkIndex.html" />
+        <option value="$PROJECT_DIR$/management/src/main/java/Singleton.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/public.html" />
         <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java" />
+        <option value="$PROJECT_DIR$/management/src/test/java/com/file/management/ManagementApplicationTests.java" />
+        <option value="$PROJECT_DIR$/management/src/test/java/com/file/management/Singleton.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TablesService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/templates/login.html" />
+        <option value="$PROJECT_DIR$/management/pom.xml" />
+        <option value="$PROJECT_DIR$/management/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/management/src/main/java/com/file/management/controller/UserLogin.java" />
       </list>
     </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -260,22 +259,28 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-2568" />
-    <option name="y" value="-137" />
-    <option name="width" value="2576" />
-    <option name="height" value="1416" />
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="management" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
   </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="415" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1082" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -292,6 +297,12 @@
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
               <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
+              <item name=".mvn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
+              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
+              <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -326,18 +337,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="state" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
@@ -355,27 +355,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="SystemManagement" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
@@ -385,27 +364,13 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="SystemManagement" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="File-Management-System" type="b2602c69:ProjectViewProjectNode" />
-              <item name="File-Management-System" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -413,8 +378,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558340573982" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/management/mysql" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -424,18 +388,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.file.management.controller.SystemManage" />
-      <recent name="com.file.management.service" />
-      <recent name="com.file.management.dao" />
-      <recent name="com.file.management.pojo" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\IDEAworkspace\File-Management-System\management\src\main\java\com\file\management\controller\SystemManage" />
-      <recent name="D:\IDEAworkspace\File-Management-System\management\src\main\resources\templates\mywork" />
-      <recent name="D:\IDEAworkspace\File-Management-System\management\src\main\resources\templates\SystemManagement" />
-      <recent name="D:\IDEAworkspace\File-Management-System\management\src\main\resources\static\js\SystemManagement" />
-      <recent name="D:\IDEAworkspace\File-Management-System\management\src\main\java\com\file\management\service\state" />
+      <recent name="C:\Users\Administrator.PC-20190422MXKW.000\Desktop\File-Management-System\management\mysql" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.file.management.service.metadata" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator.PC-20190422MXKW.000\Desktop\File-Management-System\management\src\main\resources\templates\mywork" />
+      <recent name="C:\Users\Administrator.PC-20190422MXKW.000\Desktop\File-Management-System\management\src\main\resources\templates\metadata" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -464,6 +425,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ManagementApplicationTests (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="management" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.file.management.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.file.management" />
+      <option name="MAIN_CLASS_NAME" value="com.file.management.ManagementApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ManagementApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="management" />
       <extension name="coverage">
@@ -474,6 +452,9 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.file.management" />
       <option name="MAIN_CLASS_NAME" value="com.file.management.ManagementApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -490,48 +471,56 @@
       <option name="MAIN_CLASS_NAME" value="com.file.management.ManagementApplicationTests" />
       <option name="METHOD_NAME" value="contextLoads" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="ManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="management" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.file.management.ManagementApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <module name="management" />
+      <envs />
+    </configuration>
+    <configuration name="ManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.file.management.ManagementApplication" />
+      <module name="management" />
+      <envs />
     </configuration>
     <list>
       <item itemvalue="Application.ManagementApplication" />
-      <item itemvalue="JUnit.ManagementApplicationTests.contextLoads" />
       <item itemvalue="JUnit.ManagementApplicationTests" />
-      <item itemvalue="Spring Boot.ManagementApplication" />
+      <item itemvalue="JUnit.ManagementApplicationTests.contextLoads" />
+      <item itemvalue="JUnit.ManagementApplicationTests (1)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ManagementApplication" />
         <item itemvalue="JUnit.ManagementApplicationTests" />
         <item itemvalue="JUnit.ManagementApplicationTests.contextLoads" />
+        <item itemvalue="JUnit.ManagementApplicationTests (1)" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="StructureViewFactory">
-    <option name="AUTOSCROLL_MODE" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fe44000f-35d7-47ef-ab7f-c3084f2dbecf" name="Default Changelist" comment="" />
+      <changelist id="6ac3d644-28e3-4668-9641-2541d7984094" name="Default Changelist" comment="" />
       <created>1555056777651</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555056777651</updated>
       <workItem from="1555056787580" duration="555000" />
-      <workItem from="1558337147640" duration="129000" />
-      <workItem from="1558337637393" duration="1322000" />
-      <workItem from="1558339052650" duration="1571000" />
+      <workItem from="1556113467442" duration="3384000" />
+      <workItem from="1556280663821" duration="28546000" />
+      <workItem from="1556358976503" duration="69000" />
+      <workItem from="1557400900562" duration="9696000" />
+      <workItem from="1557917525664" duration="6699000" />
+      <workItem from="1558004418690" duration="9379000" />
     </task>
     <task id="LOCAL-00001" summary="修改Solr的相关方法">
       <created>1555911575657</created>
@@ -561,78 +550,113 @@
       <option name="project" value="LOCAL" />
       <updated>1555986893306</updated>
     </task>
-    <task id="LOCAL-00005" summary="增加全文检索的页面">
-      <created>1556175768752</created>
+    <task id="LOCAL-00005" summary="修改页面">
+      <created>1556096316626</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1556175768752</updated>
+      <updated>1556096316626</updated>
     </task>
-    <task id="LOCAL-00006" summary="增加详情页">
-      <created>1556508412642</created>
+    <task id="LOCAL-00006" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557451952640</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1556508412643</updated>
+      <updated>1557451952641</updated>
     </task>
-    <task id="LOCAL-00007" summary="修改详情页的英文属性名为中文属性名">
-      <created>1556520469485</created>
+    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557457342743</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1556520469485</updated>
+      <updated>1557457342743</updated>
     </task>
-    <task id="LOCAL-00008" summary="增加高级检索页面 实现对附件的检索">
-      <created>1557135899416</created>
+    <task id="LOCAL-00008" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557465178664</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1557135899416</updated>
+      <updated>1557465178664</updated>
     </task>
-    <task id="LOCAL-00009" summary="增加全文检索的页面">
-      <created>1557459757420</created>
+    <task id="LOCAL-00009" summary="修改页面">
+      <created>1557730472424</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1557459757420</updated>
+      <updated>1557730472424</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="导入附件">
+      <created>1557739771700</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1557739771700</updated>
+    </task>
+    <task id="LOCAL-00011" summary="添加sql文件 修改页面">
+      <created>1558080958709</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1558080958709</updated>
+    </task>
+    <task id="LOCAL-00012" summary="修改页面 添加方法">
+      <created>1558426297662</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1558426297662</updated>
+    </task>
+    <task id="LOCAL-00013" summary="修改页面 添加方法">
+      <created>1558581609391</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1558581609391</updated>
+    </task>
+    <task id="LOCAL-00014" summary="修改页面 添加方法">
+      <created>1558602631040</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1558602631040</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 09h 55m 47s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 09h 56m 20s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 09h 57m 17s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 10h 00m 05s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 10h 24m 14s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 10h 24m 48s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.23 at 10h 25m 24s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests_contextLoads - 2019.04.24 at 15h 11m 19s.xml">
-      <configuration name="ManagementApplicationTests.contextLoads" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.24 at 15h 15m 31s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 45m 50s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManagementApplicationTests - 2019.04.24 at 15h 23m 59s.xml">
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 49m 21s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 50m 05s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 50m 48s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 52m 38s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 52m 56s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 14h 56m 58s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 15h 11m 31s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 15h 13m 48s.xml">
+      <configuration name="ManagementApplicationTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ManagementApplicationTests - 2019.05.24 at 15h 14m 51s.xml">
       <configuration name="ManagementApplicationTests" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3619000" />
+    <option name="totallyTimeSpent" value="58328000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -644,76 +668,71 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2568" y="-137" width="2576" height="1416" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13473769" />
-      <window_info id="Designer" order="1" />
-      <window_info id="UI Designer" order="2" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Structure" order="4" weight="0.20308311" />
-      <window_info id="Learn" order="5" show_stripe_button="false" />
-      <window_info id="Image Layers" order="6" />
-      <window_info id="Capture Tool" order="7" />
-      <window_info id="Web" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.32761312" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.3289166" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49960256" weight="0.23322932" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.72138315" weight="0.35463756" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.3289166" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3289166" />
-      <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32969603" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.27861685" side_tool="true" weight="0.35463756" />
-      <window_info anchor="bottom" id="DB Execution Console" order="13" />
-      <window_info anchor="bottom" id="Spring" order="14" />
-      <window_info anchor="bottom" id="Java Enterprise" order="15" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Database" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="DB Browser" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Coverage" order="8" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
-      <window_info anchor="right" id="Bean Validation" order="11" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Learn" order="0" show_stripe_button="false" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18044515" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988345" visible="true" weight="0.18402226" />
+      <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info id="Structure" order="5" weight="0.15500794" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.3281372" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.25409198" />
-      <window_info anchor="bottom" id="Debug" order="4" visible="true" weight="0.36009353" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.32936078" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3289166" />
-      <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="DB Execution Console" order="13" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.5011655" side_tool="true" weight="0.21780604" />
+      <window_info id="Structure" order="6" weight="0.22655007" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960256" visible="true" weight="0.40234375" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.42578125" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3296875" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50039744" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3296875" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3296875" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Database" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="DB Browser" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Coverage" order="8" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="right" id="Maven" order="10" weight="0.3298887" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21780604" />
+      <window_info id="Structure" order="1" weight="0.22655007" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960256" weight="0.3296875" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3984375" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50039744" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3296875" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3296875" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Bean Validation" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="9" />
+      <window_info anchor="right" id="Maven" order="10" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -763,432 +782,403 @@
     <MESSAGE value="修改Solr的相关注释，增加solr的简单检索" />
     <MESSAGE value="考虑solr-data-config中没有entity的问题" />
     <MESSAGE value="修改Solr的相关方法" />
-    <MESSAGE value="增加详情页" />
-    <MESSAGE value="修改详情页的英文属性名为中文属性名" />
-    <MESSAGE value="增加高级检索页面 实现对附件的检索" />
-    <MESSAGE value="增加全文检索的页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加全文检索的页面" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="((DefaultElement)((DefaultDocument)document).rootElement).content" custom="org.dom4j.tree.DefaultDocument,org.dom4j.tree.DefaultElement" />
-        <watch expression="((java.util.ArrayList)docs).get(0)" custom="java.util.ArrayList" />
-        <watch expression="((java.util.ArrayList)docs).get(1)" custom="java.util.ArrayList" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="修改页面" />
+    <MESSAGE value="导入附件" />
+    <MESSAGE value="添加sql文件 修改页面" />
+    <MESSAGE value="修改页面 添加方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改页面 添加方法" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/File_Management_System_0422$ManagementApplication.ic" NAME="ManagementApplication Coverage Results" MODIFIED="1556593235629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/File_Management_System$ManagementApplication.ic" NAME="ManagementApplication Coverage Results" MODIFIED="1557717733509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.file.management.*</FILTER>
     </SUITE>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>fileName.substring(fileName.lastIndexOf(&quot;\\&quot;) + 1 )</expression-string>
+        <expression-string>attValue[i]</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>fileName.lastIndexOf(&quot;.&quot;) + 2</expression-string>
+        <expression-string>attValue[i].toString()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>fileName.lastIndexOf(&quot;.&quot;)</expression-string>
+        <expression-string>attValue[i].toString().split(arrSplit)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>fileName.substring(fileName.lastIndexOf(&quot;.&quot;))</expression-string>
+        <expression-string>values.get(2 * j)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 2)</expression-string>
+        <expression-string>j</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1)</expression-string>
+        <expression-string>fieldService.getFieldByFieldName(values.get(2 * j))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>document.getFieldNames()</expression-string>
+        <expression-string>fieldService.getFieldByFieldName(values.get(2 * j)).getFieldEnglishName()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>response.toString()</expression-string>
+        <expression-string>values.size()/length</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>(response.toString()</expression-string>
+        <expression-string>menuOtherClassification.getMenuTable().getTableUuid()</expression-string>
         <language-id>JAVA</language-id>
-        <custom-info>org.apache.catalina.connector.ResponseFacade</custom-info>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/IntegratedQuery/AdvancedSearch.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="79" column="18" lean-forward="true" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/IntegratedQuery/AdvancedSearchController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3543">
-          <caret line="488" column="31" selection-start-line="488" selection-start-column="29" selection-end-line="488" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7816#7832#0" expanded="true" />
-            <element signature="e#8697#8716#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/solr/SolrQueryService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="333" column="48" lean-forward="true" selection-start-line="333" selection-start-column="48" selection-end-line="333" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-3408">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/LibraryUse/Check.html">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3375">
-          <caret line="290" column="136" selection-start-line="290" selection-start-column="136" selection-end-line="290" selection-end-column="136" />
-          <folding>
-            <element signature="n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#4;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="2352">
+          <caret line="146" column="27" selection-start-line="146" selection-start-column="27" selection-end-line="146" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/public.html">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1625">
-          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+        <state relative-caret-position="120">
+          <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/LibraryUse/DatabasesPojo.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/Metadata.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2000">
-          <caret line="87" column="34" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1780#1781#0" expanded="true" />
-            <element signature="e#1830#1831#0" expanded="true" />
-            <element signature="e#1872#1873#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="144">
+          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/LibraryUse/ExamineTable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4425">
-          <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/LibraryUse/DatabasesDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/LibraryUse/Check.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15250">
-          <caret line="610" column="25" selection-start-line="610" selection-start-column="25" selection-end-line="610" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!block;n#removeForm#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/Library/RegistrationFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5150">
-          <caret line="225" column="33" selection-start-line="225" selection-start-column="33" selection-end-line="225" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/LibraryUse/RegistrationFormServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/LibraryUse/RegistrationForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataManagement.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/NewFile.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/ExpiredFile.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/MetadataTemplate.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-350">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state relative-caret-position="1202">
+          <caret line="98" column="13" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#td#0;n#tr#0;n#div#4;n#form#0;n#div#1;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/Video.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/TableDetails.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/Message.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/css/mywork.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="120">
+          <caret line="5" column="3" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/Action.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="120">
+          <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/VideoDao.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/imgs/word.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/imgs/pdf.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/css/dataTables/css/dataTables.jqueryui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9612" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/css/dataTables/css/dataTables.bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/OldFileResposity.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/css/dataTables/css/dataTables.bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/metadata/TemplateDetails.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
+        <state relative-caret-position="432">
+          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/AddUserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/FileResposity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/MenuRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="89" column="1" lean-forward="true" selection-start-line="88" selection-end-line="89" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/NewFileResposity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
+        <state relative-caret-position="120">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/MessageRepository.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/OldFileResposity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
+        <state relative-caret-position="96">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/MessageService.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/MessageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/ActionServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/ActionService.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/SystemManagement/Action.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/ActionManagement.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/Environment.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/pom.xml">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/UserResposity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        <state relative-caret-position="96">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/VideoDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="120">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/WebAppConfig.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/ActionRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="28" column="15" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+        <state relative-caret-position="648">
+          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/SpecialTopic/SpecialDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.1.6.RELEASE/spring-data-jpa-2.1.6.RELEASE.jar!/org/springframework/data/jpa/repository/Query.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/TablesRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="72" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/LibraryUse/RegistrationFormRespository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/homepage.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="57" column="33" lean-forward="true" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWork.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/public.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-767">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="168">
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="44" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/main.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/register.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/MyWorkIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="36" column="42" lean-forward="true" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
+        <state relative-caret-position="216">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/myworkIndex.html">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/Library/LibraryUse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="66" column="88" lean-forward="true" selection-start-line="66" selection-start-column="88" selection-end-line="66" selection-end-column="88" />
+        <state relative-caret-position="384">
+          <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/mywork/homepage.html">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/TemplateRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="432">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/SystemManagement.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/TemplateService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-117">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="330">
+          <caret line="26" column="20" lean-forward="true" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/static/js/SystemManagement/State.js">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/DynamicSQL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="359" column="36" lean-forward="true" selection-start-line="359" selection-start-column="36" selection-end-line="359" selection-end-column="36" />
+        <state relative-caret-position="744">
+          <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/ActionManage.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/metadata/MetaDataController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/SystemManage/StateManage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="528">
+          <caret line="92" column="34" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
           <folding>
-            <element signature="e#1005#1006#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
+            <element signature="e#1352#1353#0" expanded="true" />
+            <element signature="e#1394#1395#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/ActionRepository.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.1.6.RELEASE/spring-data-jpa-2.1.6.RELEASE.jar!/org/springframework/data/jpa/repository/JpaRepository.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        <state relative-caret-position="456">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/statemanage/StateRepository.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/metadata/Field.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="1128">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/pojo/state/State.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/metadata/FieldService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+        <state relative-caret-position="330">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateService.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/MenuService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
+        <state relative-caret-position="120">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/LibraryUse/DatabasesDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/StateServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/dao/metadata/FieldRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="144">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/StateManagement.html">
+    <entry file="file://$PROJECT_DIR$/management/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6617" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/resources/templates/SystemManagement/SystemManagePublic.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="65" column="48" lean-forward="true" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
+        <state relative-caret-position="800">
+          <caret line="125" column="48" lean-forward="true" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/ManagementApplication.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        <state relative-caret-position="379">
+          <caret line="22" column="44" lean-forward="true" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#422#423#0" expanded="true" />
+            <element signature="e#502#503#0" expanded="true" />
+            <element signature="e#535#536#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/state/SchedulerTask.java">
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-975">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="216">
+          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/src/main/java/com/file/management/controller/UserLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+          <folding>
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#667#668#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -78,6 +78,9 @@ function allcheck() {
          }
      }
 }
+function confirmAddModal(obj){
+    location.reload();
+}
 
 
 //新增数据

@@ -214,7 +214,7 @@ public class MenuService {
     }
 
     /**
-     *  深度优先遍历treeview菜单树
+     *  深度优先遍历treeview菜单树，便于菜单的显示。
      */
     public List<Menu> getAllMenuByOrder(){
         List<Menu> menuRootList = getMenuRoot();
@@ -232,8 +232,9 @@ public class MenuService {
         }
         Stack<Menu> myStack = new Stack<>();
         myStack.add(menuRoot);
+        Menu menu = null;
         while(!myStack.isEmpty()){
-            Menu menu = myStack.pop();
+            menu = myStack.pop();
             menuList.add(menu);
             for(Menu child :menuRepository.findByMenuParentOrderByMenuOrder(menu.getMenuId())) {
                 myStack.push(child);
@@ -242,6 +243,11 @@ public class MenuService {
         return menuList;
     }
 
+    /**
+     * 修改menu的顺序号
+     * @param newOrder
+     * @param menuUuid
+     */
     public void editMenuOrder(int newOrder,String menuUuid) {
 
         Menu menu = this.getMenuByMenuUUid(menuUuid);

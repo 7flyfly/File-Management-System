@@ -33,7 +33,6 @@ public class UserLogin {
             cookie.setMaxAge(3600);
             response.addCookie(cookie);
 
-
             User user=userService.findUser(username,password);
             if (user != null){
                 session.setAttribute("username",username);
