@@ -11,7 +11,7 @@ public class UserInfo implements Serializable {
     @GeneratedValue
     private Integer uid;
 
-    @Column(unique =true,name = "USERNAME")
+    @Column(name = "USERNAME")
     private String username;//帐号
     @Column(name = "NAME")
     private String name;//名称（昵称或者真实姓名，不同系统不同定义）

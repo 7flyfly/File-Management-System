@@ -1,10 +1,17 @@
 package com.file.management.controller.SystemManage;
 
 
+import com.file.management.dao.SysRoleDao;
+import com.file.management.pojo.SysRole;
+import com.file.management.pojo.UserInfo;
+import com.file.management.service.UserInfoService;
 import com.file.management.service.metadata.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /*
   系统管理
@@ -14,6 +21,10 @@ public class SystemManagement {
 
     @Autowired
     TemplateService templateService;
+    @Autowired
+    UserInfoService userInfoService;
+    @Autowired
+    SysRoleDao sysRoleDao;
 
     /*
       权限管理
@@ -61,7 +72,9 @@ public class SystemManagement {
     用户管理
    */
     @RequestMapping("/SystemManagement/UserManagement")
-    public String UserManagement(){
+    public String UserManagement(Model model){
+        List<UserInfo> userInfoList = userInfoService.findAllInfo();
+        model.addAttribute("list",userInfoList);
         return "SystemManagement/UserManagement";
     }
 
@@ -69,7 +82,16 @@ public class SystemManagement {
     角色管理
    */
     @RequestMapping("/SystemManagement/RoleManagement")
-    public String UserRoleManagement(){
+    public String UserRoleManagement(Model model){
+        List<SysRole> roleList = sysRoleDao.findAll();
+        model.addAttribute("roleList",roleList);
         return "SystemManagement/RoleManagement";
+    }
+
+    @RequestMapping("/SystemManagement/DataBaseManagement")
+    public String dataBaseManagement(Model model){
+        List<SysRole> roles = sysRoleDao.findAll();
+        model.addAttribute("roles",roles);
+        return "SystemManagement/DataBaseManagement";
     }
 }

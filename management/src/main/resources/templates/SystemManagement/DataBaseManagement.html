@@ -1,0 +1,190 @@
+<!--库权限-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="public:: #public_head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <div id="Container">
+       <div class="container-fluid">
+           <div class="row bs-mc-silder-row">
+               <div class="row" >
+                   <div class="table-responsive">
+                       <table id="dataBase" class="table table-striped table-sm">
+                           <thead>
+                           <tr>
+                               <th>角色</th>
+                               <th>操作</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <tr th:each="role:${roles}">
+                               <td th:text="${role.description}"></td>
+                               <td>
+                                   <!--<button class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" id="serach" data-toggle="modal" data-target="#searchModal">查询过滤</button>-->
+                                   <button class="btn btn-primary btn-xs btn-info glyphicon glyphicon-pencil" id="li" data-toggle="modal" data-target="#liModal">列表过滤</button>
+                               </td>
+                           </tr>
+                           </tbody>
+                       </table>
+                   </div>
+               </div>
+               <!--查询过滤模态框-->
+               <!--<div class="modal fade" id="searchModal"   tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">-->
+                   <!--<div class="modal-dialog">-->
+                       <!--<div class="modal-content">-->
+                           <!--<div class="modal-header" style="background-color: #007bff">-->
+                               <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>-->
+                               <!--<h4 class="modal-title" id="searchModalLabel"> 查询过滤 </h4>-->
+                           <!--</div>-->
+                           <!--<div class="modal-body">-->
+                               <!--<form id="info" class="form-horizontal" action="" method="post">-->
+                                   <!--<input name="name" id="role-name" type="text">-->
+                                   <!--<div class="form-group">-->
+                                       <!--<label class="col-sm-2 control-label" for="typey">类型</label>-->
+                                       <!--<div class="col-sm-10">-->
+                                           <!--<input type="text" autocomplete="off" class="form-control"id="typey" name="typey" placeholder="类型" data-prompt-position="bottomLeft">-->
+                                       <!--</div>-->
+                                   <!--</div>-->
+                                   <!--<div class="form-group">-->
+                                       <!--<label class="col-sm-2 control-label" for="department">单位</label>-->
+                                       <!--<div class="col-sm-10">-->
+                                           <!--<input type="text" autocomplete="off" class="form-control"id="department" name="department" placeholder="单位" data-prompt-position="bottomLeft">-->
+                                       <!--</div>-->
+                                   <!--</div>-->
+                                   <!--<div class="form-group">-->
+                                       <!--<label class="col-sm-2 control-label" for="purpuse">目的</label>-->
+                                       <!--<div class="col-sm-10">-->
+                                           <!--<input type="text" autocomplete="off" class="form-control" id="purpuse" name="purpuse" placeholder="目的" data-prompt-position="bottomLeft">-->
+                                       <!--</div>-->
+                                   <!--</div>-->
+                               <!--</form>-->
+                           <!--</div>-->
+                           <!--<div class="modal-footer" style="display: block;">-->
+                               <!--<div class="bootstrap-dialog-footer">-->
+                                   <!--<div class="bootstrap-dialog-footer-buttons">-->
+                                       <!--<button class="btn btn-primary" id="save" data-dismiss="modal" onclick="saveSearch(this)">保存</button>-->
+                                       <!--<button class="btn btn-default" id="close" data-dismiss="modal">关闭</button>-->
+                                   <!--</div>-->
+                               <!--</div>-->
+                           <!--</div>-->
+                       <!--</div>-->
+                   <!--</div>-->
+               <!--</div>-->
+
+               <!--查询过滤模态框-->
+
+               <div class="modal fade" id="liModal"   tabindex="-1" role="dialog" aria-labelledby="liModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header" style="background-color: #007bff">
+                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                               <h4 class="modal-title" id="liModalLabel"> 查询授权</h4>
+                           </div>
+                           <div class="modal-body">
+                               <input name="name" id="roleName" type="text">
+                               <div class="form-group">
+                                   <label class="col-sm-3 control-label" for="way">借阅查询</label>
+                                   <div class="input-group ">
+                                       <div class="checkbox-panel form-control ">
+                                           <!--<input class="origin" type="hidden" id="way"  value="">-->
+                                           <span class="checkboxes-item">
+                                                        <input value="oddnumbers" id="oddnumbers"name="way" type="checkbox" data-text="单号">
+                                                        <span class="checkboxes-item-text">单号</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="type" id="type" name="way" type="checkbox" data-text="类型">
+                                                        <span class="checkboxes-item-text">类型</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="registrant" id="registrant"name="way" type="checkbox" data-text="登记人">
+                                                        <span class="checkboxes-item-text">登记人</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="recorddate" id="recorddate"name="way" type="checkbox" data-text="登记日期">
+                                                        <span class="checkboxes-item-text">登记日期</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="unit" id="unit"name="way" type="checkbox" data-text="单位">
+                                                        <span class="checkboxes-item-text">单位</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="name" id="name"name="way" type="checkbox" data-text="姓名">
+                                                        <span class="checkboxes-item-text">姓名</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="date" id="date"name="way" type="checkbox" data-text="利用起始日期">
+                                                        <span class="checkboxes-item-text">利用起始日期</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="telphone" id="telphone"name="way" type="checkbox" data-text="联系电话">
+                                                        <span class="checkboxes-item-text">联系电话</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="certificatetype" id="certificatetype" name="way"type="checkbox" data-text="证件类型">
+                                                        <span class="checkboxes-item-text">证件类型</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="certificaatenumber" id="certificaatenumber"name="way" type="checkbox" data-text="证件号码">
+                                                        <span class="checkboxes-item-text">证件号码</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="purpose" id="purpose"name="way" type="checkbox" data-text="目的">
+                                                        <span class="checkboxes-item-text">目的</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="way" id="way" name="way"type="checkbox" data-text="方式">
+                                                        <span class="checkboxes-item-text">方式</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="contant" id="contant" name="way"type="checkbox" data-text="内容">
+                                                        <span class="checkboxes-item-text">内容</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="state" id="state"name="way" type="checkbox" data-text="状态">
+                                                        <span class="checkboxes-item-text">状态</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="stloanagentate" id="stloanagentate"name="way" type="checkbox" data-text="出借经办人">
+                                                        <span class="checkboxes-item-text">出借经办人</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="day" id="day"name="way" type="checkbox" data-text="借阅天数">
+                                                        <span class="checkboxes-item-text">借阅天数</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="turn" id="turn"name="way" type="checkbox" data-text="归还经办人">
+                                                        <span class="checkboxes-item-text">归还经办人</span>
+                                                </span>
+                                           <span class="checkboxes-item">
+                                                        <input value="returndata" id="returndata"name="way" type="checkbox" data-text="归还日期">
+                                                        <span class="checkboxes-item-text">归还日期</span>
+                                                </span>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="modal-footer" style="display: block;">
+                               <div class="bootstrap-dialog-footer">
+                                   <div class="bootstrap-dialog-footer-buttons">
+                                       <button class="btn btn-primary" data-dismiss="modal" id="saveData" onclick="savedata(this)">保存</button>
+                                       <button class="btn btn-default"  data-dismiss="modal">关闭</button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+   <script th:src="@{/js/SystemManagement/DataBase.js}"></script>
+</body>
+</html>

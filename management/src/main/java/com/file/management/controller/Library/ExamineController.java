@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
@@ -26,10 +27,10 @@ public class ExamineController {
 
     @ResponseBody
     @RequestMapping("/registrat")
-    public String findAll(HttpServletResponse response){
+    public String findAll(HttpServletResponse response, HttpServletRequest request){
         response.setContentType("text/json");
         response.setCharacterEncoding("utf-8");
-        List<RegistrationForm> examines=registrationFormService.findAll();
+        List<RegistrationForm> examines=registrationFormService.findAll(request);
         int total=examines.size();
         JSONObject result= new JSONObject();
         result.put("rows",examines);

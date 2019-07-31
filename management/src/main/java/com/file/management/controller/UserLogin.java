@@ -29,8 +29,6 @@ public class UserLogin {
     //@RequestMapping("/user/login")
     @RequestMapping("/login")
     public String Login(HttpServletRequest request, Map<String,Object>map, HttpServletResponse response, HttpSession session){
-
-        System.out.println("UserLogin.login()");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         //1.获取subject

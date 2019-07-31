@@ -1,4 +1,4 @@
-//$('#userTable').bootstrapTable('destory');
+// $('#userTable').bootstrapTable('destory');
 
 $('#userTable').bootstrapTable({
     url:'/UserTable',  //请求后台url
@@ -27,7 +27,7 @@ $('#userTable').bootstrapTable({
     },
     columns : [ {
         title : '序号',
-        field : 'id',
+        field : 'ID',
         align : 'center',
         valign : 'center',
         width:"100px",
@@ -37,42 +37,24 @@ $('#userTable').bootstrapTable({
             return pageSize * (pageNumber - 1) + index + 1;    // 返回每条的序号： 每页条数 *（当前页 - 1 ）+ 序号
         }
     },{
-        title : '姓名',
-        field : 'name',
+        title : '角色描述',
+        field : 'description',
         align : 'center',
         valign : 'center',
         width:"100px",
     }, {
-        title : '账号',
-        field : 'username',
+        title : '角色',
+        field : 'role',
         align : 'center',
         valign : 'center',
         width:"150px",
-    }, {
-        title : '密码',
-        field : 'password',
-        align : 'center',
-        valign : 'center',
-        width:"150px",
-        },
+    },
         {
         title : '部门',
         field : 'department',
         align : 'center',
         valign : 'center',
         width:"200px",
-    },  {
-        title : '邮箱',
-        field : 'mail',
-        align : 'center',
-        valign : 'center',
-        width:"150px",
-    }, {
-        title : '电话',
-        field : 'phone',
-        align : 'center',
-        valign : 'center',
-        width:"100px",
     },
         {
         title : '状态',
@@ -85,17 +67,11 @@ $('#userTable').bootstrapTable({
         field : 'operation',
         width:"150px",
         formatter : function (value, row, index) {
-            var result1="";
-            var result2="";
-            // result1 +='<shiro:hasRole="admin">';
-            // result1 +='<button id="table_edit" class="btn btn-primary btn-xs btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal"  type="button">编辑</button>';
-            // result1 += '</shiro:hasRole>';
-            //return result1;
             return[
                 '<button id="table_edit" class="btn btn-primary btn-xs btn-default glyphicon glyphicon-pencil" ' +
             'data-toggle="modal" data-target="#editModal"   type="button">编辑</button>',
                 '<shiro:hasRole name="admin">',
-                "<a onclick='showAuthority(\"username\", \"" + row.username + "\");' "
+                "<a onclick='showAuthority(\"role\", \"" + row.role + "\");' "
                 + "class='btn btn-primary btn-xs btn-default glyphicon glyphicon-cog'data-toggle='modal' data-target='#kuModal' >"
                 + "菜单权限" + "</a>",
                 '</shiro:hasRole>'
@@ -104,35 +80,35 @@ $('#userTable').bootstrapTable({
     },],
 });
 
-$('#editModal').on('show.bs.modal',function (event) {
-    var btnThis=$(event.relatedTarget);//触发事件的按钮
-    var modal=$(this);//当前模态框
-    //var modalId = btnThis.data('id');   //解析出data-id的内容
-    var name= btnThis.closest('tr').find('td').eq(1).text();
-    var account= btnThis.closest('tr').find('td').eq(2).text();
-    var department= btnThis.closest('tr').find('td').eq(4).text();
-    var mail= btnThis.closest('tr').find('td').eq(5).text();
-    var phone= btnThis.closest('tr').find('td').eq(6).text();
-    //var role= btnThis.closest('tr').find('td').eq(7).text();
-
-    if (btnThis.closest('tr').find('td').eq(7).text() == '正常') {
-             modal.find("#statusEdit").select('#NORMAL');
-         } else {
-             modal.find("#statusEdit").select("#LOCK");
-         }
-    modal.find('#nameEdit').val(name);
-    modal.find('#accountEdit').val(account);
-    modal.find('#departmentEdit').val(department);
-    modal.find('#mailEdit').val(mail);
-    modal.find('#phoneEdit').val(phone);
-    //modal.find('#roleEdit').val(role);
-});
+// $('#editModal').on('show.bs.modal',function (event) {
+//     var btnThis=$(event.relatedTarget);//触发事件的按钮
+//     var modal=$(this);//当前模态框
+//     //var modalId = btnThis.data('id');   //解析出data-id的内容
+//     var name= btnThis.closest('tr').find('td').eq(1).text();
+//     var account= btnThis.closest('tr').find('td').eq(2).text();
+//     var department= btnThis.closest('tr').find('td').eq(4).text();
+//     var mail= btnThis.closest('tr').find('td').eq(5).text();
+//     var phone= btnThis.closest('tr').find('td').eq(6).text();
+//     //var role= btnThis.closest('tr').find('td').eq(7).text();
+//
+//     if (btnThis.closest('tr').find('td').eq(7).text() == '正常') {
+//              modal.find("#statusEdit").select('#NORMAL');
+//          } else {
+//              modal.find("#statusEdit").select("#LOCK");
+//          }
+//     modal.find('#nameEdit').val(name);
+//     modal.find('#accountEdit').val(account);
+//     modal.find('#departmentEdit').val(department);
+//     modal.find('#mailEdit').val(mail);
+//     modal.find('#phoneEdit').val(phone);
+//     //modal.find('#roleEdit').val(role);
+// });
 
 $('#kuModal').on('show.bs.modal',function (event) {
     var btnThis = $(event.relatedTarget);//触发事件的按钮
     var modal = $(this);//当前模态框
-    var username = btnThis.closest('tr').find('td').eq(2).text();
-    modal.find("#username").val(username);
+    var role = btnThis.closest('tr').find('td').eq(2).text(); //获取角色
+    modal.find("#username").val(role);
 });
 
 $('#kuModal').on('hidden.bs.modal',function () {
@@ -158,7 +134,7 @@ $('#kuModal').on('hidden.bs.modal',function () {
 function showAuthority(field,value) {
     console.log(value);
     var jsonObj = {
-        'username':value
+        'role':value
     };
     $.ajax({
         type: "post",
@@ -167,7 +143,6 @@ function showAuthority(field,value) {
         dataType: "json",
         contentType: "application/json",
         success: function(result) {
-            console.log(result);
             var objSelect = document.getElementsByName("way");
             for (var i=0;i<result.length;i++){
                 for (j in objSelect){
@@ -186,10 +161,10 @@ function showAuthority(field,value) {
 //$('#kuModal').modal({backdrop: 'static', keyboard: false});
 
 function save(obj){
-    var username = $('#username').val();
+    var role = $('#username').val();
     var objSelect = document.getElementsByName("way");
     var way= new Array();
-    way.push(username);//首位保存用户名
+    way.push(role);//首位保存角色
     for (k in objSelect){
         if(objSelect[k].checked){
             way.push(objSelect[k].value);
@@ -292,3 +267,6 @@ function saveAll(obj) {
     });
     $('#addModal').modal('hide');
 }
+
+//以下是写授权 2019.07.31
+

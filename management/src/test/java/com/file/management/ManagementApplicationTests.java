@@ -1,22 +1,31 @@
 package com.file.management;
 
+import com.alibaba.fastjson.JSONObject;
+import com.file.management.dao.DynamicSQL;
+import com.file.management.dao.LibraryUse.RegistrationFormRespository;
 import com.file.management.dao.MenuRepository;
 import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
+import com.file.management.dao.SystemManage.JsonTestDao;
+import com.file.management.pojo.LibraryUse.RegistrationForm;
 import com.file.management.pojo.Menu;
 import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
 import com.file.management.pojo.metadata.Field;
 import com.file.management.pojo.metadata.Template;
 import com.file.management.service.DictionaryService;
 import com.file.management.service.MenuService;
+import com.file.management.service.SystemManage.JsonService;
 import com.file.management.service.metadata.FieldService;
 import com.file.management.service.metadata.TablesService;
 import com.file.management.service.metadata.TemplateService;
+import com.google.gson.JsonObject;
+import net.sf.json.JSON;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.persistence.*;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -36,13 +45,58 @@ public class ManagementApplicationTests {
     private MenuService menuService;
 
     @Autowired
+    private DynamicSQL dynamicSQL;
+
+    @Autowired
     private MenuRepository menuRepository;
 
     @Autowired
     private DictionaryService dictionaryService;
 
+    @Autowired
+    private RegistrationFormRespository respository;
+
+    @Autowired
+    JsonService jsonService;
+
+    @Test
+    public void Test(){
+        jsonService.getWS();
+    }
+
+    @Test
+    public void getSQL(){
+
+        dynamicSQL.selectQ();
+    }
+
     @Test
     public void contextLoads() {
+        JsonObject json = new JsonObject();
+        json.addProperty("unit","计算机信息学院");
+        json.addProperty("certificatetype","学生证,身份证");
+        String sql = json.toString();
+        JsonObject js = new JsonObject();
+        System.out.println(sql);
+        JSONObject jsonObject = JSONObject.parseObject(sql);
+        System.out.println(jsonObject.getString("certificatetype"));
+
+        List<String>registrationForms1 = respository.findINfo("计算机信息学院");
+        for (String registrationForm:registrationForms1){
+            System.out.println(registrationForm);
+        }
+        List<RegistrationForm> registrationForms = respository.findAll();
+        List<RegistrationForm> registrationFormList =new ArrayList<RegistrationForm>();
+        for (RegistrationForm registrationForm:registrationForms){
+            if ((jsonObject.getString("certificatetype").contains(registrationForm.getCertificateType())) && (registrationForm.getUnit().equals(jsonObject.getString("unit")))){
+                registrationFormList.add(registrationForm);
+            }
+        }
+        for (RegistrationForm form:registrationFormList){
+            System.out.println(form.getApprovalNumber());
+        }
+
+
        /* HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put("DocumentNo","123");
         hashMap.put("PartNo","10");

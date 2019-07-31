@@ -2,19 +2,53 @@ package com.file.management.service.LibraryUse;
 
 import com.file.management.dao.LibraryUse.RegistrationFormRespository;
 import com.file.management.pojo.LibraryUse.RegistrationForm;
+import com.file.management.pojo.UserInfo;
+import com.file.management.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class RegistrationFormServiceImpl implements RegistrationFormService {
     @Autowired
     RegistrationFormRespository respository;
+    @Autowired
+    UserInfoService userInfoService;
+    /*
+     *根据用户所属部门进行查询
+     */
     @Override
-    public List<RegistrationForm> findAll() {
+    public List<RegistrationForm> findAll(HttpServletRequest request) {
+
+        //获取cookie值
+        Cookie[] cookies = request.getCookies();
+        Cookie cookie= null;
+        String username = null;
+        for (int i=0;i<cookies.length;i++){
+            cookie = cookies[i];
+            if ("username".equals(cookie.getName())){
+                username = cookie.getValue();
+            }
+        }
+        UserInfo userInfo = userInfoService.findByUsername(username);
+        String department = userInfo.getDepartment();
+        System.out.println(department);
         List<RegistrationForm> registrationForms= respository.findAll();
-        return registrationForms;
+        List<RegistrationForm> registrationFormList = new ArrayList<RegistrationForm>();
+        //行权限
+        for(RegistrationForm registrationForm : registrationForms){
+            if (department.equals("管理员")){
+                return registrationForms;
+            }else if((registrationForm.getUnit().contains(department))){
+                registrationFormList.add(registrationForm);
+            }
+        }
+        return registrationFormList;
     }
 
     @Override

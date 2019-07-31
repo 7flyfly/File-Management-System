@@ -4,6 +4,7 @@ import com.file.management.pojo.LibraryUse.RegistrationForm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -14,7 +15,6 @@ public interface RegistrationFormRespository extends JpaRepository<RegistrationF
       List<RegistrationForm> findAll();
 
       //利用查询
-
 
     //查询单号
     RegistrationForm findByOddNumbers(String oddNumber);
@@ -42,4 +42,9 @@ public interface RegistrationFormRespository extends JpaRepository<RegistrationF
     @Modifying
     @Query(value = "update tb_registration t set t.STATE=?1, t.TURN=?2, t.RETURNDATA=?3 where t.ODDNUMBERS=?4 ",nativeQuery = true)
     void updateStatus(String state, String person, String date, String num);
+
+    //json数据测试
+    @Modifying
+    @Query(value = "select t.oddnumbers, t.type,t.way,t.telphone from tb_registration t where t.unit=?1",nativeQuery = true)
+    List<String> findINfo(String sql);
 }

@@ -1,14 +1,18 @@
 package com.file.management.controller.Library;
 
 import com.alibaba.fastjson.JSONObject;
+import com.file.management.dao.DynamicSQL;
 import com.file.management.dao.LibraryUse.DatabasesDao;
 import com.file.management.dao.SystemManage.Dictionary.DictionaryDao;
 import com.file.management.pojo.LibraryUse.DatabasesPojo;
 import com.file.management.pojo.LibraryUse.RegistrationForm;
 import com.file.management.pojo.Menu;
 import com.file.management.pojo.SystemManagement.Dictionary.DictionaryPojo;
+import com.file.management.pojo.UserInfo;
 import com.file.management.service.LibraryUse.RegistrationFormService;
 import com.file.management.service.MenuService;
+import com.file.management.service.UserInfoService;
+import com.file.management.service.UserService;
 import lombok.experimental.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,12 +30,16 @@ import java.util.*;
 public class RegistrationFormController {
     @Autowired
     RegistrationFormService registrationFormService;
+    @Autowired
+    DynamicSQL dynamicSQL;
 
     @ResponseBody
     @RequestMapping("/registTable")
-    public String serchAll(){
+    public String serchAll(HttpServletRequest request){
+
         JSONObject jsonObject=new JSONObject();
-        List<RegistrationForm> registrationFormList = registrationFormService.findAll();
+       List<RegistrationForm> registrationFormList = registrationFormService.findAll(request);
+        //List<RegistrationForm> registrationFormList = dynamicSQL.selectQ();
         if (registrationFormList != null){
             jsonObject.put("rows",registrationFormList);
             jsonObject.put("total",registrationFormList.size());
@@ -127,9 +135,9 @@ public class RegistrationFormController {
     //利用查询
     @ResponseBody
     @RequestMapping("/queryTable")
-    public String queryTable(){
+    public String queryTable(HttpServletRequest request){
         JSONObject jsonObject=new JSONObject();
-        List<RegistrationForm> registrationFormList = registrationFormService.findAll();
+        List<RegistrationForm> registrationFormList = registrationFormService.findAll(request);
         if (registrationFormList != null){
             jsonObject.put("rows",registrationFormList);
             jsonObject.put("total",registrationFormList.size());
@@ -157,11 +165,11 @@ public class RegistrationFormController {
 
     @ResponseBody
     @RequestMapping("/deleteRegister")
-    public String deleteRegister(String num){
+    public String deleteRegister(String num,HttpServletRequest request){
         registrationFormService.deleteForm(num);
 
         JSONObject jsonObject=new JSONObject();
-        List<RegistrationForm> registrationFormList = registrationFormService.findAll();
+        List<RegistrationForm> registrationFormList = registrationFormService.findAll(request);
         if (registrationFormList != null){
             jsonObject.put("rows",registrationFormList);
             jsonObject.put("total",registrationFormList.size());
@@ -220,7 +228,7 @@ public class RegistrationFormController {
         String status="归还";
         JSONObject jsonObject=new JSONObject();
         registrationFormService.updateState(status,registrant,recordDate,num);//更新状态
-        List<RegistrationForm> registrationFormList = registrationFormService.findAll();
+        List<RegistrationForm> registrationFormList = registrationFormService.findAll(request);
         if (registrationFormList != null){
             jsonObject.put("rows",registrationFormList);
             jsonObject.put("total",registrationFormList.size());
@@ -331,6 +339,14 @@ public class RegistrationFormController {
         str.add("预立卷");
         str.add("整理库");
         return str;
+    }
+
+    @ResponseBody
+    @RequestMapping("/saveData")
+    public void getData(@RequestBody String[] array) {
+        if (Arrays.binarySearch(array, "type") > 0) {
+            System.out.println("a");
+        }
     }
 }
 

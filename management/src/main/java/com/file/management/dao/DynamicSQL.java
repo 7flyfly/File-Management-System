@@ -1,6 +1,7 @@
 package com.file.management.dao;
 
 import com.alibaba.fastjson.JSONObject;
+import com.file.management.pojo.LibraryUse.RegistrationForm;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -89,6 +90,21 @@ public class DynamicSQL {
     }
 
 
+    public void selectQ(){
+        String table = "tb_registration";
+        String sql = "select * from tb_registration";
+        List<RegistrationForm> resultList =entityManager.createNativeQuery(sql).getResultList();
+        for (RegistrationForm r:resultList){
+            System.out.println(r.getApprovalNumber());
+        }
+//        for (Object r:resultList)
+//        {
+//            Object[] cells = (Object[])r;
+//            System.out.println(cells[0]);
+//        }
+
+        //return resultList;
+    }
 
 //    public String getAttrCNameByTableId(String TableId, String colEName){
 //

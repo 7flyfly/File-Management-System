@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public interface UserInfoDao extends JpaRepository<UserInfo,Long> {
     /**通过username查找用户信息;*/
-    public UserInfo findByUsername(String username);
+    UserInfo findByUsername(String username);
     List<UserInfo>findAll();
     @Modifying
     @Query(value = "update user_info t set t.NAME=?1,t.PHONE=?2,t.DEPARTMENT=?3, t.MAIL=?4, t.STATUS=?5 where t.USERNAME=?6",nativeQuery = true)

@@ -2,6 +2,7 @@ package com.file.management.pojo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class SysPermission implements Serializable {
     private Boolean available = Boolean.FALSE;
     @ManyToMany
     @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
-    private List<SysRole> roles;
+    private List<SysRole> roles = new ArrayList<>();
 
     public Integer getId() {
         return id;
