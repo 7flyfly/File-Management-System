@@ -43,12 +43,16 @@
                         <input type="text" placeholder="模板描述" id="templateDescription" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="control-label" style="font-size:15px">请勾选已有字段【序号/档案号已默认添加】</label>
+                        <label for="message-text" class="control-label" style="font-size:15px">请勾选已有字段</label>
                     </div>
                     <div class="form-group" style="font-size: 14px; font-family: Tahoma;">
+                        <td><input th:type="checkbox" th:disabled="disabled" th:checked="checked" th:value="序号" th:text="序号" style="vertical-align：-2px;zoom:130%"></td>
+                        <td><input th:type="checkbox" th:disabled="disabled" th:checked="checked" th:value="档案号" th:text="档案号" style="vertical-align：-2px;zoom:130%"></td>
+                        <td><input th:type="checkbox" th:disabled="disabled" th:checked="checked" th:value="最后修改时间" th:text="最后修改时间" style="vertical-align：-2px;zoom:130%"></td>
                         <tr th:each="field:${fields}">
                             <td><input th:type="checkbox" th:name="fieldSelected" th:value="${field.fieldName}" th:text="${field.fieldName}" style="vertical-align：-2px;zoom:130%"></td>
                         </tr>
+
                     </div>
                     <div class="form-group">
                         <tr>
@@ -60,7 +64,7 @@
                         </tr>
                         <script>
 
-                                </script>
+                        </script>
 
                     </div>
                 </form>

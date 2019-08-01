@@ -199,54 +199,178 @@ INSERT INTO `tb_action` VALUES ('降温', 'Remind', '开启空调，提升温度
 INSERT INTO `tb_action` VALUES ('除湿', 'Remind', '对收集的档案进行整理', '湿度过高！自动开启加湿器。', NULL);
 
 -- ----------------------------
--- Table structure for tb_bksyxbysj
+-- Table structure for `tb_bksyxbysj`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_bksyxbysj`;
-CREATE TABLE `tb_bksyxbysj`  (
+CREATE TABLE `tb_bksyxbysj` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `TotalPackages` int(11) NULL DEFAULT NULL,
-  `Number` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `FilingTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TransactionNo` int(11) NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `BeginTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EndTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_bksyxbysjn
+
+-- Records of tb_bksyxbysj
+-- ----------------------------
+-- ----------------------------
+-- Table structure for `tb_bksyxbysj2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_bksyxbysj2`;
+CREATE TABLE `tb_bksyxbysj2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_bksyxbysj2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_bksyxbysj3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_bksyxbysj3`;
+CREATE TABLE `tb_bksyxbysj3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_bksyxbysj3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_bksyxbysjn`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_bksyxbysjn`;
-CREATE TABLE `tb_bksyxbysjn`  (
+CREATE TABLE `tb_bksyxbysjn` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `PageNumber` int(11) NULL DEFAULT NULL,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentDate` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `PageNumber` int(11) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_bksyxbysjn
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_bksyxbysjn2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_bksyxbysjn2`;
+CREATE TABLE `tb_bksyxbysjn2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PageNumber` int(11) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_bksyxbysjn2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_bksyxbysjn3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_bksyxbysjn3`;
+CREATE TABLE `tb_bksyxbysjn3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PageNumber` int(11) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_bksyxbysjn3
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_databases
@@ -399,50 +523,77 @@ CREATE TABLE `tb_field`  (
 -- ----------------------------
 -- Records of tb_field
 -- ----------------------------
-INSERT INTO `tb_field` VALUES (1, 'No', b'0', b'1', 11, '序号', 'int', 'F_6fjt03vu');
-INSERT INTO `tb_field` VALUES (2, 'DocumentNo', b'0', b'1', 50, '档案号', 'varchar', 'F_5sb4m3ts');
-INSERT INTO `tb_field` VALUES (3, 'PartNo', b'0', b'0', 11, '案卷号', 'int', 'F_anc2rym3');
-INSERT INTO `tb_field` VALUES (4, 'Title', b'1', b'1', 255, '题名', 'varchar', 'F_2xx3bgfh');
-INSERT INTO `tb_field` VALUES (5, 'PersonLiable', b'0', b'1', 50, '责任者', 'varchar', 'F_unt1z5qb');
-INSERT INTO `tb_field` VALUES (6, 'CampusCode', b'0', b'1', 50, '校区代号', 'varchar', 'F_zh48yhon');
-INSERT INTO `tb_field` VALUES (7, 'ArchivingDep', b'0', b'1', 50, '归档单位', 'varchar', 'F_zf19yk42');
-INSERT INTO `tb_field` VALUES (8, 'ClassificationNo', b'0', b'0', 50, '实体分类号', 'varchar', 'F_hsk56eso');
-INSERT INTO `tb_field` VALUES (9, 'PageNo', b'0', b'0', 11, '页数', 'int', 'F_1868cr7p');
-INSERT INTO `tb_field` VALUES (10, 'Annex', b'0', b'0', 255, '附件', 'varchar', 'F_rvevrbcg');
-INSERT INTO `tb_field` VALUES (11, 'Date', b'0', b'1', 0, '日期', 'date', 'F_yk56uu38');
-INSERT INTO `tb_field` VALUES (12, 'SecurityClassification', b'0', b'0', 50, '密级', 'varchar', 'F_n3z9adw9');
-INSERT INTO `tb_field` VALUES (13, 'Remarks', b'0', b'0', 100, '备注', 'varchar', 'F_m8yb29ed');
-INSERT INTO `tb_field` VALUES (14, 'LAST_MODIFIED', b'0', b'0', 100, '最近修改时间', 'TIMESTAMP', 'F_6nyx0w7v');
-INSERT INTO `tb_field` VALUES (15, 'IS_DEL', b'0', b'0', 11, '是否被删除', 'int', 'F_gh41pkku');
-INSERT INTO `tb_field` VALUES (16, 'TABLE_ID', b'0', b'0', 11, '表格号', 'int', 'F_lg4outo1');
-INSERT INTO `tb_field` VALUES (17, 'ReferenceNo', b'0', b'1', 123, '文号', 'varchar', 'F_scrmuoqn');
-INSERT INTO `tb_field` VALUES (18, 'RetentionPeriod', b'0', b'1', 123, '保管期限', 'varchar', 'F_51pvgj0t');
-INSERT INTO `tb_field` VALUES (19, 'FilingTime', b'0', b'0', 123, '归档时间', 'varchar', 'F_kj1dtqd1');
-INSERT INTO `tb_field` VALUES (20, 'Name', b'0', b'1', 123, '姓名', 'varchar', 'F_qxea97gx');
-INSERT INTO `tb_field` VALUES (21, 'Prize', b'0', b'1', 123, '获奖名称', 'varchar', 'F_bp7ej05a');
-INSERT INTO `tb_field` VALUES (22, 'PrizeTime', b'0', b'0', 123, '获奖时间', 'varchar', 'F_s8tvv7uu');
-INSERT INTO `tb_field` VALUES (23, 'ReceiveTime', b'0', b'0', 123, '收到时间', 'varchar', 'F_ych1szw6');
-INSERT INTO `tb_field` VALUES (24, 'Source', b'0', b'0', 123, '来源', 'varchar', 'F_bq652448');
-INSERT INTO `tb_field` VALUES (25, 'CopieNo', b'0', b'0', 11, '份数', 'int', 'F_izia1924');
-INSERT INTO `tb_field` VALUES (26, 'Designation', b'0', b'0', 123, '名称', 'varchar', 'F_aa5sbgse');
-INSERT INTO `tb_field` VALUES (27, 'TransactionNo', b'0', b'0', 11, '处理号', 'int', 'F_4jttcddj');
-INSERT INTO `tb_field` VALUES (28, 'Collaborator', b'0', b'1', 123, '合作者', 'varchar', 'F_ea9h67q0');
-INSERT INTO `tb_field` VALUES (29, 'Specifications', b'0', b'1', 123, '规格', 'varchar', 'F_2t8mc1bm');
-INSERT INTO `tb_field` VALUES (30, 'Subject', b'0', b'1', 123, '主题词', 'varchar', 'F_2sh39gwk');
-INSERT INTO `tb_field` VALUES (31, 'BeginTime', b'0', b'0', 123, '开始时间', 'varchar', 'F_8ujnf7ga');
-INSERT INTO `tb_field` VALUES (32, 'EndTime', b'0', b'0', 123, '结束时间', 'varchar', 'F_jkrir5ph');
-INSERT INTO `tb_field` VALUES (33, 'TypingPerson', b'1', b'1', 123, '输入员', 'varchar', 'F_wnjmyg4s');
-INSERT INTO `tb_field` VALUES (34, 'Sex', b'1', b'1', 123, '性别', 'varchar', 'F_3hvp3ozp');
-INSERT INTO `tb_field` VALUES (35, 'EducationalSystem', b'1', b'1', 11, '学制', 'varchar', 'F_mjcqchjn');
-INSERT INTO `tb_field` VALUES (36, 'DocumentDate', b'1', b'1', 123, '文件日期', 'varchar', 'F_3uylf1iu');
-INSERT INTO `tb_field` VALUES (37, 'Major', b'1', b'1', 123, '专业名', 'varchar', 'F_dgix2cck');
-INSERT INTO `tb_field` VALUES (38, 'IdNo', b'1', b'1', 123, '身份证', 'varchar', 'F_20arf7zg');
-INSERT INTO `tb_field` VALUES (39, 'EnrollmentPage', b'0', b'0', 255, '录取页', 'varchar', 'F_ioczjlfx');
-INSERT INTO `tb_field` VALUES (40, 'CertificateSignature ', b'0', b'0', 255, '证书签收页', 'varchar', 'F_0vbdbluu');
-INSERT INTO `tb_field` VALUES (41, 'TotalPackages', b'0', b'0', 11, '总件数', 'int', 'F_77e3hodf');
-INSERT INTO `tb_field` VALUES (42, 'Number', b'0', b'0', 11, '数量', 'int', 'F_ga8urlgs');
-INSERT INTO `tb_field` VALUES (43, 'PageNumber', b'0', b'0', 11, '页次', 'int', 'F_0po5aa1j');
-INSERT INTO `tb_field` VALUES (44, 'SeriesArea', b'0', b'0', 123, '丛编项', 'varchar', 'F_570k1jsc');
+INSERT INTO `tb_field` VALUES ('1', 'No', '', '', '11', '序号', 'int', 'F_6fjt03vu');
+INSERT INTO `tb_field` VALUES ('2', 'DocumentNo', '', '', '50', '档案号', 'varchar', 'F_5sb4m3ts');
+INSERT INTO `tb_field` VALUES ('3', 'PartNo', '', '', '11', '案卷号', 'int', 'F_anc2rym3');
+INSERT INTO `tb_field` VALUES ('4', 'Title', '', '', '255', '主题名', 'varchar', 'F_2xx3bgfh');
+INSERT INTO `tb_field` VALUES ('5', 'PersonLiable', '', '', '50', '责任者', 'varchar', 'F_unt1z5qb');
+INSERT INTO `tb_field` VALUES ('6', 'CampusCode', '', '', '50', '校区代号', 'varchar', 'F_zh48yhon');
+INSERT INTO `tb_field` VALUES ('7', 'ArchivingDep', '', '', '50', '归档单位', 'varchar', 'F_zf19yk42');
+INSERT INTO `tb_field` VALUES ('8', 'ClassificationNo', '', '', '50', '实体分类号', 'varchar', 'F_hsk56eso');
+INSERT INTO `tb_field` VALUES ('9', 'PageNo', '', '', '11', '页数', 'int', 'F_1868cr7p');
+INSERT INTO `tb_field` VALUES ('10', 'Annex', '', '', '255', '附件', 'varchar', 'F_rvevrbcg');
+INSERT INTO `tb_field` VALUES ('11', 'Date', '', '', '0', '日期', 'varchar', 'F_yk56uu38');
+INSERT INTO `tb_field` VALUES ('12', 'SecurityClassification', '', '', '50', '密级', 'varchar', 'F_n3z9adw9');
+INSERT INTO `tb_field` VALUES ('13', 'Remarks', '', '', '100', '备注', 'varchar', 'F_m8yb29ed');
+INSERT INTO `tb_field` VALUES ('14', 'LAST_MODIFIED', '', '', '100', '最后修改时间', 'TIMESTAMP', 'F_6nyx0w7v');
+INSERT INTO `tb_field` VALUES ('15', 'IS_DEL', '', '', '11', '是否被删除', 'int', 'F_gh41pkku');
+INSERT INTO `tb_field` VALUES ('16', 'TABLE_ID', '', '', '11', '表格号', 'int', 'F_lg4outo1');
+INSERT INTO `tb_field` VALUES ('17', 'ReferenceNo', '', '', '123', '文号', 'varchar', 'F_scrmuoqn');
+INSERT INTO `tb_field` VALUES ('18', 'RetentionPeriod', '', '', '123', '保管期限', 'varchar', 'F_51pvgj0t');
+INSERT INTO `tb_field` VALUES ('19', 'FilingTime', '', '', '123', '归档时间', 'varchar', 'F_kj1dtqd1');
+INSERT INTO `tb_field` VALUES ('20', 'Name', '', '', '123', '姓名', 'varchar', 'F_qxea97gx');
+INSERT INTO `tb_field` VALUES ('21', 'Prize', '', '', '123', '获奖名称', 'varchar', 'F_bp7ej05a');
+INSERT INTO `tb_field` VALUES ('22', 'PrizeTime', '', '', '123', '获奖时间', 'varchar', 'F_s8tvv7uu');
+INSERT INTO `tb_field` VALUES ('23', 'ReceiveTime', '', '', '123', '收到时间', 'varchar', 'F_ych1szw6');
+INSERT INTO `tb_field` VALUES ('24', 'Source', '', '', '123', '来源', 'varchar', 'F_bq652448');
+INSERT INTO `tb_field` VALUES ('25', 'CopieNo', '', '', '11', '份数', 'int', 'F_izia1924');
+INSERT INTO `tb_field` VALUES ('26', 'Designation', '', '', '123', '名称', 'varchar', 'F_aa5sbgse');
+INSERT INTO `tb_field` VALUES ('27', 'TransactionNo', '', '', '11', '处理号', 'int', 'F_4jttcddj');
+INSERT INTO `tb_field` VALUES ('28', 'Collaborator', '', '', '123', '合作者', 'varchar', 'F_ea9h67q0');
+INSERT INTO `tb_field` VALUES ('29', 'Specifications', '', '', '123', '规格', 'varchar', 'F_2t8mc1bm');
+INSERT INTO `tb_field` VALUES ('30', 'Subject', '', '', '123', '主题词', 'varchar', 'F_2sh39gwk');
+INSERT INTO `tb_field` VALUES ('31', 'BeginTime', '', '', '123', '开始日期', 'varchar', 'F_8ujnf7ga');
+INSERT INTO `tb_field` VALUES ('32', 'EndTime', '', '', '123', '结束日期', 'varchar', 'F_jkrir5ph');
+INSERT INTO `tb_field` VALUES ('33', 'TypingPerson', '', '', '123', '输入员', 'varchar', 'F_wnjmyg4s');
+INSERT INTO `tb_field` VALUES ('34', 'Sex', '', '', '123', '性别', 'varchar', 'F_3hvp3ozp');
+INSERT INTO `tb_field` VALUES ('35', 'EducationalSystem', '', '', '11', '学制', 'varchar', 'F_mjcqchjn');
+INSERT INTO `tb_field` VALUES ('36', 'DocumentDate', '', '', '123', '文件日期', 'varchar', 'F_3uylf1iu');
+INSERT INTO `tb_field` VALUES ('37', 'Major', '', '', '123', '专业名', 'varchar', 'F_dgix2cck');
+INSERT INTO `tb_field` VALUES ('38', 'IdNo', '', '', '123', '身份证', 'varchar', 'F_20arf7zg');
+INSERT INTO `tb_field` VALUES ('39', 'EnrollmentPage', '', '', '255', '录取页', 'varchar', 'F_ioczjlfx');
+INSERT INTO `tb_field` VALUES ('40', 'CertificateSignature ', '', '', '255', '证书签收页', 'varchar', 'F_0vbdbluu');
+INSERT INTO `tb_field` VALUES ('41', 'TotalPackages', '', '', '11', '总件数', 'int', 'F_77e3hodf');
+INSERT INTO `tb_field` VALUES ('42', 'Number', '', '', '11', '数量', 'int', 'F_ga8urlgs');
+INSERT INTO `tb_field` VALUES ('43', 'PageNumber', '', '', '11', '页次', 'int', 'F_0po5aa1j');
+INSERT INTO `tb_field` VALUES ('44', 'SeriesArea', '', '', '123', '丛编项', 'varchar', 'F_570k1jsc');
+INSERT INTO `tb_field` VALUES ('45', 'ConversaUnit', '', '', '123', '保存单位（卷、件）', 'varchar', 'F_c53fk62t');
+INSERT INTO `tb_field` VALUES ('46', 'OrderNumber', '', '', '11', '顺序号', 'int', 'F_5anxkw0r');
+INSERT INTO `tb_field` VALUES ('47', 'FullNumber', '', '', '123', '全宗号', 'varchar', 'F_ormcntg4');
+INSERT INTO `tb_field` VALUES ('48', 'SubTitle', '', '', '123', '副题名/并列题名', 'varchar', 'F_prfx7094');
+INSERT INTO `tb_field` VALUES ('49', 'ArchivingSign', '', '', '123', '正式归档标志', 'varchar', 'F_ctw9qbz9');
+INSERT INTO `tb_field` VALUES ('50', 'KG3', '', '', '123', '知识图谱挂接点3', 'varchar', 'F_nkus80zi');
+INSERT INTO `tb_field` VALUES ('51', 'KG2', '', '', '123', '知识图谱挂接点2', 'varchar', 'F_7l1hu4st');
+INSERT INTO `tb_field` VALUES ('52', 'KG1', '', '', '123', '知识图谱挂接点1', 'varchar', 'F_8pgy3iu5');
+INSERT INTO `tb_field` VALUES ('53', 'YSJGDFLFJDM', '', '', '123', '应收集归档分类分级代码', 'varchar', 'F_c4mxwuh8');
+INSERT INTO `tb_field` VALUES ('54', 'MD', '', '', '123', 'MD5加密摘要串', 'varchar', 'F_ocfx3h6h');
+INSERT INTO `tb_field` VALUES ('55', 'PageSum', '', '', '11', '总页数', 'int', 'F_ueokpke8');
+INSERT INTO `tb_field` VALUES ('56', 'PhysicalDescription ', '', '', '123', '实物说明', 'varchar', 'F_v2meao9v');
+INSERT INTO `tb_field` VALUES ('57', 'EleType', '', '', '123', '电子文件类型', 'varchar', 'F_9q7hq8ua');
+INSERT INTO `tb_field` VALUES ('58', 'EncryptionType', '', '', '123', '加密类型', 'varchar', 'F_s3xnsqxb');
+INSERT INTO `tb_field` VALUES ('59', 'Encryption', '', '', '123', '文件是否加密', 'varchar', 'F_5awvw6gu');
+INSERT INTO `tb_field` VALUES ('60', 'LastModPerson', '', '', '123', '最后修改者', 'varchar', 'F_hyj62y1z');
+INSERT INTO `tb_field` VALUES ('61', 'CreateTime', '', '', '123', '创建时间', 'varchar', 'F_ephj4qs2');
+INSERT INTO `tb_field` VALUES ('62', 'PageEnd', '', '', '11', '结束页码', 'int', 'F_ih1mg4oc');
+INSERT INTO `tb_field` VALUES ('63', 'PageStart', '', '', '11', '开始页码', 'int', 'F_n5wjde21');
+INSERT INTO `tb_field` VALUES ('64', 'Creator', '', '', '123', '创建者', 'varchar', 'F_4pww2874');
+INSERT INTO `tb_field` VALUES ('65', 'PhysicaPaperDepositAddress', '', '', '123', '实物、纸质存地址', 'varchar', 'F_l2mj8sg5');
+INSERT INTO `tb_field` VALUES ('66', 'Miniature', '', '', '123', '微缩号', 'varchar', 'F_n828eet8');
+INSERT INTO `tb_field` VALUES ('67', 'PlateNumber', '', '', '123', '盘号', 'varchar', 'F_0lgygjkx');
+INSERT INTO `tb_field` VALUES ('68', 'Carrier', '', '', '123', '载体类型', 'varchar', 'F_fehu3shi');
+INSERT INTO `tb_field` VALUES ('69', 'Language', '', '', '123', '语种', 'varchar', 'F_edrluyzy');
+INSERT INTO `tb_field` VALUES ('70', 'CategoryNumber', '', '', '123', '档案门类号', 'varchar', 'F_yxxs39j1');
+INSERT INTO `tb_field` VALUES ('71', 'FilingYear', '', '', '11', '归档年度', 'int', 'F_gfvvo7ob');
 
 -- ----------------------------
 -- Table structure for tb_hhzl
@@ -470,6 +621,50 @@ CREATE TABLE `tb_hhzl`  (
   `TABLE_ID` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`No`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for `tb_hhzl2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_hhzl2`;
+CREATE TABLE `tb_hhzl2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `ReceiveTime` varchar(123) DEFAULT NULL,
+  `Source` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_hhzl2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_hhzl3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_hhzl3`;
+CREATE TABLE `tb_hhzl3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `ReceiveTime` varchar(123) DEFAULT NULL,
+  `Source` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_hhzl3
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_menu
@@ -640,7 +835,6 @@ INSERT INTO `tb_menu` VALUES (147, '档案库', '', 2, '财务处', 1, 'M_fh8rjx
 INSERT INTO `tb_menu` VALUES (148, '档案库', '', 2, '二级单位', 2, 'M_tvphx2fs', 138, NULL);
 INSERT INTO `tb_menu` VALUES (149, '档案库', '', 3, '案卷目录', 1, 'M_1g02bbt1', 147, NULL);
 INSERT INTO `tb_menu` VALUES (150, '档案库', '', 3, '卷内目录', 2, 'M_l9z9yzqn', 147, NULL);
-INSERT INTO `tb_menu` VALUES (266, '预立库', '456', 1, '456', 8, 'M_ayr6wwln', 1, 49);
 
 -- ----------------------------
 -- Table structure for tb_message
@@ -1244,22 +1438,70 @@ CREATE TABLE `tb_video`  (
 INSERT INTO `tb_video` VALUES (0, 'D:/Video/01RDD复习.mp4', '01RDD复习.mp4', 'http://localhost:8080/images/01RDD复习.mp4');
 
 -- ----------------------------
--- Table structure for tb_wjzl
+-- Table structure for `tb_wjzl`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_wjzl`;
-CREATE TABLE `tb_wjzl`  (
+CREATE TABLE `tb_wjzl` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ClassificationNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReceiveTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Source` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `CopieNo` int(11) NULL DEFAULT NULL,
-  `Designation` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `ReceiveTime` varchar(123) DEFAULT NULL,
+  `Source` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wjzl
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wjzl2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_wjzl2`;
+CREATE TABLE `tb_wjzl2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `ReceiveTime` varchar(123) DEFAULT NULL,
+  `Source` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wjzl2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wjzl3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_wjzl3`;
+CREATE TABLE `tb_wjzl3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `ReceiveTime` varchar(123) DEFAULT NULL,
+  `Source` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wjzl3
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_ws
@@ -1296,307 +1538,952 @@ INSERT INTO `tb_ws` VALUES (2, '1.南京校区', '科技处', '2017-1WS12.1', 53
 INSERT INTO `tb_ws` VALUES (3, '1.南京校区', '科技处', '2017-1WS12.1', 526, '20175016812', '2017-1WS12.1-526', '湖南省水利科技项目合作协议书：农村水电河流生态修复技术研究与应用', 8, '河海大学', 'http://192.168.0.105/hh5.jpg;http://192.168.0.105/hh6.jpg;http://192.168.0.105/hh7.jpg;', '2017-07-04', '永久', NULL, NULL, '201805', '2019-05-24 09:04:08', 0, 1);
 
 -- ----------------------------
--- Table structure for tb_wsaj
+-- Table structure for `tb_ws2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ws2`;
+CREATE TABLE `tb_ws2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_ws2
+-- ----------------------------
+INSERT INTO `tb_ws2` VALUES ('1', '1.南京校区', '离退休处', '2016-1WS22.1', '5', null, '2016-1WS22.1-5', '2016年退休人员名单', '3', '离退休处', 'http://192.168.0.105/hh10.jpg;http://192.168.0.105/hh11.jpg;http://192.168.0.105/hh12.jpg;', '2016-07-06', '定期30', '公开', null, '201705', '2019-05-24 09:06:44', '0', '8');
+INSERT INTO `tb_ws2` VALUES ('2', '1.南京校区', '科技处', '2017-1WS12.1', '526', '20175016812', '2017-1WS12.1-526', '湖南省水利科技项目合作协议书：农村水电河流生态修复技术研究与应用', '8', '河海大学', 'http://192.168.0.105/hh5.jpg;http://192.168.0.105/hh6.jpg;http://192.168.0.105/hh7.jpg;', '2017-07-04', '永久', null, null, '201805', '2019-07-15 11:03:22', '0', null);
+INSERT INTO `tb_ws2` VALUES ('3', '1.南京校区', '科技处', '2017-1WS12.1', '534', '20175017812', '2017-1WS12.1-534', '江苏省水利科技项目合同书：超高韧性水泥基复合材料修复水工混凝土结构裂缝的应用技术研究', '25', '河海大学', 'http://192.168.0.105/hh1.jpg;http://192.168.0.105/hh11.jpg;http://192.168.0.105/hh12.jpg;http://192.168.0.105/hh8.jpg;', '2017-08-21', '永久', null, '456', '201805', '2019-07-16 17:26:52', '0', null);
+
+-- ----------------------------
+-- Table structure for `tb_ws3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ws3`;
+CREATE TABLE `tb_ws3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_ws3
+-- ----------------------------
+INSERT INTO `tb_ws3` VALUES ('1', '1.南京校区', '科技处', '2017-1WS22.1', '534', '20175017812', '2017-1WS12.2-123', '江苏省水利科技项目合同书：超高韧性水泥基复合材料修复水工混凝土结构裂缝的应用技术研究', '25', '河海大学', 'http://192.168.0.105/hh13.jpg;http://192.168.0.105/hh1.jpg;http://192.168.0.105/hh11.jpg;', '2017-08-21', '永久', null, null, '201805', '2019-05-23 18:02:50', '0', '9');
+INSERT INTO `tb_ws3` VALUES ('2', '1.南京校区', '科技处', '2017-1WS22.3', '534', '20175017812', '2017-1WS12.2-456', '江苏省水利科技项目合同书：超高韧性水泥基复合材料修复水工混凝土结构裂缝的应用技术研究', '25', '河海大学', 'http://192.168.0.105/hh12.jpg;', '2017-08-21', '永久', null, null, '201805', '2019-05-23 18:03:23', '0', '9');
+INSERT INTO `tb_ws3` VALUES ('3', '1.南京校区', '科技处', '2017-1WS22.2', '534', '20175017812', '2017-1WS12.2-789', '江苏省水利科技项目合同书：超高韧性水泥基复合材料修复水工混凝土结构裂缝的应用技术研究', '25', '河海大学', 'http://192.168.0.105/hh7.jpg;http://192.168.0.105/科学技术哲学在我国的发展状况及趋势.pdf;', '2017-08-21', '永久', null, null, '201805', '2019-05-23 18:03:51', '0', '9');
+INSERT INTO `tb_ws3` VALUES ('4', '1.南京校区', '离退休处', '2016-1WS22.1', '5', null, '2016-1WS22.1-5', '2016年退休人员名单', '3', '离退休处', 'http://192.168.0.105/hh10.jpg;http://192.168.0.105/hh11.jpg;http://192.168.0.105/hh12.jpg;', '2016-07-06', '定期30', '公开', null, '201705', '2019-07-16 17:27:24', '0', null);
+
+-- ----------------------------
+-- Table structure for `tb_wsaj`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_wsaj`;
-CREATE TABLE `tb_wsaj`  (
+CREATE TABLE `tb_wsaj` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TransactionNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Designation` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `CopieNo` int(11) NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ClassificationNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Specifications` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Subject` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Specifications` varchar(123) DEFAULT NULL,
+  `Subject` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_wsajn
+-- Records of tb_wsaj
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wsaj2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_wsaj2`;
+CREATE TABLE `tb_wsaj2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Specifications` varchar(123) DEFAULT NULL,
+  `Subject` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wsaj2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wsaj3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_wsaj3`;
+CREATE TABLE `tb_wsaj3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `Designation` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Specifications` varchar(123) DEFAULT NULL,
+  `Subject` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wsaj3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wsajn`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_wsajn`;
-CREATE TABLE `tb_wsajn`  (
+CREATE TABLE `tb_wsajn` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `CampusCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ClassificationNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNo` int(11) NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Date` date NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `FilingTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_xjk
+-- Records of tb_wsajn
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wsajn2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_wsajn2`;
+CREATE TABLE `tb_wsajn2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wsajn2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_wsajn3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_wsajn3`;
+CREATE TABLE `tb_wsajn3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `ClassificationNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_wsajn3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xjk`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_xjk`;
-CREATE TABLE `tb_xjk`  (
+CREATE TABLE `tb_xjk` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `BeginTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EndTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNo` int(11) NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `FilingTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `CopieNo` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_xjkn
+-- Records of tb_xjk
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xjk2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xjk2`;
+CREATE TABLE `tb_xjk2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xjk2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xjk3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xjk3`;
+CREATE TABLE `tb_xjk3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `CopieNo` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xjk3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xjkn`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_xjkn`;
-CREATE TABLE `tb_xjkn`  (
+CREATE TABLE `tb_xjkn` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `Sex` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EducationalSystem` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentDate` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Major` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `IdNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EnrollmentPage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `CertificateSignature` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNo` int(11) NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `BeginTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EndTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `Sex` varchar(123) DEFAULT NULL,
+  `EducationalSystem` varchar(11) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `Major` varchar(123) DEFAULT NULL,
+  `IdNo` varchar(123) DEFAULT NULL,
+  `EnrollmentPage` varchar(255) DEFAULT NULL,
+  `CertificateSignature` varchar(255) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_xscj
+-- Records of tb_xjkn
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xjkn2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xjkn2`;
+CREATE TABLE `tb_xjkn2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `Sex` varchar(123) DEFAULT NULL,
+  `EducationalSystem` varchar(11) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `Major` varchar(123) DEFAULT NULL,
+  `IdNo` varchar(123) DEFAULT NULL,
+  `EnrollmentPage` varchar(255) DEFAULT NULL,
+  `CertificateSignature` varchar(255) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xjkn2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xjkn3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xjkn3`;
+CREATE TABLE `tb_xjkn3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xjkn3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xscj`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_xscj`;
-CREATE TABLE `tb_xscj`  (
+CREATE TABLE `tb_xscj` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `FilingTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TransactionNo` int(11) NULL DEFAULT NULL,
-  `BeginTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EndTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TotalPackages` int(11) NULL DEFAULT NULL,
-  `Number` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_xscjn
+-- Records of tb_xscj
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xscj2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xscj2`;
+CREATE TABLE `tb_xscj2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xscj2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xscj3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xscj3`;
+CREATE TABLE `tb_xscj3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xscj3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xscjn`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_xscjn`;
-CREATE TABLE `tb_xscjn`  (
+CREATE TABLE `tb_xscjn` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentDate` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNumber` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_xsws
+-- Records of tb_xscjn
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xscjn2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xscjn2`;
+CREATE TABLE `tb_xscjn2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xscjn2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xscjn3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xscjn3`;
+CREATE TABLE `tb_xscjn3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xscjn3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xsws`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_xsws`;
-CREATE TABLE `tb_xsws`  (
+CREATE TABLE `tb_xsws` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNo` int(11) NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Date` date NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `FilingTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_ygrs
+-- Records of tb_xsws
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xsws2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xsws2`;
+CREATE TABLE `tb_xsws2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xsws2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_xsws3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_xsws3`;
+CREATE TABLE `tb_xsws3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `PageNo` int(11) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_xsws3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_ygrs`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_ygrs`;
-CREATE TABLE `tb_ygrs`  (
+CREATE TABLE `tb_ygrs` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `CampusCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Name` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Name` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_yjsyw
+-- Records of tb_ygrs
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_ygrs2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ygrs2`;
+CREATE TABLE `tb_ygrs2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Name` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_ygrs2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_ygrs3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ygrs3`;
+CREATE TABLE `tb_ygrs3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `CampusCode` varchar(50) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Name` varchar(123) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_ygrs3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_yjsyw`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_yjsyw`;
-CREATE TABLE `tb_yjsyw`  (
+CREATE TABLE `tb_yjsyw` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `SeriesArea` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ArchivingDep` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `SecurityClassification` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `FilingTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TransactionNo` int(11) NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `BeginTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EndTime` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `IdNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `EnrollmentPage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TotalPackages` int(11) NULL DEFAULT NULL,
-  `Number` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `SeriesArea` varchar(123) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `IdNo` varchar(123) DEFAULT NULL,
+  `EnrollmentPage` varchar(255) DEFAULT NULL,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_yjsywn
+-- Records of tb_yjsyw
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_yjsyw2`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_yjsyw2`;
+CREATE TABLE `tb_yjsyw2` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `SeriesArea` varchar(123) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `IdNo` varchar(123) DEFAULT NULL,
+  `EnrollmentPage` varchar(255) DEFAULT NULL,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_yjsyw2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_yjsyw3`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_yjsyw3`;
+CREATE TABLE `tb_yjsyw3` (
+  `No` int(11) NOT NULL AUTO_INCREMENT,
+  `SeriesArea` varchar(123) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `ArchivingDep` varchar(50) DEFAULT NULL,
+  `SecurityClassification` varchar(50) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `FilingTime` varchar(123) DEFAULT NULL,
+  `TransactionNo` int(11) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `BeginTime` varchar(123) DEFAULT NULL,
+  `EndTime` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `IdNo` varchar(123) DEFAULT NULL,
+  `EnrollmentPage` varchar(255) DEFAULT NULL,
+  `TotalPackages` int(11) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_yjsyw3
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_yjsywn`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_yjsywn`;
-CREATE TABLE `tb_yjsywn`  (
+CREATE TABLE `tb_yjsywn` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentDate` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNumber` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_yjsywn2
+-- Records of tb_yjsywn
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_yjsywn2`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_yjsywn2`;
-CREATE TABLE `tb_yjsywn2`  (
+CREATE TABLE `tb_yjsywn2` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentDate` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNumber` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for tb_yjsywn3
+-- Records of tb_yjsywn2
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tb_yjsywn3`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_yjsywn3`;
-CREATE TABLE `tb_yjsywn3`  (
+CREATE TABLE `tb_yjsywn3` (
   `No` int(11) NOT NULL AUTO_INCREMENT,
-  `PartNo` int(11) NULL DEFAULT NULL,
-  `Title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PersonLiable` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Remarks` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ReferenceNo` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `RetentionPeriod` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Collaborator` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `TypingPerson` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `DocumentDate` varchar(123) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PageNumber` int(11) NULL DEFAULT NULL,
-  `DocumentNo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `LAST_MODIFIED` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `IS_DEL` int(11) NULL DEFAULT 0,
-  `TABLE_ID` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`No`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `PartNo` int(11) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `PersonLiable` varchar(50) DEFAULT NULL,
+  `Annex` varchar(255) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `ReferenceNo` varchar(123) DEFAULT NULL,
+  `RetentionPeriod` varchar(123) DEFAULT NULL,
+  `Collaborator` varchar(123) DEFAULT NULL,
+  `TypingPerson` varchar(123) DEFAULT NULL,
+  `DocumentDate` varchar(123) DEFAULT NULL,
+  `PageNumber` int(11) DEFAULT NULL,
+  `DocumentNo` varchar(50) DEFAULT NULL,
+  `LAST_MODIFIED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `IS_DEL` int(11) DEFAULT '0',
+  `TABLE_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_yjsywn3
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_zc

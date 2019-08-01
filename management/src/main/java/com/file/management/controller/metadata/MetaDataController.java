@@ -55,7 +55,8 @@ public class MetaDataController {
         Iterator<Field> it = fields.iterator();
         while(it.hasNext()){
             Field f = it.next();
-            if(f.getFieldName().equals("序号") || f.getFieldName().equals("档案号")){
+            //序号和档案号已经默认添加，当遇到这样的字段时，移除出去，不显示
+            if(f.getFieldName().equals("序号") || f.getFieldName().equals("档案号") || f.getFieldName().equals("档案号")){
                 it.remove();
             }
         }
@@ -90,7 +91,9 @@ public class MetaDataController {
                 field.setFieldType(((ArrayList<String>) map.get("fieldTypes")).get(i));
                 field.setFieldIndex(Boolean.parseBoolean(((ArrayList<String>) map.get("fieldIndexes")).get(i)));
                 field.setFieldIk(Boolean.parseBoolean(((ArrayList<String>) map.get("fieldIks")).get(i)));
+
                 fieldService.saveOne(field);
+
                 fields.add(field);
             }
 
@@ -105,6 +108,8 @@ public class MetaDataController {
             fields.add(fieldPk);
             Field fieldNo = fieldService.getFieldByFieldName("序号");
             fields.add(fieldNo);
+            Field filedLastMod = fieldService.getFieldByFieldName("最后修改时间");
+            fields.add(filedLastMod);
 
             Template template = new Template();
             template.setTemplateName((String) map.get("templateName"));
